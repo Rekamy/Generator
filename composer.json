@@ -1,0 +1,24 @@
+{
+    "name": "rekamy/generator",
+    "description": "API Generator with Swagger API Doc",
+    "type": "composer-plugin",
+    "require": {
+        "prettus/l5-repository": "^2.6",
+        "laravel/passport": "^8.2",
+        "darkaonline/l5-swagger": "^6.0",
+        "infyomlabs/laravel-generator": "6.0.x-dev",
+        "silber/bouncer": "v1.0.0-rc.6",
+        "fruitcake/laravel-cors": "^1.0@dev"
+    },
+    "authors": [
+        {
+            "name": "Firdaus Ishaddin",
+            "email": "firdausishaddin@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Rekamy\\ApiGenerator\\": "src/"
+        }
+    }
+}
