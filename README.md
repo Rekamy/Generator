@@ -1,5 +1,6 @@
-## Api Generator with Swagger API Doc
+Rekamy API Generator
+====================
 
-[![Latest Version](https://img.shields.io/github/release/guzzle/guzzle.svg?style=flat-square)](https://github.com/guzzle/guzzle/releases)
-![Build Status](https://github.com/guzzle/guzzle/workflows/CI/badge.svg?style=flat-square)
-[![Total Downloads](https://img.shields.io/packagist/dt/guzzlehttp/guzzle.svg?style=flat-square)](https://packagist.org/packages/guzzlehttp/guzzle)
+This API Generator will generate a complete CRUD with Repository Design Pattern along with the Swagger API Documentation.
+
+## Api Generator with Swagger API Doc
