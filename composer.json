@@ -2,6 +2,7 @@
     "name": "rekamy/generator",
     "description": "API Generator with Swagger API Doc",
     "type": "composer-plugin",
+    "license": "MIT",
     "require": {
         "prettus/l5-repository": "^2.6",
         "darkaonline/l5-swagger": "^6.0",
