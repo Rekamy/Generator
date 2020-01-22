@@ -3,6 +3,10 @@
 namespace Rekamy\ApiGenerator\Console\Commands;
 
 use Illuminate\Console\Command;
+use Rekamy\ApiGenerator\Console\RuleParser;
+use Rekamy\ApiGenerator\Console\StubGenerator;
+use Illuminate\Support\Str;
+use DB;
 
 class ApiGenerator extends Command
 {
@@ -18,7 +22,7 @@ class ApiGenerator extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate CRUD API';
 
     /**
      * Create a new command instance.
