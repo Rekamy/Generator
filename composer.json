@@ -3,6 +3,17 @@
     "description": "API Generator with Swagger API Doc",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "api",
+        "request",
+        "model",
+        "crud",
+        "repository",
+        "view",
+        "generator",
+        "swagger"
+    ],
     "require": {
         "prettus/l5-repository": "^2.6",
         "darkaonline/l5-swagger": "^6.0",
@@ -17,6 +28,13 @@
     "autoload": {
         "psr-4": {
             "Rekamy\\ApiGenerator\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rekamy\\ApiGenerator\\ApiGeneratorServiceProvider"
+            ]
         }
     }
 }
