@@ -4,11 +4,8 @@
     "type": "composer-plugin",
     "require": {
         "prettus/l5-repository": "^2.6",
-        "laravel/passport": "^8.2",
         "darkaonline/l5-swagger": "^6.0",
-        "infyomlabs/laravel-generator": "6.0.x-dev",
-        "silber/bouncer": "v1.0.0-rc.6",
-        "fruitcake/laravel-cors": "^1.0@dev"
+        "infyomlabs/laravel-generator": "6.0.x-dev"
     },
     "authors": [
         {
