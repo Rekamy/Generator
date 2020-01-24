@@ -13,6 +13,7 @@ class ApiGeneratorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/backend', 'template');
         $this->publishes([
             __DIR__ . '/config/apigenerator.php' => config_path('apigenerator.php')
         ]);
