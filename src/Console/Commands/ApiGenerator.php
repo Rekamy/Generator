@@ -3,7 +3,6 @@
 namespace Rekamy\ApiGenerator\Console\Commands;
 
 use Illuminate\Console\Command;
-use DB;
 use Rekamy\ApiGenerator\Console\Context;
 use Symfony\Component\Console\Helper\Table;
 
