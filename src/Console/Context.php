@@ -57,6 +57,7 @@ class Context
             ->where('is_nullable', 'NO')
             ->where('table_schema', $this->dbname);
 
+        //exclude
         if (!empty($this->excludeTables)) {
             $this->db['columns']->whereNotIn('table_name', $this->excludeTables);
             $this->db['tables']->whereNotIn('table_name', $this->excludeTables);
