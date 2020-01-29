@@ -27,7 +27,7 @@ return [
 
         'base_controller'      => true,
 
-        'app_base_controller' => true,
+        'app_base_controller'  => true,
 
         'repositories'         => true,
 

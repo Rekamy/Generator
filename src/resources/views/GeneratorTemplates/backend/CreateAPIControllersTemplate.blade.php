@@ -1,7 +1,7 @@
 <?=
     "<?php
 
-namespace " . $context->namespace['app_base_controller'] . ";
+namespace " . $context->namespace['api_controller'] . ";
 
 use App\Http\Requests\API\Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
 use App\Http\Requests\API\Update" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
@@ -15,7 +15,7 @@ use Response;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller
- * @package App\Http\Controllers\API
+ * @package " . $context->namespace['api_controller'] . "
  */
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extends AppBaseController
 {

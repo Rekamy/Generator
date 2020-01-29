@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 <?= "Route::apiResources([" ?>
 <?php foreach ($db->tables as $table) { ?>
 <?= "
-    '" . lcfirst(Str::singular(str_replace('_', '', $table->TABLE_NAME))) . "' => '" . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . "APIController@index',
+    '" . lcfirst(Str::singular(str_replace('_', '', $table->TABLE_NAME))) . "' => '" . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . "APIController',
 " ?>
 <?php } ?>
 <?= "]);" ?>
