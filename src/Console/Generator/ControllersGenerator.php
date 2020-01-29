@@ -28,7 +28,7 @@ trait ControllersGenerator
 
                 $stub = new StubGenerator(
                     $view->render(),
-                    $this->path['api_controller'] . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . 'Controller.php'
+                    $this->path['api_controller'] . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . 'APIController.php'
                 );
 
                 $stub->render([
