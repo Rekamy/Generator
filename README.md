@@ -1,7 +1,20 @@
 Rekamy Generator
 ================
 
+## Introduction
+
 This Generator will generate a complete CRUD with Repository Design Pattern along with the Swagger API Documentation.
+
+## Table Of Contents
+
+<details><summary>Click to expand</summary><p>
+
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [License](#license)
+</p></details>
 
 ## Installing Rekamy Generator
 
@@ -22,39 +35,48 @@ php artisan vendor:publish --provider "Rekamy\ApiGenerator\ApiGeneratorServicePr
 Update the configuration file based on your needs.
 
 ```php
-    // Setup your application name here(For Swagger Use).
-    'app_name' => env('APP_NAME'),
-    
-    // Which file would you like to generate. Set the value to false you don't want to generate.
-    'generate' => [
-        // ...
-    ],
+// Setup your application name here(For Swagger Use).
+'app_name' => env('APP_NAME'),
 
-    // Database configuration. Set your database name here or from .env and exclude any tables you don't want to generate
-    'database' => [
+// Which file would you like to generate. Set the value to false you don't want to generate.
+'generate' => [
+    // ...
+],
 
-        // Database name
-        'name'           => env('DB_DATABASE'),
+// Database configuration. Set your database name here or from .env and exclude any tables you don't want to generate
+'database' => [
+    // Database name
+    'name'           => env('DB_DATABASE'),
 
-        // Exclude table name
-        'exclude_tables' => [
-            // ...
-        ]
-    ],
-
-    // Path is where you want the generator to generate.
-    'path' => [
-        // ...
-    ],
-
-    // Namespace for the generated files.
-    'namespace' => [
-        // ...
-    ],
-
-    // options is an add on you can disable these options by setting the value to false
-    'options' => [
+    // Exclude table name
+    'exclude_tables' => [
         // ...
     ]
+],
 
+// Path is where you want the generator to generate.
+'path' => [
+    // ...
+],
+
+// Namespace for the generated files.
+'namespace' => [
+    // ...
+],
+
+// options is an add on you can disable these options by setting the value to false
+'options' => [
+    // ...
+]
 ```
+
+## Usage
+
+In order to run the generator after configuration, you can run it via :
+```bash
+php artisan generate:api
+```
+
+## License
+
+Rekamy Generator is open-sourced software licensed under the MIT license
