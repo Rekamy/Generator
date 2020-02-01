@@ -21,7 +21,7 @@ php artisan vendor:publish --provider "Rekamy\ApiGenerator\ApiGeneratorServicePr
 
 Update the configuration file based on your needs.
 
-```bash
+```php
     // Setup your application name here(For Swagger Use).
     'app_name' => env('APP_NAME'),
     
