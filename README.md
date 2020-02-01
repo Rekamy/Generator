@@ -1,6 +1,10 @@
 Rekamy Generator
 ================
 
+<p>
+[![Latest Stable Version](https://poser.pugx.org/rekamy/generator/v/stable)](https://packagist.org/packages/rekamy/generator)
+</p>
+
 ## Introduction
 
 This Generator will generate a complete CRUD with Repository Design Pattern along with the Swagger API Documentation.
@@ -16,7 +20,7 @@ This Generator will generate a complete CRUD with Repository Design Pattern alon
 - [License](#license)
 </p></details>
 
-## Installing Rekamy Generator
+## Installation
 
 The recommended way to install Rekamy Generator is through Composer.
 
