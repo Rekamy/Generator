@@ -1,7 +1,7 @@
 <?=
     "<?php
 
-namespace " . $context->namespace['app_base_controller'] . ";
+namespace " . $context->namespace['api_controller'] . ";
 
 use App\Http\Requests\API\Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
 use App\Http\Requests\API\Update" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
@@ -15,7 +15,7 @@ use Response;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller
- * @package App\Http\Controllers\API
+ * @package " . $context->namespace['api_controller'] . "
  */
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extends AppBaseController
 {
@@ -38,7 +38,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
      *     @OA\Response(response=400, description=\"Bad request\"),
      *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     security={{\"passport\": {\"*\"}}},
      * )
      */
     public function index(Request \$request)
@@ -60,8 +59,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      *     description=\"Store " . ucfirst(str_replace('_', '', $tablename)) . "\",
      *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
      *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     security={{\"passport\": {\"*\"}}}," ?> 
+     *     @OA\Response(response=404, description=\"Resource Not Found\")," ?> 
     <?php foreach ($db->columns as $i => $column) {
         if ($column->COLUMN_NAME == "id" || strpos($column->COLUMN_NAME, "_at") || strpos($column->COLUMN_NAME, "_by") || $column->COLUMN_NAME == "status_id") {
             continue;
@@ -150,7 +148,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
      *     @OA\Response(response=400, description=\"Bad request\"),
      *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     security={{\"passport\": {\"*\"}}},
      *     @OA\Parameter(
      *          name=\"id\",
      *          in=\"path\",
@@ -184,8 +181,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      *     description=\"Update " . ucfirst(str_replace('_', '', $tablename)) . "\",
      *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
      *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     security={{\"passport\": {\"*\"}}}," ?> 
+     *     @OA\Response(response=404, description=\"Resource Not Found\")," ?> 
     <?php foreach ($db->columns as $i => $column) {
         if (strpos($column->COLUMN_NAME, "_at") || strpos($column->COLUMN_NAME, "_by") || $column->COLUMN_NAME == "status_id") {
             continue;
@@ -284,7 +280,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
      *     @OA\Response(response=400, description=\"Bad request\"),
      *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     security={{\"passport\": {\"*\"}}},
      *     @OA\Parameter(
      *          name=\"id\",
      *          in=\"path\",
@@ -316,8 +311,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      *     description=\"Filter " . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Data\",
      *     @OA\Response(response=200, description=\"" . Ucfirst(str_replace('_', '', $tablename)) . " Module\"),
      *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     security={{\"passport\": {\"*\"}}}," ?>
+     *     @OA\Response(response=404, description=\"Resource Not Found\")," ?>
     <?php
     foreach ($db->columns as $i => $column) {
         if ($column->TABLE_NAME == $tablename) {

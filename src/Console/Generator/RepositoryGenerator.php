@@ -28,7 +28,7 @@ trait RepositoryGenerator
 
                 $stub = new StubGenerator(
                     $view->render(),
-                    $this->path['repository'] . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . '.php'
+                    $this->path['repository'] . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . 'Repository.php'
                 );
 
                 $stub->render([
