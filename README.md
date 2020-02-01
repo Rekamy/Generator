@@ -11,3 +11,8 @@ The recommended way to install Rekamy Generator is through Composer.
 composer require rekamy/generator
 ```
 
+Next, you will need to publish the generator.
+
+```bash
+php artisan vendor:publish --provider "Rekamy\ApiGenerator\ApiGeneratorServiceProvider"
+```
