@@ -2,7 +2,9 @@ Rekamy Generator
 ================
 
 <p>
-[![Latest Stable Version](https://poser.pugx.org/rekamy/generator/v/stable)](https://packagist.org/packages/rekamy/generator)
+<a title="copy to clipboard" class="copy_on_clip" data-clipboard-target="#latest_stable_version_markdown">
+                            <img class="spinned latest_stable_version_img" src="https://poser.pugx.org/rekamy/generator/v/stable" style="display: inline;">
+                        </a>
 </p>
 
 ## Introduction
