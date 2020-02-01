@@ -2,9 +2,12 @@ Rekamy Generator
 ================
 
 <p>
-<a title="copy to clipboard" class="copy_on_clip" data-clipboard-target="#latest_stable_version_markdown">
-                            <img class="spinned latest_stable_version_img" src="https://poser.pugx.org/rekamy/generator/v/stable" style="display: inline;">
-                        </a>
+<a href="https://packagist.org/packages/rekamy/generator">
+<img class="total_img" src="https://poser.pugx.org/rekamy/generator/downloads">
+</a>
+<a href="https://github.com/Rekamy/ApiGenerator/blob/master/LICENSE.txt">
+<img class="license_img" src="https://poser.pugx.org/rekamy/generator/license">
+</a>
 </p>
 
 ## Introduction
