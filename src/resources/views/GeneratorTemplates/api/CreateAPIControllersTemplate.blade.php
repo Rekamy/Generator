@@ -1,5 +1,5 @@
 <?=
-    "<?php
+"<?php
 
 namespace " . $context->namespace['api_controller'] . ";
 

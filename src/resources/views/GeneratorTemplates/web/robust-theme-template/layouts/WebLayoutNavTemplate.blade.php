@@ -12,7 +12,7 @@
           </li>"?>
           <?php foreach ($db->tables as $table) { ?>
           <?= "
-          <li class=\"<?php if(\$page=='" . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . "') {echo'active';}?>\"><a href=\"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $table->TABLE_NAME))) . ".index') }}\"><i class=\"icon-user-female\"></i><span class=\"menu-title\" data-i18n=\"nav.email-application.main\">" . ucfirst(Str::singular(str_replace('_', '', $table->TABLE_NAME))) . "</span></a>
+          <li class=\"<?php if(\$page=='" . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . "') {echo'active';}?>\"><a href=\"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $table->TABLE_NAME))) . ".index') }}\"><i class=\"icon-user-female\"></i><span class=\"menu-title\" data-i18n=\"nav.email-application.main\">" . ucfirst(Str::singular(str_replace('_', ' ', $table->TABLE_NAME))) . "</span></a>
           </li>" ?>
           <?php } ?>
         <?="  

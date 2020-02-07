@@ -4,7 +4,7 @@
     <div class=\"navbar-header\">
       <ul class=\"nav navbar-nav flex-row\">
         <li class=\"nav-item mobile-menu d-md-none mr-auto\"><a class=\"nav-link nav-menu-main menu-toggle hidden-xs\" href=\"#\"><i class=\"ft-menu font-large-1\"></i></a></li>
-        <li class=\"nav-item\"><a class=\"navbar-brand\" href=\"{{ route('dashboard') }}\"><img class=\"brand-logo\" alt=\"robust admin logo\" src=\"../../../app-assets/images/logo/logo-dark-sm.png\">
+        <li class=\"nav-item\"><a class=\"navbar-brand\" href=\"{{ route('dashboard') }}\"><img class=\"brand-logo\" alt=\"robust admin logo\" src=\"{{ asset('vendor/themes/app-assets/images/logo/logo-dark-sm.png') }}\">
             <h3 class=\"brand-text\">FIMATS</h3>
           </a></li>
         <li class=\"nav-item d-md-none\"><a class=\"nav-link open-navbar-container\" data-toggle=\"collapse\" data-target=\"#navbar-mobile\"><i class=\"fa fa-ellipsis-v\"></i></a></li>

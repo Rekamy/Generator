@@ -97,19 +97,19 @@ trait RobustModuleViewGenerator
                         ],
                         [
                             "view" => view('robustjs::WebCreateJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/create.js'
+                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/create.blade.php'
                         ],
                         [
                             "view" => view('robustjs::WebShowJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/show.js'
+                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/show.blade.php'
                         ],
                         [
                             "view" => view('robustjs::WebIndexJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/index.js'
+                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/index.blade.php'
                         ],
                         [
                             "view" => view('robustjs::WebEditJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/edit.js'
+                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/edit.blade.php'
                         ],
                     ];
                 }
@@ -135,65 +135,13 @@ trait RobustModuleViewGenerator
         }
     }
 
-    public function recurse_copy()
-    {
-        $src = __DIR__ . '/../../resources/views/GeneratorTemplates/web/robust-theme-template/public';
-        $dir = opendir($src);
-        $dst = public_path();
-        while (false !== ($file = readdir($dir))) {
-            if (($file != '.') && ($file != '..')) {
-                if (is_dir($src . '/' . $file)) {
-                    dd($src . '/' . $file, $dst . '/' . $file);
-                    $this->recurse_copy($src . '/' . $file, $dst . '/' . $file);
-                } else {
-                    dd($src . '/' . $file, $dst . '/' . $file);
-                    copy($src . '/' . $file, $dst . '/' . $file);
-                }
-            }
-        }
-        closedir($dir);
-    }
-
     public function countRobustPublicFiles()
     {
-        $src = realpath(__DIR__ . '/../../resources/views/GeneratorTemplates/web/robust-theme-template/public/');
-        $dst = realpath(public_path());
+        $src = realpath(__DIR__ . '/../../resources/views/GeneratorTemplates/web/robust-theme-template/themes/');
+        $dst = realpath(public_path('vendor'));
 
-        exec("cp -vr " . $src . " " . $dst);
-        dd($src, $dst);
-
-        $di = new RecursiveDirectoryIterator(realpath(__DIR__ . '/../../resources/views/GeneratorTemplates/web/robust-theme-template/public'));
-        $arr = [];
-        foreach (new RecursiveIteratorIterator($di) as $filename => $file) {
-            $path = str_replace("", '', $filename);
-
-            if (($file != '.') && ($file != '..')) {
-                if (is_dir($src . '/' . $file)) {
-                    $this->recurse_copy($src . '/' . $file, $dst . '/' . $file);
-                } else {
-                    copy($src . '/' . $file, $dst . '/' . $file);
-                }
-            }
-        }
-        die;
-
-        $this->progress = $this->outputDecorator->createProgressBar(count($arr));
-        $this->progress->start();
-
-        foreach ($arr as $key => $value) {
-            dd($value);
-            if (strpos($value, "") !== false) {
-                dd($value);
-            }
-
-            if (strpos($path, '/.') || strpos($path, '/files/.')) {
-                copy(realpath($filename), public_path($path));
-            }
-
-            $this->progress->advance();
-        }
-        die;
-
-        $this->progress->finish();
+        echo "Copying bootstrap files into " . $dst . "\n";
+        exec("cp -r " . $src . " " . $dst);
+        echo "Done\n";
     }
 }

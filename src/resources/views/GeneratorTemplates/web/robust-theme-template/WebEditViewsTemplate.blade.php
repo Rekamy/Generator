@@ -34,8 +34,11 @@
         </div>
     </div>
 </div>
-
-<script src=\"js/edit.js\"></script>
-
 @endsection
+@push('scripts')
+
+@include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/edit')
+
+@endpush
+
 "?>

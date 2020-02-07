@@ -33,8 +33,11 @@
         </div>
     </div>
 </div>
-
-<script src=\"js/create.js\"></script>
-
 @endsection
+@push('scripts')
+
+@include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/index')
+
+@endpush
+
 "?>

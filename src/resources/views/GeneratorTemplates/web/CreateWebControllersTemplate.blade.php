@@ -29,9 +29,9 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
      * @param " . ucfirst(Str::camel(Str::singular($tablename))) . "DataTable \$" . lcfirst(Str::camel(Str::singular($tablename))) . "DataTable
      * @return Response
      */
-    public function index(" . ucfirst(Str::camel(Str::singular($tablename))) . "DataTable \$" . lcfirst(Str::camel(Str::singular($tablename))) . "DataTable)
+    public function index()
     {
-        return \$" . lcfirst(Str::camel(Str::singular($tablename))) . "DataTable->render('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index');
+        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index')->with('page', \$this->page);
     }
 
     /**

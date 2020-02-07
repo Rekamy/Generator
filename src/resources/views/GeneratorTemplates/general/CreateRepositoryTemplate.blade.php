@@ -1,7 +1,7 @@
 <?=
 "<?php
 
-namespace App\Repositories;
+namespace " . $context->namespace['repository'] . ";
 
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
 use InfyOm\Generator\Common\BaseRepository;

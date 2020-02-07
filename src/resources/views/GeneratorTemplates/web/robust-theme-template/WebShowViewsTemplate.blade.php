@@ -22,8 +22,11 @@
         </div>
     </div>
 </div>
-
-<script src=\"js/show.js\"></script>
-
 @endsection
+@push('scripts')
+
+@include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/show')
+
+@endpush
+
 "?>
