@@ -6,7 +6,7 @@ namespace " . $context->namespace['api_controller'] . ";
 use App\Http\Requests\API\Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
 use App\Http\Requests\API\Update" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
-use App\Repositories\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
+use " . $context->namespace['repository'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
