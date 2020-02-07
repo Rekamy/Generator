@@ -1,0 +1,28 @@
+/*
+	jQuery.mmenu setSelected addon CSS
+*/
+.mm-menu.mm-hoverselected .mm-listview > li > a:not(.mm-fullsubopen),
+.mm-menu.mm-hoverselected .mm-listview > li > a.mm-fullsubopen + span,
+.mm-menu.mm-hoverselected .mm-listview > li > a.mm-fullsubopen + a,
+.mm-menu.mm-parentselected .mm-listview > li > a:not(.mm-fullsubopen),
+.mm-menu.mm-parentselected .mm-listview > li > a.mm-fullsubopen + span,
+.mm-menu.mm-parentselected .mm-listview > li > a.mm-fullsubopen + a
+{
+    -webkit-transition: background .4s ease;
+       -moz-transition: background .4s ease;
+         -o-transition: background .4s ease;
+            transition: background .4s ease;
+}
+
+.mm-menu.mm-hoverselected .mm-listview > li > a:not(.mm-fullsubopen):hover,
+.mm-menu.mm-hoverselected .mm-listview > li > a.mm-fullsubopen:hover + span
+{
+    background: rgba(255, 255, 255, .5);
+}
+
+.mm-menu.mm-parentselected .mm-listview > li > a.mm-selected:not(.mm-fullsubopen),
+.mm-menu.mm-parentselected .mm-listview > li > a.mm-selected.mm-fullsubopen + span,
+.mm-menu.mm-parentselected .mm-listview > li > a.mm-selected.mm-fullsubopen + a
+{
+    background: rgba(255, 255, 255, .5);
+}

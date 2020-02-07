@@ -29,13 +29,13 @@
     ],
     "autoload": {
         "psr-4": {
-            "Rekamy\\ApiGenerator\\": "src/"
+            "Rekamy\\Generator\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Rekamy\\ApiGenerator\\ApiGeneratorServiceProvider"
+                "Rekamy\\Generator\\GeneratorServiceProvider"
             ]
         }
     }

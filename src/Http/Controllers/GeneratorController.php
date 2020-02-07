@@ -1,6 +1,6 @@
 <?php
 
-namespace Rekamy\ApiGenerator\Http\Controllers;
+namespace Rekamy\Generator\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 

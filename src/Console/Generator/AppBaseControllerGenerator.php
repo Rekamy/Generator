@@ -1,10 +1,10 @@
 <?php
 
-namespace Rekamy\ApiGenerator\Console\Generator;
+namespace Rekamy\Generator\Console\Generator;
 
 use DB;
-use Rekamy\ApiGenerator\Console\RuleParser;
-use Rekamy\ApiGenerator\Console\StubGenerator;
+use Rekamy\Generator\Console\RuleParser;
+use Rekamy\Generator\Console\StubGenerator;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
@@ -14,13 +14,16 @@ trait AppBaseControllerGenerator
     public function generateAppBaseController($outputDecorator)
     {
         try {
+            $this->progress = $this->outputDecorator->createProgressBar(1);
+            $this->progress->start();
+
             $this->output['rows'] = [];
             $separator = new TableSeparator;
 
             array_push($this->output['rows'], [new TableCell('<info>App Base Controller</info>')]);
             array_push($this->output['rows'], $separator);
 
-            $view = view('template::CreateAppBaseControllerTemplate')
+            $view = view('generaltemplate::CreateAppBaseControllerTemplate')
                 ->with('db', (object) $this->db)
                 ->with('context', $this);
 
@@ -37,6 +40,7 @@ trait AppBaseControllerGenerator
 
             array_push($this->output['rows'], ['<comment>' . $response . '</comment>']);
 
+            $this->progress->advance();
             $outputDecorator->setRows($this->output['rows']);
         } catch (\Throwable $th) {
             throw $th;

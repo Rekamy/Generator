@@ -1,6 +1,6 @@
 <?php
 
-namespace Rekamy\ApiGenerator\Console;
+namespace Rekamy\Generator\Console;
 
 use RuntimeException;
 

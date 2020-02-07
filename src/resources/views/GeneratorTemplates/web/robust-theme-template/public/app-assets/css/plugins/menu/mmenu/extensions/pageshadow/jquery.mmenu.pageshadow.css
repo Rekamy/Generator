@@ -1,0 +1,37 @@
+/*
+	jQuery.mmenu pageShadow extension CSS
+*/
+.mm-menu.mm-pageshadow:after
+{
+    position: absolute;
+    z-index: 99; 
+    top: -10%;
+    left: 100%;
+
+    display: block;
+
+    width: 20px;
+    height: 120%;
+
+    content: '';
+}
+
+.mm-menu.mm-pageshadow.mm-right:after
+{
+    right: 100%; 
+    left: auto;
+}
+
+.mm-menu.mm-pageshadow.mm-next:after,
+.mm-menu.mm-pageshadow.mm-front:after
+{
+    display: none; 
+
+    content: none;
+}
+
+.mm-menu.mm-pageshadow:after
+{
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}

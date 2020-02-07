@@ -1,0 +1,61 @@
+/*
+	jQuery.mmenu dividers addon CSS
+*/
+.mm-divider > span
+{
+    line-height: 25px; 
+
+    overflow: hidden;
+
+    padding: 0;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.mm-divider.mm-opened a.mm-next:after
+{
+    -webkit-transform: rotate(45deg);
+       -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+         -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+
+.mm-collapsed:not(.mm-uncollapsed)
+{
+    display: none;
+}
+
+.mm-fixeddivider
+{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    display: none;
+
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0); 
+
+    background: inherit;
+}
+.mm-fixeddivider:after
+{
+    display: none !important; 
+
+    content: none !important;
+}
+
+.mm-hasdividers .mm-fixeddivider
+{
+    display: block;
+}
+
+.mm-menu .mm-fixeddivider span
+{
+    background: rgba(0, 0, 0, .8);
+}

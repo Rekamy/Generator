@@ -36,7 +36,7 @@ composer require rekamy/generator
 Next, you will need to publish the generator's config file by running :
 
 ```bash
-php artisan vendor:publish --provider "Rekamy\ApiGenerator\ApiGeneratorServiceProvider"
+php artisan vendor:publish --provider "Rekamy\Generator\GeneratorServiceProvider"
 ```
 
 ## Configuration

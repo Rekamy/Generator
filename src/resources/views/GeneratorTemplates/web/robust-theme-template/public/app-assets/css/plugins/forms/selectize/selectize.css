@@ -1,0 +1,327 @@
+.selectize-control .selectize-input
+{
+    font-size: 1rem;
+
+    border-color: #d9d9d9 !important;
+}
+.selectize-control .selectize-input input
+{
+    font-size: 1rem;
+}
+.selectize-control .selectize-input:focus,
+.selectize-control .selectize-input.focus
+{
+    border-color: #ccc !important;
+    outline: 0;
+}
+.selectize-control .selectize-input > div .email
+{
+    opacity: .8;
+}
+.selectize-control .selectize-input > div .email:before
+{
+    content: '<';
+}
+.selectize-control .selectize-input > div .email:after
+{
+    content: '>';
+}
+.selectize-control .selectize-input > div .name + .email
+{
+    margin-left: 5px;
+}
+
+.selectize-control.selectize-rtl-select .selectize-input,
+.selectize-control.selectize-rtl-select .selectize-dropdown-content
+{
+    text-align: right;
+}
+
+.selectize-control .selectize-dropdown
+{
+    font-size: 1rem;
+}
+.selectize-control .selectize-dropdown .caption
+{
+    font-size: 12px;
+
+    display: block;
+
+    color: #a0a0a0;
+}
+.selectize-control .selectize-dropdown .label
+{
+    font-size: 75%;
+    font-weight: 600;
+    line-height: 1.25;
+
+    display: table-row;
+
+    color: #495c68;
+}
+.selectize-control .selectize-dropdown .active
+{
+    color: #424242 !important; 
+    background-color: #e0e0e0 !important;
+}
+.selectize-control .selectize-dropdown [data-selectable]
+{
+    padding: 10px 8px;
+}
+
+.selectize-control.repositories::before
+{
+    position: absolute;
+    z-index: 2;
+    top: 12px;
+    right: 34px;
+
+    display: block;
+
+    width: 16px;
+    height: 16px;
+
+    content: ' ';
+    -webkit-transition: opacity .2s;
+       -moz-transition: opacity .2s;
+         -o-transition: opacity .2s;
+            transition: opacity .2s;
+
+    opacity: 0; 
+    background: url(../../../../images/icons/spinner.gif);
+    -webkit-background-size: 16px 16px;
+            background-size: 16px 16px;
+}
+
+.selectize-control.repositories.loading::before
+{
+    opacity: .4;
+}
+
+.selectize-control.repositories .selectize-dropdown div
+{
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+
+.selectize-control.repositories .selectize-dropdown .by
+{
+    font-size: 11px;
+
+    opacity: .8;
+}
+.selectize-control.repositories .selectize-dropdown .by::before
+{
+    content: 'by ';
+}
+
+.selectize-control.repositories .selectize-dropdown .name
+{
+    font-weight: bold;
+
+    margin-right: 5px;
+}
+
+.selectize-control.repositories .selectize-dropdown .title
+{
+    display: block;
+}
+
+.selectize-control.repositories .selectize-dropdown .description
+{
+    font-size: 12px;
+
+    display: block;
+    overflow: hidden; 
+
+    width: 100%;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    color: #a0a0a0;
+}
+
+.selectize-control.repositories .selectize-dropdown .meta
+{
+    font-size: 10px; 
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+.selectize-control.repositories .selectize-dropdown .meta [class^='icon-']
+{
+    font-size: .8rem;
+}
+.selectize-control.repositories .selectize-dropdown .meta [class^='icon-']:before
+{
+    margin-right: 8px;
+}
+.selectize-control.repositories .selectize-dropdown .meta li
+{
+    display: inline;
+
+    margin: 0;
+    margin-right: 10px; 
+    padding: 0;
+}
+.selectize-control.repositories .selectize-dropdown .meta li span
+{
+    font-weight: bold;
+}
+
+.selectize-control.movies::before
+{
+    position: absolute;
+    z-index: 2;
+    top: 12px;
+    right: 34px;
+
+    display: block;
+
+    width: 16px;
+    height: 16px;
+
+    content: ' ';
+    -webkit-transition: opacity .2s;
+       -moz-transition: opacity .2s;
+         -o-transition: opacity .2s;
+            transition: opacity .2s;
+
+    opacity: 0; 
+    background: url(../../../../images/icons/spinner.gif);
+    -webkit-background-size: 16px 16px;
+            background-size: 16px 16px;
+}
+
+.selectize-control.movies.loading::before
+{
+    opacity: .4;
+}
+
+.selectize-control.movies .selectize-dropdown [data-selectable]
+{
+    position: relative;
+
+    -webkit-box-sizing: content-box;
+       -moz-box-sizing: content-box;
+            box-sizing: content-box;
+    height: 60px;
+    padding: 10px 10px 10px 60px; 
+
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+.selectize-control.movies .selectize-dropdown [data-selectable]:last-child
+{
+    border-bottom: 0 none;
+}
+
+.selectize-control.movies .selectize-dropdown .by
+{
+    font-size: 11px;
+
+    opacity: .8;
+}
+.selectize-control.movies .selectize-dropdown .by ::before
+{
+    content: 'by ';
+}
+
+.selectize-control.movies .selectize-dropdown .name
+{
+    font-weight: bold;
+
+    margin-right: 5px;
+}
+
+.selectize-control.movies .selectize-dropdown .description
+{
+    font-size: 12px;
+
+    color: #a0a0a0;
+}
+
+.selectize-control.movies .selectize-dropdown .actors,
+.selectize-control.movies .selectize-dropdown .description,
+.selectize-control.movies .selectize-dropdown .title
+{
+    display: block;
+    overflow: hidden;
+
+    width: 100%;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.selectize-control.movies .selectize-dropdown .actors
+{
+    font-size: 10px;
+
+    color: #a0a0a0;
+}
+.selectize-control.movies .selectize-dropdown .actors span
+{
+    color: #606060;
+}
+
+.selectize-control.movies .selectize-dropdown img
+{
+    position: absolute;
+    left: 10px;
+
+    height: 60px;
+
+    border-radius: 3px;
+    background: rgba(0, 0, 0, .04);
+}
+
+.selectize-control.movies .selectize-dropdown .meta
+{
+    font-size: 10px; 
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+.selectize-control.movies .selectize-dropdown .meta li
+{
+    display: inline;
+
+    margin: 0;
+    margin-right: 10px; 
+    padding: 0;
+}
+.selectize-control.movies .selectize-dropdown .meta li span
+{
+    font-weight: bold;
+}
+
+.selectize-control.multi .selectize-input.has-items
+{
+    padding-left: 8px !important;
+}
+.selectize-control.multi .selectize-input.has-items.disabled [data-value]
+{
+    color: #fff;
+}
+
+.selectize-control.multi .selectize-input [data-value]
+{
+    font-size: 1rem;
+    line-height: 1.5rem; 
+
+    margin-right: 7px;
+    padding: 3px 6px;
+
+    border-color: #2494be !important;
+    background-color: #3bafda !important;
+    background-image: none !important;
+}
+
+.selectize-control.plugin-remove_button [data-value] .remove
+{
+    border-left-color: #2494be !important;
+}

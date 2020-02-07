@@ -1,0 +1,274 @@
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-primary,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-primary
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#704acf), to(#a992e2));
+    background-image: -webkit-linear-gradient(top, #704acf 0%, #a992e2 100%);
+    background-image:    -moz-linear-gradient(top, #704acf 0%, #a992e2 100%);
+    background-image:      -o-linear-gradient(top, #704acf 0%, #a992e2 100%);
+    background-image:         linear-gradient(to bottom, #704acf 0%, #a992e2 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-success,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-success
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#298d74), to(#48c9a9));
+    background-image: -webkit-linear-gradient(top, #298d74 0%, #48c9a9 100%);
+    background-image:    -moz-linear-gradient(top, #298d74 0%, #48c9a9 100%);
+    background-image:      -o-linear-gradient(top, #298d74 0%, #48c9a9 100%);
+    background-image:         linear-gradient(to bottom, #298d74 0%, #48c9a9 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-info,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-info
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#228eb6), to(#55b9df));
+    background-image: -webkit-linear-gradient(top, #228eb6 0%, #55b9df 100%);
+    background-image:    -moz-linear-gradient(top, #228eb6 0%, #55b9df 100%);
+    background-image:      -o-linear-gradient(top, #228eb6 0%, #55b9df 100%);
+    background-image:         linear-gradient(to bottom, #228eb6 0%, #55b9df 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-warning,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-warning
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#efa50b), to(#f7c55f));
+    background-image: -webkit-linear-gradient(top, #efa50b 0%, #f7c55f 100%);
+    background-image:    -moz-linear-gradient(top, #efa50b 0%, #f7c55f 100%);
+    background-image:      -o-linear-gradient(top, #efa50b 0%, #f7c55f 100%);
+    background-image:         linear-gradient(to bottom, #efa50b 0%, #f7c55f 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-danger,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-danger
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#bc2534), to(#df5e6a));
+    background-image: -webkit-linear-gradient(top, #bc2534 0%, #df5e6a 100%);
+    background-image:    -moz-linear-gradient(top, #bc2534 0%, #df5e6a 100%);
+    background-image:      -o-linear-gradient(top, #bc2534 0%, #df5e6a 100%);
+    background-image:         linear-gradient(to bottom, #bc2534 0%, #df5e6a 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-red,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-red
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d32f2f), to(#ef5350));
+    background-image: -webkit-linear-gradient(top, #d32f2f 0%, #ef5350 100%);
+    background-image:    -moz-linear-gradient(top, #d32f2f 0%, #ef5350 100%);
+    background-image:      -o-linear-gradient(top, #d32f2f 0%, #ef5350 100%);
+    background-image:         linear-gradient(to bottom, #d32f2f 0%, #ef5350 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-pink,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-pink
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#c2185b), to(#ec407a));
+    background-image: -webkit-linear-gradient(top, #c2185b 0%, #ec407a 100%);
+    background-image:    -moz-linear-gradient(top, #c2185b 0%, #ec407a 100%);
+    background-image:      -o-linear-gradient(top, #c2185b 0%, #ec407a 100%);
+    background-image:         linear-gradient(to bottom, #c2185b 0%, #ec407a 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-purple,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-purple
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#7b1fa2), to(#ab47bc));
+    background-image: -webkit-linear-gradient(top, #7b1fa2 0%, #ab47bc 100%);
+    background-image:    -moz-linear-gradient(top, #7b1fa2 0%, #ab47bc 100%);
+    background-image:      -o-linear-gradient(top, #7b1fa2 0%, #ab47bc 100%);
+    background-image:         linear-gradient(to bottom, #7b1fa2 0%, #ab47bc 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-deep-purple,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-deep-purple
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#512da8), to(#7e57c2));
+    background-image: -webkit-linear-gradient(top, #512da8 0%, #7e57c2 100%);
+    background-image:    -moz-linear-gradient(top, #512da8 0%, #7e57c2 100%);
+    background-image:      -o-linear-gradient(top, #512da8 0%, #7e57c2 100%);
+    background-image:         linear-gradient(to bottom, #512da8 0%, #7e57c2 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-indigo,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-indigo
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#303f9f), to(#5c6bc0));
+    background-image: -webkit-linear-gradient(top, #303f9f 0%, #5c6bc0 100%);
+    background-image:    -moz-linear-gradient(top, #303f9f 0%, #5c6bc0 100%);
+    background-image:      -o-linear-gradient(top, #303f9f 0%, #5c6bc0 100%);
+    background-image:         linear-gradient(to bottom, #303f9f 0%, #5c6bc0 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-blue,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-blue
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1976d2), to(#42a5f5));
+    background-image: -webkit-linear-gradient(top, #1976d2 0%, #42a5f5 100%);
+    background-image:    -moz-linear-gradient(top, #1976d2 0%, #42a5f5 100%);
+    background-image:      -o-linear-gradient(top, #1976d2 0%, #42a5f5 100%);
+    background-image:         linear-gradient(to bottom, #1976d2 0%, #42a5f5 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-light-blue,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-light-blue
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#0288d1), to(#29b6f6));
+    background-image: -webkit-linear-gradient(top, #0288d1 0%, #29b6f6 100%);
+    background-image:    -moz-linear-gradient(top, #0288d1 0%, #29b6f6 100%);
+    background-image:      -o-linear-gradient(top, #0288d1 0%, #29b6f6 100%);
+    background-image:         linear-gradient(to bottom, #0288d1 0%, #29b6f6 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-cyan,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-cyan
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#0097a7), to(#26c6da));
+    background-image: -webkit-linear-gradient(top, #0097a7 0%, #26c6da 100%);
+    background-image:    -moz-linear-gradient(top, #0097a7 0%, #26c6da 100%);
+    background-image:      -o-linear-gradient(top, #0097a7 0%, #26c6da 100%);
+    background-image:         linear-gradient(to bottom, #0097a7 0%, #26c6da 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-teal,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-teal
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#00796b), to(#26a69a));
+    background-image: -webkit-linear-gradient(top, #00796b 0%, #26a69a 100%);
+    background-image:    -moz-linear-gradient(top, #00796b 0%, #26a69a 100%);
+    background-image:      -o-linear-gradient(top, #00796b 0%, #26a69a 100%);
+    background-image:         linear-gradient(to bottom, #00796b 0%, #26a69a 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-green,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-green
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#388e3c), to(#66bb6a));
+    background-image: -webkit-linear-gradient(top, #388e3c 0%, #66bb6a 100%);
+    background-image:    -moz-linear-gradient(top, #388e3c 0%, #66bb6a 100%);
+    background-image:      -o-linear-gradient(top, #388e3c 0%, #66bb6a 100%);
+    background-image:         linear-gradient(to bottom, #388e3c 0%, #66bb6a 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-light-green,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-light-green
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#689f38), to(#9ccc65));
+    background-image: -webkit-linear-gradient(top, #689f38 0%, #9ccc65 100%);
+    background-image:    -moz-linear-gradient(top, #689f38 0%, #9ccc65 100%);
+    background-image:      -o-linear-gradient(top, #689f38 0%, #9ccc65 100%);
+    background-image:         linear-gradient(to bottom, #689f38 0%, #9ccc65 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-lime,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-lime
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#afb42b), to(#d4e157));
+    background-image: -webkit-linear-gradient(top, #afb42b 0%, #d4e157 100%);
+    background-image:    -moz-linear-gradient(top, #afb42b 0%, #d4e157 100%);
+    background-image:      -o-linear-gradient(top, #afb42b 0%, #d4e157 100%);
+    background-image:         linear-gradient(to bottom, #afb42b 0%, #d4e157 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-yellow,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-yellow
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#fbc02d), to(#ffee58));
+    background-image: -webkit-linear-gradient(top, #fbc02d 0%, #ffee58 100%);
+    background-image:    -moz-linear-gradient(top, #fbc02d 0%, #ffee58 100%);
+    background-image:      -o-linear-gradient(top, #fbc02d 0%, #ffee58 100%);
+    background-image:         linear-gradient(to bottom, #fbc02d 0%, #ffee58 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-amber,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-amber
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffa000), to(#ffca28));
+    background-image: -webkit-linear-gradient(top, #ffa000 0%, #ffca28 100%);
+    background-image:    -moz-linear-gradient(top, #ffa000 0%, #ffca28 100%);
+    background-image:      -o-linear-gradient(top, #ffa000 0%, #ffca28 100%);
+    background-image:         linear-gradient(to bottom, #ffa000 0%, #ffca28 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-orange,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-orange
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f57c00), to(#ffa726));
+    background-image: -webkit-linear-gradient(top, #f57c00 0%, #ffa726 100%);
+    background-image:    -moz-linear-gradient(top, #f57c00 0%, #ffa726 100%);
+    background-image:      -o-linear-gradient(top, #f57c00 0%, #ffa726 100%);
+    background-image:         linear-gradient(to bottom, #f57c00 0%, #ffa726 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-deep-orange,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-deep-orange
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#e64a19), to(#ff7043));
+    background-image: -webkit-linear-gradient(top, #e64a19 0%, #ff7043 100%);
+    background-image:    -moz-linear-gradient(top, #e64a19 0%, #ff7043 100%);
+    background-image:      -o-linear-gradient(top, #e64a19 0%, #ff7043 100%);
+    background-image:         linear-gradient(to bottom, #e64a19 0%, #ff7043 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-brown,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-brown
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#5d4037), to(#8d6e63));
+    background-image: -webkit-linear-gradient(top, #5d4037 0%, #8d6e63 100%);
+    background-image:    -moz-linear-gradient(top, #5d4037 0%, #8d6e63 100%);
+    background-image:      -o-linear-gradient(top, #5d4037 0%, #8d6e63 100%);
+    background-image:         linear-gradient(to bottom, #5d4037 0%, #8d6e63 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-blue-grey,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-blue-grey
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#455a64), to(#78909c));
+    background-image: -webkit-linear-gradient(top, #455a64 0%, #78909c 100%);
+    background-image:    -moz-linear-gradient(top, #455a64 0%, #78909c 100%);
+    background-image:      -o-linear-gradient(top, #455a64 0%, #78909c 100%);
+    background-image:         linear-gradient(to bottom, #455a64 0%, #78909c 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-grey,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-grey
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#616161), to(#bdbdbd));
+    background-image: -webkit-linear-gradient(top, #616161 0%, #bdbdbd 100%);
+    background-image:    -moz-linear-gradient(top, #616161 0%, #bdbdbd 100%);
+    background-image:      -o-linear-gradient(top, #616161 0%, #bdbdbd 100%);
+    background-image:         linear-gradient(to bottom, #616161 0%, #bdbdbd 100%);
+    background-repeat: repeat-x;
+}
+
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-on.bootstrap-switch-grey-blue,
+.bootstrap-switch .bootstrap-switch-container .bootstrap-switch-handle-off.bootstrap-switch-grey-blue
+{
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#2c303b), to(#78909c));
+    background-image: -webkit-linear-gradient(top, #2c303b 0%, #78909c 100%);
+    background-image:    -moz-linear-gradient(top, #2c303b 0%, #78909c 100%);
+    background-image:      -o-linear-gradient(top, #2c303b 0%, #78909c 100%);
+    background-image:         linear-gradient(to bottom, #2c303b 0%, #78909c 100%);
+    background-repeat: repeat-x;
+}

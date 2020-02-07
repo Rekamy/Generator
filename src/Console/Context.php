@@ -1,26 +1,34 @@
 <?php
 
-namespace Rekamy\ApiGenerator\Console;
+namespace Rekamy\Generator\Console;
 
 use DB;
-use Rekamy\ApiGenerator\Console\Generator\AppBaseControllerGenerator;
-use Rekamy\ApiGenerator\Console\Generator\BaseControllerGenerator;
-use Rekamy\ApiGenerator\Console\Generator\ControllersGenerator;
-use Rekamy\ApiGenerator\Console\Generator\ModelGenerator;
-use Rekamy\ApiGenerator\Console\Generator\RepositoryGenerator;
-use Rekamy\ApiGenerator\Console\Generator\RequestGenerator;
-use Rekamy\ApiGenerator\Console\Generator\RouteGenerator;
-use Debugbar;
+use Rekamy\Generator\Console\Generator\AppBaseControllerGenerator;
+use Rekamy\Generator\Console\Generator\BaseControllerGenerator;
+use Rekamy\Generator\Console\Generator\ApiControllersGenerator;
+use Rekamy\Generator\Console\Generator\ModelGenerator;
+use Rekamy\Generator\Console\Generator\RepositoryGenerator;
+use Rekamy\Generator\Console\Generator\ApiRequestGenerator;
+use Rekamy\Generator\Console\Generator\WebRequestGenerator;
+use Rekamy\Generator\Console\Generator\ApiRouteGenerator;
+use Rekamy\Generator\Console\Generator\RobustModuleViewGenerator;
+use Rekamy\Generator\Console\Generator\WebRouteGenerator;
+use Rekamy\Generator\Console\Generator\WebControllersGenerator;
+use Rekamy\Generator\GeneratorServiceProvider;
 
-class Context
+class Context extends GeneratorServiceProvider
 {
     use ModelGenerator,
-        ControllersGenerator,
+        ApiControllersGenerator,
         BaseControllerGenerator,
         AppBaseControllerGenerator,
         RepositoryGenerator,
-        RequestGenerator,
-        RouteGenerator;
+        ApiRequestGenerator,
+        ApiRouteGenerator,
+        WebControllersGenerator,
+        WebRequestGenerator,
+        RobustModuleViewGenerator,
+        WebRouteGenerator;
 
     public $config;
     public $dbname;
@@ -30,18 +38,42 @@ class Context
     public $options;
     public $namespace;
     public $appName;
+    public $template;
     public $db = [];
     public $output = [];
+    public $configFile = [];
+    public $outputDecorator;
+    public $progress;
+
+    public function loadConfig()
+    {
+        if (!config('rekamygenerator')) {
+            $this->configFile = include __DIR__ . '/../config/rekamygenerator.php';
+            $config = config('database');
+            $this->dbname = $config['connections']['mysql']['database'];
+            $this->excludeTables = $this->configFile['database']['exclude_tables'];
+            $this->generate = $this->configFile['generate'];
+            $this->path = $this->configFile['path'];
+            $this->options = $this->configFile['options'];
+            $this->namespace = $this->configFile['namespace'];
+            $this->appName = $this->configFile['app_name'];
+            $this->template = $this->configFile['template'];
+        } else {
+            $this->configFile = config('rekamygenerator');
+            $this->dbname = config('rekamygenerator.database.name');
+            $this->excludeTables = config('rekamygenerator.database.exclude_tables');
+            $this->generate = config('rekamygenerator.generate');
+            $this->path = config('rekamygenerator.path');
+            $this->options = config('rekamygenerator.options');
+            $this->namespace = config('rekamygenerator.namespace');
+            $this->appName = config('rekamygenerator.app_name');
+            $this->template = config('template');
+        }
+    }
 
     public function __construct()
     {
-        $this->dbname = config('apigenerator.database.name', 'homestead');
-        $this->excludeTables = config('apigenerator.database.exclude_tables', []);
-        $this->generate = config('apigenerator.generate', false);
-        $this->path = config('apigenerator.path');
-        $this->options = config('apigenerator.options');
-        $this->namespace = config('apigenerator.namespace');
-        $this->appName = config('apigenerator.app_name');
+        $this->loadConfig();
 
         $this->db['context'] = $this;
 

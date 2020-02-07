@@ -1,10 +1,10 @@
 <?php
 
-namespace Rekamy\ApiGenerator\Console\Generator;
+namespace Rekamy\Generator\Console\Generator;
 
 use DB;
-use Rekamy\ApiGenerator\Console\RuleParser;
-use Rekamy\ApiGenerator\Console\StubGenerator;
+use Rekamy\Generator\Console\RuleParser;
+use Rekamy\Generator\Console\StubGenerator;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
@@ -13,7 +13,11 @@ trait ModelGenerator
 {
     public function generateModels($outputDecorator)
     {
+
         try {
+            $this->progress = $this->outputDecorator->createProgressBar(count($this->db['tables']));
+            $this->progress->start();
+
             $this->output['rows'] = [];
             $separator = new TableSeparator;
 
@@ -21,7 +25,7 @@ trait ModelGenerator
             array_push($this->output['rows'], $separator);
 
             foreach ($this->db['tables'] as $table) {
-                $view = view('template::CreateModelTemplate')
+                $view = view('generaltemplate::CreateModelTemplate')
                     ->with('db', (object) $this->db)
                     ->with('context', $this)
                     ->with('tablename', $table->TABLE_NAME);
@@ -37,6 +41,7 @@ trait ModelGenerator
                 $response = ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . " Model Successfully Created";
 
                 array_push($this->output['rows'], ['<comment>' . $response . '</comment>']);
+                $this->progress->advance();
             }
             $outputDecorator->setRows($this->output['rows']);
         } catch (\Throwable $th) {

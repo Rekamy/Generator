@@ -1,0 +1,181 @@
+@-webkit-keyframes ball-grid-beat
+{
+    50%
+    {
+        opacity: .7;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes ball-grid-beat
+{
+    50%
+    {
+        opacity: .7;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes ball-grid-beat
+{
+    50%
+    {
+        opacity: .7;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+@keyframes ball-grid-beat
+{
+    50%
+    {
+        opacity: .7;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
+.ball-grid-beat
+{
+    width: 57px;
+}
+.ball-grid-beat > div:nth-child(1)
+{
+    -webkit-animation-duration: .61s;
+       -moz-animation-duration: .61s;
+         -o-animation-duration: .61s;
+            animation-duration: .61s; 
+    -webkit-animation-delay: .2s;
+       -moz-animation-delay: .2s;
+         -o-animation-delay: .2s;
+            animation-delay: .2s;
+}
+.ball-grid-beat > div:nth-child(2)
+{
+    -webkit-animation-duration: 1.5s;
+       -moz-animation-duration: 1.5s;
+         -o-animation-duration: 1.5s;
+            animation-duration: 1.5s; 
+    -webkit-animation-delay: .05s;
+       -moz-animation-delay: .05s;
+         -o-animation-delay: .05s;
+            animation-delay: .05s;
+}
+.ball-grid-beat > div:nth-child(3)
+{
+    -webkit-animation-duration: 1.13s;
+       -moz-animation-duration: 1.13s;
+         -o-animation-duration: 1.13s;
+            animation-duration: 1.13s; 
+    -webkit-animation-delay: .1s;
+       -moz-animation-delay: .1s;
+         -o-animation-delay: .1s;
+            animation-delay: .1s;
+}
+.ball-grid-beat > div:nth-child(4)
+{
+    -webkit-animation-duration: 1.1s;
+       -moz-animation-duration: 1.1s;
+         -o-animation-duration: 1.1s;
+            animation-duration: 1.1s; 
+    -webkit-animation-delay: -.05s;
+       -moz-animation-delay: -.05s;
+         -o-animation-delay: -.05s;
+            animation-delay: -.05s;
+}
+.ball-grid-beat > div:nth-child(5)
+{
+    -webkit-animation-duration: 1.09s;
+       -moz-animation-duration: 1.09s;
+         -o-animation-duration: 1.09s;
+            animation-duration: 1.09s; 
+    -webkit-animation-delay: .29s;
+       -moz-animation-delay: .29s;
+         -o-animation-delay: .29s;
+            animation-delay: .29s;
+}
+.ball-grid-beat > div:nth-child(6)
+{
+    -webkit-animation-duration: .78s;
+       -moz-animation-duration: .78s;
+         -o-animation-duration: .78s;
+            animation-duration: .78s; 
+    -webkit-animation-delay: .02s;
+       -moz-animation-delay: .02s;
+         -o-animation-delay: .02s;
+            animation-delay: .02s;
+}
+.ball-grid-beat > div:nth-child(7)
+{
+    -webkit-animation-duration: .98s;
+       -moz-animation-duration: .98s;
+         -o-animation-duration: .98s;
+            animation-duration: .98s; 
+    -webkit-animation-delay: .66s;
+       -moz-animation-delay: .66s;
+         -o-animation-delay: .66s;
+            animation-delay: .66s;
+}
+.ball-grid-beat > div:nth-child(8)
+{
+    -webkit-animation-duration: .86s;
+       -moz-animation-duration: .86s;
+         -o-animation-duration: .86s;
+            animation-duration: .86s; 
+    -webkit-animation-delay: .39s;
+       -moz-animation-delay: .39s;
+         -o-animation-delay: .39s;
+            animation-delay: .39s;
+}
+.ball-grid-beat > div:nth-child(9)
+{
+    -webkit-animation-duration: 1.33s;
+       -moz-animation-duration: 1.33s;
+         -o-animation-duration: 1.33s;
+            animation-duration: 1.33s; 
+    -webkit-animation-delay: -.1s;
+       -moz-animation-delay: -.1s;
+         -o-animation-delay: -.1s;
+            animation-delay: -.1s;
+}
+.ball-grid-beat > div
+{
+    display: inline-block;
+    float: left;
+
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+
+    -webkit-animation-name: ball-grid-beat;
+       -moz-animation-name: ball-grid-beat;
+         -o-animation-name: ball-grid-beat;
+            animation-name: ball-grid-beat;
+    -webkit-animation-delay: 0;
+       -moz-animation-delay: 0;
+         -o-animation-delay: 0;
+            animation-delay: 0; 
+    -webkit-animation-iteration-count: infinite;
+       -moz-animation-iteration-count: infinite;
+         -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+
+    border-radius: 100%;
+    background-color: #55595c;
+
+    -webkit-animation-fill-mode: both;
+       -moz-animation-fill-mode: both;
+         -o-animation-fill-mode: both;
+            animation-fill-mode: both;
+}
