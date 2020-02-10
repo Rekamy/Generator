@@ -69,6 +69,7 @@ class Context extends GeneratorServiceProvider
             $this->options = config('rekamygenerator.options');
             $this->namespace = config('rekamygenerator.namespace');
             $this->appName = config('rekamygenerator.app_name');
+            $this->template = config('rekamygenerator.template');
         }
     }
 
