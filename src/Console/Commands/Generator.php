@@ -103,6 +103,13 @@ class Generator extends Command
         echo PHP_EOL;
         $table->render();
         $this->context->progress->finish();
+
+        if ($this->context->generate['swagger_api_doc'])
+            $this->context->generateSwaggerApiDoc($table);
+
+        echo PHP_EOL;
+        $table->render();
+        $this->context->progress->finish();
     }
 
 
@@ -166,6 +173,7 @@ class Generator extends Command
             echo PHP_EOL;
             $table->render();
 
+            if($this->context->template['vendor_files'])
             $this->context->countRobustPublicFiles();
         } else if ($choice == "AdminLTE") {
             if ($this->context->generate['module_views'])

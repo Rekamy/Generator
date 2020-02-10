@@ -14,6 +14,7 @@ use Rekamy\Generator\Console\Generator\ApiRouteGenerator;
 use Rekamy\Generator\Console\Generator\RobustModuleViewGenerator;
 use Rekamy\Generator\Console\Generator\WebRouteGenerator;
 use Rekamy\Generator\Console\Generator\WebControllersGenerator;
+use Rekamy\Generator\Console\Generator\SwaggerApiDocGenerator;
 use Rekamy\Generator\GeneratorServiceProvider;
 
 class Context extends GeneratorServiceProvider
@@ -28,7 +29,8 @@ class Context extends GeneratorServiceProvider
         WebControllersGenerator,
         WebRequestGenerator,
         RobustModuleViewGenerator,
-        WebRouteGenerator;
+        WebRouteGenerator,
+        SwaggerApiDocGenerator;
 
     public $config;
     public $dbname;
@@ -67,7 +69,6 @@ class Context extends GeneratorServiceProvider
             $this->options = config('rekamygenerator.options');
             $this->namespace = config('rekamygenerator.namespace');
             $this->appName = config('rekamygenerator.app_name');
-            $this->template = config('template');
         }
     }
 
@@ -76,7 +77,6 @@ class Context extends GeneratorServiceProvider
         $this->loadConfig();
 
         $this->db['context'] = $this;
-
         $this->db['columns'] = DB::table('information_schema.columns')
             ->where('table_schema', $this->dbname);
         $this->db['tables'] = DB::table('information_schema.tables')

@@ -3,7 +3,7 @@
 
 namespace " . $context->namespace['web_controller'] . ";
 
-use App\Http\Requests;
+use Illuminate\Http\Request;
 use App\DataTables\\" . ucfirst(Str::camel(Str::singular($tablename))) . "DataTable;
 use " . $context->namespace['web_request'] . "\Create" . ucfirst(Str::camel(Str::singular($tablename))) . "Request;
 use " . $context->namespace['web_request'] . "\Update" . ucfirst(Str::camel(Str::singular($tablename))) . "Request;
@@ -29,9 +29,22 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
      * @param " . ucfirst(Str::camel(Str::singular($tablename))) . "DataTable \$" . lcfirst(Str::camel(Str::singular($tablename))) . "DataTable
      * @return Response
      */
-    public function index()
+    public function index(Request \$request)
     {
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index')->with('page', \$this->page);
+        if (\$request->ajax()) {
+            \$input = \$request->all();
+
+            \$output = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->" . lcfirst(Str::camel($tablename)) . "(\$input)->toArray();
+
+            \$response = [
+                \"draw\"            => \$input['draw'],
+                \"recordsTotal\"    => intval(\$output['total']),
+                \"recordsFiltered\" => intval(\$output['total']),
+                \"data\"            => \$output['data']
+            ];
+            return response()->json(\$response, 200);
+        }
+        return view('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".index')->with('page', \$this->page);
     }
 
     /**
@@ -41,7 +54,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
      */
     public function create()
     {
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".create');
+        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".create')->with('page', \$this->page);
     }
 
     /**
@@ -71,7 +84,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     {
         \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
 
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".show')->with('" . lcfirst(Str::camel(Str::singular($tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ");
+        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".show')->with('" . lcfirst(Str::camel(Str::singular($tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ")->with('page', \$this->page);
     }
 
     /**
@@ -85,7 +98,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     {
         \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
 
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".edit')->with('" . lcfirst(Str::camel(Str::singular($tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ");
+        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".edit')->with('" . lcfirst(Str::camel(Str::singular($tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ")->with('page', \$this->page);
     }
 
     /**

@@ -30,15 +30,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
     /**
      * @param Request \$request
      * @return Response
-     * @OA\Get(
-     *     path=\"/api/" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "\",
-     *     tags={\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . "\"},
-     *     summary=\"Get list of " . ucfirst(str_replace('_', '', $tablename)) . "\",
-     *     description=\"Get " . ucfirst(str_replace('_', '', $tablename)) . "\",
-     *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
-     *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     * )
      */
     public function index(Request \$request)
     {
@@ -52,81 +43,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
     /**
      * @param Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest \$request
      * @return Response
-     * @OA\Post(
-     *     path=\"/api/" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "\",
-     *     tags={\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . "\"},
-     *     summary=\"Store a " . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " into database\",
-     *     description=\"Store " . ucfirst(str_replace('_', '', $tablename)) . "\",
-     *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
-     *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\")," ?> 
-    <?php foreach ($db->columns as $i => $column) {
-        if ($column->COLUMN_NAME == "id" || strpos($column->COLUMN_NAME, "_at") || strpos($column->COLUMN_NAME, "_by") || $column->COLUMN_NAME == "status_id") {
-            continue;
-        }
-        if ($column->TABLE_NAME == $tablename) {
-            if ($column->ORDINAL_POSITION == 2) { ?>
-<?= " *     @OA\Parameter(
-     *          name=\"" . $column->COLUMN_NAME . "\",
-     *          in=\"query\",\n" ?>
-<?php if ($column->IS_NULLABLE == "NO") { ?>
-    <?= "\t *          required=true,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } else { ?>
-    <?= "\t *          required=false,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-
-<?php } ?>
-<?= "\n\t *     )," ?>
-    <?php } else { ?>
-<?= "\n\t *     @OA\Parameter(
-     *          name=\"" . $column->COLUMN_NAME . "\",
-     *          in=\"query\",\n" ?>
-<?php if ($column->IS_NULLABLE == "NO") { ?>
-<?= "\t *          required=true,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } else { ?>
-<?= "\t *          required=false,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } ?>
-<?= "\n\t *     )," ?>
-     <?php
-                }
-            }
-        } ?><?= "
-     * )
      */
     public function store(Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest \$request)
     {
@@ -140,23 +56,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
     /**
      * @param int \$id
      * @return Response
-     * @OA\Get(
-     *     path=\"/api/" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/{id}\",
-     *     tags={\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . "\"},
-     *     summary=\"Get a " . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " by ID\",
-     *     description=\"Get " . ucfirst(str_replace('_', '', $tablename)) . " by id\",
-     *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
-     *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     @OA\Parameter(
-     *          name=\"id\",
-     *          in=\"path\",
-     *          required=true,
-     *          @OA\Schema(
-     *              type=\"integer\"
-     *          )
-     *     ),
-     * )
      */
     public function show(\$id)
     {
@@ -174,84 +73,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
      * @param int \$id
      * @param Update" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest \$request
      * @return Response
-     * @OA\Patch(
-     *     path=\"/api/" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/{id}\",
-     *     tags={\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . "\"},
-     *     summary=\"Update a " . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " by ID\",
-     *     description=\"Update " . ucfirst(str_replace('_', '', $tablename)) . "\",
-     *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
-     *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\")," ?> 
-    <?php foreach ($db->columns as $i => $column) {
-        if (strpos($column->COLUMN_NAME, "_at") || strpos($column->COLUMN_NAME, "_by") || $column->COLUMN_NAME == "status_id") {
-            continue;
-        }
-        if ($column->TABLE_NAME == $tablename) {
-            if ($column->ORDINAL_POSITION == 2) { ?>
-<?= " *     @OA\Parameter(
-     *          name=\"" . $column->COLUMN_NAME . "\",
-     *          in=\"query\",\n" ?>
-<?php if ($column->IS_NULLABLE == "NO") { ?>
-    <?= "\t *          required=true,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } else { ?>
-    <?= "\t *          required=false,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } ?>
-<?= "\n\t *     )," ?>
-    <?php } else { ?>
-<?= "\n\t *     @OA\Parameter(
-     *          name=\"" . $column->COLUMN_NAME . "\"," ?>
-    <?php if ($column->COLUMN_NAME == "id") { ?>
-        <?= " *          in=\"path\",\n" ?>
-        <?php } else { ?>
-        <?= " *          in=\"query\",\n" ?>
-        <?php } ?>
-<?php if ($column->IS_NULLABLE == "NO") { ?>
-    <?= "\t *          required=true,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } else { ?>
-    <?= "\t *          required=false,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?php } ?>
-<?= "\n\t *     )," ?>
-     <?php
-                }
-            }
-        } ?><?= "
-     * )
      */
     public function update(\$id, Update" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest \$request)
     {
@@ -272,20 +93,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
     /**
      * @param int \$id
      * @return Response
-     * @OA\Delete(
-     *     path=\"/api/" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/{id}\",
-     *     tags={\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . "\"},
-     *     summary=\"Delete a " . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " by ID\",
-     *     description=\"Delete " . ucfirst(str_replace('_', '', $tablename)) . "\",
-     *     @OA\Response(response=200, description=\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Module\"),
-     *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\"),
-     *     @OA\Parameter(
-     *          name=\"id\",
-     *          in=\"path\",
-     *          required=true,
-     *     ),
-     * )
      */
     public function destroy(\$id)
     {
@@ -304,54 +111,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
     /**
      * @param int \$id
      * @return Response
-     * @OA\Get(
-     *     path=\"/api/" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/filter\",
-     *     tags={\"" . ucfirst(Str::singular(str_replace('_', '', $tablename))) . "\"},
-     *     summary=\"General filter to get " . ucfirst(str_replace('_', '', $tablename)) . ". Just name the column name\",
-     *     description=\"Filter " . ucfirst(Str::singular(str_replace('_', '', $tablename))) . " Data\",
-     *     @OA\Response(response=200, description=\"" . Ucfirst(str_replace('_', '', $tablename)) . " Module\"),
-     *     @OA\Response(response=400, description=\"Bad request\"),
-     *     @OA\Response(response=404, description=\"Resource Not Found\")," ?>
-    <?php
-    foreach ($db->columns as $i => $column) {
-        if ($column->TABLE_NAME == $tablename) {
-            if ($column->ORDINAL_POSITION == 1) { ?>
-        <?= "\n\t *     @OA\Parameter(
-     *          name=\"" . $column->COLUMN_NAME . "\",
-     *          in=\"query\"," ?>
-<?= "\n\t *          required=false,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?= "\n\t *    )," ?>
-       <?php
-                } else { ?>
-<?= "\n\t *     @OA\Parameter(
-     *          name=\"" . $column->COLUMN_NAME . "\",
-     *          in=\"query\"," ?>
-<?= "\n\t *          required=false,
-     *          @OA\Schema(" ?>
-    <?php if ($column->DATA_TYPE == "integer" || $column->DATA_TYPE == "int") { ?>
-    <?= "\n\t *              type=\"integer\"" ?>
-    <?php } else if ($column->DATA_TYPE == "datetime" || $column->DATA_TYPE == "timestamp") { ?>
-    <?= "\n\t *              type=\"datetime\"" ?>
-    <?php } else { ?>
-    <?= "\n\t *              type=\"string\"" ?>
-    <?php } ?>
-<?= "\n\t *          )," ?>
-<?= "\n\t *    )," ?>
-        <?php
-                }
-            }
-        }
-        ?>
-    <?= "\n\t * )
      */
     public function filterData(Request \$request)
     {
@@ -370,4 +129,4 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extend
     }
 }
 "
-    ?>
+?>

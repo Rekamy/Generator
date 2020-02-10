@@ -13,9 +13,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class " . ucfirst(Str::camel(Str::singular($tablename))) . " extends Model
 {" ?>
     <?php if ($context->options['softDelete']) { ?>
+    <?php foreach ($db->columns as $i => $column) {
+    if ($column->TABLE_NAME == $tablename) {
+    if (strpos($column->COLUMN_NAME, 'deleted_at') !== false) { ?>
     <?= "
     use SoftDeletes;
     " ?>
+    <?php } 
+    }
+    } ?>
     <?php } ?>
     <?= "
     public \$table = '" . $tablename . "';

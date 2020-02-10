@@ -42,6 +42,8 @@ return [
         'web_controllers'      => true,
 
         'module_views'         => true,
+
+        'swagger_api_doc'      => true,
     ],
 
     /*
@@ -58,8 +60,6 @@ return [
         'exclude_tables' => [
 
             'migrations',
-
-            'abilities',
         ]
     ],
 
@@ -97,6 +97,8 @@ return [
         'module_views'          => base_path('resources/views'),
 
         'layouts'               => base_path('resources/views/layouts'),
+
+        'swagger_api_doc'       => app_path('Http/Controllers/API/Doc'),
     ],
 
     /*
@@ -145,6 +147,8 @@ return [
     */
 
     'template' => [
+
+        'vendor_files' => false,
 
         'own' => false,
 

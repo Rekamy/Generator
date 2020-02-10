@@ -25,7 +25,7 @@ class Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest ext
      */
     public function rules()
     {
-        return " . Str::camel(Str::singular($tablename)) . "::\$rules;
+        return " . ucfirst(Str::camel(Str::singular($tablename))) . "::\$rules;
     }
 }
 "

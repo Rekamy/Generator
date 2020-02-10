@@ -3,8 +3,10 @@
 
 namespace " . $context->namespace['repository'] . ";
 
+use Illuminate\Pagination\Paginator;
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
 use InfyOm\Generator\Common\BaseRepository;
+use Rekamy\Generator\Console\Traits\Helper;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository
@@ -31,6 +33,8 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
 <?="
     ];
 
+    use Helper;
+
     /**
      * Configure the Model
      **/
@@ -38,6 +42,23 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
     {
         return " . ucfirst(Str::camel(Str::singular($tablename))) . "::class;
     }
+    
+    public function " . lcfirst(Str::camel($tablename)) . "(\$input)
+	{
+		Paginator::currentPageResolver(function () use (\$input) {
+			return (\$input['start'] / \$input['length'] + 1);
+		});
+
+		\$model = \$this;
+
+		if (!empty(\$input['search']['value'])) {
+			foreach (\$this->fieldSearchable as \$column) {
+				\$model = \$model->whereLike(\$column, \$input['search']['value']);
+			}
+		}
+
+		return \$model->paginate(\$input['length']);
+	}
 }
 
 "?>
