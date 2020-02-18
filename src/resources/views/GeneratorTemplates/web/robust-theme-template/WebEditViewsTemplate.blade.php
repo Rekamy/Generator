@@ -1,44 +1,27 @@
-<?=
-"@extends('layouts.app')
-@section('content')
-
-<div class=\"row match-height\">
-    <div class=\"col-md-12\">
-        <div class=\"card\">
-            <div class=\"card-header\">
-                <h4 class=\"card-title\" id=\"basic-layout-form-center\">Edit " . ucfirst(Str::singular(str_replace('_', ' ', $tablename))) . "</h4>
+<?="
+<div class=\"modal fade\" id=\"baseAjaxModalContent\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editModalLabel\" aria-hidden=\"true\">
+    <div class=\"modal-dialog\" role=\"document\">
+        <div class=\"modal-content\">
+            <div class=\"modal-header\">
+                <h5 class=\"modal-title\" id=\"editModalLabel\">Edit " . ucfirst(Str::singular(str_replace('_', ' ', $tablename))) . "</h5>
+                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                    <span aria-hidden=\"true\">&times;</span>
+                </button>
             </div>
-            <div class=\"card-content collapse show\">
-                <div class=\"card-body\">
-                    <form class=\"form\" action=\"{{ route('" . lcfirst(Str::singular(Str::camel($tablename))) . ".update') }}\" method=\"POST\">
-                        @csrf
-                        @method('PUT')
-                        <div class=\"row justify-content-md-center\">
-                            <div class=\"col-md-6\">
-                                <div class=\"form-body\">
-                                    @include('" . lcfirst(Str::singular(Str::camel($tablename))) . ".fields')
-                                </div>
-                            </div>
-                        </div>
-                        <div class=\"form-actions center\">
-                            <button type=\"button\" onClick=\"window.history.back()\" class=\"btn btn-warning mr-1\">
-                                <i class=\"ft-x\"></i> Back
-                            </button>
-                            <button type=\"submit\" class=\"btn btn-info\">
-                                <i class=\"fa fa-check-square-o\"></i> Update
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <div class=\"modal-body\">
+                @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
+            </div>
+            <div class=\"modal-footer\">
+                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
+                <button type=\"button\" class=\"btn btn-primary\">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-@endsection
+
 @push('scripts')
 
 @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/edit')
 
 @endpush
-
 "?>

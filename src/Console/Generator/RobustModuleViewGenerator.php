@@ -96,6 +96,10 @@ trait RobustModuleViewGenerator
                             "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/fields.blade.php'
                         ],
                         [
+                            "view" => view('robust::WebDatatableViewsTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
+                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/datatable.blade.php'
+                        ],
+                        [
                             "view" => view('robustjs::WebCreateJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
                             "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/create.blade.php'
                         ],
@@ -110,6 +114,10 @@ trait RobustModuleViewGenerator
                         [
                             "view" => view('robustjs::WebEditJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
                             "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/edit.blade.php'
+                        ],
+                        [
+                            "view" => view('robustjs::WebDatatableJSTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
+                            "path" => $this->path['module_views'] . '/' . lcfirst(Str::singular(str_replace('_', '-', $table->TABLE_NAME))) . '/js/datatable.blade.php'
                         ],
                     ];
                 }

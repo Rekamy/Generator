@@ -148,7 +148,7 @@ return [
 
     'template' => [
 
-        'vendor_files' => true,
+        'vendor_files' => false,
 
         'own' => false,
 

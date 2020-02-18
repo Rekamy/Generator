@@ -4,10 +4,10 @@ namespace Rekamy\Generator\Console\Traits;
 
 trait Helper
 {
-    public $whereLike;
+  public $like;
 
-    public function whereLike(string $attribute, string $searchTerm)
-    {
-		return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
-    }
+  public function like(string $attribute, string $searchTerm)
+  {
+    return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
+  }
 }

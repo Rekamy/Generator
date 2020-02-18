@@ -12,34 +12,7 @@
             <div class=\"card-content collapse show\">
                 <div class=\"card-body card-dashboard\">
                     @include('layouts.alert')
-                    <a href=\"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".create') }}\" class=\"btn btn-primary pull-right\"><i class=\"fa fa-plus\"></i> Add New {{ \$page }}</a>
-                    <table id=\"" . lcfirst(Str::singular(Str::camel($tablename))) . "Datatable\" class=\"display\" style=\"width:100%\">
-                        <thead>
-                            <tr>
-                                " ?><?php
-                                    foreach ($db->columns as $i => $column) {
-                                        if ($column->TABLE_NAME == $tablename) {
-                                            echo "<th>" . $column->COLUMN_NAME . "</th>\n\t\t\t\t\t\t\t\t";
-                                        }
-                                    } 
-                                ?><?= "
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- -->
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                " ?><?php
-                                foreach ($db->columns as $i => $column) {
-                                    if ($column->TABLE_NAME == $tablename) {
-                                        echo "<th>" . $column->COLUMN_NAME . "</th>\n\t\t\t\t\t\t\t\t";
-                                    }
-                                } 
-                                ?><?= "
-                            </tr>
-                        </tfoot>
-                    </table>
+                    @include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . "/datatable')
                 </div>
             </div>
         </div>

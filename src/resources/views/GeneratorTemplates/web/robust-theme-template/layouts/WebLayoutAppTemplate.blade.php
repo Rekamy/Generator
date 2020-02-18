@@ -28,8 +28,14 @@
     <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('vendor/themes/app-assets/vendors/css/extensions/sweetalert.css') }}\">
     <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('vendor/themes/app-assets/vendors/css/forms/selects/select2.min.css') }}\">
     <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/buttons/1.6.1/css/buttons.bootstrap4.min.css\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/buttons/1.4.2/css/mixins.scss\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/buttons/1.4.2/css/common.scss\">
+    <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/buttons/1.4.2/css/buttons.bootstrap4.min.css\">
     <link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css\">
-    <script src=\"https://code.jquery.com/jquery-3.4.1.min.js\"></script>
+
     <!-- END VENDOR CSS-->
     <!-- BEGIN ROBUST CSS-->
     <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('vendor/themes/app-assets/css/app.css') }}\">
@@ -102,6 +108,10 @@
             font-size: 12px;
             line-height: 1.42857;
         }
+        
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0em 0em;
+        }
     </style>
 
     <div class=\"content-body\">
@@ -161,22 +171,82 @@
     <script src=\"{{ asset('vendor/themes/app-assets/js/scripts/forms/select/form-select2.js') }}\"></script>
     <script src=\"https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js\"></script>
     <script src=\"https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js\"></script>
+    <script src=\"https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js\"></script>
+    <script src=\"https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js\"></script>
+    <script src=\"https://cdn.datatables.net/buttons/1.6.1/js/buttons.bootstrap4.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js\"></script>
+    <script src=\"https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js\"></script>
+    <script src=\"https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js\"></script>
+    <script src=\"https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js\"></script>
+    <script src=\"https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js\"></script>
+    <script src=\"https://cdn.datatables.net/buttons/1.6.1/js/buttons.colVis.min.js\"></script>
+    <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>
     @stack('scripts')
     <!-- END PAGE LEVEL JS-->
 </body>
 
 </html>
 <script>
-    \$('select').addClass('select2');
+    \$('select').not('.defaultDOM').select2([
+        width: '100%'
+    ]);
+
     \$(window).on('load', function() {
         setTimeout(function() {
             \$('.preloader').fadeOut('slow');
         }, 0)
     });
+
     \$.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': \$('meta[name=\"csrf-token\"]').attr('content')
         }
     });
+
+    confirmDelete = (elem) => {
+        return Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this data!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#fc0330',
+            cancelButtonColor: '#999',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        })
+    }
+
+    processDeletion = (elem, callback) => {
+        Swal.fire({
+            title: 'Data is being processed. Please wait...',
+            onOpen: function() {
+                Swal.showLoading();
+                \$.ajax({
+                    url: elem.dataset.action,
+                    type: 'DELETE',
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Data has been deleted.',
+                                showConfirmButton: true,
+                            }).then(() => {
+                                callback.DataTable().ajax.reload()
+                            });
+                        }
+                    }
+                })
+            }
+        })
+    }
+
+    getModalContent = (elem) => {
+        console.log(elem);
+        \$.get(elem.dataset.action, function(response) {
+            \$(baseAjaxModal).html(response);
+            \$(baseAjaxModalContent).modal(\"show\");
+        });
+    }
 </script>
 "?>

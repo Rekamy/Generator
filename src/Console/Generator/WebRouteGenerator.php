@@ -28,10 +28,10 @@ trait WebRouteGenerator
                     ->with('db', (object) $this->db)
                     ->with('tablename', $table->TABLE_NAME);
 
-                $stub = new StubGenerator(
-                    $view->render(),
-                    $this->path['web_routes']
-                );
+                    $stub = new StubGenerator(
+                        $view->render(),
+                        $this->path['web_routes']
+                    );
 
                 $stub->render([
                     $stub

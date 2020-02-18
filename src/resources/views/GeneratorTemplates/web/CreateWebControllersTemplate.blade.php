@@ -10,6 +10,7 @@ use " . $context->namespace['web_request'] . "\Update" . ucfirst(Str::camel(Str:
 use " . $context->namespace['repository'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
 use " . $context->namespace['web_controller'] . "\AppBaseController;
 use Response;
+use DB;
 
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends AppBaseController
 {

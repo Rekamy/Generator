@@ -6,7 +6,6 @@ namespace " . $context->namespace['repository'] . ";
 use Illuminate\Pagination\Paginator;
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
 use InfyOm\Generator\Common\BaseRepository;
-use Rekamy\Generator\Console\Traits\Helper;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository
@@ -32,8 +31,6 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
     } ?>
 <?="
     ];
-
-    use Helper;
 
     /**
      * Configure the Model
