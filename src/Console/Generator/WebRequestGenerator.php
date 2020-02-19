@@ -27,11 +27,11 @@ trait WebRequestGenerator
                 $arrayPaths = [
                     [
                         "view" => view('webtemplate::CreateWebRequestTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                        "path" => app_path('Http/Requests/Create' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'Request.php'))
+                        "path" => $this->path['web_request'] . 'Create' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'Request.php')
                     ],
                     [
                         "view" => view('webtemplate::UpdateWebRequestTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                        "path" => app_path('Http/Requests/Update' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'Request.php'))
+                        "path" => $this->path['web_request'] . 'Update' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'Request.php')
                     ],
                 ];
 
