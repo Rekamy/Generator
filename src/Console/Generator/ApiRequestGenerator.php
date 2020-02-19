@@ -27,11 +27,11 @@ trait ApiRequestGenerator
                 $arrayPaths = [
                     [
                         "view" => view('apitemplate::CreateApiRequestTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                        "path" => app_path($this->path['api_request'] . '/Create' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'APIRequest.php'))
+                        "path" => $this->path['api_request'] . 'Create' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'APIRequest.php')
                     ],
                     [
                         "view" => view('apitemplate::UpdateApiRequestTemplate')->with('db', (object) $this->db)->with('tablename', $table->TABLE_NAME)->with('context', $this),
-                        "path" => app_path($this->path['api_request'] . '/Update' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'APIRequest.php'))
+                        "path" => $this->path['api_request'] . 'Update' . ucfirst(Str::camel(Str::singular($table->TABLE_NAME)) . 'APIRequest.php')
                     ],
                 ];
 
