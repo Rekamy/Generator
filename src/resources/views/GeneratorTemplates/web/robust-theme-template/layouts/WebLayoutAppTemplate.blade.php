@@ -188,9 +188,9 @@
 
 </html>
 <script>
-    \$('select').not('.defaultDOM').select2([
+    \$('select').not('.defaultDOM').select2({
         width: '100%'
-    ]);
+    });
 
     \$(window).on('load', function() {
         setTimeout(function() {
