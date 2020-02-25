@@ -6,6 +6,9 @@ namespace " . $context->namespace['repository'] . ";
 use Illuminate\Pagination\Paginator;
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
 use InfyOm\Generator\Common\BaseRepository;
+use DB;
+use Exception;
+use Rekamy\Generator\Console\Traits\ResponseHandler;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository
@@ -18,6 +21,8 @@ use InfyOm\Generator\Common\BaseRepository;
 */
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends BaseRepository
 {
+    use ResponseHandler;
+
     /**
      * @var array
      */
@@ -55,6 +60,63 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
 		}
 
 		return \$model->paginate(\$input['length']);
+    }
+    
+    public function create" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$input)
+	{
+		DB::beginTransaction();
+		try {
+			if (!\$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->create(\$input)) {
+				throw new Exception('Error Processing Request', 405);
+			}
+			DB::commit();
+			return \$this->successResponse('Successfully Insert New Data');
+		} catch (\Throwable \$th) {
+			DB::rollBack();
+			return \$this->failResponse(\$th->getMessage(), \$th->getCode());
+		}
+	}
+    
+    public function show" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$id)
+	{
+		try {
+			if (!\$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->findWithoutFail(\$id)) {
+				throw new Exception('Error Processing Request', 405);
+			}
+			return \$this->successResponse('Successfully Update Data', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ");
+		} catch (\Throwable \$th) {
+			return \$this->failResponse(\$th->getMessage(), \$th->getCode());
+		}
+	}
+
+    public function update" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$input, \$id)
+	{
+		DB::beginTransaction();
+		try {
+			if (!\$this->update(\$input, \$id)) {
+				throw new Exception('Error Processing Request', 405);
+			}
+			DB::commit();
+			return \$this->successResponse('Successfully Update Data');
+		} catch (\Throwable \$th) {
+			DB::rollBack();
+			return \$this->failResponse(\$th->getMessage(), \$th->getCode());
+		}
+	}
+
+	public function delete" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$id)
+	{
+		DB::beginTransaction();
+		try {
+			if (!\$this->delete(\$id)) {
+				throw new Exception('Error Processing Request', 405);
+			}
+			DB::commit();
+			return \$this->successResponse('Data Has Been Deleted');
+		} catch (\Throwable \$th) {
+			DB::rollBack();
+			return \$this->failResponse(\$th->getMessage(), \$th->getCode());
+		}
 	}
 }
 

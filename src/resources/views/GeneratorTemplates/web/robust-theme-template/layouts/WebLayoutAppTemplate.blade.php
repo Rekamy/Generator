@@ -58,6 +58,8 @@
 
     <!-- <div class=\"preloader\"></div> -->
 
+    <div id=\"baseAjaxModal\"></div>
+
     @include('layouts.header')
 
     @include('layouts.nav')
@@ -188,9 +190,9 @@
 
 </html>
 <script>
-    \$('select').not('.defaultDOM').select2([
+    \$('select').not('.defaultDOM').select2({
         width: '100%'
-    ]);
+    });
 
     \$(window).on('load', function() {
         setTimeout(function() {
@@ -217,24 +219,138 @@
         })
     }
 
-    processDeletion = (elem, callback) => {
+    confirmCreate = (elem) => {
+        return Swal.fire({
+            title: 'Are you sure?',
+            text: 'Data will be stored in the database!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#038cfc',
+            cancelButtonColor: '#999',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        })
+    }
+
+    
+    confirmDelete = (elem) => {
+        return Swal.fire({
+            title: 'Are you sure?',
+            text: 'You will not be able to recover this data!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#fc0330',
+            cancelButtonColor: '#999',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        })
+    }
+
+    deleteItem = (elem, successCallback = () => {}, failCallback = () => {}) => {
+        $.ajax({
+            url: elem.dataset.action,
+            type: 'DELETE',
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: true,
+                    }).then(() => {
+                        $(elem).closest('table').DataTable().ajax.reload()
+                        successCallback()
+                    });
+                }
+            },
+            fail: (response) => {
+                Swal.fire(
+                    'Opps!',
+                    'An error occur, we are sorry for inconvenience',
+                    'danger'
+                )
+                failCallback()
+            }
+        })
+    }
+
+    processDeletion = (elem, successCallback, failCallback) => {
+        Swal.fire({
+            title: 'Data is being processed. Please wait...',
+            onOpen: function() {
+                Swal.showLoading();
+                confirmDelete(elem).then((choice) => {
+                    if (choice.value) {
+                        deleteItem(elem, successCallback, failCallback)
+                    } else {
+                        Swal.fire(
+                            'Canceled',
+                            'Process has been canceled',
+                            'info'
+                        )
+                    }
+                })
+
+            }
+        })
+    }
+
+    processCreation = (elem, callback) => {
         Swal.fire({
             title: 'Data is being processed. Please wait...',
             onOpen: function() {
                 Swal.showLoading();
                 \$.ajax({
                     url: elem.dataset.action,
-                    type: 'DELETE',
+                    type: 'POST',
                     success: function(response) {
                         if (response.success) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Data has been deleted.',
+                                title: response.message,
                                 showConfirmButton: true,
                             }).then(() => {
                                 callback.DataTable().ajax.reload()
                             });
                         }
+                    },
+                    fail: (response) => {
+                        Swal.fire(
+                            'Opps!',
+                            'An error occur, we are sorry for inconvenience',
+                            'danger'
+                        )
+                    }
+                })
+            }
+        })
+    }
+
+    processUpdation = (elem, callback) => {
+        Swal.fire({
+            title: 'Data is being processed. Please wait...',
+            onOpen: function() {
+                Swal.showLoading();
+                \$.ajax({
+                    url: elem.dataset.action,
+                    type: 'PUT',
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: response.message,
+                                showConfirmButton: true,
+                            }).then(() => {
+                                callback.DataTable().ajax.reload()
+                            });
+                        }
+                    },
+                    fail: (response) => {
+                        Swal.fire(
+                            'Opps!',
+                            'An error occur, we are sorry for inconvenience',
+                            'danger'
+                        )
+                        failCallback()
                     }
                 })
             }
@@ -242,9 +358,8 @@
     }
 
     getModalContent = (elem) => {
-        console.log(elem);
         \$.get(elem.dataset.action, function(response) {
-            \$(baseAjaxModal).html(response);
+            \$(\"#baseAjaxModal\").html(response);
             \$(baseAjaxModalContent).modal(\"show\");
         });
     }

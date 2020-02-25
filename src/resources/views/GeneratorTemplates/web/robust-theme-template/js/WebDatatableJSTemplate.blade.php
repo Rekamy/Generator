@@ -16,7 +16,7 @@
                     text: 'Create',
                     attr:  {
                         \"data-action\": createUrl,
-                        \"onClick\": \"btnCreate(this)\",
+                        \"onClick\": \"getModalContent(this)\",
                     }
                 },
                 'excel', 'pdf', 'colvis'
@@ -25,9 +25,6 @@
                 url: baseUrl,
                 method: 'GET',
                 dataType: 'json',
-                data: { 
-                    _token: \"{{ csrf_token() }}\" 
-                },
                 dataSrc: \"data\",
             },
             columns: [
@@ -37,7 +34,7 @@
                         if ($column->TABLE_NAME == $tablename) {
                             $int++;
                     ?><?="{ \"data\" : \"" . $column->COLUMN_NAME . "\" }, \n"?>
-                    <?php } } ?><?="
+                <?php } } ?><?="
             ],
             columnDefs: [{
                 \"targets\": 12,
@@ -62,24 +59,10 @@
             }]
         });
 
-        btnCreate = (elem) => {
-            getModalContent(elem)
+        btnDelete = (elem) => {
+            processDeletion(elem)
         }
 
-        btnDelete = (elem) => {
-            confirmDelete(elem).then((result) => {
-                if (result.value) {
-                    callback = \$('#" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "Datatable')
-                    processDeletion(elem, callback)
-                } else {
-                    Swal.fire(
-                        'Canceled',
-                        'Process has been canceled',
-                        'info'
-                    )
-                }
-            })
-        }
     });
 </script>
 "?>

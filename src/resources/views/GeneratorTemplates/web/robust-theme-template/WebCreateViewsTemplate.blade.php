@@ -1,27 +1,25 @@
 <?="
 <div class=\"modal fade\" id=\"baseAjaxModalContent\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"createModalLabel\" aria-hidden=\"true\">
     <div class=\"modal-dialog\" role=\"document\">
-        <div class=\"modal-content\">
-            <div class=\"modal-header\">
-                <h5 class=\"modal-title\" id=\"createModalLabel\">Create " . ucfirst(Str::singular(str_replace('_', ' ', $tablename))) . "</h5>
-                <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
-                    <span aria-hidden=\"true\">&times;</span>
-                </button>
+        <form method=\"POST\">
+            <div class=\"modal-content\">
+                <div class=\"modal-header\">
+                    <h5 class=\"modal-title\" id=\"createModalLabel\">Create " . ucfirst(Str::singular(str_replace('_', ' ', $tablename))) . "</h5>
+                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
+                        <span aria-hidden=\"true\">&times;</span>
+                    </button>
+                </div>
+                <div class=\"modal-body\">
+                    @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
+                </div>
+                <div class=\"modal-footer\">
+                    <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
+                    <button type=\"button\" class=\"btn btn-primary\">Save Changes</button>
+                </div>
             </div>
-            <div class=\"modal-body\">
-                @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
-            </div>
-            <div class=\"modal-footer\">
-                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
-                <button type=\"button\" class=\"btn btn-primary\">Save changes</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
-@push('scripts')
-
 @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/create')
-
-@endpush
 "?>

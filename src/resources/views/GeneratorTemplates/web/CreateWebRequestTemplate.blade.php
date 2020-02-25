@@ -4,7 +4,7 @@
 namespace " . $context->namespace['web_request'] . ";
 
 use Illuminate\Foundation\Http\FormRequest;
-use " . $context->namespace['model'] . ucfirst(Str::camel(Str::singular($tablename))) .";
+use " . $context->namespace['model'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) .";
 
 class Create" . ucfirst(Str::camel(Str::singular($tablename))) . "Request extends FormRequest
 {
@@ -25,7 +25,7 @@ class Create" . ucfirst(Str::camel(Str::singular($tablename))) . "Request extend
      */
     public function rules()
     {
-        return " . Str::camel(Str::singular($tablename)) . "::\$rules;
+        return " . ucfirst(Str::camel(Str::singular($tablename))) . "::\$rules;
     }
 }
 "

@@ -11,17 +11,9 @@
             <div class=\"modal-body\">
                 @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
             </div>
-            <div class=\"modal-footer\">
-                <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
-                <button type=\"button\" class=\"btn btn-primary\">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
 
-@push('scripts')
-
 @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/show')
-
-@endpush
 "?>

@@ -10,7 +10,6 @@ use " . $context->namespace['web_request'] . "\Update" . ucfirst(Str::camel(Str:
 use " . $context->namespace['repository'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
 use " . $context->namespace['web_controller'] . "\AppBaseController;
 use Response;
-use DB;
 
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends AppBaseController
 {
@@ -69,7 +68,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     {
         \$input = \$request->all();
 
-        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->create(\$input);
+        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->create" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$input);
 
         return redirect(route('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index'));
     }
@@ -114,7 +113,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     {
         \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
 
-        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->update(\$request->all(), \$id);
+        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->update" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$request->all(), \$id);
 
         return redirect(route('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index'));
     }
@@ -122,17 +121,13 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     /**
      * Remove the specified " . ucfirst(Str::camel(Str::singular($tablename))) . " from storage.
      *
-     * @param  int \$id
+     * @param int \$id
      *
      * @return Response
      */
     public function destroy(\$id)
     {
-        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
-
-        \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->delete(\$id);
-
-        return redirect(route('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index'));
+        return \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->delete" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$id);
     }
 }
 "?>
