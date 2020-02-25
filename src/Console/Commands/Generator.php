@@ -29,10 +29,9 @@ class Generator extends Command
      *
      * @return void
      */
-    public function __construct(Context $context)
+    public function __construct()
     {
         parent::__construct();
-        $this->context = $context;
     }
 
     /**
@@ -40,8 +39,10 @@ class Generator extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(Context $context)
     {
+        // TODO: check for DB connection error
+        $this->context = $context;
         $this->context->outputDecorator = $this->output;
         $choice = $this->choice('Which CRUD would you want to generate?', ['Web', 'Api']);
 
