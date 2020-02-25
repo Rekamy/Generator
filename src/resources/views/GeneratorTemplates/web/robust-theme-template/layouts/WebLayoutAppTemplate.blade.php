@@ -134,6 +134,7 @@
     </div>
     </div>
 
+    <div class=\"baseAjaxModal\"></div>
     @include('layouts.footer')
     <!-- BEGIN VENDOR JS-->
     <script src=\"{{ asset('vendor/themes/app-assets/vendors/js/vendors.min.js') }}\"></script>

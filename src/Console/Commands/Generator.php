@@ -60,56 +60,56 @@ class Generator extends Command
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['api_controllers'])
             $this->context->generateApiControllers($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['base_controller'])
             $this->context->generateBaseController($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['app_base_controller'])
             $this->context->generateAppBaseController($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['repositories'])
             $this->context->generateRepositories($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['api_requests'])
             $this->context->generateApiRequests($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['api_routes'])
             $this->context->generateApiRoutes($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['swagger_api_doc'])
             $this->context->generateSwaggerApiDoc($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
     }
 
 
@@ -123,42 +123,42 @@ class Generator extends Command
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['web_controllers'])
             $this->context->generateWebControllers($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['base_controller'])
             $this->context->generateBaseController($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['app_base_controller'])
             $this->context->generateAppBaseController($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['repositories'])
             $this->context->generateRepositories($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['web_requests'])
             $this->context->generateWebRequests($table);
 
         echo PHP_EOL;
         $table->render();
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
 
         if ($this->context->generate['web_routes'])
             $this->context->generateWebRoutes($table);
@@ -173,8 +173,8 @@ class Generator extends Command
             echo PHP_EOL;
             $table->render();
 
-            if($this->context->template['vendor_files'])
-            $this->context->countRobustPublicFiles();
+            if ($this->context->template['vendor_files'])
+                $this->context->countRobustPublicFiles();
         } else if ($choice == "AdminLTE") {
             if ($this->context->generate['module_views'])
                 $this->context->generateRobustModuleViews($table);
@@ -193,6 +193,6 @@ class Generator extends Command
             $this->context->countRobustPublicFiles();
         }
 
-        $this->context->progress->finish();
+        if ($this->context->progress) $this->context->progress->finish();
     }
 }
