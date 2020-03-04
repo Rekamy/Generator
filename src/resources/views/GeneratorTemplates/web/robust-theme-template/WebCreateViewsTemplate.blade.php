@@ -14,7 +14,7 @@
                 </div>
                 <div class=\"modal-footer\">
                     <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
-                    <button type=\"button\" class=\"btn btn-primary\">Save Changes</button>
+                    <button type=\"button\" class=\"btn btn-primary\" data-action=\"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".store') }}\" onClick=\"btnCreate(this)\">Save Changes</button>
                 </div>
             </div>
         </form>

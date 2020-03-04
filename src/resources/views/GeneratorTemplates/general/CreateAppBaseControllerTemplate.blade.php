@@ -16,11 +16,11 @@ class AppBaseController extends Controller
 
     public function sendError(\$error, \$code = 404)
     {
-        if (!array_key_exists($code, CoreResponse::$statusTexts)) {
-            $code = 500;
+        if (!array_key_exists(\$code, CoreResponse::\$statusTexts)) {
+            \$code = 500;
         }
 
-        $error = app()->environment('local') ? $error : CoreResponse::$statusTexts[$code];
+        \$error = app()->environment('local') ? \$error : CoreResponse::\$statusTexts[\$code];
         
         return Response::json(ResponseUtil::makeError(\$error), \$code);
     }

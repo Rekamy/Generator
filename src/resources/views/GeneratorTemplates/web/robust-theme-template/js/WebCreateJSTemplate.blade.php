@@ -1,26 +1,19 @@
 <?="
 <script type=\"text/javascript\">
-    let storeUrl = \"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".store') }}\";
-
-    \$('form').submit(function(e) {
-        e.preventDefault();
-
+    btnCreate = (elem) => {
         let data = \$('form').serialize();
-
-        btnCreate = (elem) => {
-            confirmCreate(elem).then((result) => {
-                if (result.value) {
-                    callback = $('#intercomDatatable')
-                    processCreation(elem, callback)
-                } else {
-                    Swal.fire(
-                        'Canceled',
-                        'Process has been canceled',
-                        'info'
-                    )
-                }
-            })
-        }
-    })
+        confirmCreate(elem).then((result) => {
+            if (result.value) {
+                let datatable = \$('#" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "Datatable')
+                processCreation(elem, datatable)
+            } else {
+                Swal.fire(
+                    'Canceled',
+                    'Process has been canceled',
+                    'info'
+                )
+            }
+        })
+    }
 </script>
 "?>

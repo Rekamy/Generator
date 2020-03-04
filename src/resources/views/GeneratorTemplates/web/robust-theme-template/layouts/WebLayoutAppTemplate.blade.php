@@ -234,10 +234,10 @@
     }
 
     
-    confirmDelete = (elem) => {
+    confirmUpdate = (elem) => {
         return Swal.fire({
             title: 'Are you sure?',
-            text: 'You will not be able to recover this data!',
+            text: 'Data will be updated!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#fc0330',
@@ -290,12 +290,11 @@
                         )
                     }
                 })
-
             }
         })
     }
 
-    processCreation = (elem, callback) => {
+    processCreation = (elem, datatable) => {
         Swal.fire({
             title: 'Data is being processed. Please wait...',
             onOpen: function() {
@@ -310,7 +309,7 @@
                                 title: response.message,
                                 showConfirmButton: true,
                             }).then(() => {
-                                callback.DataTable().ajax.reload()
+                                datatable.DataTable().ajax.reload()
                             });
                         }
                     },
@@ -326,7 +325,7 @@
         })
     }
 
-    processUpdation = (elem, callback) => {
+    processUpdation = (elem, datatable) => {
         Swal.fire({
             title: 'Data is being processed. Please wait...',
             onOpen: function() {
@@ -341,7 +340,7 @@
                                 title: response.message,
                                 showConfirmButton: true,
                             }).then(() => {
-                                callback.DataTable().ajax.reload()
+                                datatable.DataTable().ajax.reload()
                             });
                         }
                     },
