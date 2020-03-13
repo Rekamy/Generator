@@ -294,13 +294,14 @@
         })
     }
 
-    processCreation = (elem, datatable) => {
+    processCreation = (elem, datatable, data) => {
         Swal.fire({
             title: 'Data is being processed. Please wait...',
             onOpen: function() {
                 Swal.showLoading();
                 \$.ajax({
                     url: elem.dataset.action,
+                    data: data,
                     type: 'POST',
                     success: function(response) {
                         if (response.success) {
@@ -309,6 +310,7 @@
                                 title: response.message,
                                 showConfirmButton: true,
                             }).then(() => {
+                                \$(baseAjaxModalContent).modal(\"hide\");
                                 datatable.DataTable().ajax.reload()
                             });
                         }
@@ -325,13 +327,14 @@
         })
     }
 
-    processUpdation = (elem, datatable) => {
+    processUpdation = (elem, datatable, data) => {
         Swal.fire({
             title: 'Data is being processed. Please wait...',
             onOpen: function() {
                 Swal.showLoading();
                 \$.ajax({
                     url: elem.dataset.action,
+                    data: data,
                     type: 'PUT',
                     success: function(response) {
                         if (response.success) {
@@ -340,6 +343,7 @@
                                 title: response.message,
                                 showConfirmButton: true,
                             }).then(() => {
+                                \$(baseAjaxModalContent).modal(\"hide\");
                                 datatable.DataTable().ajax.reload()
                             });
                         }

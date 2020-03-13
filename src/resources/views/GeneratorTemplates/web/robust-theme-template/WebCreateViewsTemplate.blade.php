@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class=\"modal-body\">
-                    @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
+                    @include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".fields')
                 </div>
                 <div class=\"modal-footer\">
                     <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
@@ -21,5 +21,5 @@
     </div>
 </div>
 
-@include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/create')
+@include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . "/js/create')
 "?>

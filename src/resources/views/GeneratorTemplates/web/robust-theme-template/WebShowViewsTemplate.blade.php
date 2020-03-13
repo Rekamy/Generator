@@ -9,11 +9,11 @@
                 </button>
             </div>
             <div class=\"modal-body\">
-                @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
+                @include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".fields')
             </div>
         </div>
     </div>
 </div>
 
-@include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/show')
+@include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . "/js/show')
 "?>

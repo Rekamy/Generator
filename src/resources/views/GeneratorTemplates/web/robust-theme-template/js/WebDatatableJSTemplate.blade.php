@@ -3,7 +3,7 @@
     let createUrl = \"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".create') }}\";
 
     \$(document).ready(function () {
-        \$('#" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "Datatable').DataTable({
+        \$('#" . lcfirst(Str::singular(Str::camel($tablename))) . "Datatable').DataTable({
             'scrollX': true,
             'scrollY': '500px',
             'scrollCollapse': true,
@@ -37,7 +37,7 @@
                 <?php } } ?><?="
             ],
             columnDefs: [{
-                \"targets\": 12,
+                \"targets\": " . $int . ",
                 \"data\": 'id',
                 \"render\": function(id, type, full, meta) {
                     let showUrl = \"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".show', 'data-id') }}\";                    

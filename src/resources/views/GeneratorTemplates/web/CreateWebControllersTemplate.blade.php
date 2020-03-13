@@ -10,9 +10,12 @@ use " . $context->namespace['web_request'] . "\Update" . ucfirst(Str::camel(Str:
 use " . $context->namespace['repository'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
 use " . $context->namespace['web_controller'] . "\AppBaseController;
 use Response;
+use Rekamy\Generator\Console\Traits\ResponseHandler;
 
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends AppBaseController
 {
+    use ResponseHandler;
+
     private \$page = '" . ucfirst(Str::camel(Str::singular($tablename))) . "';
 
     /** @var  " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository */
@@ -54,7 +57,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
      */
     public function create()
     {
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".create')->with('page', \$this->page);
+        return view('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".create')->with('page', \$this->page);
     }
 
     /**
@@ -70,7 +73,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
 
         \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->create" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$input);
 
-        return redirect(route('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index'));
+        return \$this->successResponse('Successfully Insert New Data', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ");
     }
 
     /**
@@ -84,7 +87,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     {
         \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
 
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".show')->with('" . lcfirst(Str::camel(Str::singular($tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ")->with('page', \$this->page);
+        return view('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".show')->with('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ")->with('page', \$this->page);
     }
 
     /**
@@ -98,7 +101,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
     {
         \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
 
-        return view('" . lcfirst(Str::camel(Str::singular($tablename))) . ".edit')->with('" . lcfirst(Str::camel(Str::singular($tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ")->with('page', \$this->page);
+        return view('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".edit')->with('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ")->with('page', \$this->page);
     }
 
     /**
@@ -111,11 +114,11 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller extends A
      */
     public function update(\$id, Update" . ucfirst(Str::camel(Str::singular($tablename))) . "Request \$request)
     {
-        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->findWithoutFail(\$id);
+        \$input = \$request->all();
 
-        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->update" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$request->all(), \$id);
+        \$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->" . lcfirst(Str::camel(Str::singular($tablename))) . "Repository->update" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$id, \$input);
 
-        return redirect(route('" . lcfirst(Str::camel(Str::singular($tablename))) . ".index'));
+        return \$this->successResponse('Successfully Update Data', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ");
     }
 
     /**

@@ -19,7 +19,7 @@ trait ResponseHandler
   {
     return response()->json([
       'success' => false,
-      'message' => $message
+      'message' => $message,
     ], $code);
   }
 }

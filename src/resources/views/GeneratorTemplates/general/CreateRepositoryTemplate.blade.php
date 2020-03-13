@@ -8,7 +8,6 @@ use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
 use InfyOm\Generator\Common\BaseRepository;
 use DB;
 use Exception;
-use Rekamy\Generator\Console\Traits\ResponseHandler;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository
@@ -21,8 +20,6 @@ use Rekamy\Generator\Console\Traits\ResponseHandler;
 */
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends BaseRepository
 {
-    use ResponseHandler;
-
     /**
      * @var array
      */
@@ -66,14 +63,13 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
 	{
 		DB::beginTransaction();
 		try {
-			if (!\$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->create(\$input)) {
+			if (!\$this->create(\$input)) {
 				throw new Exception('Error Processing Request', 405);
 			}
 			DB::commit();
-			return \$this->successResponse('Successfully Insert New Data');
 		} catch (\Throwable \$th) {
 			DB::rollBack();
-			return \$this->failResponse(\$th->getMessage(), \$th->getCode());
+			throw new Exception(\$th->getMessage(), \$th->getCode());
 		}
 	}
     
@@ -89,7 +85,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
 		}
 	}
 
-    public function update" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$input, \$id)
+    public function update" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$id, \$input)
 	{
 		DB::beginTransaction();
 		try {
@@ -97,10 +93,9 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
 				throw new Exception('Error Processing Request', 405);
 			}
 			DB::commit();
-			return \$this->successResponse('Successfully Update Data');
 		} catch (\Throwable \$th) {
 			DB::rollBack();
-			return \$this->failResponse(\$th->getMessage(), \$th->getCode());
+			throw new Exception(\$th->getMessage(), \$th->getCode());
 		}
 	}
 

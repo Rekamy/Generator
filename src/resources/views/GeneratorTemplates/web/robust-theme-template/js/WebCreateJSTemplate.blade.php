@@ -1,11 +1,10 @@
-<?="
-<script type=\"text/javascript\">
+<?="<script type=\"text/javascript\">
     btnCreate = (elem) => {
-        let data = \$('form').serialize();
         confirmCreate(elem).then((result) => {
+            let data = \$('form').serialize();
             if (result.value) {
-                let datatable = \$('#" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "Datatable')
-                processCreation(elem, datatable)
+                let datatable = \$('#" . lcfirst(Str::singular(Str::camel($tablename))) . "Datatable')
+                processCreation(elem, datatable, data)
             } else {
                 Swal.fire(
                     'Canceled',

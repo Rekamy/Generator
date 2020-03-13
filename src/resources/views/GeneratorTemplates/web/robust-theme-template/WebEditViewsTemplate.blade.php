@@ -10,16 +10,16 @@
                     </button>
                 </div>
                 <div class=\"modal-body\">
-                    @include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".fields')
+                    @include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . ".fields')
                 </div>
                 <div class=\"modal-footer\">
                     <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
-                    <button type=\"button\" class=\"btn btn-primary\">Update Changes</button>
+                    <button type=\"button\" class=\"btn btn-primary\" data-action=\"{{ route('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . ".update', \$" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "->id) }}\" onClick=\"btnUpdate(this)\">Update Changes</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-@include('" . lcfirst(Str::singular(str_replace('_', '', $tablename))) . "/js/edit')
+@include('" . lcfirst(Str::singular(str_replace('_', '-', $tablename))) . "/js/edit')
 "?>
