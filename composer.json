@@ -18,7 +18,7 @@
     ],
     "require": {
         "prettus/l5-repository": "^2.6",
-        "darkaonline/l5-swagger": "^6.0"
+        "darkaonline/l5-swagger": "^7.0"
     },
     "authors": [
         {
