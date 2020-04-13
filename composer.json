@@ -1,6 +1,6 @@
 {
     "name": "rekamy/generator",
-    "description": "API Generator with Swagger API Doc",
+    "description": "Web & API Generator with Swagger API Doc",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -24,6 +24,10 @@
         {
             "name": "Firdaus Ishaddin",
             "email": "firdausishaddin@gmail.com"
+        },
+        {
+            "name": "Zahrin Azam",
+            "email": "zahrin.azam@gmail.com"
         }
     ],
     "autoload": {
