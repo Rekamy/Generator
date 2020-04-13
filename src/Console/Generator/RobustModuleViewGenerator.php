@@ -147,7 +147,7 @@ trait RobustModuleViewGenerator
     {
         $src = realpath(__DIR__ . '/../../resources/views/GeneratorTemplates/web/robust-theme-template/themes/');
         $dst = public_path('vendor');
-
+        if(!is_dir(public_path('vendor'))) mkdir($dst, 0755, true); 
         echo "Copying bootstrap files into " . $dst . "\n";
         exec("cp -r " . $src . " " . $dst);
         echo "Done\n";
