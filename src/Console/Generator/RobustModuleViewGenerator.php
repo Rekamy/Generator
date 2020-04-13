@@ -146,7 +146,7 @@ trait RobustModuleViewGenerator
     public function countRobustPublicFiles()
     {
         $src = realpath(__DIR__ . '/../../resources/views/GeneratorTemplates/web/robust-theme-template/themes/');
-        $dst = realpath(public_path('vendor'));
+        $dst = public_path('vendor');
 
         echo "Copying bootstrap files into " . $dst . "\n";
         exec("cp -r " . $src . " " . $dst);

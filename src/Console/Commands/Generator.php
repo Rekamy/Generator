@@ -174,8 +174,11 @@ class Generator extends Command
             echo PHP_EOL;
             $table->render();
 
-            if ($this->context->template['vendor_files'])
-                $this->context->countRobustPublicFiles();
+            if ($this->context->template['vendor_files']) {
+                $publishTemplateAsset = $this->confirm('Are you sure to republish template file?');
+                if ($publishTemplateAsset)
+                    $this->context->countRobustPublicFiles();
+            }
         } else if ($choice == "AdminLTE") {
             if ($this->context->generate['module_views'])
                 $this->context->generateRobustModuleViews($table);
