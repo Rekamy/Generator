@@ -12,9 +12,8 @@ use Exception;
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository
  * @package App\Repositories
- * @version April 10, 2019, 3:42 am +08
  *
- * @method " . ucfirst(Str::camel(Str::singular($tablename))) . " findWithoutFail(\$id, \$columns = ['*'])
+ * @method " . ucfirst(Str::camel(Str::singular($tablename))) . " find(\$id, \$columns = ['*'])
  * @method " . ucfirst(Str::camel(Str::singular($tablename))) . " find(\$id, \$columns = ['*'])
  * @method " . ucfirst(Str::camel(Str::singular($tablename))) . " first(\$columns = ['*'])
 */
@@ -76,7 +75,7 @@ class " . ucfirst(Str::camel(Str::singular($tablename))) . "Repository extends B
     public function show" . ucfirst(Str::camel(Str::singular($tablename))) . "(\$id)
 	{
 		try {
-			if (!\$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->findWithoutFail(\$id)) {
+			if (!\$" . lcfirst(Str::camel(Str::singular($tablename))) . " = \$this->find(\$id)) {
 				throw new Exception('Error Processing Request', 405);
 			}
 			return \$this->successResponse('Successfully Update Data', \$" . lcfirst(Str::camel(Str::singular($tablename))) . ");
