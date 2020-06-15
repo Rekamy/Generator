@@ -5,7 +5,7 @@ namespace " . $context->namespace['repository'] . ";
 
 use Illuminate\Pagination\Paginator;
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
-use InfyOm\Generator\Common\BaseRepository;
+use Prettus\Repository\Eloquent\BaseRepository;
 use DB;
 use Exception;
 
