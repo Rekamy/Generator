@@ -2,6 +2,7 @@
 
 namespace Rekamy\Generator\Console;
 
+use Str;
 class RuleParser
 {
 
@@ -49,16 +50,20 @@ class RuleParser
 
     public static function parsingCasts($db, $column)
     {
-        $rule = '';
+        switch (true) {
+            case Str::contains($column->COLUMN_TYPE, 'varchar'):
+                $rule = 'string';
+                break;
+            case Str::contains($column->COLUMN_TYPE, 'int'):
+                $rule = 'integer';
+                break;
+            case Str::contains($column->COLUMN_TYPE, 'timestamp'):
+                $rule = 'datetime';
+                break;
 
-        if (strpos($column->COLUMN_TYPE, 'varchar') !== false) {
-            $rule .= 'string';
-        }
-        if (strpos($column->COLUMN_TYPE, 'int') !== false) {
-            $rule .= 'integer';
-        }
-        if (strpos($column->COLUMN_TYPE, 'timestamp') !== false) {
-            $rule .= 'datetime';
+            default:
+                $rule = $column->COLUMN_TYPE;
+                break;
         }
 
         return $rule;
@@ -72,6 +77,7 @@ class RuleParser
             'string',
             'mimes:jpeg,bmp,png',
             'date',
+            // 'datetime',
             'integer',
             'numeric',
             'required',

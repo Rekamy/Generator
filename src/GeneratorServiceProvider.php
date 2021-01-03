@@ -17,16 +17,19 @@ class GeneratorServiceProvider extends ServiceProvider
             return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
         });
 
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
-        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/api', 'apitemplate');
-        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/web', 'webtemplate');
-        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/general', 'generaltemplate');
-        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/web/robust-theme-template', 'robust');
-        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/web/robust-theme-template/js', 'robustjs');
-        $this->loadViewsFrom(__DIR__ . '/resources/views/GeneratorTemplates/web/robust-theme-template/layouts', 'robustlayouts');
         $this->publishes([
             __DIR__ . '/config/rekamygenerator.php' => config_path('rekamygenerator.php')
         ]);
+
+        // $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+
+        $this->loadViewsFrom(__DIR__ . '/templates/api', 'apitemplate');
+        $this->loadViewsFrom(__DIR__ . '/templates/web', 'webtemplate');
+        $this->loadViewsFrom(__DIR__ . '/templates/general', 'generaltemplate');
+        // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template', 'robust');
+        // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template/js', 'robustjs');
+        // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template/layouts', 'robustlayouts');
+        
     }
 
     public function register()

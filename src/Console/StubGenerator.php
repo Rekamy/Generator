@@ -33,22 +33,25 @@ class StubGenerator
      */
     public function render($overwrite = false)
     {
-        $contents = $this->source;
         if (file_exists($this->target) && !$overwrite) {
-            throw new RuntimeException('Cannot generate file. Target ' . $this->target . ' already exists.');
+            // throw new RuntimeException('Cannot generate file. Target ' . $this->target . ' already exists.');
+            dump("Target $this->target already exists.");
+
+            // dd("Target $this->target already exists.");
+        } else {
+
+            // Standard replacements
+            // collect($replacements)->each(function (string $replacement, string $tag) use (&$this->source) {
+            //     $this->source = str_replace($tag, $replacement, $this->source);
+            // });
+
+            $path = pathinfo($this->target, PATHINFO_DIRNAME);
+
+            if (!file_exists($path)) {
+                mkdir($path, 0776, true);
+            }
+
+            file_put_contents($this->target, $this->source);
         }
-
-        // Standard replacements
-        // collect($replacements)->each(function (string $replacement, string $tag) use (&$contents) {
-        //     $contents = str_replace($tag, $replacement, $contents);
-        // });
-
-        $path = pathinfo($this->target, PATHINFO_DIRNAME);
-
-        if (!file_exists($path)) {
-            mkdir($path, 0776, true);
-        }
-
-        file_put_contents($this->target, $contents);
     }
 }

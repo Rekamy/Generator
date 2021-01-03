@@ -1,6 +1,6 @@
 <?php
 
-namespace Rekamy\Generator\Console\Traits;
+namespace Rekamy\Generator\Traits;
 
 trait ResponseHandler
 {

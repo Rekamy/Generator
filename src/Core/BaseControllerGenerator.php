@@ -1,6 +1,6 @@
 <?php
 
-namespace Rekamy\Generator\Console\Generator;
+namespace Rekamy\Generator\Core;
 
 use DB;
 use Rekamy\Generator\Console\RuleParser;
@@ -9,9 +9,9 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
 
-trait AppBaseControllerGenerator
+trait BaseControllerGenerator
 {
-    public function generateAppBaseController($outputDecorator)
+    public function generateBaseController($outputDecorator)
     {
         try {
             $this->progress = $this->outputDecorator->createProgressBar(1);
@@ -20,23 +20,23 @@ trait AppBaseControllerGenerator
             $this->output['rows'] = [];
             $separator = new TableSeparator;
 
-            array_push($this->output['rows'], [new TableCell('<info>App Base Controller</info>')]);
+            array_push($this->output['rows'], [new TableCell('<info>Base Controller</info>')]);
             array_push($this->output['rows'], $separator);
 
-            $view = view('generaltemplate::CreateAppBaseControllerTemplate')
+            $view = view('generaltemplate::CreateBaseControllerTemplate')
                 ->with('db', (object) $this->db)
                 ->with('context', $this);
 
             $stub = new StubGenerator(
                 $view->render(),
-                $this->path['app_base_controller'] . 'AppBaseController.php'
+                $this->path['base_controller'] . 'Controller.php'
             );
 
             $stub->render([
                 $stub
             ]);
 
-            $response = "App Base Controller Successfully Created";
+            $response = "Base Controller Successfully Created";
 
             array_push($this->output['rows'], ['<comment>' . $response . '</comment>']);
 

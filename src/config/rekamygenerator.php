@@ -35,13 +35,13 @@ return [
 
         'api_controllers'      => true,
 
-        'web_requests'         => true,
+        // 'web_requests'         => true,
 
-        'web_routes'           => true,
+        // 'web_routes'           => true,
 
-        'web_controllers'      => true,
+        // 'web_controllers'      => true,
 
-        'module_views'         => true,
+        // 'module_views'         => true,
 
         'swagger_api_doc'      => true,
     ],
@@ -58,8 +58,24 @@ return [
         'name'           => env('DB_DATABASE'),
 
         'exclude_tables' => [
-
+            // laravel
             'migrations',
+            'failed_jobs',
+            'password_resets',
+            
+            // spatie permission
+            'model_has_permissions',
+            'model_has_roles',
+            'permissions',
+            'roles',
+            'role_has_permissions',
+
+            // passport
+            'oauth_access_tokens',
+            'oauth_auth_codes',
+            'oauth_clients',
+            'oauth_personal_access_clients',
+            'oauth_refresh_tokens',
         ]
     ],
 
@@ -77,6 +93,8 @@ return [
         'model'                 => app_path('Models/'),
 
         'repository'            => app_path('Repositories/'),
+
+        'bloc'                  => app_path('Bloc/'),
 
         'base_controller'       => app_path('Http/Controllers/'),
 
@@ -114,6 +132,8 @@ return [
 
         'repository'            => 'App\Repositories',
 
+        'bloc'                  => 'App\Bloc',
+
         'base_controller'       => 'App\Http\Controllers',
 
         'app_base_controller'   => 'App\Http\Controllers',
@@ -137,6 +157,13 @@ return [
     'options' => [
 
         'softDelete' => true,
+
+        'relation' => true,
+
+        'dontOverwrite' => [
+            app_path('Models/User.php')
+        ],
+        
     ],
 
     /*
