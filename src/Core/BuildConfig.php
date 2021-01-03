@@ -46,40 +46,10 @@ trait BuildConfig
             $this->template = config('rekamygenerator.template');
         }
 
-        $this->loadDefault();
-    }
-
-    public function loadDefault()
-    {
-        // TODO: use doctrine
         $db = \DB::connection();
         $schema = $db->getDoctrineSchemaManager();
 
         $this->db = $schema;
-
-        // $this->db['columns'] = DB::table('information_schema.columns')
-        //     ->where('table_schema', $this->dbname);
-        // $this->db['tables'] = DB::table('information_schema.tables')
-        //     ->where('table_schema', $this->dbname);
-        // $this->db['constraints'] = DB::table('information_schema.key_column_usage')
-        //     ->where('table_schema', $this->dbname)
-        //     ->where('constraint_name', 'like', 'fk_%');
-        // $this->db['nullable'] = DB::table('column_name')
-        //     ->from('information_schema.columns')
-        //     ->where('is_nullable', 'NO')
-        //     ->where('table_schema', $this->dbname);
-
-        // if (!empty($this->excludeTables)) {
-        //     $this->db['columns']->whereNotIn('table_name', $this->excludeTables);
-        //     $this->db['tables']->whereNotIn('table_name', $this->excludeTables);
-        //     $this->db['constraints']->whereNotIn('table_name', $this->excludeTables);
-        //     $this->db['nullable']->whereNotIn('table_name', $this->excludeTables);
-        // }
-
-        // $this->db['columns'] = $this->db['columns']->get();
-        // $this->db['tables'] = $this->db['tables']->get();
-        // $this->db['constraints'] = $this->db['constraints']->get();
-        // $this->db['nullable'] = $this->db['nullable']->get();
     }
 
 }
