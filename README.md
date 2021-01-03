@@ -12,7 +12,7 @@ Rekamy Generator
 
 ## Introduction
 
-This Generator will generate a complete CRUD with Repository Design Pattern along with the Swagger API Documentation.
+This Generator will generate a complete SPA (Vue JS) CRUD along with the Swagger API Documentation.
 
 ## Table Of Contents
 
@@ -81,10 +81,20 @@ Update the configuration file based on your needs.
 
 ## Usage
 
+Publish configuration :
+```bash
+php artisan vendor:publish --tag="rekamygenerator"
+```
+
 In order to run the generator after configuration, you can run it via :
 ```bash
-php artisan generate:api
+php artisan generate
 ```
+
+## Todo
+
+- handle table name ending with 's'
+- progress bar as per Habib done in previous version
 
 ## License
 

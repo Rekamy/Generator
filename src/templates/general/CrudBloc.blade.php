@@ -1,6 +1,6 @@
-<?="<?php" ?>
+<?="<?php
 
-namespace {{ $context->namespace['crud_bloc'] }};
+namespace App\Bloc;
 
 use App\Contracts\Bloc\Concerns\CrudableBloc;
 use App\Contracts\Bloc\Concerns\HasRepository;

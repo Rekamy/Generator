@@ -1,12 +1,14 @@
 <?php
-
+// TODO: fix format
 return [
 
     /*
     |--------------------------------------------------------------------------
     | App Name
     |--------------------------------------------------------------------------
-    |
+    | 
+    | Setup your application name here(For Swagger Use).
+    | 
     */
 
     'app_name' => env('APP_NAME', 'Swagger API Documentation'),
@@ -16,6 +18,9 @@ return [
     |--------------------------------------------------------------------------
     | Generate
     |--------------------------------------------------------------------------
+    |
+    | Which file would you like to generate. Set the value to false you 
+    | don't want to generate.
     |
     */
 
@@ -51,18 +56,23 @@ return [
     | Database
     |--------------------------------------------------------------------------
     |
+    | Database configuration. Set your database name here or 
+    | from .env and exclude any tables you don't want to generate
+    |
     */
 
     'database' => [
 
+        // Database name
         'name'           => env('DB_DATABASE'),
 
+        // Exclude table name
         'exclude_tables' => [
             // laravel
             'migrations',
             'failed_jobs',
             'password_resets',
-            
+
             // spatie permission
             'model_has_permissions',
             'model_has_roles',
@@ -86,6 +96,7 @@ return [
     |
     */
 
+    // Path is where you want the generator to generate.
     'path' => [
 
         'migration'             => base_path('database/migrations/'),
@@ -126,6 +137,7 @@ return [
     |
     */
 
+    // Namespace for the generated files.
     'namespace' => [
 
         'model'                 => 'App\Models',
@@ -154,6 +166,7 @@ return [
     |
     */
 
+    // options is an add on you can disable these options by setting the value to false
     'options' => [
 
         'softDelete' => true,
@@ -163,7 +176,7 @@ return [
         'dontOverwrite' => [
             app_path('Models/User.php')
         ],
-        
+
     ],
 
     /*

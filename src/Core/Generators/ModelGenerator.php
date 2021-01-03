@@ -14,14 +14,17 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 class ModelGenerator
 {
     private $context;
+
     private $tables;
 
     private $relations;
+
     private $tempRelations;
 
     public function __construct($context)
     {
         $this->context = $context;
+        $this->context->info("Creating Models...");
         $this->tables = collect($this->context->db->listTableNames())
             ->filter(function ($item) {
                 return !in_array($item, $this->context->excludeTables);
@@ -29,6 +32,7 @@ class ModelGenerator
 
         $this->relations = collect();
 
+        $this->context->info("Make relationships collection...");
         if ($this->context->options->get('relation')) {
             $this->makeRelations();
         }
@@ -37,10 +41,8 @@ class ModelGenerator
     public function generate()
     {
         try {
-            $progressbar = $this->context->progressbar->createProgressBar(count($this->tables));
-            $progressbar->start();
-
             foreach ($this->tables as $table) {
+                $this->context->info("Creating model for table $table ...");
                 $data['context'] = $this->context;
                 $data['table'] = $table;
 
@@ -56,22 +58,16 @@ class ModelGenerator
                 }
 
                 $view = view('generaltemplate::Model', $data);
-                $target = $this->context->path['model'] . $data['className'] . '.php';
+
                 $stub = new StubGenerator(
+                    $this->context,
                     $view->render(),
-                    $target
+                    $this->context->path['model'] . $data['className'] . '.php'
                 );
-
-                $overwrite = true;
-
-                if (in_array($target, $this->context->options->get('dontOverwrite'))) {
-                    $overwrite = false;
-                }
-
-                $stub->render($overwrite);
-                $progressbar->advance();
+                $stub->render();
+                $this->context->info("Models {$data['className']} Created.");
+                $this->context->newline();
             }
-            // $progressbar->end();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -103,11 +99,11 @@ class ModelGenerator
         $this->relations->filter(function ($item) {
             return !empty($item);
         })
-        ->each(function($item)  use ($collect) {
-            collect($item)->each(function($item, $key) use ($collect) {
-                $collect->put($key, $item);
+            ->each(function ($item)  use ($collect) {
+                collect($item)->each(function ($item, $key) use ($collect) {
+                    $collect->put($key, $item);
+                });
             });
-        });
         $this->relations = $collect;
     }
 

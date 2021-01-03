@@ -18,10 +18,11 @@ class GeneratorServiceProvider extends ServiceProvider
         });
 
         $this->publishes([
-            __DIR__ . '/config/rekamygenerator.php' => config_path('rekamygenerator.php')
-        ]);
+            __DIR__ . '/config/rekamygenerator.php' => config_path('rekamygenerator.php'),
+        ], 'rekamygenerator');
 
         // $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+
 
         $this->loadViewsFrom(__DIR__ . '/templates/api', 'apitemplate');
         $this->loadViewsFrom(__DIR__ . '/templates/web', 'webtemplate');
@@ -34,6 +35,13 @@ class GeneratorServiceProvider extends ServiceProvider
 
     public function register()
     {
+        // TODO: laravel bugs : mergeConfigFrom
+        // $this->mergeConfigFrom(
+        //     __DIR__ . '/config/rekamygenerator.php', 'rekamygenerator'
+        // );
+        $config = $this->app['config']->get('rekamygenerator', []);
+        $this->app['config']->set('rekamygenerator', array_merge(require __DIR__ . '/config/rekamygenerator.php', $config));
+
         $this->commands($this->commands);
     }
 }

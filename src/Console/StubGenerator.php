@@ -7,6 +7,11 @@ use RuntimeException;
 class StubGenerator
 {
     /**
+     * @var object
+     */
+    protected $context;
+
+    /**
      * @var string
      */
     protected $source;
@@ -17,11 +22,13 @@ class StubGenerator
     protected $target;
 
     /**
-     * @param string $source
-     * @param string $target
+     * @param object $context Generator context
+     * @param string $source String contents
+     * @param string $target Target generated file
      */
-    public function __construct(string $source, string $target)
+    public function __construct(object $context, string $source, string $target)
     {
+        $this->context = $context;
         $this->source = $source;
         $this->target = $target;
     }
@@ -31,11 +38,17 @@ class StubGenerator
      *
      * @throws \RuntimeException
      */
-    public function render($overwrite = false)
+    public function render()
     {
+        $overwrite = true;
+
+        if (in_array($this->target, $this->context->options->get('dontOverwrite'))) {
+            $overwrite = false;
+        }
+
         if (file_exists($this->target) && !$overwrite) {
             // throw new RuntimeException('Cannot generate file. Target ' . $this->target . ' already exists.');
-            dump("Target $this->target already exists.");
+            $this->context->error("Target $this->target already exists.");
 
             // dd("Target $this->target already exists.");
         } else {

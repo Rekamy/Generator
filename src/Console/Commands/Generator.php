@@ -5,7 +5,10 @@ namespace Rekamy\Generator\Console\Commands;
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\Context;
 use Rekamy\Generator\Core\BuildConfig;
+use Rekamy\Generator\Core\Generators\BaseControllerGenerator;
 use Rekamy\Generator\Core\Generators\ModelGenerator;
+use Rekamy\Generator\Core\Generators\CrudableTraitGenerator;
+use Rekamy\Generator\Core\Generators\CrudBlocGenerator;
 use Symfony\Component\Console\Helper\Table;
 
 
@@ -47,27 +50,24 @@ class Generator extends Command
     public function handle()
     {
         $this->loadConfig();
-        // dd($this->db);
-        // TODO: check for DB connection error
-        // $this->context->outputDecorator = $this->output;
-        // $choice = $this->choice('Which CRUD would you want to generate?', ['Web', 'Api']);
-
-        // if ($choice == "Web") {
-        //     $this->webGenerator();
-        // } else if ($choice == "Api") {
-        //     $this->apiGenerator();
-        // }
-        $this->apiGenerator2();
+        $this->apiGenerator();
 
     }
 
-    public function apiGenerator2()
+    public function apiGenerator()
     {
-        // dd($this->output->createProgressBar(count($this->db['tables'])));
-        $this->progressbar = $this->output;
-        // dd($this->progressbar);
-        $generator = new ModelGenerator($this);
-        $generator->generate();
+        $generators = [
+            ModelGenerator::class,
+            BaseControllerGenerator::class,
+            CrudableTraitGenerator::class,
+            CrudBlocGenerator::class,
+        ];
+
+        foreach ($generators as $generator) {
+            $instance = new $generator($this);
+            $instance->generate();
+            $this->newline();
+        }
     }
     // public function apiGenerator()
     // {
