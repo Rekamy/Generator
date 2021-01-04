@@ -38,7 +38,7 @@ class APIDocGenerator
                 $data['title'] = Str::title($table);
                 $data['className'] = Str::studly(Str::singular($table)) . "APIDoc";
                 
-                $data['route'] = '/api/' . Str::kebab(Str::singular($table));
+                $data['route'] = '/api/' . Str::slug(Str::singular($table));
 
                 $view = view('swagger::APIDoc', $data);
 
