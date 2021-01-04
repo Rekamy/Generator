@@ -11,13 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Controller extends BaseController
 {
-    /**
-    * @OA\Info(
-    *     description=\"" . $context->appName . " API Documentation\",
-    *     version=\"1.0.0\",
-    *     title=\"" . $context->appName . " API Documentation\",
-    * )
-    */
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     private function httpError()
