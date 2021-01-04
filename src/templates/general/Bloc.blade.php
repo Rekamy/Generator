@@ -23,7 +23,7 @@ class $className extends CrudBloc
             'update' => '{$table}_update',
             'destroy' => '{$table}_destroy',
         ];
-
+        
         return \$permission[\$name];
     }
 }

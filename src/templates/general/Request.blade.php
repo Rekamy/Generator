@@ -45,7 +45,7 @@ class $className extends FormRequest implements CrudRequestInterface
 
     public function validateDestroy()
     {
-        \$haveAccess = auth()->user()->can($blocName::permission('delete'));
+        \$haveAccess = auth()->user()->can($blocName::permission('destroy'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
     }
 
