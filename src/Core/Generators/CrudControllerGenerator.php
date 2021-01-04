@@ -9,30 +9,30 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
 
-class CrudBlocGenerator
+class CrudControllerGenerator
 {
     private $context;
  
     public function __construct($context)
     {
         $this->context = $context;
-        $this->context->info("Creating CrudBloc...");
+        $this->context->info("Creating Crud Controller...");
     }
 
     public function generate()
     {
         try {
-            $view = view('generaltemplate::CrudBloc')
+            $view = view('generaltemplate::CrudController')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Bloc/Base/') . 'CrudBloc.php'
+                app_path('Http/Controllers/Base/') . 'CrudController.php'
             );
 
             $stub->render();
-            $this->context->info("CrudBloc Created.");
+            $this->context->info("Crud Controller Created.");
 
         } catch (\Throwable $th) {
             throw $th;

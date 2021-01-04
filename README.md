@@ -81,7 +81,7 @@ Update the configuration file based on your needs.
 
 ## Usage
 
-Publish configuration :
+(Optional) Publish configuration :
 ```bash
 php artisan vendor:publish --tag="rekamygenerator"
 ```

@@ -5,11 +5,20 @@ namespace Rekamy\Generator\Console\Commands;
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\Context;
 use Rekamy\Generator\Core\BuildConfig;
+use Symfony\Component\Console\Helper\Table;
+
 use Rekamy\Generator\Core\Generators\BaseControllerGenerator;
 use Rekamy\Generator\Core\Generators\ModelGenerator;
+use Rekamy\Generator\Core\Generators\BlocGenerator;
+use Rekamy\Generator\Core\Generators\RepositoryGenerator;
 use Rekamy\Generator\Core\Generators\CrudableTraitGenerator;
+use Rekamy\Generator\Core\Generators\HasRepositoryGenerator;
+use Rekamy\Generator\Core\Generators\HasRequestGenerator;
 use Rekamy\Generator\Core\Generators\CrudBlocGenerator;
-use Symfony\Component\Console\Helper\Table;
+use Rekamy\Generator\Core\Generators\CrudBlocInterfaceGenerator;
+use Rekamy\Generator\Core\Generators\CrudControllerGenerator;
+use Rekamy\Generator\Core\Generators\CrudRepositoryInterfaceGenerator;
+use Rekamy\Generator\Core\Generators\RequestInterfaceGenerator;
 
 
 class Generator extends Command
@@ -57,15 +66,23 @@ class Generator extends Command
     public function apiGenerator()
     {
         $generators = [
-            ModelGenerator::class,
-            BaseControllerGenerator::class,
-            CrudableTraitGenerator::class,
-            CrudBlocGenerator::class,
+            'model' => ModelGenerator::class,
+            'bloc' => BlocGenerator::class,
+            'repository' => RepositoryGenerator::class,
+            'base_controller' => BaseControllerGenerator::class,
+            'crudable_trait' => CrudableTraitGenerator::class,
+            'has_repository_trait' => HasRepositoryGenerator::class,
+            'has_request_trait' => HasRequestGenerator::class,
+            'crud_bloc' => CrudBlocGenerator::class,
+            'crud_bloc_Interface' => CrudBlocInterfaceGenerator::class,
+            'crud_controller' => CrudControllerGenerator::class,
+            'crud_repository_interface' => CrudRepositoryInterfaceGenerator::class,
+            'request_interface' => RequestInterfaceGenerator::class,
         ];
 
-        foreach ($generators as $generator) {
-            $instance = new $generator($this);
-            $instance->generate();
+        foreach ($generators as $class) {
+            $generator = new $class($this);
+            $generator->generate();
             $this->newline();
         }
     }

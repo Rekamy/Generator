@@ -9,30 +9,30 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
 
-class CrudBlocGenerator
+class HasRepositoryGenerator
 {
     private $context;
  
     public function __construct($context)
     {
         $this->context = $context;
-        $this->context->info("Creating CrudBloc...");
+        $this->context->info("Creating HasRepository Trait...");
     }
 
     public function generate()
     {
         try {
-            $view = view('generaltemplate::CrudBloc')
+            $view = view('generaltemplate::HasRepository')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Bloc/Base/') . 'CrudBloc.php'
+                app_path('Contracts/Bloc/Concerns/') . 'HasRepository.php'
             );
 
             $stub->render();
-            $this->context->info("CrudBloc Created.");
+            $this->context->info("HasRepository Trait Created.");
 
         } catch (\Throwable $th) {
             throw $th;

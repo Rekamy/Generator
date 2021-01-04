@@ -107,7 +107,7 @@ return [
 
         'bloc'                  => app_path('Bloc/'),
 
-        'base_controller'       => app_path('Http/Controllers/'),
+        'base_controller'       => app_path('Http/Controllers/Base/'),
 
         'app_base_controller'   => app_path('Http/Controllers/'),
 
@@ -146,7 +146,7 @@ return [
 
         'bloc'                  => 'App\Bloc',
 
-        'base_controller'       => 'App\Http\Controllers',
+        'base_controller'       => 'App\Http\Controllers\Base',
 
         'app_base_controller'   => 'App\Http\Controllers',
 

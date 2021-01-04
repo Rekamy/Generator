@@ -48,7 +48,7 @@ class ModelGenerator
 
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
                 $data['softDelete'] = $data['columns']->get('deleted_at') && $this->context->options->get('softDelete');
-                $data['className'] = ucfirst(Str::camel(Str::singular($table)));
+                $data['className'] = Str::studly(Str::singular($table));
                 $data['namespace'] = $this->context->namespace['model'];
                 $data['notNullColumns'] = $data['columns']->filter(function ($column) {
                     return $column->getNotnull();
