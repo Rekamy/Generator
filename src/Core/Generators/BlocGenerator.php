@@ -38,7 +38,7 @@ class BlocGenerator
                 $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
                 $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
 
-                $view = view('generaltemplate::Bloc', $data);
+                $view = view('backend::Bloc', $data);
 
                 $stub = new StubGenerator(
                     $this->context,

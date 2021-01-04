@@ -22,7 +22,7 @@ class BaseControllerGenerator
     public function generate()
     {
         try {
-            $view = view('generaltemplate::BaseController')
+            $view = view('backend::BaseController')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

@@ -57,7 +57,7 @@ class ModelGenerator
                     $data['relations'] = $this->relations;
                 }
 
-                $view = view('generaltemplate::Model', $data);
+                $view = view('backend::Model', $data);
 
                 $stub = new StubGenerator(
                     $this->context,

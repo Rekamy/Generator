@@ -22,7 +22,7 @@ class HasRepositoryGenerator
     public function generate()
     {
         try {
-            $view = view('generaltemplate::HasRepository')
+            $view = view('backend::HasRepository')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

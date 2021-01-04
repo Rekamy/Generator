@@ -3,27 +3,27 @@
 namespace Rekamy\Generator\Console\Commands;
 
 use Illuminate\Console\Command;
-use Rekamy\Generator\Core\Context;
 use Rekamy\Generator\Core\BuildConfig;
 use Symfony\Component\Console\Helper\Table;
+use Rekamy\Generator\Core\Generators\{
+    BaseControllerGenerator,
+    ModelGenerator,
+    BlocGenerator,
+    RepositoryGenerator,
+    ControllerGenerator,
+    RequestGenerator,
+    CrudableTraitGenerator,
+    HasRepositoryGenerator,
+    HasRequestGenerator,
+    CrudBlocGenerator,
+    CrudBlocInterfaceGenerator,
+    CrudControllerGenerator,
+    CrudRepositoryInterfaceGenerator,
+    CrudRequestInterfaceGenerator,
+};
 
-use Rekamy\Generator\Core\Generators\BaseControllerGenerator;
-use Rekamy\Generator\Core\Generators\ModelGenerator;
-use Rekamy\Generator\Core\Generators\BlocGenerator;
-use Rekamy\Generator\Core\Generators\RepositoryGenerator;
-use Rekamy\Generator\Core\Generators\ControllerGenerator;
-use Rekamy\Generator\Core\Generators\RequestGenerator;
-use Rekamy\Generator\Core\Generators\CrudableTraitGenerator;
-use Rekamy\Generator\Core\Generators\HasRepositoryGenerator;
-use Rekamy\Generator\Core\Generators\HasRequestGenerator;
-use Rekamy\Generator\Core\Generators\CrudBlocGenerator;
-use Rekamy\Generator\Core\Generators\CrudBlocInterfaceGenerator;
-use Rekamy\Generator\Core\Generators\CrudControllerGenerator;
-use Rekamy\Generator\Core\Generators\CrudRepositoryInterfaceGenerator;
-use Rekamy\Generator\Core\Generators\CrudRequestInterfaceGenerator;
 
-
-class Generator extends Command
+class FrontendCrudGenerator extends Command
 {
     use BuildConfig;
     /**
@@ -31,14 +31,14 @@ class Generator extends Command
      *
      * @var string
      */
-    protected $signature = 'generate';
+    protected $signature = 'generate:frontend';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate CRUD API';
+    protected $description = 'Generate Frontend CRUD API';
 
     public $context;
     public $progressbar;
@@ -61,11 +61,10 @@ class Generator extends Command
     public function handle()
     {
         $this->loadConfig();
-        $this->apiGenerator();
-
+        $this->crudGenerator();
     }
 
-    public function apiGenerator()
+    public function crudGenerator()
     {
         $generators = [
             'model' => ModelGenerator::class,
@@ -83,7 +82,7 @@ class Generator extends Command
             'base_controller' => BaseControllerGenerator::class,
             'crud_bloc' => CrudBlocGenerator::class,
             'crud_controller' => CrudControllerGenerator::class,
-            
+
             // contracts
             'crud_repository_interface' => CrudRepositoryInterfaceGenerator::class,
             'crud_bloc_Interface' => CrudBlocInterfaceGenerator::class,

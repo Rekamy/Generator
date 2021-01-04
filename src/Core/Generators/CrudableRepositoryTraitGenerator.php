@@ -22,7 +22,7 @@ class CrudableRepositoryTraitGenerator
     public function generate()
     {
         try {
-            $view = view('generaltemplate::CrudableRepositoryTrait')
+            $view = view('backend::CrudableRepositoryTrait')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

@@ -38,7 +38,7 @@ class RepositoryGenerator
                 $data['className'] = $data['modelName'] . "Repository";
                 $data['namespace'] = $this->context->namespace['repository'];
 
-                $view = view('generaltemplate::Repository', $data);
+                $view = view('backend::Repository', $data);
 
                 $stub = new StubGenerator(
                     $this->context,

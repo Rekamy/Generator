@@ -37,7 +37,7 @@ class RequestGenerator
                 $data['className'] = Str::studly(Str::singular($table)) . "Request";
                 $data['blocName'] = Str::studly(Str::singular($table)) . "Bloc";
 
-                $view = view('generaltemplate::Request', $data);
+                $view = view('backend::Request', $data);
 
                 $stub = new StubGenerator(
                     $this->context,

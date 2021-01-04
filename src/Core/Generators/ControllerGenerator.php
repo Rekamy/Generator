@@ -36,7 +36,7 @@ class ControllerGenerator
                 $data['className'] = Str::studly(Str::singular($table)) . "Controller";
                 $data['blocName'] = Str::studly(Str::singular($table)) . "Bloc";
 
-                $view = view('generaltemplate::Controller', $data);
+                $view = view('backend::Controller', $data);
 
                 $stub = new StubGenerator(
                     $this->context,

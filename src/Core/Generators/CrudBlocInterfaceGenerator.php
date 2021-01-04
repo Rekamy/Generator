@@ -22,7 +22,7 @@ class CrudBlocInterfaceGenerator
     public function generate()
     {
         try {
-            $view = view('generaltemplate::CrudBlocInterface')
+            $view = view('backend::CrudBlocInterface')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

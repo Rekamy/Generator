@@ -22,7 +22,7 @@ class CrudRepositoryInterfaceGenerator
     public function generate()
     {
         try {
-            $view = view('generaltemplate::CrudRepositoryInterface')
+            $view = view('backend::CrudRepositoryInterface')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

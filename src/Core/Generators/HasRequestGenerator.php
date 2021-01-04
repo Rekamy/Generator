@@ -22,7 +22,7 @@ class HasRequestGenerator
     public function generate()
     {
         try {
-            $view = view('generaltemplate::HasRequest')
+            $view = view('backend::HasRequest')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

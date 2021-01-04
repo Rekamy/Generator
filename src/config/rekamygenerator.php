@@ -169,6 +169,10 @@ return [
     // options is an add on you can disable these options by setting the value to false
     'options' => [
 
+        'frontend_path' => resource_path('frontend/'),
+        
+        'backend_path' => base_path(),
+
         'softDelete' => true,
 
         'relation' => true,
