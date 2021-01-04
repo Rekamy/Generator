@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
 use Symfony\Component\Console\Helper\Table;
 use Rekamy\Generator\Core\Generators\{
+    APIDocGenerator,
     BaseControllerGenerator,
     ModelGenerator,
     BlocGenerator,
@@ -64,6 +65,7 @@ class BackendCrudGenerator extends Command
             'request' => RequestGenerator::class,
 
             // TODO: Crud Route Service Provider 
+            'apiDoc' => APIDocGenerator::class,
 
             // traits
             'crudable_trait' => CrudableTraitGenerator::class,
