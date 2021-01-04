@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Bloc;
 use Prettus\Repository\Contracts\RepositoryInterface;
-use App\Contracts\Requests\RequestInterface;
+use App\Contracts\Requests\CrudRequestInterface;
 
 
 /**
@@ -16,7 +16,7 @@ use App\Contracts\Requests\RequestInterface;
 interface CrudBlocInterface
 {
 
-    public function registerRequest(RequestInterface \$request);
+    public function registerRequest(CrudRequestInterface \$request);
 
     public function registerRepository(RepositoryInterface \$repository);
 
@@ -29,6 +29,8 @@ interface CrudBlocInterface
     public function update(integer \$id, array \$input);
 
     public function destroy(integer \$id);
+
+    public function permission(string \$name);
 
 }
 "

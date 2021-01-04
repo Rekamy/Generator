@@ -2,11 +2,11 @@
 
 namespace App\Contracts\Bloc\Concerns;
 
-use App\Contracts\Requests\RequestInterface;
+use App\Contracts\Requests\CrudRequestInterface;
 
 trait HasRequest
 {
-    public function registerRequest(RequestInterface \$request)
+    public function registerRequest(CrudRequestInterface \$request)
     {
         \$this->request = \$request;
     }

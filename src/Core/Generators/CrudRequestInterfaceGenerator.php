@@ -9,30 +9,30 @@ use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
 
-class RequestInterfaceGenerator
+class CrudRequestInterfaceGenerator
 {
     private $context;
  
     public function __construct($context)
     {
         $this->context = $context;
-        $this->context->info("Creating Request Interface...");
+        $this->context->info("Creating Crud Request Interface...");
     }
 
     public function generate()
     {
         try {
-            $view = view('generaltemplate::RequestInterface')
+            $view = view('generaltemplate::CrudRequestInterface')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Requests/') . 'RequestInterface.php'
+                app_path('Contracts/Requests/') . 'CrudRequestInterface.php'
             );
 
             $stub->render();
-            $this->context->info("Request Interface Created.");
+            $this->context->info("Crud Request Interface Created.");
 
         } catch (\Throwable $th) {
             throw $th;

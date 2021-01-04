@@ -3,11 +3,10 @@
 
 namespace $namespace;
 
-use Illuminate\Pagination\Paginator;
+use App\Contracts\Repositories\Concerns\CrudableRepository;
+use App\Contracts\Repositories\CrudRepositoryInterface;
 use App\Models\\$modelName;
 use Prettus\Repository\Eloquent\BaseRepository;
-use DB;
-use Exception;
 
 /**
  * Class $className
@@ -17,8 +16,10 @@ use Exception;
  * @method $modelName find(\$id, \$columns = ['*'])
  * @method $modelName first(\$columns = ['*'])
 */
-class $className extends BaseRepository
+class $className extends BaseRepository implements CrudRepositoryInterface
 {
+    use CrudableRepository;
+
     /**
      * @var array
      */

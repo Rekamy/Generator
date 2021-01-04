@@ -2,8 +2,12 @@
 
 namespace App\Contracts\Requests;
 
-interface RequestInterface
+use App\Contracts\Bloc\CrudBlocInterface;
+
+interface CrudRequestInterface
 {
+    // public function getBloc(CrudBlocInterface \$bloc);
+
     /**
      * Determine if the user is authorized to make index request.
      *

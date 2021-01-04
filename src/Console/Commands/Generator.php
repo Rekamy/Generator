@@ -11,6 +11,8 @@ use Rekamy\Generator\Core\Generators\BaseControllerGenerator;
 use Rekamy\Generator\Core\Generators\ModelGenerator;
 use Rekamy\Generator\Core\Generators\BlocGenerator;
 use Rekamy\Generator\Core\Generators\RepositoryGenerator;
+use Rekamy\Generator\Core\Generators\ControllerGenerator;
+use Rekamy\Generator\Core\Generators\RequestGenerator;
 use Rekamy\Generator\Core\Generators\CrudableTraitGenerator;
 use Rekamy\Generator\Core\Generators\HasRepositoryGenerator;
 use Rekamy\Generator\Core\Generators\HasRequestGenerator;
@@ -18,7 +20,7 @@ use Rekamy\Generator\Core\Generators\CrudBlocGenerator;
 use Rekamy\Generator\Core\Generators\CrudBlocInterfaceGenerator;
 use Rekamy\Generator\Core\Generators\CrudControllerGenerator;
 use Rekamy\Generator\Core\Generators\CrudRepositoryInterfaceGenerator;
-use Rekamy\Generator\Core\Generators\RequestInterfaceGenerator;
+use Rekamy\Generator\Core\Generators\CrudRequestInterfaceGenerator;
 
 
 class Generator extends Command
@@ -69,15 +71,23 @@ class Generator extends Command
             'model' => ModelGenerator::class,
             'bloc' => BlocGenerator::class,
             'repository' => RepositoryGenerator::class,
-            'base_controller' => BaseControllerGenerator::class,
+            'controller' => ControllerGenerator::class,
+            'request' => RequestGenerator::class,
+
+            // traits
             'crudable_trait' => CrudableTraitGenerator::class,
             'has_repository_trait' => HasRepositoryGenerator::class,
             'has_request_trait' => HasRequestGenerator::class,
+
+            // base
+            'base_controller' => BaseControllerGenerator::class,
             'crud_bloc' => CrudBlocGenerator::class,
-            'crud_bloc_Interface' => CrudBlocInterfaceGenerator::class,
             'crud_controller' => CrudControllerGenerator::class,
+            
+            // contracts
             'crud_repository_interface' => CrudRepositoryInterfaceGenerator::class,
-            'request_interface' => RequestInterfaceGenerator::class,
+            'crud_bloc_Interface' => CrudBlocInterfaceGenerator::class,
+            'request_interface' => CrudRequestInterfaceGenerator::class,
         ];
 
         foreach ($generators as $class) {
