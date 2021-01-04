@@ -30,6 +30,7 @@ class GeneratorServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/templates/web', 'webtemplate');
         $this->loadViewsFrom(__DIR__ . '/templates/backend', 'generaltemplate');
         $this->loadViewsFrom(__DIR__ . '/templates/frontend', 'frontend');
+        $this->loadViewsFrom(__DIR__ . '/templates/swagger', 'swagger');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template', 'robust');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template/js', 'robustjs');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template/layouts', 'robustlayouts');
