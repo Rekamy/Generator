@@ -34,9 +34,11 @@ class APIDocGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $table;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
+                $data['tags'] = Str::studly($table);
+                $data['title'] = Str::title($table);
                 $data['className'] = Str::studly(Str::singular($table)) . "APIDoc";
-                $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
-                $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
+                
+                $data['route'] = '/api/' . Str::kebab(Str::singular($table));
 
                 $view = view('swagger::APIDoc', $data);
 

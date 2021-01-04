@@ -61,6 +61,10 @@ class Controller extends BaseController
             'message' => \$message
         ]);
     }
+
+    public function apiDoc() {
+        return redirect('/api/documentation');
+    }
 }
 "
 ?>
