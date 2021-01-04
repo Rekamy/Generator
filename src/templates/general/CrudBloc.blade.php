@@ -13,17 +13,6 @@ abstract class CrudBloc implements CrudBlocInterface
 
     protected \$moduleName;
 
-    public function permission(\$name) {
-        \$permission = [
-            'index' => \$this->moduleName . '_index',
-            'create' => \$this->moduleName . '_create',
-            'show' => \$this->moduleName . '_show',
-            'update' => \$this->moduleName . '_update',
-            'destroy' => \$this->moduleName . '_destroy',
-        ];
-
-        return \$permission[\$name];
-    }
 }
 "
 ?>

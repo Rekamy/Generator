@@ -48,21 +48,21 @@ class RuleParser
         return $rule;
     }
 
-    public static function parsingCasts($db, $column)
+    public static function parseType($type)
     {
         switch (true) {
-            case Str::contains($column->COLUMN_TYPE, 'varchar'):
+            case Str::contains($type, ['bigint', 'varchar']):
                 $rule = 'string';
                 break;
-            case Str::contains($column->COLUMN_TYPE, 'int'):
+            case Str::contains($type, ['int', 'smallint']):
                 $rule = 'integer';
                 break;
-            case Str::contains($column->COLUMN_TYPE, 'timestamp'):
+            case Str::contains($type, 'timestamp'):
                 $rule = 'datetime';
                 break;
 
             default:
-                $rule = $column->COLUMN_TYPE;
+                $rule = $type;
                 break;
         }
 

@@ -30,7 +30,7 @@ interface CrudBlocInterface
 
     public function destroy(integer \$id);
 
-    public function permission(string \$name);
+    public static function permission(string \$name);
 
 }
 "

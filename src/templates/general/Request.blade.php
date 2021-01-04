@@ -13,20 +13,16 @@ use Validator;
 class $className extends FormRequest implements CrudRequestInterface
 {
     
-    public function getBloc($blocName \$bloc) {
-        \$this->bloc = \$bloc;
-    }
-    
     public function validateIndex()
     {
-        \$haveAccess = auth()->user()->can(\$this->bloc->permission('index'));
+        \$haveAccess = auth()->user()->can($blocName::permission('index'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
     }
 
     public function validateStore()
     {
 
-        \$haveAccess = auth()->user()->can(\$this->bloc->permission('create'));
+        \$haveAccess = auth()->user()->can($blocName::permission('create'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
 
         // \$validator = Validator::make(request()->all(), \$this->rules());
@@ -35,21 +31,21 @@ class $className extends FormRequest implements CrudRequestInterface
 
     public function validateShow()
     {
-        \$haveAccess = auth()->user()->can(\$this->bloc->permission('show'));
+        \$haveAccess = auth()->user()->can($blocName::permission('show'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
     }
 
 
     public function validateUpdate()
     {
-        \$haveAccess = auth()->user()->can(\$this->bloc->permission('update'));
+        \$haveAccess = auth()->user()->can($blocName::permission('update'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
     }
 
 
     public function validateDestroy()
     {
-        \$haveAccess = auth()->user()->can(\$this->bloc->permission('delete'));
+        \$haveAccess = auth()->user()->can($blocName::permission('delete'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
     }
 

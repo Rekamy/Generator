@@ -36,7 +36,7 @@ class $className extends Model
 <?= "\tpublic \$casts = [\n" ?>
 <?php 
     foreach ($columns as $i=> $column) :
-        echo "\t\t'{$column->getName()}' => '{$column->getType()->getName()}',\n";
+        echo "\t\t'{$column->getName()}' => '" . RuleParser::parseType($column->getType()->getName()) . "',\n";
     endforeach;
     echo "\t];\n";
 ?>

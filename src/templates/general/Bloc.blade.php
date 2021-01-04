@@ -14,5 +14,17 @@ class $className extends CrudBloc
         \$this->repo = \$repo;
         \$this->request = \$request;
     }
+
+    public static function permission(\$name) : string {
+        \$permission = [
+            'index' => '{$table}_index',
+            'create' => '{$table}_create',
+            'show' => '{$table}_show',
+            'update' => '{$table}_update',
+            'destroy' => '{$table}_destroy',
+        ];
+
+        return \$permission[\$name];
+    }
 }
 "?>
