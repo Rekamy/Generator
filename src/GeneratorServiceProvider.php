@@ -4,7 +4,8 @@ namespace Rekamy\Generator;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
-use Rekamy\Generator\Console\Commands\CrudGenerator;
+use Rekamy\Generator\Console\Commands\FrontendCrudGenerator;
+use Rekamy\Generator\Console\Commands\BackendCrudGenerator;
 
 class GeneratorServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,7 @@ class GeneratorServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/templates/api', 'apitemplate');
         $this->loadViewsFrom(__DIR__ . '/templates/web', 'webtemplate');
-        $this->loadViewsFrom(__DIR__ . '/templates/backend', 'generaltemplate');
+        $this->loadViewsFrom(__DIR__ . '/templates/backend', 'backend');
         $this->loadViewsFrom(__DIR__ . '/templates/frontend', 'frontend');
         $this->loadViewsFrom(__DIR__ . '/templates/swagger', 'swagger');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template', 'robust');
