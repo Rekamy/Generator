@@ -15,7 +15,7 @@ class CrudController extends Controller
     public function index(Request \$request)
     {
         try {
-            \$this->baseBloc->request->validateIndex();
+            //\$this->baseBloc->request->validateIndex();
             \$this->result = \$this->baseBloc->index(\$request->all());
 
 
@@ -30,7 +30,7 @@ class CrudController extends Controller
         DB::beginTransaction();
         try {
 
-            \$this->baseBloc->request->validateStore();
+            //\$this->baseBloc->request->validateStore();
             \$this->result = \$this->baseBloc->store(\$request->all());
 
             DB::commit();
@@ -45,7 +45,7 @@ class CrudController extends Controller
     public function show(\$id)
     {
         try {
-            \$this->baseBloc->request->validateShow();
+            //\$this->baseBloc->request->validateShow();
             \$this->result = \$this->baseBloc->show(\$id);
 
             return \$this->success('Succesfull Retrieved Data', \$this->result);
@@ -58,7 +58,7 @@ class CrudController extends Controller
     {
         DB::beginTransaction();
         try {
-            \$this->baseBloc->request->validateUpdate();
+            //\$this->baseBloc->request->validateUpdate();
             \$this->result = \$this->baseBloc->update(\$id, \$request->all());
 
             DB::commit();
@@ -73,7 +73,7 @@ class CrudController extends Controller
     {
         DB::beginTransaction();
         try {
-            \$this->baseBloc->request->validateDestroy();
+            //\$this->baseBloc->request->validateDestroy();
             \$this->result = \$this->baseBloc->destroy(\$id);
 
             DB::commit();

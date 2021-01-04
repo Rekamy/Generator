@@ -7,7 +7,8 @@ use Rekamy\Generator\Core\BuildConfig;
 use Symfony\Component\Console\Helper\Table;
 use Rekamy\Generator\Core\Generators\{
     BaseControllerGenerator,
-    BaseVue,
+    BaseTSGenerator,
+    BaseVueGenerator,
     ModelGenerator,
     BlocGenerator,
     RepositoryGenerator,
@@ -68,7 +69,8 @@ class FrontendCrudGenerator extends Command
     public function crudGenerator()
     {
         $generators = [
-            'baseVue' => BaseVue::class,
+            'baseVue' => BaseVueGenerator::class,
+            'baseTs' => BaseTSGenerator::class,
         ];
 
         foreach ($generators as $class) {
