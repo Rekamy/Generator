@@ -53,10 +53,10 @@ class BackendCrudGenerator extends Command
     public function handle()
     {
         $this->loadConfig();
-        $this->apiGenerator();
+        $this->generate();
     }
 
-    public function apiGenerator()
+    public function generate()
     {
         $generators = [
             'model' => ModelGenerator::class,
