@@ -15,19 +15,12 @@ export default class Charges extends Vue {
         this.setData()
         this.options = {
             data: this.charges,
-            // columns: [
-            //     // { data: 'id', title: 'id' },
-            //     { data: 'oks.name', title: 'oks' },
-            //     { data: 'offence.name', title: 'offence' },
-            //     { data: 'geolocation.address', title: 'address' },
-            //     { data: 'created_at', title: 'created_at' },
-            // ]
             columns: [\n" ?><?php
             foreach ($columns as $column) :
                 echo "\t\t\t\t{ data: '" . $column->getName() . "' },\n";
             endforeach;
             ?>
-<?= "\t{
+<?= "\t\t\t\t{
                     data: 'id',
                     render: function (data: string, type: string, row: any) {
 
@@ -146,18 +139,17 @@ export default class Charges extends Vue {
     }
 
     setData() {
-        this.charges = ["?>
+        this.charges = [\n"?>
 <?php 
-        for ($i=10;$i == 0;$i--) :
-            echo "{\n";
+        for ($i=10;$i > 0;$i--) :
+            echo "\t\t\t{\n";
             foreach ($columns as $column) :
-                echo $column->getName() . ": '".   $column->getName() . "',";
+                echo "\t\t\t\t" . $column->getName() . ": '".   $column->getName() . "',\n";
             endforeach;
-            echo "}\n";
+            echo "\t\t\t},\n";
         endfor;
 ?>
-<?= "
-        ]
+<?= "\t\t]
     }
 }
 

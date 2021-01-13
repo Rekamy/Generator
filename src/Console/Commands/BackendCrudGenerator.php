@@ -54,6 +54,9 @@ class BackendCrudGenerator extends Command
     {
         $this->loadConfig();
         $this->generate();
+        for ($i=0; $i < 10; $i++) { 
+            # code...
+        }
     }
 
     public function generate()

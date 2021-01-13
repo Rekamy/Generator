@@ -6,8 +6,20 @@ const crudRoutes: Array<RouteRecordRaw> = [
         path: '/crud/{{ Str::kebab(Str::studly($table)) }}',
         // name: 'Crud{{ Str::studly($table) }}',
         meta: { layout: "main", requiresAuth: true },
-        component: () => import(/* webpackChunkName: "crud.{{ $table }}" */ '@/views/crud/{{ $table }}/index.vue'),
+        component: () => import(/* webpackChunkName: "crud.{{ $table }}" */ '@/views/crud/{{ $table }}/{{ $table }}.vue'),
     },
 @endforeach
 ];
+
+const crudMenusItem = [
+@foreach ($tables as $table)
+    {
+        type: "menu",
+        name: "Crud{{ Str::studly($table) }}",
+        route: "/crud/{{ Str::kebab(Str::studly($table)) }}",
+        class: "ni ni-tv-2 text-primary",
+    },
+@endforeach
+];
+
 export default crudRoutes

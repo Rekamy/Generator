@@ -38,6 +38,7 @@ class BaseVueGenerator
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
+                $data['table'] =  $table;
                 $data['title'] =  Str::title($table);
                 // $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
                 // $data['requestName'] = Str::studly(Str::singular($table)) . "Request";

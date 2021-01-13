@@ -22,7 +22,7 @@
                 <tr>\n" ?>
 <?php 
   foreach($columns as $column):
-    echo "\t\t\t\t  <th scope=\"col\">{$column->getName()}</th>\n";
+    echo "\t\t\t\t\t<th scope=\"col\">{$column->getName()}</th>\n";
   endforeach;
 ?>
 <?= "\t\t\t\t</tr>
@@ -37,7 +37,7 @@
   </div>
 </template>
 
-<script lang=\"ts\" src=\"./$title.ts\"></script>
+<script lang=\"ts\" src=\"./$table.ts\"></script>
 
 "
 ?>
