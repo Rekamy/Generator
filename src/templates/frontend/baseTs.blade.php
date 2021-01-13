@@ -22,14 +22,12 @@ export default class Charges extends Vue {
             //     { data: 'geolocation.address', title: 'address' },
             //     { data: 'created_at', title: 'created_at' },
             // ]
-            columns: [
-                // { data: 'id', title: 'id' },
-                { data: 'oks.name' },
-                { data: 'offence.name' },
-                { data: 'geolocation.address' },
-                { data: 'created_at' },
-                // { data: 'oks.name'},
-                {
+            columns: [\n" ?><?php
+            foreach ($columns as $column) :
+                echo "\t\t\t\t{ data: '" . $column->getName() . "' },\n";
+            endforeach;
+            ?>
+<?= "\t{
                     data: 'id',
                     render: function (data: string, type: string, row: any) {
 
@@ -147,48 +145,18 @@ export default class Charges extends Vue {
         })
     }
 
-
     setData() {
-        this.charges = [
-            {
-                id: 1,
-                oks: {
-                    name: 'Kertas Pertuduhan',
-                    address: 'Kertas Pertuduhan',
-                },
-                offence: {
-                    act: 'AKTA 132',
-                    section: 'SEKSYEN 12 (2)',
-                    name: 'Timbus tanah',
-                    description: 'Timbus tanah',
-                },
-                geolocation: {
-                    address: 'LOT 3 MUKIM 12',
-                    lat: '0.12973',
-                    long: '0.12973',
-                },
-                created_at: '03 JUN 2020',
-            },
-            {
-                id: 1,
-                oks: {
-                    name: 'Kertas Pertuduhan',
-                    address: 'LOT 3 PENANG',
-                },
-                offence: {
-                    act: 'AKTA 132',
-                    section: 'SEKSYEN 12 (2)',
-                    name: 'Timbus tanah',
-                    description: 'Timbus tanah',
-                },
-                geolocation: {
-                    address: 'LOT 3 MUKIM 12',
-                    lat: '0.12973',
-                    long: '0.12973',
-                },
-                created_at: '03 JUN 2020',
-            },
-
+        this.charges = ["?>
+<?php 
+        for ($i=10;$i == 0;$i--) :
+            echo "{\n";
+            foreach ($columns as $column) :
+                echo $column->getName() . ": '".   $column->getName() . "',";
+            endforeach;
+            echo "}\n";
+        endfor;
+?>
+<?= "
         ]
     }
 }

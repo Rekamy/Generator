@@ -9,6 +9,7 @@ use Rekamy\Generator\Core\Generators\{
     BaseControllerGenerator,
     BaseTSGenerator,
     BaseVueGenerator,
+    VueRouteGenerator,
     ModelGenerator,
     BlocGenerator,
     RepositoryGenerator,
@@ -71,6 +72,7 @@ class FrontendCrudGenerator extends Command
         $generators = [
             'baseVue' => BaseVueGenerator::class,
             'baseTs' => BaseTSGenerator::class,
+            'route' => VueRouteGenerator::class,
         ];
 
         foreach ($generators as $class) {

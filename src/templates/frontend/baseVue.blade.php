@@ -19,19 +19,13 @@
             <!-- Projects table -->
             <DataTable class=\"table align-items-center table-flush\" :events=\"events\" :options=\"options\" id=\"$title-list\">
               <thead class=\"thead-light\">
-                <tr>
-                  "
-                  ?>
-                    <?php 
-
-                    foreach($columns as $column):
-                      echo "<th scope=\"col\">{$column->getName()}</th>";
-                    endforeach;
-                    ?>
-
-                  <?= 
-                  "
-                </tr>
+                <tr>\n" ?>
+<?php 
+  foreach($columns as $column):
+    echo "\t\t\t\t  <th scope=\"col\">{$column->getName()}</th>\n";
+  endforeach;
+?>
+<?= "\t\t\t\t</tr>
               </thead>
             </DataTable>
           </div>

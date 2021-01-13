@@ -23,7 +23,7 @@ class BaseVueGenerator
             ->filter(function ($item) {
                 return !in_array($item, $this->context->excludeTables);
             });
-}
+    }
 
     public function generate()
     {
@@ -33,7 +33,11 @@ class BaseVueGenerator
 
                 // $data['context'] = $this->context;
                 // $data['table'] = $table;
-                $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
+                $data['columns'] = collect($this->context->db->listTableColumns($table))
+                    ->except([
+                        'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
+                        'deleted_at', 'deleted_by', 'remark',
+                    ]);
                 $data['title'] =  Str::title($table);
                 // $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
                 // $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
@@ -49,7 +53,6 @@ class BaseVueGenerator
                 $stub->render();
                 $this->context->info("Vue Table $table Created.");
             }
-
         } catch (\Throwable $th) {
             throw $th;
         }
