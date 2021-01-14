@@ -34,6 +34,8 @@ class BaseTSGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $table;
                 $data['title'] =  Str::title($table);
+                $data['camelId'] = Str::camel($table);
+                $data['slugId'] =  Str::slug($table);
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',

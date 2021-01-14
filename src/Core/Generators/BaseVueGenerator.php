@@ -39,7 +39,8 @@ class BaseVueGenerator
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
                 $data['table'] =  $table;
-                $data['title'] =  Str::title($table);
+                $data['title'] =  Str::title(str_replace('_', ' ', $table));
+                $data['kebabTitle'] =  Str::kebab(Str::studly($table));
                 // $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
                 // $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
 

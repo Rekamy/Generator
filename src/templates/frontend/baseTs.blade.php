@@ -8,13 +8,13 @@ export default class Charges extends Vue {
     Swal!: typeof Swal
 
     options: object = {}
-    charges: object[] = []
+    $camelId: object[] = []
     events: object[] = []
 
     created() {
         this.setData()
         this.options = {
-            data: this.charges,
+            data: this.$camelId,
             columns: [\n" ?><?php
             foreach ($columns as $column) :
                 echo "\t\t\t\t{ data: '" . $column->getName() . "' },\n";
@@ -25,10 +25,8 @@ export default class Charges extends Vue {
                     render: function (data: string, type: string, row: any) {
 
                         let html = `<div class=\"btn-group\" role=\"group\" aria-label=\"Action Button Group\">`;
-                        html += `<button type=\"button\" class=\"btn btn-primary btn-sm approve\"><i class=\"fas fa-check\" data-placement=\"top\" title=\"Approve\" data-action=\"approve\" data-id=\"\${data}\"></i></button>`;
-                        html += `<button type=\"button\" class=\"btn btn-danger btn-sm reject\"><i class=\"fas fa-ban\" data-placement=\"top\" title=\"Reject\" data-action=\"reject\" data-id=\"\${data}\"></i></button>`;
-                        html += `<button type=\"button\" class=\"btn btn-light btn-sm view\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" data-id=\"\${data}\"></i></button>`;
-                        html += `<button type=\"button\" class=\"btn btn-light btn-sm edit\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\" data-id=\"\${data}\"></i></button>`;
+                        html += `<button type=\"button\" class=\"btn btn-success btn-sm view\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" data-id=\"\${data}\"></i></button>`;
+                        html += `<button type=\"button\" class=\"btn btn-primary btn-sm edit\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\" data-id=\"\${data}\"></i></button>`;
                         html += `<button type=\"button\" class=\"btn btn-danger btn-sm delete\"><i class=\"far fa-trash-alt\" data-placement=\"top\" title=\"Delete\" data-id=\"\${data}\"></i></button>`;
                         html += `</div>`;
 
@@ -45,16 +43,6 @@ export default class Charges extends Vue {
     registerEvents() {
         this.events = [
             {
-                selector: '.approve',
-                trigger: 'click',
-                action: (jquery: any) => this.approveData(jquery.target.dataset.id)
-            },
-            {
-                selector: '.reject',
-                trigger: 'click',
-                action: (jquery: any) => this.rejectData(jquery.target.dataset.id)
-            },
-            {
                 selector: '.view',
                 trigger: 'click',
                 action: (jquery: any) => this.viewData(jquery.target.dataset.id)
@@ -69,54 +57,15 @@ export default class Charges extends Vue {
                 trigger: 'click',
                 action: (jquery: any) => this.deleteData(jquery.target.dataset.id)
             },
-            {
-                selector: '.view',
-                trigger: 'click',
-                action: (jquery: any) => this.viewData(jquery.target.dataset.id)
-            }
         ]
     }
 
-    approveData(value: any) {
-        this.Swal.fire({
-            title: 'Are you sure?',
-            text: \"You won't be able to revert this!\",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Proceed it!'
-        }).then((result: any) => {
-            if (result.isConfirmed) {
-                //somecode route
-                this.\$router.replace('/case/department');
-            }
-        })
-    }
-
-    rejectData(value: any) {
-        this.Swal.fire({
-            title: 'Are you sure?',
-            text: \"You won't be able to revert this!\",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Proceed it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                //somecode route
-            }
-        })
-
-    }
-
     viewData(value: any) {
-        this.\$router.replace('/charges/view');
+        this.\$router.push('/crud/$slugId/view');
     }
 
     editData(value: any) {
-        this.\$router.replace('/charges/edit');
+        this.\$router.push('/crud/$slugId/edit');
     }
 
     deleteData(value: any) {
@@ -131,7 +80,7 @@ export default class Charges extends Vue {
         }).then((result) => {
             if (result.isConfirmed) {
                 //somecode route
-                // this.\$router.replace('/case/department');
+                // this.\$router.push('/crud/case/department');
 
 
             }
@@ -139,7 +88,7 @@ export default class Charges extends Vue {
     }
 
     setData() {
-        this.charges = [\n"?>
+        this.$camelId = [\n"?>
 <?php 
         for ($i=10;$i > 0;$i--) :
             echo "\t\t\t{\n";
