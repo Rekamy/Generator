@@ -15,6 +15,7 @@ use Rekamy\Generator\Core\Generators\{
     ControllerGenerator,
     RequestGenerator,
     CrudableTraitGenerator,
+    CrudableRepositoryTraitGenerator,
     HasRepositoryGenerator,
     HasRequestGenerator,
     CrudBlocGenerator,
@@ -74,6 +75,7 @@ class BackendCrudGenerator extends Command
 
             // traits
             'crudable_trait' => CrudableTraitGenerator::class,
+            'crudable_repository_trait' => CrudableRepositoryTraitGenerator::class,
             'has_repository_trait' => HasRepositoryGenerator::class,
             'has_request_trait' => HasRequestGenerator::class,
 
