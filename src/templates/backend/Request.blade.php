@@ -25,7 +25,9 @@ class $className extends FormRequest implements CrudRequestInterface
         \$haveAccess = auth()->user()->can($blocName::permission('create'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
 
-        // \$validator = Validator::make(request()->all(), \$this->rules());
+        // \$rules = [];
+        // \$messages = [];
+        // \$validator = validator(request()->all(), \$rules, \$messages);
         // if (\$validator->fails()) return response()->json(['errors' => \$validator->errors()]);
     }
 
