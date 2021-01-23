@@ -4,14 +4,18 @@ namespace Rekamy\Generator;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
-use Rekamy\Generator\Console\Commands\FrontendCrudGenerator;
-use Rekamy\Generator\Console\Commands\BackendCrudGenerator;
+use Rekamy\Generator\Console\Commands\{
+    FrontendCrudGenerator,
+    BackendCrudGenerator,
+    MigrationGenerator
+};
 
 class GeneratorServiceProvider extends ServiceProvider
 {
     protected $commands = [
         BackendCrudGenerator::class,
         FrontendCrudGenerator::class,
+        MigrationGenerator::class,
     ];
 
     public function boot()
@@ -32,6 +36,7 @@ class GeneratorServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/templates/backend', 'backend');
         $this->loadViewsFrom(__DIR__ . '/templates/frontend', 'frontend');
         $this->loadViewsFrom(__DIR__ . '/templates/swagger', 'swagger');
+        $this->loadViewsFrom(__DIR__ . '/templates/migration', 'migration');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template', 'robust');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template/js', 'robustjs');
         // $this->loadViewsFrom(__DIR__ . '/templates/web/robust-theme-template/layouts', 'robustlayouts');
