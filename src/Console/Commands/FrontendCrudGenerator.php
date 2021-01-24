@@ -6,23 +6,19 @@ use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
 use Symfony\Component\Console\Helper\Table;
 use Rekamy\Generator\Core\Generators\{
-    BaseControllerGenerator,
     BaseTSGenerator,
     BaseVueGenerator,
     VueRouteGenerator,
-    ModelGenerator,
-    BlocGenerator,
-    RepositoryGenerator,
-    ControllerGenerator,
-    RequestGenerator,
-    CrudableTraitGenerator,
-    HasRepositoryGenerator,
-    HasRequestGenerator,
-    CrudBlocGenerator,
-    CrudBlocInterfaceGenerator,
-    CrudControllerGenerator,
-    CrudRepositoryInterfaceGenerator,
-    CrudRequestInterfaceGenerator,
+    CrudBaseTSGenerator,
+    CrudBaseVueGenerator,
+    CrudIndexTSGenerator,
+    CrudIndexVueGenerator,
+    CrudViewTSGenerator,
+    CrudViewVueGenerator,
+    CrudCreateTSGenerator,
+    CrudCreateVueGenerator,
+    CrudEditTSGenerator,
+    CrudEditVueGenerator,
 };
 
 
@@ -70,9 +66,30 @@ class FrontendCrudGenerator extends Command
     public function generate()
     {
         $generators = [
-            'baseVue' => BaseVueGenerator::class,
-            'baseTs' => BaseTSGenerator::class,
+            // 'baseVue' => BaseVueGenerator::class,
+            // 'baseTs' => BaseTSGenerator::class,
             'route' => VueRouteGenerator::class,
+
+            'crudBaseVue' => CrudBaseVueGenerator::class,
+            'crudBaseTS' => CrudBaseTSGenerator::class,
+
+            'crudIndexVue' => CrudIndexVueGenerator::class,
+            'crudIndexTS' => CrudIndexTSGenerator::class,
+
+            'crudCreateVue' => CrudCreateVueGenerator::class,
+            'crudCreateTS' => CrudCreateTSGenerator::class,
+
+            'crudViewVue' => CrudViewVueGenerator::class,
+            'crudViewTS' => CrudViewTSGenerator::class,
+
+            'crudEditVue' => CrudEditVueGenerator::class,
+            'crudEditTS' => CrudEditTSGenerator::class,
+
+            // 'crudViewVue' => CrudViewVueGenerator::class,
+            // 'crudViewTS' => CrudViewTSGenerator::class,
+
+            // 'crudViewVue' => CrudViewVueGenerator::class,
+            // 'crudViewTS' => CrudViewTSGenerator::class,
         ];
 
         foreach ($generators as $class) {
