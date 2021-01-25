@@ -3,16 +3,22 @@
 "
 import { Vue } from \"vue-class-component\";
 import Swal from \"sweetalert2\";
+import { $studly, {$camelId->singular()}Api } from \"@/modules/{$table->singular()}\";
 
 export default class Charges extends Vue {
     Swal!: typeof Swal
-
+    
     options: object = {}
     $camelId: object[] = []
     events: object[] = []
+    api: any = {$camelId->singular()}Api
 
-    created() {
-        this.setData()
+    mounted() {
+        this.builDataTable()
+    }
+    async builDataTable() {
+        let response = await {$camelId->singular()}Api.get$studly()
+        this.$camelId = response.data.data
         this.options = {
             data: this.$camelId,
             columns: [\n" ?><?php
@@ -78,27 +84,10 @@ export default class Charges extends Vue {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, Proceed it!'
         }).then((result) => {
-            if (result.isConfirmed) {
-                //somecode route
-                // this.\$router.push('/crud/case/department');
+            // if (result.isConfirmed) {
 
-
-            }
+            // }
         })
-    }
-
-    setData() {
-        this.$camelId = [\n"?>
-<?php 
-        for ($i=10;$i > 0;$i--) :
-            echo "\t\t\t{\n";
-            foreach ($columns as $column) :
-                echo "\t\t\t\t" . $column->getName() . ": '".   $column->getName() . "',\n";
-            endforeach;
-            echo "\t\t\t},\n";
-        endfor;
-?>
-<?= "\t\t]
     }
 }
 

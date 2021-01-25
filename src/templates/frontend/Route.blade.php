@@ -1,34 +1,36 @@
 import { RouteRecordRaw } from 'vue-router';
 
 const crudRoutes: Array<RouteRecordRaw> = [
-@foreach ($tables as $table)
+@foreach ($routes as $route)
     {
-        path: '/crud/{{ Str::kebab(Str::studly($table)) }}',
-        name: '{{ Str::title($table) }}',
-        meta: { layout: "main", requiresAuth: true },
-        component: () => import(/* webpackChunkName: "crud.{{ $table }}" */ '@/views/crud/{{ $table }}/base.vue'),
+        path: '{{ $route['path'] }}',
+        name: '{{ $route['name'] }}',
+        meta: { layout: "main", requiresAuth: true, breadcrumb: '{{ $route['title'] }}' },
+        component: () => import(/* webpackChunkName: "{{ $route['name'] }}" */ '@/views/crud/{{ $route['table'] }}/base.vue'),
         children: [
             {
-                path: '/',
-                name: 'list',
-                component: () => import(/* webpackChunkName: "crud.{{ $table }}.index" */ '@/views/crud/{{ $table }}/index.vue'),
+                path: '',
+                name: '{{ $route['name'] }}.index',
+                meta: { layout: "main", requiresAuth: true, breadcrumb: 'List' },
+                component: () => import(/* webpackChunkName: "{{ $route['name'] }}.index" */ '@/views/crud/{{ $route['table'] }}/index.vue'),
             },
             {
-                path: '/view',
-                name: 'View',
-                component: () => import(/* webpackChunkName: "crud.{{ $table }}.view" */ '@/views/crud/{{ $table }}/view.vue'),
+                path: 'view',
+                name: '{{ $route['name'] }}.view',
+                meta: { layout: "main", requiresAuth: true, breadcrumb: 'View' },
+                component: () => import(/* webpackChunkName: "{{ $route['name'] }}.view" */ '@/views/crud/{{ $route['table'] }}/view.vue'),
             },
             {
-                path: '/crud/{{ Str::kebab(Str::studly($table)) }}/create',
-                name: 'Create',
-                meta: { layout: "main", requiresAuth: true },
-                component: () => import(/* webpackChunkName: "crud.{{ $table }}.create" */ '@/views/crud/{{ $table }}/create.vue'),
+                path: 'create',
+                name: '{{ $route['name'] }}.create',
+                meta: { layout: "main", requiresAuth: true, breadcrumb: 'Create' },
+                component: () => import(/* webpackChunkName: "{{ $route['name'] }}.create" */ '@/views/crud/{{ $route['table'] }}/create.vue'),
             },
             {
-                path: '/crud/{{ Str::kebab(Str::studly($table)) }}/edit',
-                name: 'Edit',
-                meta: { layout: "main", requiresAuth: true },
-                component: () => import(/* webpackChunkName: "crud.{{ $table }}.edit" */ '@/views/crud/{{ $table }}/edit.vue'),
+                path: 'edit',
+                name: '{{ $route['name'] }}.edit',
+                meta: { layout: "main", requiresAuth: true, breadcrumb: 'Edit' },
+                component: () => import(/* webpackChunkName: "{{ $route['name'] }}.edit" */ '@/views/crud/{{ $route['table'] }}/edit.vue'),
             },
         ]
     },
@@ -36,11 +38,11 @@ const crudRoutes: Array<RouteRecordRaw> = [
 ];
 
 const crudMenusItem = [
-@foreach ($tables as $table)
+@foreach ($routes as $route)
     {
         type: "menu",
-        name: "Crud{{ Str::studly($table) }}",
-        route: "/crud/{{ Str::kebab(Str::studly($table)) }}",
+        name: "Crud{{ Str::studly($route['table']) }}",
+        route: "/crud/{{ Str::kebab(Str::studly($route['table'])) }}",
         class: "ni ni-tv-2 text-primary",
     },
 @endforeach

@@ -28,7 +28,19 @@ class VueRouteGenerator
     public function generate()
     {
         try {
-            $data['tables'] = $this->tables;
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $route = [
+                    'name' => 'crud.' . $table,
+                    'table' => $table,
+                    'title' => Str::of($table)->replace('_', ' ')->title(),
+                    'path' => '/crud/' . Str::of($table)->studly()->kebab(),
+                ];
+                // dd($route);
+                
+                $data['routes'][] = $route;
+            }
+
             $view = view('frontend::route', $data);
 
             $stub = new StubGenerator(

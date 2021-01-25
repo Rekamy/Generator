@@ -32,11 +32,11 @@ class CrudIndexTSGenerator
                 $this->context->info("Creating TS Index for Table $table ...");
 
                 $data['context'] = $this->context;
-                $data['table'] = $table;
-                $data['title'] =  Str::title($table);
-                $data['camelId'] = Str::camel($table);
-                $data['slugId'] =  Str::slug($table);
-                $data['studly'] =  Str::studly($table);
+                $data['table'] = Str::of($table);
+                $data['title'] =  Str::of($table)->title();
+                $data['camelId'] = Str::of($table)->camel();
+                $data['slugId'] =  Str::of($table)->slug();
+                $data['studly'] =  Str::of($table)->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
