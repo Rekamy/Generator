@@ -42,9 +42,9 @@ class CrudEditTSGenerator
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
-                $data['className'] = Str::studly(Str::singular($table)) . "Bloc";
-                $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
-                $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
+                $data['className'] = Str::of($table)->singular()->studly() . "Bloc";
+                $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
+                $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
                 $view = view('frontend::crud-flat/CrudEditTS', $data);
 

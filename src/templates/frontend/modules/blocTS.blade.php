@@ -16,7 +16,7 @@ import { useStore } from \"vuex\"
  * }
  * ```
  */
-export function ${camel}Factory(): ${studly}Bloc {
+export function {$camel}Factory(): ${studly}Bloc {
     const module = '${camel}'
     const store: any = useStore()
     const ${camel} = ref([])

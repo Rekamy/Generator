@@ -34,9 +34,9 @@ class BlocGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $table;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
-                $data['className'] = Str::studly(Str::singular($table)) . "Bloc";
-                $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
-                $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
+                $data['className'] = Str::of($table)->singular()->studly() . "Bloc";
+                $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
+                $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
                 $view = view('backend::Bloc', $data);
 

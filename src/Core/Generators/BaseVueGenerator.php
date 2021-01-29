@@ -38,11 +38,11 @@ class BaseVueGenerator
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
-                $data['table'] =  $table;
+                $data['table'] =  Str::of($table);
                 $data['title'] =  Str::title(str_replace('_', ' ', $table));
-                $data['kebabTitle'] =  Str::kebab(Str::studly($table));
-                // $data['repoName'] = Str::studly(Str::singular($table)) . "Repository";
-                // $data['requestName'] = Str::studly(Str::singular($table)) . "Request";
+                $data['kebabTitle'] =  Str::of($table)->studly()->kebab();
+                // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
+                // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
                 $view = view('frontend::BaseVue', $data);
 

@@ -48,10 +48,10 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->title();
-        $data['camel'] = $name->camel();
-        $data['slug'] =  $name->slug();
-        $data['studly'] =  $name->studly();
+        $data['title'] =  $name->singular()->title();
+        $data['camel'] = $name->singular()->camel();
+        $data['slug'] =  $name->singular()->slug();
+        $data['studly'] =  $name->singular()->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -78,10 +78,10 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->title();
-        $data['camel'] = $name->camel();
-        $data['slug'] =  $name->slug();
-        $data['studly'] =  $name->studly();
+        $data['title'] =  $name->singular()->title();
+        $data['camel'] = $name->singular()->camel();
+        $data['slug'] =  $name->singular()->slug();
+        $data['studly'] =  $name->singular()->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -108,10 +108,10 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->title();
-        $data['camel'] = $name->camel();
-        $data['slug'] =  $name->slug();
-        $data['studly'] =  $name->studly();
+        $data['title'] =  $name->singular()->title();
+        $data['camel'] = $name->singular()->camel();
+        $data['slug'] =  $name->singular()->slug();
+        $data['studly'] =  $name->singular()->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -138,10 +138,10 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->title();
-        $data['camel'] = $name->camel();
-        $data['slug'] =  $name->slug();
-        $data['studly'] =  $name->studly();
+        $data['title'] =  $name->singular()->title();
+        $data['camel'] = $name->singular()->camel();
+        $data['slug'] =  $name->singular()->slug();
+        $data['studly'] =  $name->singular()->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -168,10 +168,10 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->title();
-        $data['camel'] = $name->camel();
-        $data['slug'] =  $name->slug();
-        $data['studly'] =  $name->studly();
+        $data['title'] =  $name->singular()->title();
+        $data['camel'] = $name->singular()->camel();
+        $data['slug'] =  $name->singular()->slug();
+        $data['studly'] =  $name->singular()->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',

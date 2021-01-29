@@ -33,8 +33,8 @@ class ControllerGenerator
 
                 $data['context'] = $this->context;
                 $data['table'] = $table;
-                $data['className'] = Str::studly(Str::singular($table)) . "Controller";
-                $data['blocName'] = Str::studly(Str::singular($table)) . "Bloc";
+                $data['className'] = Str::of($table)->singular()->studly() . "Controller";
+                $data['blocName'] = Str::of($table)->singular()->studly() . "Bloc";
 
                 $view = view('backend::Controller', $data);
 

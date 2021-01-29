@@ -58,7 +58,7 @@ export type ${studly}Bloc = {
      * destroy specified ${camel} and sync to storage
      */
     destroy: (id: number) => void
-    ${camel}s: any
+    ${camel}: any
 }
 
 

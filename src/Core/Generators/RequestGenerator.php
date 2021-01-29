@@ -34,8 +34,8 @@ class RequestGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $table;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
-                $data['className'] = Str::studly(Str::singular($table)) . "Request";
-                $data['blocName'] = Str::studly(Str::singular($table)) . "Bloc";
+                $data['className'] = Str::of($table)->singular()->studly() . "Request";
+                $data['blocName'] = Str::of($table)->singular()->studly() . "Bloc";
 
                 $view = view('backend::Request', $data);
 

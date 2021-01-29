@@ -34,7 +34,7 @@ class RepositoryGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $table;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
-                $data['modelName'] = Str::studly(Str::singular($table));
+                $data['modelName'] = Str::of($table)->singular()->studly();
                 $data['className'] = $data['modelName'] . "Repository";
                 $data['namespace'] = $this->context->namespace['repository'];
 
