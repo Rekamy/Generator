@@ -35,8 +35,8 @@ class CrudIndexTSGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $name;
                 $data['title'] =  $name->singular()->title();
-                $data['camelId'] = $name->singular()->camel();
-                $data['slugId'] =  $name->singular()->slug();
+                $data['camel'] = $name->singular()->camel();
+                $data['slug'] =  $name->slug();
                 $data['studly'] =  $name->singular()->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
@@ -52,7 +52,7 @@ class CrudIndexTSGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/{$name->singular()}/index.ts")
+                    resource_path("frontend/src/views/crud/$name/index.ts")
                 );
 
                 $stub->render();

@@ -3,24 +3,24 @@
 "
 import { Vue } from \"vue-class-component\";
 import Swal from \"sweetalert2\";
-import { $studly, {$camelId->singular()}Api } from \"@/modules/{$table->singular()}\";
+import { $studly, {$camel->singular()}Api } from \"@/modules/{$table->singular()}\";
 
 export default class Charges extends Vue {
     Swal!: typeof Swal
     
     options: object = {}
-    $camelId: object[] = []
+    $camel: object[] = []
     events: object[] = []
-    api: any = {$camelId->singular()}Api
+    api: any = {$camel->singular()}Api
 
     mounted() {
         this.builDataTable()
     }
     async builDataTable() {
-        let response = await {$camelId->singular()}Api.get$studly()
-        this.$camelId = response.data.data
+        let response = await {$camel->singular()}Api.get$studly()
+        this.$camel = response.data.data
         this.options = {
-            data: this.$camelId,
+            data: this.$camel,
             columns: [\n" ?><?php
             foreach ($columns as $column) :
                 echo "\t\t\t\t{ data: '" . $column->getName() . "' },\n";
@@ -67,11 +67,11 @@ export default class Charges extends Vue {
     }
 
     viewData(value: any) {
-        this.\$router.push('/crud/$slugId/view');
+        this.\$router.push('/crud/$slug/view');
     }
 
     editData(value: any) {
-        this.\$router.push('/crud/$slugId/edit');
+        this.\$router.push('/crud/$slug/edit');
     }
 
     deleteData(value: any) {
