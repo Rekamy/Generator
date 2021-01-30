@@ -39,8 +39,9 @@ class CrudViewVueGenerator
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
                 $data['table'] =  Str::of($table);
-                $data['title'] =  Str::title(str_replace('_', ' ', $table));
+                $data['title'] =  Str::of($table)->replace('_',' ')->title();
                 $data['kebabTitle'] =  Str::of($table)->studly()->kebab();
+                $data['myvar'] = $table ? 'department' : 'dsa';
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
