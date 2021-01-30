@@ -30,7 +30,7 @@ class CrudIndexVueGenerator
         try {
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Vue Index for Table $table ...");
-
+                $name = Str::of($table);
                 // $data['context'] = $this->context;
                 // $data['table'] = $table;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
@@ -38,9 +38,9 @@ class CrudIndexVueGenerator
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
-                $data['table'] =  Str::of($table);
+                $data['table'] =  $name;
                 $data['title'] =  Str::title(str_replace('_', ' ', $table));
-                $data['kebabTitle'] =  Str::of($table)->studly()->kebab();
+                $data['kebabTitle'] =  $name->studly()->kebab();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
@@ -49,11 +49,11 @@ class CrudIndexVueGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$table/index.vue")
+                    resource_path("frontend/src/views/crud/$name/index.vue")
                 );
 
                 $stub->render();
-                $this->context->info("Vue Index for Table $table Created.");
+                $this->context->info("Vue Index for Table $name Created.");
             }
         } catch (\Throwable $th) {
             throw $th;
