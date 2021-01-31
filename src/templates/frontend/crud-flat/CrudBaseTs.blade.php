@@ -4,7 +4,7 @@
 import { Vue } from \"vue-class-component\";
 import Swal from \"sweetalert2\";
 
-export default class $camelId extends Vue {
+export default class $camel extends Vue {
 }
 
 "

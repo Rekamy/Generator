@@ -1,5 +1,6 @@
 <?= "
 import { api } from '@/services/api';
+import { {$studly->singular()} } from './index';
 
 export class {$studly->singular()}Api {
     private BASE_URL: string;
@@ -8,10 +9,24 @@ export class {$studly->singular()}Api {
         this.BASE_URL = \"/{$table->singular()}\";
     }
 
-    async get{$studly}(): Promise<any> {
-        console.log('model get data')
-        const endpoint = `\${this.BASE_URL}`;
-        return api.get<any>(endpoint, true);
+    async all(): Promise<any> {
+        return await api.get<any>(this.BASE_URL, true);
+    }
+
+    async first(id: number): Promise<any> {
+        return await api.get<any>(`\${this.BASE_URL}/\${id}`, true);
+    }
+
+    async create(data: any): Promise<any> {
+        return await api.post<any>(this.BASE_URL, data, true);
+    }
+
+    async edit(id: number, data: any): Promise<any> {
+        return await api.put<any>(`\${this.BASE_URL}/\${id}`, data, true);
+    }
+
+    async destroy(id: number): Promise<any> {
+        return await api.delete<any>(`\${this.BASE_URL}/\${id}`, true);
     }
 
 }

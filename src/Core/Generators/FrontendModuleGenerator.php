@@ -46,12 +46,12 @@ class FrontendModuleGenerator
         $this->context->info("Creating Api for table $table ...");
 
         $data['context'] = $this->context;
-        $name = Str::of($table);
+        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->singular()->title();
-        $data['camel'] = $name->singular()->camel();
-        $data['slug'] =  $name->singular()->slug();
-        $data['studly'] =  $name->singular()->studly();
+        $data['title'] =  $name->title();
+        $data['camel'] = $name->camel();
+        $data['slug'] =  $name->slug();
+        $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -63,7 +63,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name->singular()}/api.ts")
+            resource_path("frontend/src/modules/{$name}/api.ts")
         );
 
         $stub->render();
@@ -76,12 +76,12 @@ class FrontendModuleGenerator
         $this->context->info("Creating Bloc for table $table ...");
 
         $data['context'] = $this->context;
-        $name = Str::of($table);
+        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->singular()->title();
-        $data['camel'] = $name->singular()->camel();
-        $data['slug'] =  $name->singular()->slug();
-        $data['studly'] =  $name->singular()->studly();
+        $data['title'] =  $name->title();
+        $data['camel'] = $name->camel();
+        $data['slug'] =  $name->slug();
+        $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -93,7 +93,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name->singular()}/bloc.ts")
+            resource_path("frontend/src/modules/{$name}/bloc.ts")
         );
 
         $stub->render();
@@ -106,12 +106,12 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module Model for table $table ...");
 
         $data['context'] = $this->context;
-        $name = Str::of($table);
+        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->singular()->title();
-        $data['camel'] = $name->singular()->camel();
-        $data['slug'] =  $name->singular()->slug();
-        $data['studly'] =  $name->singular()->studly();
+        $data['title'] =  $name->title();
+        $data['camel'] = $name->camel();
+        $data['slug'] =  $name->slug();
+        $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -123,7 +123,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name->singular()}/model.ts")
+            resource_path("frontend/src/modules/{$name}/model.ts")
         );
 
         $stub->render();
@@ -136,12 +136,12 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module Store for table $table ...");
 
         $data['context'] = $this->context;
-        $name = Str::of($table);
+        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->singular()->title();
-        $data['camel'] = $name->singular()->camel();
-        $data['slug'] =  $name->singular()->slug();
-        $data['studly'] =  $name->singular()->studly();
+        $data['title'] =  $name->title();
+        $data['camel'] = $name->camel();
+        $data['slug'] =  $name->slug();
+        $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -153,7 +153,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name->singular()}/store.ts")
+            resource_path("frontend/src/modules/{$name}/store.ts")
         );
 
         $stub->render();
@@ -166,12 +166,12 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module Index for table $table ...");
 
         $data['context'] = $this->context;
-        $name = Str::of($table);
+        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
         $data['table'] = $name;
-        $data['title'] =  $name->singular()->title();
-        $data['camel'] = $name->singular()->camel();
-        $data['slug'] =  $name->singular()->slug();
-        $data['studly'] =  $name->singular()->studly();
+        $data['title'] =  $name->title();
+        $data['camel'] = $name->camel();
+        $data['slug'] =  $name->slug();
+        $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except([
                 'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -183,7 +183,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name->singular()}/index.ts")
+            resource_path("frontend/src/modules/{$name}/index.ts")
         );
 
         $stub->render();

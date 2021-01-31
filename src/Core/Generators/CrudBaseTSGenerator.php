@@ -31,27 +31,28 @@ class CrudBaseTSGenerator
             foreach ($this->tables as $table) {
                 $this->context->info("Creating TS Base for Table $table ...");
 
+                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
                 $data['context'] = $this->context;
-                $data['table'] = Str::of($table);
-                $data['title'] =  Str::of($table)->title();
-                $data['camelId'] = Str::of($table)->camel();
-                $data['slugId'] =  Str::of($table)->slug();
-                $data['studly'] =  Str::of($table)->studly();
+                $data['table'] = $name;
+                $data['title'] =  $name->title();
+                $data['camel'] = $name->camel();
+                $data['slug'] =  $name->slug();
+                $data['studly'] =  $name->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
-                $data['className'] = Str::of($table)->singular()->studly() . "Bloc";
-                $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
-                $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
+                $data['className'] = $name->studly() . "Bloc";
+                $data['repoName'] = $name->studly() . "Repository";
+                $data['requestName'] = $name->studly() . "Request";
 
                 $view = view('frontend::crud-flat/CrudBaseTS', $data);
 
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$table/base.ts")
+                    resource_path("frontend/src/views/crud/$name/base.ts")
                 );
 
                 $stub->render();

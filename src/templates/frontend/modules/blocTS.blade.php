@@ -1,5 +1,5 @@
 <?= "
-import { $studly, {$studly}Bloc, ${camel}Store } from \"./index\"
+import { $studly, {$studly}Bloc, ${camel}Store, ${camel}Api } from \"./index\"
 import { ref, reactive, onBeforeMount, onUpdated } from \"vue\"
 import { useStore } from \"vuex\"
 
@@ -19,54 +19,65 @@ import { useStore } from \"vuex\"
 export function {$camel}Factory(): ${studly}Bloc {
     const module = '${camel}'
     const store: any = useStore()
-    const ${camel} = ref([])
+    const api = ${camel}Api
+    const context = ref([])
 
     onBeforeMount(() => {
-        store.dispatch(`\${module}/init`)
+        // check module authorization
+
+        // store.dispatch(`\${module}/init`)
         // console.log(store.get('${camel}'))
-        ${camel}.value = store.state.${camel}.all
+        // context.value = store.state.${camel}.all
     })
 
-    function init(): void {
-        store.dispatch(`\${module}/init`)
+    async function get{$studly->plural()}() : Promise<[$studly]> {
+        let response = await api.all()
+        return response.data.data;
+        // return store.state.all
     }
 
-    function all(): [$studly] {
-        return store.state.all
+    async function get{$studly}(id: number): Promise<$studly> {
+        let response = await api.first(id)
+        return response.data;
+        // return store.getters.module.first(id)
     }
 
-    function first(id: number): $studly {
-        return store.getters.module.first(id)
+    async function create{$studly}(${camel}: $studly): Promise<$studly> {
+        let response = await api.create(${camel})
+        return response.data.data;
+        // store.dispatch(`\${module}/create`, ${camel})
+        // return store.getters.module.first(id)
     }
 
-    function create(${camel}: $studly): void {
-        store.dispatch(`\${module}/create`, ${camel})
-    }
-
-    function update(id: number, request: $studly): void {
-        ${camel}.value.forEach((${camel}: $studly) => {
-            if (${camel}.id === id) {
-                // ${camel}.name = request.name
-                store.dispatch(`\${module}/update`, { id, request })
-            }
-        })
+    async function update{$studly}(${camel}: $studly): Promise<$studly> {
+        let response = await api.edit(${camel}.id, ${camel})
+        return response.data.data;
+        // store.dispatch(`\${module}/create`, ${camel})
+        // return store.getters.module.first(id)
+        // context.value.forEach((${camel}: ${studly}) => {
+        //     if (${camel}.id === id) {
+        //         // ${camel}.name = request.name
+        //         store.dispatch(`\${module}/update`, { id, request })
+        //     }
+        // })
     }
 
     // FIXME: not working
-    function destroy(id: number): void {
-        // let ${camel} = ${camel}.value.filter((${camel}: $studly) => ${camel}.id === id)
-        store.dispatch(`\${module}/destroy`, id)
+    async function destroy{$studly}(id: number): Promise<void> {
+        // let ${camel} = ${camel}.value.filter((${camel}: ${studly}) => ${camel}.id === id)
+        let response = await api.destroy(id)
+        return response.data.data;
+        // store.dispatch(`\${module}/destroy`, id)
     }
 
     return {
-        state: store.state.${camel},
-        init,
-        all,
-        first,
-        create,
-        update,
-        destroy,
-        ${camel},
+        store,
+        api,
+        get{$studly->plural()},
+        get{$studly},
+        create{$studly},
+        update{$studly},
+        destroy{$studly},
     }
 
 }

@@ -30,17 +30,16 @@ class CrudIndexVueGenerator
         try {
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Vue Index for Table $table ...");
-                $name = Str::of($table);
+                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
                 // $data['context'] = $this->context;
-                // $data['table'] = $table;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
                 $data['table'] =  $name;
-                $data['title'] =  Str::title(str_replace('_', ' ', $table));
-                $data['kebabTitle'] =  $name->studly()->kebab();
+                $data['title'] =  $name->replace('_', ' ')->title();
+                $data['slug'] =  $name->slug();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
@@ -53,7 +52,7 @@ class CrudIndexVueGenerator
                 );
 
                 $stub->render();
-                $this->context->info("Vue Index for Table $name Created.");
+                $this->context->info("Vue Index for Table $table Created.");
             }
         } catch (\Throwable $th) {
             throw $th;

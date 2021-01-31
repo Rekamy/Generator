@@ -24,8 +24,8 @@ export default class CreateCharges extends Vue {
     offence:any = []
 
     created() {
-        this.departmentBloc.init(),
-        this.districtBloc.init(),
+        // this.departmentBloc.init(),
+        // this.districtBloc.init(),
 
         axios.get(this.departmentURL).then(response => {
             if(response.data.success)

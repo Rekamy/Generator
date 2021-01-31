@@ -11,13 +11,13 @@
                 <h3 class=\"mb-0\">$title</h3>
               </div>
               <div class=\"col text-right\">
-                <router-link to=\"/crud/$kebabTitle/create\" class=\"btn btn-sm btn-primary\">New $title</router-link>
+                <router-link to=\"/crud/$slug/create\" class=\"btn btn-sm btn-primary\">New $title</router-link>
               </div>
             </div>
           </div>
           <div class=\"table-responsive\">
             <!-- Projects table -->
-            <DataTable class=\"table align-items-center table-flush\" :events=\"events\" :options=\"options\" id=\"$kebabTitle-list\">
+            <DataTable class=\"table align-items-center table-flush\" :events=\"events\" :options=\"options\" id=\"$slug-list\">
               <thead class=\"thead-light\">
                 <tr>\n" ?>
 <?php

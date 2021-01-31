@@ -30,15 +30,7 @@ class VueRouteGenerator
         try {
             $data['routes'] = [];
             foreach ($this->tables as $key => $table) {
-                $route = [
-                    'name' => 'crud.' . $table,
-                    'table' => $table,
-                    'title' => Str::of($table)->replace('_', ' ')->title(),
-                    'path' => '/crud/' . Str::of($table)->studly()->kebab(),
-                ];
-                // dd($route);
-                
-                $data['routes'][] = $route;
+                $data['routes'][] = Str::of($table)->singular();
             }
 
             $view = view('frontend::route', $data);

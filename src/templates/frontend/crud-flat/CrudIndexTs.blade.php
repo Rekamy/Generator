@@ -1,26 +1,26 @@
 <?=
 
 "
-import { Vue } from \"vue-class-component\";
+import { Vue, setup } from \"vue-class-component\";
 import Swal from \"sweetalert2\";
-import { $studly, {$camel->singular()}Api } from \"@/modules/{$table->singular()}\";
+import { $studly, {$studly->singular()}Bloc, {$camel}Factory } from \"@/modules/{$table->singular()}\";
 
 export default class Charges extends Vue {
     Swal!: typeof Swal
     
+    {$camel->singular()}Bloc: {$studly->singular()}Bloc = setup(() => {$camel}Factory())
+    {$camel->plural()}: object[] = []
     options: object = {}
-    $camel: object[] = []
     events: object[] = []
-    api: any = {$camel->singular()}Api
 
     mounted() {
         this.builDataTable()
     }
+
     async builDataTable() {
-        let response = await {$camel->singular()}Api.get$studly()
-        this.$camel = response.data.data
+        this.{$camel->plural()} = await this.{$camel->singular()}Bloc.get{$studly->plural()}()
         this.options = {
-            data: this.$camel,
+            data: this.{$camel->plural()},
             columns: [\n" ?><?php
             foreach ($columns as $column) :
                 echo "\t\t\t\t{ data: '" . $column->getName() . "' },\n";
@@ -66,15 +66,15 @@ export default class Charges extends Vue {
         ]
     }
 
-    viewData(value: any) {
-        this.\$router.push('/crud/$slug/view');
+    viewData(id: any) {
+        this.\$router.push(`/crud/$slug/\${id}`);
     }
 
-    editData(value: any) {
-        this.\$router.push('/crud/$slug/edit');
+    editData(id: any) {
+        this.\$router.push(`/crud/$slug/\${id}/edit`);
     }
 
-    deleteData(value: any) {
+    deleteData(id: any) {
         this.Swal.fire({
             title: 'Are you sure?',
             text: \"You won't be able to revert this!\",
@@ -84,9 +84,9 @@ export default class Charges extends Vue {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, Proceed it!'
         }).then((result) => {
-            // if (result.isConfirmed) {
-
-            // }
+            if (result.isConfirmed) {
+                this.Swal.fire('Deleted', '', 'success');
+            }
         })
     }
 }

@@ -31,21 +31,21 @@ class CrudIndexTSGenerator
             foreach ($this->tables as $table) {
                 $this->context->info("Creating TS Index for Table $table ...");
                 
-                $name = Str::of($table);
+                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
                 $data['context'] = $this->context;
                 $data['table'] = $name;
-                $data['title'] =  $name->singular()->title();
-                $data['camel'] = $name->singular()->camel();
+                $data['title'] =  $name->title();
+                $data['camel'] = $name->camel();
                 $data['slug'] =  $name->slug();
-                $data['studly'] =  $name->singular()->studly();
+                $data['studly'] =  $name->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
-                $data['className'] = $name->singular()->studly() . "Bloc";
-                $data['repoName'] = $name->singular()->studly() . "Repository";
-                $data['requestName'] = $name->singular()->studly() . "Request";
+                $data['className'] = $name->studly() . "Bloc";
+                $data['repoName'] = $name->studly() . "Repository";
+                $data['requestName'] = $name->studly() . "Request";
 
                 $view = view('frontend::crud-flat/CrudIndexTS', $data);
 

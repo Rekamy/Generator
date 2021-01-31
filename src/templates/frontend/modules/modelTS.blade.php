@@ -28,37 +28,33 @@ export class ${studly} {
  * ```
  */
 export type ${studly}Bloc = {
-    state: any
+    store: any
+    api: any
+
     /**
-     * Get data from storage
+     * Get all ${camel} 
      */
-    init: () => void
+    get{$studly->plural()}: () => Promise<[${studly}]>
 
     /**
      * Get ${camel} by id
      */
-    all: () => [${studly}]
-
-    /**
-     * Get ${camel} by id
-     */
-    first: (id: number) => ${studly}
+    get{$studly}: (id: number) => Promise<${studly}>
 
     /**
      * Create new ${camel} and sync to storage
      */
-    create: (${camel}: ${studly}) => void
+    create{$studly}: (${camel}: ${studly}) => Promise<${studly}>
 
     /**
      * update specified ${camel} and sync to storage
      */
-    update: (id: number, request: ${studly}) => void
+    update{$studly}: (${camel}: ${studly}) => Promise<${studly}>
 
     /**
      * destroy specified ${camel} and sync to storage
      */
-    destroy: (id: number) => void
-    ${camel}: any
+    destroy{$studly}: (id: number) => Promise<void>
 }
 
 
