@@ -1,12 +1,13 @@
 <?= "
 import { api } from '@/services/api';
-import { {$studly->singular()} } from './index';
+import { {$studly} } from './index';
 
-export class {$studly->singular()}Api {
+export class {$studly}Api {
     private BASE_URL: string;
 
+    
     constructor() {
-        this.BASE_URL = \"/{$table->singular()}\";
+        this.BASE_URL = \"/{$slug}\";
     }
 
     async all(): Promise<any> {
@@ -31,6 +32,6 @@ export class {$studly->singular()}Api {
 
 }
 
-const {$camel->singular()}Api = new {$studly->singular()}Api();
-export { {$camel->singular()}Api };
+const {$camel}Api = new {$studly}Api();
+export { {$camel}Api };
 " 

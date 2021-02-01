@@ -51,7 +51,7 @@ class RuleParser
     public static function parseType($type)
     {
         switch (true) {
-            case Str::contains($type, ['bigint', 'varchar']):
+            case Str::contains($type, ['bigint', 'varchar','text']):
                 $rule = 'string';
                 break;
             case Str::contains($type, ['int', 'smallint']):

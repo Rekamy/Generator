@@ -9,7 +9,7 @@ export default class CreateCharges extends Vue {
     $camel = new $studly
 
     async save() {
-        await this.{$camel}Bloc.create{$studly}({$camel});
+        await this.{$camel}Bloc.create{$studly}(this.{$camel});
     }
 }
 

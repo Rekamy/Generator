@@ -6,10 +6,19 @@ export interface I${studly} {
 }
 
 export class ${studly} {
-    public id!: number;
-    public name!: string;
-    public description!: string;
-    public status!: string;
+    public id!: number;\n"?><?php
+    foreach ($columns as $column) {
+    $name = Str::of($column->getName());
+    echo "\tpublic {$name->camel()}!: string;\n";
+    }
+    ?>
+    <?=
+    " 
+
+    // public id!: number;
+    // public name!: string;
+    // public description!: string;
+    // public status!: string;
 }
 
 /**

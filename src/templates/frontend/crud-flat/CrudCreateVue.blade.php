@@ -38,6 +38,6 @@
     </div>
 </template>
 
-<script lang=\"ts\" src=\"./edit.ts\"></script>
+<script lang=\"ts\" src=\"./create.ts\"></script>
 "
 ?>

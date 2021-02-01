@@ -69,7 +69,7 @@ const mutations = {
     update(state: any, payload: { id: number, request: $studly }) {
 
         state.all.map((${camel}: any) => {
-            if (${camel}.id === payload.id) ${camel}.name = payload.request.name
+            // if (${camel}.id === payload.id) ${camel}.name = payload.request.name
             return ${camel}
         })
     },
