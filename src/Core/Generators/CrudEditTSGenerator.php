@@ -32,11 +32,11 @@ class CrudEditTSGenerator
                 $this->context->info("Creating TS Edit for Table $table ...");
 
                 $data['context'] = $this->context;
-                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+                $name = Str::of($table)->singular();
                 $data['table'] = $name;
                 $data['title'] =  $name->title();
-                $data['camelId'] = $name->camel();
-                $data['slugId'] =  $name->slug();
+                $data['camel'] = $name->camel();
+                $data['slug'] =  $name->slug();
                 $data['studly'] =  $name->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([

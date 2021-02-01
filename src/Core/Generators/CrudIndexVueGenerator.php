@@ -30,7 +30,7 @@ class CrudIndexVueGenerator
         try {
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Vue Index for Table $table ...");
-                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+                $name = Str::of($table)->singular();
                 // $data['context'] = $this->context;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([

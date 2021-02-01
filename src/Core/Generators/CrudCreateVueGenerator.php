@@ -32,15 +32,16 @@ class CrudCreateVueGenerator
                 $this->context->info("Creating Vue Create for Table $table ...");
 
                 // $data['context'] = $this->context;
-                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+                $name = Str::of($table)->singular();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
                 $data['table'] =  $name;
+                $data['camel'] =  $name->camel();
                 $data['title'] =  $name->replace('_', ' ')->title();
-                $data['kebabTitle'] =  $name->studly()->kebab();
+                $data['slug'] =  $name->slug();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 

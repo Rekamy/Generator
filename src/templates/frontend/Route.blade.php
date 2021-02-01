@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 const crudRoutes: Array<RouteRecordRaw> = [
 @foreach ($routes as $name)
     {
-        path: '/crud/{{ $name }}',
+        path: '/crud/{{ $name->slug() }}',
         name: 'crud.{{ $name }}',
         meta: { layout: "main", requiresAuth: true, breadcrumb: '{{ $name->replace('_', ' ')->title() }}' },
         component: () => import(/* webpackChunkName: "crud.{{ $name }}" */ '@/views/crud/{{ $name }}/base.vue'),

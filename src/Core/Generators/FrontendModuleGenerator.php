@@ -46,7 +46,7 @@ class FrontendModuleGenerator
         $this->context->info("Creating Api for table $table ...");
 
         $data['context'] = $this->context;
-        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+        $name = Str::of($table)->singular();
         $data['table'] = $name;
         $data['title'] =  $name->title();
         $data['camel'] = $name->camel();
@@ -76,7 +76,7 @@ class FrontendModuleGenerator
         $this->context->info("Creating Bloc for table $table ...");
 
         $data['context'] = $this->context;
-        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+        $name = Str::of($table)->singular();
         $data['table'] = $name;
         $data['title'] =  $name->title();
         $data['camel'] = $name->camel();
@@ -106,7 +106,7 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module Model for table $table ...");
 
         $data['context'] = $this->context;
-        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+        $name = Str::of($table)->singular();
         $data['table'] = $name;
         $data['title'] =  $name->title();
         $data['camel'] = $name->camel();
@@ -136,7 +136,7 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module Store for table $table ...");
 
         $data['context'] = $this->context;
-        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+        $name = Str::of($table)->singular();
         $data['table'] = $name;
         $data['title'] =  $name->title();
         $data['camel'] = $name->camel();
@@ -166,7 +166,7 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module Index for table $table ...");
 
         $data['context'] = $this->context;
-        $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+        $name = Str::of($table)->singular();
         $data['table'] = $name;
         $data['title'] =  $name->title();
         $data['camel'] = $name->camel();

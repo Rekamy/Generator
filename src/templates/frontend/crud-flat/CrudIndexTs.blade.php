@@ -3,14 +3,14 @@
 "
 import { Vue, setup } from \"vue-class-component\";
 import Swal from \"sweetalert2\";
-import { $studly, {$studly->singular()}Bloc, {$camel}Factory } from \"@/modules/{$table->singular()}\";
+import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
 
 export default class Charges extends Vue {
     Swal!: typeof Swal
     
-    {$camel->singular()}Bloc: {$studly->singular()}Bloc = setup(() => {$camel}Factory())
+    {$camel}Bloc = setup(() => {$camel}Factory())
     {$camel->plural()}: object[] = []
-    options: object = {}
+    options = {}
     events: object[] = []
 
     mounted() {
@@ -18,7 +18,7 @@ export default class Charges extends Vue {
     }
 
     async builDataTable() {
-        this.{$camel->plural()} = await this.{$camel->singular()}Bloc.get{$studly->plural()}()
+        this.{$camel->plural()} = await this.{$camel}Bloc.get{$studly->plural()}()
         this.options = {
             data: this.{$camel->plural()},
             columns: [\n" ?><?php

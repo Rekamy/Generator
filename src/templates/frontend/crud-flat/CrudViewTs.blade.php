@@ -2,16 +2,15 @@
 
 "
 import { Vue, setup } from 'vue-class-component';
-import { $studly, {$studly}Bloc, {$camel}Factory } from \"@/modules/{$table->singular()}\";
+import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
 
-export default class ViewDepartment extends Vue {
-    {$camel}Bloc: {$studly}Bloc = setup(() => {$camel}Factory())
-    $camel!: $studly
+export default class View{$studly} extends Vue {
+    {$camel}Bloc = setup(() => {$camel}Factory())
+    $camel = new $studly
 
     async created() {
-        console.log(this.\$route);
-        let id = +this.\$route.params.id;
-        this.$camel = await this.{$camel}Bloc.get{$studly}(id);
+        this.{$camel}.id = +this.\$route.params.id;
+        this.{$camel} = await this.{$camel}Bloc.get{$studly}(this.{$camel}.id);
     }
 }
 "

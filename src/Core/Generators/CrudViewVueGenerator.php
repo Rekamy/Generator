@@ -33,7 +33,7 @@ class CrudViewVueGenerator
 
                 // $data['context'] = $this->context;
                 // $data['table'] = $table;
-                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+                $name = Str::of($table)->singular();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',

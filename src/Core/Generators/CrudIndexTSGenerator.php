@@ -31,7 +31,7 @@ class CrudIndexTSGenerator
             foreach ($this->tables as $table) {
                 $this->context->info("Creating TS Index for Table $table ...");
                 
-                $name = strlen($table) > 3 ? Str::of($table)->singular()  :  Str::of($table);
+                $name = Str::of($table)->singular();
                 $data['context'] = $this->context;
                 $data['table'] = $name;
                 $data['title'] =  $name->title();
