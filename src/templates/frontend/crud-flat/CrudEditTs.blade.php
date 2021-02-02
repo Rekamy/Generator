@@ -13,9 +13,9 @@ export default class Edit{$studly} extends Vue {
     }
 
     async save() {
+        this.{$camel}._method = \"PUT\";
         this.$camel = await this.{$camel}Bloc.update{$studly}(this.{$camel});
-    }
-    
+    }   
 }
 
 "

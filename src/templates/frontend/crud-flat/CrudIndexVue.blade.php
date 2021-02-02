@@ -22,7 +22,8 @@
                 <tr>\n" ?>
 <?php
   foreach($columns as $column):
-    $name = Str::title(str_replace('_', ' ', $column->getName()));
+    $name = Str::of($column->getName());
+
     echo "\t\t\t\t\t<th scope=\"col\">$name</th>\n";
   endforeach;
   echo "\t\t\t\t\t<th scope=\"col\">Action</th>\n";
