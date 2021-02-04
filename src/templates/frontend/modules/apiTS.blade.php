@@ -23,7 +23,7 @@ export class {$studly}Api {
     }
 
     async edit(id: number, data: any): Promise<any> {
-        return await api.post<any>(`\${this.BASE_URL}/\${id}`, data, true);
+        return await api.put<any>(`\${this.BASE_URL}/\${id}`, data, true);
     }
 
     async destroy(id: number): Promise<any> {
@@ -34,4 +34,4 @@ export class {$studly}Api {
 
 const {$camel}Api = new {$studly}Api();
 export { {$camel}Api };
-" 
+"
