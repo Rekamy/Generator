@@ -45,7 +45,7 @@ trait CrudableRepository
     public function storeAction(\$input)
     {
         if (!\$result = \$this->create(\$input))
-            throw new Exception('Error Processing Request', 405);
+            throw new Exception('Error Processing Request', 422);
 
         return \$result;
     }
@@ -53,7 +53,7 @@ trait CrudableRepository
     public function showAction(\$id)
     {
         if (!\$result = \$this->find(\$id))
-            throw new Exception('Error Processing Request', 405);
+            throw new Exception('Error Processing Request', 422);
 
         return \$result;
     }
@@ -61,7 +61,7 @@ trait CrudableRepository
     public function updateAction(\$id, \$input)
     {
         if (!\$result = \$this->update(\$input, \$id))
-            throw new Exception('Error Processing Request', 405);
+            throw new Exception('Error Processing Request', 422);
 
         return \$result;
     }
@@ -69,7 +69,7 @@ trait CrudableRepository
     public function destroyAction(\$id)
     {
         if (!\$result = \$this->delete(\$id))
-            throw new Exception('Error Processing Request', 405);
+            throw new Exception('Error Processing Request', 422);
 
         return \$result;
     }

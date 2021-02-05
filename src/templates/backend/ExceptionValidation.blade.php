@@ -36,7 +36,6 @@ class ValidationException extends Exception
     public function toResponse()
     {
         return response()->json([
-            'success' => false,
             'message' => \$this->getMessage(),
             'data' => \$this->validation->errors()
         ], 422);
