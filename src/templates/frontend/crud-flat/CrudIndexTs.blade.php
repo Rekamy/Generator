@@ -67,13 +67,12 @@ export default class {$studly}Page extends Vue {
         widget.alertDelete().then(async (result) => {
             try {
                 if (!result.isConfirmed) {
-                    widget.alertSuccess('Deletion abort. Your data is save.')
+                    widget.alertSuccess('Deletion abort.', 'Your data is save.')
                     return;
                 }
                 let message = await this.{$camel}Bloc.destroy{$studly}(data.id);
-                this.builDataTable();
-                console.log(message);
                 widget.alertSuccess('Good Job!', 'Your data has been deleted.');
+                this.builDataTable();
             } catch (error) {
                 widget.alertError(error);
             }
