@@ -31,11 +31,13 @@ class RequestGenerator
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Request for table $table ...");
 
+                $name = Str::of($table);
                 $data['context'] = $this->context;
-                $data['table'] = $table;
+                $data['table'] = $name;
+                $data['model'] = $name->singular()->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
-                $data['className'] = Str::of($table)->singular()->studly() . "Request";
-                $data['blocName'] = Str::of($table)->singular()->studly() . "Bloc";
+                $data['className'] = $name->singular()->studly() . "Request";
+                $data['blocName'] = $name->singular()->studly() . "Bloc";
 
                 $view = view('backend::Request', $data);
 
@@ -48,7 +50,6 @@ class RequestGenerator
                 $stub->render();
                 $this->context->info("Request Created.");
             }
-
         } catch (\Throwable $th) {
             throw $th;
         }

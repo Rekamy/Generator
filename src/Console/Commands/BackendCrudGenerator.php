@@ -55,7 +55,7 @@ class BackendCrudGenerator extends Command
     {
         $this->loadConfig();
         $this->generate();
-        for ($i=0; $i < 10; $i++) { 
+        for ($i = 0; $i < 10; $i++) {
             # code...
         }
     }
@@ -68,6 +68,7 @@ class BackendCrudGenerator extends Command
             'repository' => RepositoryGenerator::class,
             'controller' => ControllerGenerator::class,
             'request' => RequestGenerator::class,
+            // 'exception_validation' => ExceptionValidationGenerator::class,
 
             // TODO: Crud Route Service Provider 
             'apiDoc' => APIDocGenerator::class,
@@ -88,6 +89,7 @@ class BackendCrudGenerator extends Command
             'crud_repository_interface' => CrudRepositoryInterfaceGenerator::class,
             'crud_bloc_Interface' => CrudBlocInterfaceGenerator::class,
             'request_interface' => CrudRequestInterfaceGenerator::class,
+
         ];
 
         foreach ($generators as $class) {

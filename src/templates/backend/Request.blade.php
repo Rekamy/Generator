@@ -12,7 +12,10 @@ use Validator;
 
 class $className extends FormRequest implements CrudRequestInterface
 {
-    
+    public function model() {
+        return $model::class;
+    }
+
     public function validateIndex()
     {
         \$haveAccess = auth()->user()->can($blocName::permission('index'));
@@ -27,8 +30,8 @@ class $className extends FormRequest implements CrudRequestInterface
 
         // \$rules = [];
         // \$messages = [];
-        // \$validator = validator(request()->all(), \$rules, \$messages);
-        // if (\$validator->fails()) return response()->json(['errors' => \$validator->errors()]);
+        // $validation = validator(request()->all(), $rules, $messages);
+        // if ($validation->fails()) throw new \App\Exceptions\ValidationError($validation);
     }
 
     public function validateShow()
