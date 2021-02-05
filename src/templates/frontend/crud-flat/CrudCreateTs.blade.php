@@ -12,7 +12,7 @@ export default class Create{$studly}Page extends Vue {
         try {
             this.{$camel} = await this.{$camel}Bloc.create{$studly}(this.{$camel});
             widget.alertSuccess('Good Job!', 'You have successfully created a $title');
-            this.\$router.push(`/crud/department/\${this.{$camel}}`)
+            this.\$router.push(`/crud/{$camel}/\${this.{$camel}.id}`)
         } catch (error) {
             widget.alertError(error);
         }
