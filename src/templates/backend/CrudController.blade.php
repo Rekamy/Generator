@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Exceptions\ValidationException;
 
 class CrudController extends Controller
 {
@@ -30,11 +31,14 @@ class CrudController extends Controller
         DB::beginTransaction();
         try {
 
-            //\$this->baseBloc->request->validateStore();
+            \$this->baseBloc->request->validateStore();
             \$this->result = \$this->baseBloc->store(\$request->all());
 
             DB::commit();
             return \$this->success('Succesfull Insert Data', \$this->result);
+        } catch (ValidationException \$ex) {
+            DB::rollBack();
+            return \$ex->toResponse();
         } catch (\Throwable \$th) {
             DB::rollBack();
             return \$this->error(\$th, ['message' => '' . \$this->moduleName . ' not created']);

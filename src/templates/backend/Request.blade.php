@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Contracts\Requests\CrudRequestInterface;
-use Validator;
+use App\Exceptions\ValidationException;
 
 class $className extends FormRequest implements CrudRequestInterface
 {
@@ -24,14 +24,17 @@ class $className extends FormRequest implements CrudRequestInterface
 
     public function validateStore()
     {
-
+        /*
         \$haveAccess = auth()->user()->can($blocName::permission('create'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
-
-        // \$rules = [];
-        // \$messages = [];
-        // $validation = validator(request()->all(), $rules, $messages);
-        // if ($validation->fails()) throw new \App\Exceptions\ValidationError($validation);
+        */
+        
+        \$rules = [$rules
+        ];
+        
+        \$messages = [];
+        \$validation = validator(request()->all(), \$rules, \$messages);
+        if (\$validation->fails()) throw new ValidationException(\$validation);
     }
 
     public function validateShow()

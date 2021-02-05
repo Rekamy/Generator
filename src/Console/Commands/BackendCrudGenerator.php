@@ -23,6 +23,7 @@ use Rekamy\Generator\Core\Generators\{
     CrudControllerGenerator,
     CrudRepositoryInterfaceGenerator,
     CrudRequestInterfaceGenerator,
+    ExceptionValidationGenerator,
 };
 
 
@@ -55,9 +56,6 @@ class BackendCrudGenerator extends Command
     {
         $this->loadConfig();
         $this->generate();
-        for ($i = 0; $i < 10; $i++) {
-            # code...
-        }
     }
 
     public function generate()
@@ -68,7 +66,7 @@ class BackendCrudGenerator extends Command
             'repository' => RepositoryGenerator::class,
             'controller' => ControllerGenerator::class,
             'request' => RequestGenerator::class,
-            // 'exception_validation' => ExceptionValidationGenerator::class,
+            'exception_validation' => ExceptionValidationGenerator::class,
 
             // TODO: Crud Route Service Provider 
             'apiDoc' => APIDocGenerator::class,

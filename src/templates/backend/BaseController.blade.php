@@ -22,11 +22,9 @@ class Controller extends BaseController
     public function success(\$message ,\$data = null)
     {
         return response()->json([
-            'success' => true,
-            'code' => 200,
             'message' => \$message,
             'data' => \$data
-        ]);
+        ], 200);
     }
 
     private function httpErrorMessage()
@@ -38,10 +36,8 @@ class Controller extends BaseController
     {
         if (config(\"app.debug\")) {
             return response()->json([
-                'success' => false,
-                'code' => \$th->getCode(),
                 'message' => \$th->getMessage()
-            ]);
+            ], 500);
         }
         \$code = !empty(\$response['code']) ? \$response['code'] : \$th->getCode();
         if ( !in_array(\$code, \$this->httpErrorMessage()->keys()->toArray()) )
@@ -49,10 +45,8 @@ class Controller extends BaseController
 
         \$message = !empty(\$response['message']) ? \$response['message'] : \$this->httpErrorMessage()->get(\$code);
         return response()->json([
-            'success' => false,
-            'code' => \$code,
             'message' => \$message
-        ]);
+        ], \$code);
     }
 
     public function apiDoc() {

@@ -34,6 +34,7 @@ class RequestGenerator
                 $name = Str::of($table);
                 $data['context'] = $this->context;
                 $data['table'] = $name;
+                $data['rules'] = $this->drawRules($table);
                 $data['model'] = $name->singular()->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
                 $data['className'] = $name->singular()->studly() . "Request";
@@ -53,5 +54,10 @@ class RequestGenerator
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    private function drawRules($table)
+    {
+        return "\n\t\t\t'name' => 'required|unique:departments'";
     }
 }
