@@ -170,10 +170,10 @@ return [
     'options' => [
 
         'frontend_path' => resource_path('frontend/'),
-        
+
         'backend_path' => base_path(),
 
-        'softDelete' => true,
+        'softDelete' => false,
 
         'relation' => true,
 
