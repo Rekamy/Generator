@@ -2,12 +2,11 @@
 
 "
 import { Vue, setup } from \"vue-class-component\";
-import Swal from \"sweetalert2\";
+import { widget } from \"@/core/components/widget\";
 import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
 import $ from \"jquery\";
 
-export default class Charges extends Vue {
-    Swal!: typeof Swal
+export default class {$studly}Page extends Vue {
     
     {$camel}Bloc = setup(() => {$camel}Factory())
     {$camel->plural()}: object[] = []
@@ -65,20 +64,18 @@ export default class Charges extends Vue {
     }
 
     async deleteData(data: any) {
-        this.Swal.fire({
-            title: 'Are you sure?',
-            text: \"You won't be able to revert this!\",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Proceed it!'
-        }).then(async (result) => {
-            if (result.isConfirmed) {
+        widget.alertDelete().then(async (result) => {
+            try {
+                if (!result.isConfirmed) {
+                    widget.alertSuccess('Deletion abort. Your data is save.')
+                    return;
+                }
                 let message = await this.{$camel}Bloc.destroy{$studly}(data.id);
                 this.builDataTable();
                 console.log(message);
-                this.Swal.fire('Deleted', '', 'success');
+                widget.alertSuccess('Good Job!', 'Your data has been deleted.');
+            } catch (error) {
+                widget.alertError(error);
             }
         })
     }

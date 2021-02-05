@@ -2,8 +2,9 @@
 "
 import { Vue, setup } from 'vue-class-component';
 import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
+import { widget } from \"@/core/components/widget\";
 
-export default class Edit{$studly} extends Vue {
+export default class Edit{$studly}Page extends Vue {
     {$camel}Bloc = setup(() => {$camel}Factory())
     $camel = new $studly
 
@@ -13,8 +14,13 @@ export default class Edit{$studly} extends Vue {
     }
 
     async save() {
-        this.{$camel}._method = \"PUT\";
-        this.$camel = await this.{$camel}Bloc.update{$studly}(this.{$camel});
+        try {
+            this.{$camel}._method = \"PUT\";
+            this.$camel = await this.{$camel}Bloc.update{$studly}(this.{$camel});
+            widget.alertSuccess('Good Job!', 'You have successfully edit this $title');
+        } catch (error) {
+            widget.alertError(error);
+        }
     }   
 }
 
