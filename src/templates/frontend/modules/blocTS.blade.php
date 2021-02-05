@@ -44,14 +44,14 @@ export function {$camel}Factory(): ${studly}Bloc {
 
     async function create{$studly}(${camel}: $studly): Promise<$studly> {
         let response = await api.create(${camel})
-        return response.data.data;
+        return response.data;
         // store.dispatch(`\${module}/create`, ${camel})
         // return store.getters.module.first(id)
     }
 
     async function update{$studly}(${camel}: $studly): Promise<$studly> {
         let response = await api.edit(${camel}.id, ${camel})
-        return response.data.data;
+        return response.data;
         // store.dispatch(`\${module}/create`, ${camel})
         // return store.getters.module.first(id)
         // context.value.forEach((${camel}: ${studly}) => {
@@ -66,7 +66,7 @@ export function {$camel}Factory(): ${studly}Bloc {
     async function destroy{$studly}(id: number): Promise<void> {
         // let ${camel} = ${camel}.value.filter((${camel}: ${studly}) => ${camel}.id === id)
         let response = await api.destroy(id)
-        return response.data.data;
+        return response.data;
         // store.dispatch(`\${module}/destroy`, id)
     }
 

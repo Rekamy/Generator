@@ -29,8 +29,8 @@
                             </div>
                             <hr class=\"my-4\" />
                             <div class=\"col text-right\">
-                                <button type=\"button\" @click=\"\$router.back()\" class=\"btn btn-primary\">Kemaskini</button>
-                                <button type=\"button\" @click=\"\$router.back()\" class=\"btn btn-default\">Kembali</button>
+                                <button type=\"button\" @click=\"\$router.replace('/crud/$slug/create')\" class=\"btn btn-primary\">Update</button>
+                                <button type=\"button\" @click=\"\$router.replace('/crud/$slug')\" class=\"btn btn-default\">Back</button>
                             </div>
                         </form>
                     </div>
