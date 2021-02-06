@@ -5,40 +5,50 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Validation\Validator;
+use Illuminate\Validation\ValidationException as BaseException;
 
-class ValidationException extends Exception
+class ValidationException extends BaseException
 {
-
     /**
-     * The underlying response instance.
+     * The message response to send to the client.
      *
-     * @var \Illuminate\Validation\Validator
+     * @var string|null
      */
-    protected Validator \$validation;
+    public \$message;
 
     /**
-     * Create a new HTTP response exception instance.
+     * Override Validation Exception instance.
      *
      * @param  \Illuminate\Validation\Validator  \$validator
      * @return void
      */
-    public function __construct(Validator \$validator)
+    public function __construct(Validator \$validator, string \$message = null)
     {
-        \$this->validation = \$validator;
-        \$this->message = \"Validation Failed. Please make sure you fill it in correctly.\";
+        parent::__construct(\$validator);
+
+        \$this->setMessage(\$message);
+
+        \$this->setResponse();
     }
 
     /**
-     * Cast error to json response result.
+     * Make json response result.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function toResponse()
+    public function setResponse()
     {
-        return response()->json([
+        \$this->response =  response()->json([
             'message' => \$this->getMessage(),
-            'data' => \$this->validation->errors()
+            'data' => \$this->validator->errors()->messages()
         ], 422);
+    }
+
+    public function setMessage(\$message)
+    {
+        \$message = 'Validation Failed. Please make sure you fill it in correctly.';
+
+        \$this->message = \$message ?? \$this->message;
     }
 }
 " ?>

@@ -18,6 +18,7 @@ class $className extends FormRequest implements CrudRequestInterface
 
     public function validateIndex()
     {
+        if (!auth()->check()) throw new \Exception(\"Unauthorized Access\", 401);
         \$haveAccess = auth()->user()->can($blocName::permission('index'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
     }

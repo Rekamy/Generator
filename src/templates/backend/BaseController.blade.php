@@ -2,6 +2,7 @@
 
 namespace " . $context->namespace['base_controller'] . ";
 
+use App\Exceptions\ValidationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,7 +20,7 @@ class Controller extends BaseController
         return collect(\$httpErrorCode->getConstants())->values()->toArray();
     }
 
-    public function success(\$message ,\$data = null)
+    public function success(\$message, \$data = null)
     {
         return response()->json([
             'message' => \$message,
@@ -34,11 +35,14 @@ class Controller extends BaseController
 
     public function error(\Throwable \$th, \$response = null)
     {
-        if (config(\"app.debug\")) {
-            return response()->json([
-                'message' => \$th->getMessage()
-            ], 500);
-        }
+        // if (config(\"app.debug\")) {
+        //     return response()->json([
+        //         'message' => \$th->getMessage()
+        //     ], 500);
+        // }
+
+        if (\$th instanceof ValidationException) return \$th->toResponse();
+
         \$code = !empty(\$response['code']) ? \$response['code'] : \$th->getCode();
         if ( !in_array(\$code, \$this->httpErrorMessage()->keys()->toArray()) )
             \$code = 500;
@@ -49,7 +53,8 @@ class Controller extends BaseController
         ], \$code);
     }
 
-    public function apiDoc() {
+    public function apiDoc()
+    {
         return redirect('/api/documentation');
     }
 }
