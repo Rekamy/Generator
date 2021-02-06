@@ -42,13 +42,13 @@ class Controller extends BaseController
         // }
 
         \$code = !empty(\$response['code']) ? \$response['code'] : \$th->getCode();
-        \$isHttpError = in_array(\$code, \$this->httpErrorMessage()->keys()->toArray())
+        \$isHttpError = in_array(\$code, \$this->httpErrorMessage()->keys()->toArray());
         if ( !\$isHttpError ) \$code = 500;
 
         \$message = !empty(\$response['message']) ? \$response['message'] : \$this->httpErrorMessage()->get(\$code);
         return response()->json([
-            'message' => \$message
-            'stack' => \$th
+            'message' => \$message,
+            // 'stack' => \$th
         ], \$code);
     }
 

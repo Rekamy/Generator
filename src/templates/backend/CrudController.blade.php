@@ -16,7 +16,7 @@ class CrudController extends Controller
     public function index(Request \$request)
     {
         try {
-            //\$this->baseBloc->request->validateIndex();
+            \$this->baseBloc->request->validateIndex();
             \$this->result = \$this->baseBloc->index(\$request->all());
 
 
@@ -38,7 +38,7 @@ class CrudController extends Controller
             return \$this->success('Succesfull Insert Data', \$this->result);
         } catch (ValidationException \$ex) {
             DB::rollBack();
-            return \$ex->toResponse();
+            return \$this->error(\$th);
         } catch (\Throwable \$th) {
             DB::rollBack();
             return \$this->error(\$th, ['message' => '' . \$this->moduleName . ' not created']);
