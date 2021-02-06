@@ -41,15 +41,14 @@ class Controller extends BaseController
         //     ], 500);
         // }
 
-        if (\$th instanceof ValidationException) return \$th->toResponse();
-
         \$code = !empty(\$response['code']) ? \$response['code'] : \$th->getCode();
-        if ( !in_array(\$code, \$this->httpErrorMessage()->keys()->toArray()) )
-            \$code = 500;
+        \$isHttpError = in_array(\$code, \$this->httpErrorMessage()->keys()->toArray())
+        if ( !\$isHttpError ) \$code = 500;
 
         \$message = !empty(\$response['message']) ? \$response['message'] : \$this->httpErrorMessage()->get(\$code);
         return response()->json([
             'message' => \$message
+            'stack' => \$th
         ], \$code);
     }
 
