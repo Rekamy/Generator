@@ -1,5 +1,4 @@
-Rekamy Generator
-================
+# Rekamy Generator
 
 <p>
 <a href="https://packagist.org/packages/rekamy/generator">
@@ -23,6 +22,7 @@ This Generator will generate a complete SPA (Vue JS) CRUD along with the Swagger
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [License](#license)
+
 </p></details>
 
 ## Installation
@@ -82,14 +82,18 @@ Update the configuration file based on your needs.
 ## Usage
 
 (Optional) Publish configuration :
+
 ```bash
 php artisan vendor:publish --tag="rekamygenerator"
 ```
 
 In order to run the generator after configuration, you can run it via :
+
 ```bash
 php artisan generate
 ```
+
+## Requirement
 
 ## Todo
 
