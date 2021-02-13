@@ -93,7 +93,6 @@ In order to run the generator after configuration, you can run it via :
 php artisan generate
 ```
 
-## Requirement
 
 ## Todo
 
