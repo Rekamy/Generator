@@ -74,7 +74,7 @@ class FrontendCrudGenerator extends Command
         $generators = [
             // 'baseVue' => BaseVueGenerator::class,
             // 'baseTs' => BaseTSGenerator::class,
-            
+
             'dashboard' => DashboardGenerator::class,
 
             'templateBase' => VueTemplateGenerator::class,
