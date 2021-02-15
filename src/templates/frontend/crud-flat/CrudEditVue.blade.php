@@ -8,11 +8,8 @@
                     <div class=\"card-header\">
                         <div class=\"row align-items-center\">
                             <div class=\"col-8\">
-                                <h3 class=\"mb-0\">Kertas Pertuduhan Edit</h3>
+                                <h3 class=\"mb-0\">{$title}</h3>
                             </div>
-                            <!-- <div class=\"col-4 text-right\">
-                  <a href=\"#!\" class=\"btn btn-sm btn-primary\">Settings</a>
-                </div> -->
                         </div>
                     </div>
                     <div class=\"card-body\">
@@ -32,7 +29,7 @@
                             </div>
                             <hr class=\"my-4\" />
                             <div class=\"col text-right\">
-                                <button type=\"button\" @click=\"save\" class=\"btn btn-primary\" v-permissions=\"['edit_department']\">Save</button>
+                                <button type=\"button\" @click=\"save\" class=\"btn btn-primary\">Save</button>
                                 <button type=\"button\" @click=\"\$router.back()\" class=\"btn btn-default\">Back</button>
                             </div>
                         </form>

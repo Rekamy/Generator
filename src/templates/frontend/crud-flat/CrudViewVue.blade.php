@@ -8,7 +8,7 @@
                     <div class=\"card-header\">
                         <div class=\"row align-items-center\">
                             <div class=\"col-8\">
-                                <h3 class=\"mb-0\">{$title} : 1</h3>
+                                <h3 class=\"mb-0\">{$title}</h3>
                             </div>
                         </div>
                     </div>
