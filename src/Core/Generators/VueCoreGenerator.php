@@ -146,16 +146,36 @@ class VueCoreGenerator
                 $data['routes'][] = Str::of($table)->singular();
             }
 
-            $view = view('frontend::Argon/template/src/core/plugins/datatable/indexTs');
+            $view = view('frontend::Argon/template/src/core/plugins/indexTs');
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
+                resource_path("frontend/src/core/plugins/index.ts")
+            );
+
+            $view2 = view('frontend::Argon/template/src/core/plugins/datatable/indexTs');
+
+            $stub2 = new StubGenerator(
+                $this->context,
+                $view2->render(),
                 resource_path("frontend/src/core/plugins/datatable/index.ts")
             );
 
+            $view3 = view('frontend::Argon/template/src/core/plugins/select2/indexTs');
+
+            $stub3 = new StubGenerator(
+                $this->context,
+                $view3->render(),
+                resource_path("frontend/src/core/plugins/select2/index.ts")
+            );
+
             $stub->render();
+            $stub2->render();
+            $stub3->render();
+
             $this->context->info("Datatable file Created.");
+            $this->context->info("Select2 file Created.");
             $this->generateServices();
         } catch (\Throwable $th) {
             throw $th;
