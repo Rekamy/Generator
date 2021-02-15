@@ -176,6 +176,50 @@ class VueCoreGenerator
 
             $this->context->info("Datatable file Created.");
             $this->context->info("Select2 file Created.");
+            $this->generatePluginsAssets();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function generatePluginsAssets()
+    {
+        try {
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
+
+            $view = view('frontend::Argon/template/src/core/plugins/assets/scss/core/alerts/_alert-dismissibleScss');
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/core/plugins/assets/scss/core/alerts/_alert-dismissible.scss")
+            );
+
+            // $view2 = view('frontend::Argon/template/src/core/plugins/datatable/indexTs');
+
+            // $stub2 = new StubGenerator(
+            //     $this->context,
+            //     $view2->render(),
+            //     resource_path("frontend/src/core/plugins/datatable/index.ts")
+            // );
+
+            // $view3 = view('frontend::Argon/template/src/core/plugins/select2/indexTs');
+
+            // $stub3 = new StubGenerator(
+            //     $this->context,
+            //     $view3->render(),
+            //     resource_path("frontend/src/core/plugins/select2/index.ts")
+            // );
+
+            $stub->render();
+            // $stub2->render();
+            // $stub3->render();
+
+            $this->context->info("Assets file Created.");
+            // $this->context->info("Select2 file Created.");
             $this->generateServices();
         } catch (\Throwable $th) {
             throw $th;
