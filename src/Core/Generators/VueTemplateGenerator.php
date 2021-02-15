@@ -17,34 +17,58 @@ class VueTemplateGenerator
 
     public function __construct($context)
     {
-        // $this->context = $context;
-        // $this->context->info("Creating Template file...");
-        // $this->tables = collect($this->context->db->listTableNames())
-        //     ->filter(function ($item) {
-        //         return !in_array($item, $this->context->excludeTables);
-        //     });
+        $this->context = $context;
+        $this->context->info("Creating Src base...");
+        $this->tables = collect($this->context->db->listTableNames())
+            ->filter(function ($item) {
+                return !in_array($item, $this->context->excludeTables);
+            });
     }
 
     public function generate()
     {
-        // try {
-        //     $data['routes'] = [];
-        //     foreach ($this->tables as $key => $table) {
-        //         $data['routes'][] = Str::of($table)->singular();
-        //     }
+        try {
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
 
-        //     $view = view('frontend::route', $data);
+            $view = view('frontend::Argon/template/src/appVue');
 
-        //     $stub = new StubGenerator(
-        //         $this->context,
-        //         $view->render(),
-        //         resource_path("frontend/src/router/crud.ts")
-        //     );
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/App.vue")
+            );
 
-        //     $stub->render();
-        //     $this->context->info("Route file Created.");
-        // } catch (\Throwable $th) {
-        //     throw $th;
-        // }
+            $stub->render();
+            $this->context->info("App.vue file Created.");
+            $this->generateMain();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function generateMain()
+    {
+        try {
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
+
+            $view = view('frontend::Argon/template/src/mainTs');
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/main.ts")
+            );
+
+            $stub->render();
+            $this->context->info("Main.ts file Created.");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
