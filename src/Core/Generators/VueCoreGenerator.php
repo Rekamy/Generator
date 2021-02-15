@@ -136,44 +136,26 @@ class VueCoreGenerator
         }
     }
 
-    // public function generatePlugins()
-    // {
-    //     try {
-    //         $data['routes'] = [];
-    //         foreach ($this->tables as $key => $table) {
-    //             $data['routes'][] = Str::of($table)->singular();
-    //         }
+    public function generatePlugins()
+    {
+        try {
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
 
-    //         $view = view('frontend::Argon/template/src/core/components/select2/builderTs');
+            $view = view('frontend::Argon/template/src/core/components/select2/builderTs');
 
-    //         $stub = new StubGenerator(
-    //             $this->context,
-    //             $view->render(),
-    //             resource_path("frontend/src/core/components/select2/builder.ts")
-    //         );
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/core/components/select2/builder.ts")
+            );
 
-    //         $view2 = view('frontend::Argon/template/src/core/components/select2/indexTs');
-
-    //         $stub2 = new StubGenerator(
-    //             $this->context,
-    //             $view2->render(),
-    //             resource_path("frontend/src/core/components/select2/index.ts")
-    //         );
-
-    //         $view3 = view('frontend::Argon/template/src/core/components/select2/templateVue');
-
-    //         $stub3 = new StubGenerator(
-    //             $this->context,
-    //             $view3->render(),
-    //             resource_path("frontend/src/core/components/select2/template.vue")
-    //         );
-
-    //         $stub->render();
-    //         $stub2->render();
-    //         $stub3->render();
-    //         $this->context->info("Select2 file Created.");
-    //     } catch (\Throwable $th) {
-    //         throw $th;
-    //     }
-    // }
+            $stub->render();
+            $this->context->info("Select2 file Created.");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
