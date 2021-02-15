@@ -24,8 +24,8 @@
 ?><?= "
                                 <div class=\"col-lg-6\">
                                     <div class=\"form-group\">
-                                        <label class=\"form-control-label\" for=\"input-id-jabatan\">{$name->studly()}</label>
-                                        <input type=\"text\" v-model=\"{$camel}.{$name}\" id=\"input-id-jabatan\" class=\"form-control\">
+                                        <label class=\"form-control-label\" for=\"edit-{$camel}-{$name}\">{$name->studly()}</label>
+                                        <input type=\"text\" v-model=\"{$camel}.{$name}\" id=\"edit-{$camel}-{$name}\" class=\"form-control\">
                                     </div>
                                 </div>" ?>
 <?php endforeach; ?><?= "
@@ -43,6 +43,6 @@
     </div>
 </template>
 
-<script lang=\"ts\" src=\"./edit.ts\"></script>
+<script scoped lang=\"ts\" src=\"./edit.ts\"></script>
 "
 ?>

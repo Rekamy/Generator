@@ -40,6 +40,8 @@ class DashboardGenerator
             $this->context->info("Installing dependency...");
             $command =  "cd $resources_path/frontend && npm i";
             exec($command);
+            $command =  "cd $resources_path/frontend && rm -rf .git";
+            exec($command);
         } catch (\Throwable $th) {
             throw $th;
         }
