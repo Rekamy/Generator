@@ -17,34 +17,76 @@ class VueConfigGenerator
 
     public function __construct($context)
     {
-        // $this->context = $context;
-        // $this->context->info("Creating Template file...");
-        // $this->tables = collect($this->context->db->listTableNames())
-        //     ->filter(function ($item) {
-        //         return !in_array($item, $this->context->excludeTables);
-        //     });
+        $this->context = $context;
+        $this->context->info("Creating Config file...");
+        $this->tables = collect($this->context->db->listTableNames())
+            ->filter(function ($item) {
+                return !in_array($item, $this->context->excludeTables);
+            });
     }
 
     public function generate()
     {
-        // try {
-        //     $data['routes'] = [];
-        //     foreach ($this->tables as $key => $table) {
-        //         $data['routes'][] = Str::of($table)->singular();
-        //     }
+        try {
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
 
-        //     $view = view('frontend::route', $data);
+            $view = view('frontend::Argon/template/src/config/environment/indexTs');
 
-        //     $stub = new StubGenerator(
-        //         $this->context,
-        //         $view->render(),
-        //         resource_path("frontend/src/router/crud.ts")
-        //     );
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/config/environment/index.ts")
+            );
 
-        //     $stub->render();
-        //     $this->context->info("Route file Created.");
-        // } catch (\Throwable $th) {
-        //     throw $th;
-        // }
+            $stub->render();
+            $this->context->info("Environment file Created.");
+            $this->generateTyping();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function generateTyping()
+    {
+        try {
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
+
+            $view = view('frontend::Argon/template/src/config/typings/tsshimsdTs');
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/config/typings/ts-shims.d.ts")
+            );
+
+            $view2 = view('frontend::Argon/template/src/config/typings/vueshimsdTs');
+
+            $stub2 = new StubGenerator(
+                $this->context,
+                $view2->render(),
+                resource_path("frontend/src/config/typings/vue-shims.d.ts")
+            );
+
+            $view3 = view('frontend::Argon/template/src/config/typings/vuexshimdTs');
+
+            $stub3 = new StubGenerator(
+                $this->context,
+                $view3->render(),
+                resource_path("frontend/src/config/typings/vuex-shim.d.ts")
+            );
+
+            $stub->render();
+            $stub2->render();
+            $stub3->render();
+            $this->context->info("Typings file Created.");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

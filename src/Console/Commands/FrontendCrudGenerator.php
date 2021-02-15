@@ -11,6 +11,8 @@ use Rekamy\Generator\Core\Generators\{
     VueRouteGenerator,
     VueTemplateGenerator,
     VueComponentGenerator,
+    VueConfigGenerator,
+    VueCoreGenerator,
     CrudBaseTSGenerator,
     CrudBaseVueGenerator,
     CrudIndexTSGenerator,
@@ -79,9 +81,9 @@ class FrontendCrudGenerator extends Command
 
             'components' => VueComponentGenerator::class,
 
-            // 'config' => VueConfigGenerator::class,
+            'config' => VueConfigGenerator::class,
 
-            // 'core' => VueCoreGenerator::class,
+            'core' => VueCoreGenerator::class,
 
             // 'route' => VueRouteGenerator::class,
 
