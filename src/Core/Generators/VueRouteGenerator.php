@@ -42,7 +42,7 @@ class VueRouteGenerator
             );
 
             $stub->render();
-            $this->context->info("Route file Created.");
+            $this->context->info("Crud Route file Created.");
         } catch (\Throwable $th) {
             throw $th;
         }

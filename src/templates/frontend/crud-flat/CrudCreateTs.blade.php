@@ -2,7 +2,7 @@
 "
 import { Vue, setup } from 'vue-class-component';
 import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
-import { widget } from \"@/core/components/widget\";
+import { widget } from \"@/core/utils/widget\";
 
 export default class Create{$studly}Page extends Vue {
     {$camel}Bloc = setup(() => {$camel}Factory())

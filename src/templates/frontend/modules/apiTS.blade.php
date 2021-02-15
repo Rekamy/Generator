@@ -1,5 +1,5 @@
 <?= "
-import { store } from '@/core/services/api';
+import { api } from '@/core/services/api';
 import { {$studly} } from './index';
 
 export class {$studly}Api {

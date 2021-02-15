@@ -28,11 +28,19 @@
     "authors": [
         {
             "name": "Firdaus Ishaddin",
-            "email": "firdausishaddin@gmail.com"
+            "email": "firdausishaddin@rekamy.com"
         },
         {
             "name": "Zahrin Azam",
-            "email": "zahrin.azam@gmail.com"
+            "email": "zahrin.azam@rekamy.com"
+        },
+        {
+            "name": "Shahrin Nidzam",
+            "email": "shahrin.nidzam@rekamy.com"
+        },
+        {
+            "name": "Razlan Razak",
+            "email": "razlanrzk@rekamy.com"
         }
     ],
     "autoload": {

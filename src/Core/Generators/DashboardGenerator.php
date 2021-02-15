@@ -28,169 +28,18 @@ class DashboardGenerator
     public function generate()
     {
         try {
-            $view = view('frontend::Argon/template/packageJson');
+            
+            $resources_path = resource_path();
+            if(is_dir($resources_path . "/frontend")) {
+                $this->context->info("Folder dashboard already exist. skip clone..");
+                return;
+            }
 
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/package.json")
-            );
-
-            $stub->render();
-            $this->context->info("Frontend file Created.");
-            $this->context->info("Package.json Created.");
-            $this->generateTsConfig();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateTsConfig()
-    {
-        try {
-            $view = view('frontend::Argon/template/tsconfigJson');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/tsconfig.json")
-            );
-
-            $stub->render();
-            $this->context->info("Tsconfig.json Created.");
-            $this->generateVueConfig();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateVueConfig()
-    {
-        try {
-            $view = view('frontend::Argon/template/vueconfigJs');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/vue.config.js")
-            );
-
-            $stub->render();
-            $this->context->info("Vueconfig.js Created.");
-            $this->generateBabel();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateBabel()
-    {
-        try {
-            $view = view('frontend::Argon/template/babelconfigJs');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/babel.config.js")
-            );
-
-            $stub->render();
-            $this->context->info("Babelconfig.js Created.");
-            $this->generateBrowserlistrc();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateBrowserlistrc()
-    {
-        try {
-            $view = view('frontend::Argon/template/browserlistrc');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/.browserslistrc")
-            );
-
-            $stub->render();
-            $this->context->info("Browserslistrc Created.");
-            $this->generateEnv();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateEnv()
-    {
-        try {
-            $view = view('frontend::Argon/template/env');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/.env")
-            );
-
-            $stub->render();
-            $this->context->info("Env Created.");
-            $this->generateEnvExample();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateEnvExample()
-    {
-        try {
-            $view = view('frontend::Argon/template/envExample');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/.env.example")
-            );
-
-            $stub->render();
-            $this->context->info("Env.Example Created.");
-            $this->generateGitIgnore();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateGitIgnore()
-    {
-        try {
-            $view = view('frontend::Argon/template/gitIgnore');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/.gitignore")
-            );
-
-            $stub->render();
-            $this->context->info("Gitignore Created.");
-            $this->generateReadMe();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
-    }
-
-    public function generateReadMe()
-    {
-        try {
-            $view = view('frontend::Argon/template/readmeMd');
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                resource_path("frontend/README.md")
-            );
-
-            $stub->render();
-            $this->context->info("README Created.");
+            $command =  "cd $resources_path && git clone git@gitlab.com:rekamy/packages/argon-template.git frontend";
+            exec($command);
+            $this->context->info("Installing dependency...");
+            $command =  "cd $resources_path/frontend && npm i";
+            exec($command);
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -9,10 +9,6 @@ use Rekamy\Generator\Core\Generators\{
     BaseTSGenerator,
     BaseVueGenerator,
     VueRouteGenerator,
-    VueTemplateGenerator,
-    VueComponentGenerator,
-    VueConfigGenerator,
-    VueCoreGenerator,
     CrudBaseTSGenerator,
     CrudBaseVueGenerator,
     CrudIndexTSGenerator,
@@ -76,14 +72,6 @@ class FrontendCrudGenerator extends Command
             // 'baseTs' => BaseTSGenerator::class,
 
             'dashboard' => DashboardGenerator::class,
-
-            'templateBase' => VueTemplateGenerator::class,
-
-            'components' => VueComponentGenerator::class,
-
-            'config' => VueConfigGenerator::class,
-
-            'core' => VueCoreGenerator::class,
 
             'route' => VueRouteGenerator::class,
 
