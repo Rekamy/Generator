@@ -131,6 +131,7 @@ class VueCoreGenerator
             $stub2->render();
             $stub3->render();
             $this->context->info("Select2 file Created.");
+            $this->generatePlugins();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -139,21 +140,137 @@ class VueCoreGenerator
     public function generatePlugins()
     {
         try {
+            $this->context->info("Plugins file Created.");
             $data['routes'] = [];
             foreach ($this->tables as $key => $table) {
                 $data['routes'][] = Str::of($table)->singular();
             }
 
-            $view = view('frontend::Argon/template/src/core/components/select2/builderTs');
+            $view = view('frontend::Argon/template/src/core/plugins/datatable/indexTs');
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                resource_path("frontend/src/core/components/select2/builder.ts")
+                resource_path("frontend/src/core/plugins/datatable/index.ts")
             );
 
             $stub->render();
-            $this->context->info("Select2 file Created.");
+            $this->context->info("Datatable file Created.");
+            $this->generateServices();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function generateServices()
+    {
+        try {
+            $this->context->info("Services file Created.");
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
+
+            $view = view('frontend::Argon/template/src/core/services/api/apiserviceTs');
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/core/services/api/api.service.ts")
+            );
+
+            $view2 = view('frontend::Argon/template/src/core/services/api/indexTs');
+
+            $stub2 = new StubGenerator(
+                $this->context,
+                $view2->render(),
+                resource_path("frontend/src/core/services/api/index.ts")
+            );
+
+            $view3 = view('frontend::Argon/template/src/core/services/store/indexTs');
+
+            $stub3 = new StubGenerator(
+                $this->context,
+                $view3->render(),
+                resource_path("frontend/src/core/services/store/index.ts")
+            );
+
+            $stub->render();
+            $stub2->render();
+            $stub3->render();
+            $this->context->info("Api file Created.");
+            $this->context->info("Store file Created.");
+            $this->generateUtils();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function generateUtils()
+    {
+        try {
+            $this->context->info("Utils file Created.");
+            $data['routes'] = [];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = Str::of($table)->singular();
+            }
+
+            $view = view('frontend::Argon/template/src/core/utils/helperTs');
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                resource_path("frontend/src/core/utils/helper.ts")
+            );
+
+            
+            $view2 = view('frontend::Argon/template/src/core/utils/indexTs');
+
+            $stub2 = new StubGenerator(
+                $this->context,
+                $view2->render(),
+                resource_path("frontend/src/core/utils/index.ts")
+            );
+
+            $view3 = view('frontend::Argon/template/src/core/utils/mainTs');
+
+            $stub3 = new StubGenerator(
+                $this->context,
+                $view3->render(),
+                resource_path("frontend/src/core/utils/main.ts")
+            );
+
+            $view4 = view('frontend::Argon/template/src/core/utils/storageTs');
+
+            $stub4 = new StubGenerator(
+                $this->context,
+                $view4->render(),
+                resource_path("frontend/src/core/utils/storage.ts")
+            );
+
+            $view5 = view('frontend::Argon/template/src/core/utils/validatorTs');
+
+            $stub5 = new StubGenerator(
+                $this->context,
+                $view5->render(),
+                resource_path("frontend/src/core/utils/validator.ts")
+            );
+
+            $view6 = view('frontend::Argon/template/src/core/utils/widgetTs');
+
+            $stub6 = new StubGenerator(
+                $this->context,
+                $view6->render(),
+                resource_path("frontend/src/core/utils/widget.ts")
+            );
+
+            $stub->render();
+            $stub2->render();
+            $stub3->render();
+            $stub4->render();
+            $stub5->render();
+            $stub6->render();
+            $this->context->info("Api file Created.");
         } catch (\Throwable $th) {
             throw $th;
         }
