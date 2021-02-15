@@ -28,6 +28,7 @@ class $className extends FormRequest implements CrudRequestInterface
     public function validateStore()
     {
         /*
+        if (!auth()->check()) throw new \Exception(\"Unauthorized Access\", 401);
         \$haveAccess = auth()->user()->can($blocName::permission('create'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
         
