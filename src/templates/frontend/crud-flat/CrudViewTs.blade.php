@@ -10,7 +10,7 @@ export default class View{$studly}Page extends Vue {
     $camel = new $studly
 
     async created() {
-        this.{$camel}.id = +this.\$route.params.id;
+        this.{$camel}.id = this.\$route.params.id;
         this.{$camel} = await this.{$camel}Bloc.get{$studly}(this.{$camel}.id);
     }
 

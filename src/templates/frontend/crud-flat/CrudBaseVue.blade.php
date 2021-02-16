@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script lang=\"ts\" src=\"./base.ts\"></script>
+<script scoped lang=\"ts\" src=\"./base.ts\"></script>
 
 "
 ?>

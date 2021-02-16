@@ -20,8 +20,8 @@
 ?><?= "
                             <div class=\"col-lg-6\">
                                 <div class=\"form-group\">
-                                    <label class=\"form-control-label\" for=\"input-id-jabatan\">{$name->studly()}</label>
-                                    <input type=\"text\" v-model=\"{$camel}.{$name}\" id=\"input-id-jabatan\" class=\"form-control\">
+                                    <label class=\"form-control-label\" for=\"create-{$camel}-{$name}\">{$name->studly()}</label>
+                                    <input type=\"text\" v-model=\"{$camel}.{$name}\" id=\"create-{$camel}-{$name}\" class=\"form-control\">
                                 </div>
                             </div>" ?>
 <?php endforeach; ?><?= "
@@ -38,6 +38,6 @@
     </div>
 </template>
 
-<script lang=\"ts\" src=\"./create.ts\"></script>
+<script scoped lang=\"ts\" src=\"./create.ts\"></script>
 "
 ?>

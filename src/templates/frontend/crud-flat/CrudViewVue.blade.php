@@ -8,7 +8,7 @@
                     <div class=\"card-header\">
                         <div class=\"row align-items-center\">
                             <div class=\"col-8\">
-                                <h3 class=\"mb-0\">{$title} : 1</h3>
+                                <h3 class=\"mb-0\">{$title}</h3>
                             </div>
                         </div>
                     </div>
@@ -21,8 +21,8 @@
 ?><?= "
                                 <div class=\"col-lg-6\">
                                     <div class=\"form-group\">
-                                        <label class=\"form-control-label\" for=\"input-id-jabatan\">{$name->studly()}</label>
-                                        <input type=\"text\" :value=\"{$camel}.{$name}\" id=\"input-id-jabatan\" class=\"form-control\" readonly>
+                                        <label class=\"form-control-label\" for=\"view-{$camel}-{$name}\">{$name->studly()}</label>
+                                        <input type=\"text\" :value=\"{$camel}.{$name}\" id=\"view-{$camel}-{$name}\" class=\"form-control\" readonly>
                                     </div>
                                 </div>" ?>
 <?php endforeach; ?><?= "
@@ -41,6 +41,6 @@
     </div>
 </template>
 
-<script lang=\"ts\" src=\"./view.ts\"></script>
+<script scoped lang=\"ts\" src=\"./view.ts\"></script>
 "
 ?>

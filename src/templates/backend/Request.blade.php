@@ -18,17 +18,19 @@ class $className extends FormRequest implements CrudRequestInterface
 
     public function validateIndex()
     {
+        /*
         if (!auth()->check()) throw new \Exception(\"Unauthorized Access\", 401);
         \$haveAccess = auth()->user()->can($blocName::permission('index'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
+        */
     }
 
     public function validateStore()
     {
         /*
+        if (!auth()->check()) throw new \Exception(\"Unauthorized Access\", 401);
         \$haveAccess = auth()->user()->can($blocName::permission('create'));
         if (!\$haveAccess) throw new \Exception(\"Unauthorized Processing Request\", 403);
-        */
         
         \$rules = [$rules
         ];
@@ -36,6 +38,7 @@ class $className extends FormRequest implements CrudRequestInterface
         \$messages = [];
         \$validation = validator(request()->all(), \$rules, \$messages);
         if (\$validation->fails()) throw new ValidationException(\$validation);
+        */
     }
 
     public function validateShow()
