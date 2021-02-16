@@ -32,7 +32,8 @@
                             </div>
                             <hr class=\"my-4\" />
                             <div class=\"col text-right\">
-                                <button type=\"button\" @click=\"save\" class=\"btn btn-primary\" v-permissions=\"['edit_department']\">Save</button>
+                                <button type=\"button\" @click=\"save\" class=\"btn btn-primary\">Save</button>
+                                <!-- <button type=\"button\" @click=\"save\" class=\"btn btn-primary\" v-permissions=\"['edit_department']\">Save</button> -->
                                 <button type=\"button\" @click=\"\$router.back()\" class=\"btn btn-default\">Back</button>
                             </div>
                         </form>

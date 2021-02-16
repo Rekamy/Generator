@@ -22,8 +22,12 @@ export class {$studly}Api {
         return await api.post<any>(this.BASE_URL, data, true);
     }
 
+    // async edit(id: any, data: any): Promise<any> {
+    //     return await api.put<any>(`\${this.BASE_URL}/\${id}`, data, true);
+    // }
+
     async edit(id: any, data: any): Promise<any> {
-        return await api.put<any>(`\${this.BASE_URL}/\${id}`, data, true);
+        return await api.post<any>(`\${this.BASE_URL}/\${id}`, data, true);
     }
 
     async destroy(id: any): Promise<any> {
