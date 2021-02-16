@@ -39,7 +39,7 @@
   </div>
 </template>
 
-<script lang=\"ts\" src=\"./index.ts\"></script>
+<script scoped lang=\"ts\" src=\"./index.ts\"></script>
 
 "
 ?>
