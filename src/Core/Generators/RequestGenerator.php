@@ -34,9 +34,9 @@ class RequestGenerator
                 $name = Str::of($table);
                 $data['context'] = $this->context;
                 $data['table'] = $name;
-                $data['rules'] = $this->drawRules($table);
                 $data['model'] = $name->singular()->studly();
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
+                $data['rules'] = $this->drawRules($data['columns']);
                 $data['className'] = $name->singular()->studly() . "Request";
                 $data['blocName'] = $name->singular()->studly() . "Bloc";
 
@@ -56,8 +56,24 @@ class RequestGenerator
         }
     }
 
-    private function drawRules($table)
+    private function drawRules($columns)
     {
-        return "\n\t\t\t'name' => 'required|unique:departments'";
+        $columns = collect($columns)->except([
+            'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by', 'status',
+        ]);
+        $rules = '';
+        foreach ($columns as $column) {
+            $name = $column->getName();
+            $ruleList = [];
+            $ruleList[] = $column->getType()->getName();
+            if ($column->getLength()) $ruleList[] = 'max:' . $column->getLength();
+            if ($column->getNotnull()) $ruleList[] = 'required';
+
+            $rule = implode("|", $ruleList);
+
+            $rules .= "\n\t\t\t'{$name}' => '{$rule}',";
+            # code...
+        }
+        return $rules;
     }
 }

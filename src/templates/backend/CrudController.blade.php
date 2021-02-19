@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 use DB;
-use App\Exceptions\ValidationException;
 
 class CrudController extends Controller
 {
@@ -22,7 +21,7 @@ class CrudController extends Controller
 
             return \$this->success('Succesfull Retrieved Data', \$this->result);
         } catch (\Throwable \$th) {
-            return \$this->error(\$th, ['message' => 'Error Processing ' . \$this->moduleName . ' Request']);
+            throw \$th;
         }
     }
 
@@ -36,12 +35,9 @@ class CrudController extends Controller
 
             DB::commit();
             return \$this->success('Succesfull Insert Data', \$this->result);
-        } catch (ValidationException \$ex) {
-            DB::rollBack();
-            return \$this->error(\$th);
         } catch (\Throwable \$th) {
             DB::rollBack();
-            return \$this->error(\$th, ['message' => '' . \$this->moduleName . ' not created']);
+            throw \$th;
         }
     }
 
@@ -54,7 +50,7 @@ class CrudController extends Controller
 
             return \$this->success('Succesfull Retrieved Data', \$this->result);
         } catch (\Throwable \$th) {
-            return \$this->error(\$th, ['message' => 'Unable to retrieved ' . \$this->moduleName . '']);
+            throw \$th;
         }
     }
 
@@ -69,7 +65,7 @@ class CrudController extends Controller
             return \$this->success('Succesfull Update Data', \$this->result);
         } catch (\Throwable \$th) {
             DB::rollback();
-            return \$this->error(\$th, ['message' => 'Unable to update ' . \$this->moduleName . '']);
+            throw \$th;
         }
     }
 
@@ -84,7 +80,7 @@ class CrudController extends Controller
             return \$this->success('Succesfull Delete Data', \$this->result);
         } catch (\Throwable \$th) {
             DB::rollback();
-            return \$this->error(\$th, ['message' => 'Unable to delete ' . \$this->moduleName . '']);
+            throw \$th;
         }
     }
 }
