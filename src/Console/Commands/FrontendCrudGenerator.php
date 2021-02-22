@@ -43,6 +43,8 @@ class FrontendCrudGenerator extends Command
 
     public $context;
     public $progressbar;
+    private $defaultIndex = 0;
+
 
     /**
      * Create a new command instance.
@@ -62,6 +64,7 @@ class FrontendCrudGenerator extends Command
     public function handle()
     {
         $this->loadConfig();
+        $this->template = $this->choice('Choose your template ?', ['Argon', 'Sparker', 'Robust'], $this->defaultIndex);
         $this->generate();
     }
 
@@ -75,23 +78,47 @@ class FrontendCrudGenerator extends Command
 
             'route' => VueRouteGenerator::class,
 
-            'crudBaseVue' => CrudBaseVueGenerator::class,
+            // 'crudBaseVue' => CrudBaseVueGenerator::class,
             'crudBaseTS' => CrudBaseTSGenerator::class,
 
-            'crudIndexVue' => CrudIndexVueGenerator::class,
+            // 'crudIndexVue' => CrudIndexVueGenerator::class,
             'crudIndexTS' => CrudIndexTSGenerator::class,
 
-            'crudCreateVue' => CrudCreateVueGenerator::class,
+            // 'crudCreateVue' => CrudCreateVueGenerator::class,
             'crudCreateTS' => CrudCreateTSGenerator::class,
 
-            'crudViewVue' => CrudViewVueGenerator::class,
+            // 'crudViewVue' => CrudViewVueGenerator::class,
             'crudViewTS' => CrudViewTSGenerator::class,
 
-            'crudEditVue' => CrudEditVueGenerator::class,
+            // 'crudEditVue' => CrudEditVueGenerator::class,
             'crudEditTS' => CrudEditTSGenerator::class,
 
             'frontendModule' => FrontendModuleGenerator::class,
         ];
+
+        switch ($this->template) {
+
+            case 'Argon':
+                $generators['crudBaseVue'] = CrudBaseVueGenerator::class;
+                $generators['crudIndexVue'] = CrudIndexVueGenerator::class;
+                $generators['crudCreateVue'] = CrudCreateVueGenerator::class;
+                $generators['crudViewVue'] = CrudViewVueGenerator::class;
+                $generators['crudEditVue'] = CrudEditVueGenerator::class;
+                break;
+
+            case 'Sparker':
+                dd("Tak buat lagi bro");
+                break;
+
+            case 'Robust':
+                dd("Tak buat lagi bro");
+                # code...
+                break;
+
+            default:
+                dd("Choose la");
+                break;
+        }
 
         foreach ($generators as $class) {
             $generator = new $class($this);
