@@ -30,11 +30,13 @@ class ControllerGenerator
         try {
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Controller for table $table ...");
-
+                $name = Str::of($table);
                 $data['context'] = $this->context;
-                $data['table'] = $table;
-                $data['className'] = Str::of($table)->singular()->studly() . "Controller";
-                $data['blocName'] = Str::of($table)->singular()->studly() . "Bloc";
+                $data['table'] = $name;
+                $data['slug'] = $name->slug();
+                $data['snake'] = $name->snake();
+                $data['className'] = $name->singular()->studly() . "Controller";
+                $data['blocName'] = $name->singular()->studly() . "Bloc";
 
                 $view = view('backend::Controller', $data);
 
@@ -47,7 +49,6 @@ class ControllerGenerator
                 $stub->render();
                 $this->context->info("Controller Created.");
             }
-
         } catch (\Throwable $th) {
             throw $th;
         }

@@ -58,6 +58,7 @@ class RequestGenerator
 
     private function drawRules($columns)
     {
+
         $columns = collect($columns)->except([
             'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by', 'status',
         ]);
@@ -65,7 +66,7 @@ class RequestGenerator
         foreach ($columns as $column) {
             $name = $column->getName();
             $ruleList = [];
-            $ruleList[] = $column->getType()->getName();
+            $ruleList[] = RuleParser::parseType($column->getType()->getName());
             if ($column->getLength()) $ruleList[] = 'max:' . $column->getLength();
             if ($column->getNotnull()) $ruleList[] = 'required';
 

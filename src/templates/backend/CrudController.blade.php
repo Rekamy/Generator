@@ -30,7 +30,7 @@ class CrudController extends Controller
         DB::beginTransaction();
         try {
 
-            // \$this->baseBloc->request->validateStore();
+            \$this->baseBloc->request->validateStore();
             \$this->result = \$this->baseBloc->store(\$request->all());
 
             DB::commit();
