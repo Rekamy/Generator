@@ -81,19 +81,19 @@ class FrontendCrudGenerator extends Command
 
             'services' => VueServicesStorage::class,
 
-            // 'crudBaseVue' => CrudBaseVueGenerator::class,
+            'crudBaseVue' => CrudBaseVueGenerator::class,
             'crudBaseTS' => CrudBaseTSGenerator::class,
 
-            // 'crudIndexVue' => CrudIndexVueGenerator::class,
+            'crudIndexVue' => CrudIndexVueGenerator::class,
             'crudIndexTS' => CrudIndexTSGenerator::class,
 
-            // 'crudCreateVue' => CrudCreateVueGenerator::class,
+            'crudCreateVue' => CrudCreateVueGenerator::class,
             'crudCreateTS' => CrudCreateTSGenerator::class,
 
-            // 'crudViewVue' => CrudViewVueGenerator::class,
+            'crudViewVue' => CrudViewVueGenerator::class,
             'crudViewTS' => CrudViewTSGenerator::class,
 
-            // 'crudEditVue' => CrudEditVueGenerator::class,
+            'crudEditVue' => CrudEditVueGenerator::class,
             'crudEditTS' => CrudEditTSGenerator::class,
 
             'frontendModule' => FrontendModuleGenerator::class,
