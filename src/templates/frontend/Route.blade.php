@@ -21,19 +21,28 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: ':id',
                 name: 'crud.{{ $name }}.view',
-                meta: { layout: "main", requiresAuth: true, parent: false, parentPath: 'crud/{{ $name->slug() }}', parentName: 'Client', breadcrumb: 'View' },
+                meta: { 
+                    layout: "main", requiresAuth: true, breadcrumb: '{{ $name->slug() }}',
+                    permissions: [Permissions.{{ $name }}_show]
+                    },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.view" */ '@/views/crud/{{ $name }}/view.vue'),
             },
             {
                 path: 'create',
                 name: 'crud.{{ $name }}.create',
-                meta: { layout: "main", requiresAuth: true, parent: false, parentPath: 'crud/{{ $name->slug() }}', parentName: 'Client', breadcrumb: 'Create' },
+                meta: { 
+                    layout: "main", requiresAuth: true, breadcrumb: '{{ $name->slug() }}',
+                    permissions: [Permissions.{{ $name }}_create]
+                    },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.create" */ '@/views/crud/{{ $name }}/create.vue'),
             },
             {
                 path: ':id/edit',
                 name: 'crud.{{ $name }}.edit',
-                meta: { layout: "main", requiresAuth: true, parent: false, parentPath: 'crud/{{ $name->slug() }}', parentName: 'Client', breadcrumb: 'Edit' },
+                meta: { 
+                    layout: "main", requiresAuth: true, breadcrumb: '{{ $name->slug() }}',
+                    permissions: [Permissions.{{ $name}}_update]
+                    },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.edit" */ '@/views/crud/{{ $name }}/edit.vue'),
             },
         ]
