@@ -1,4 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
+import { Roles, Permissions } from '@/modules/auth';
 
 const routes: Array<RouteRecordRaw> = [
 @foreach ($routes as $name)
@@ -11,7 +12,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '',
                 name: 'crud.{{ $name }}.index',
-                meta: { layout: "main", requiresAuth: true, parent: true, parentPath: '/crud/{{ $name->slug() }}', parentName: '{{ $name->replace('_', ' ')->title() }}', breadcrumb: '{{ $name->replace('_', ' ')->title() }}' },
+                meta: { 
+                    layout: "main", requiresAuth: true, breadcrumb: '{{ $name->replace('_', ' ')->title() }}',
+                    permissions: [Permissions.{{ $name }}_index] 
+                    },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.index" */ '@/views/crud/{{ $name }}/index.vue'),
             },
             {

@@ -35,13 +35,14 @@ class FrontendModuleGenerator
                 $this->generateModel($table);
                 $this->generateStore($table);
                 $this->generateIndex($table);
+                $this->generateAuth();
             }
         } catch (\Throwable $th) {
             throw $th;
         }
     }
 
-    private function generateApi($table) 
+    private function generateApi($table)
     {
         $this->context->info("Creating Api for table $table ...");
 
@@ -68,10 +69,9 @@ class FrontendModuleGenerator
 
         $stub->render();
         $this->context->info("Api for table $table created.");
-
     }
 
-    private function generateBloc($table) 
+    private function generateBloc($table)
     {
         $this->context->info("Creating Bloc for table $table ...");
 
@@ -98,10 +98,9 @@ class FrontendModuleGenerator
 
         $stub->render();
         $this->context->info("Bloc for table $table created.");
-
     }
 
-    private function generateModel($table) 
+    private function generateModel($table)
     {
         $this->context->info("Creating Frontend Module Model for table $table ...");
 
@@ -128,10 +127,9 @@ class FrontendModuleGenerator
 
         $stub->render();
         $this->context->info("Frontend Module Model for table $table created.");
-
     }
 
-    private function generateStore($table) 
+    private function generateStore($table)
     {
         $this->context->info("Creating Frontend Module Store for table $table ...");
 
@@ -158,10 +156,9 @@ class FrontendModuleGenerator
 
         $stub->render();
         $this->context->info("Frontend Module Store for table $table created.");
-
     }
 
-    private function generateIndex($table) 
+    private function generateIndex($table)
     {
         $this->context->info("Creating Frontend Module Index for table $table ...");
 
@@ -188,10 +185,9 @@ class FrontendModuleGenerator
 
         $stub->render();
         $this->context->info("Frontend Module Index for table $table created.");
-
     }
 
-    private function generateBaseIndex() 
+    private function generateBaseIndex()
     {
         $this->context->info("Creating Frontend Module Base Index ...");
 
@@ -210,7 +206,68 @@ class FrontendModuleGenerator
 
         $stub->render();
         $this->context->info("Frontend Module Base Index created.");
-
     }
 
+    private function generateAuth()
+    {
+        $this->context->info("Creating Frontend Module Auth ...");
+
+        foreach ($this->tables as $table) {
+            $data['modules'][] = Str::of($table)->singular();
+        }
+
+        $data['context'] = $this->context;
+
+        $view = view('frontend::modules/auth/apiTS', $data);
+
+        $stub = new StubGenerator(
+            $this->context,
+            $view->render(),
+            resource_path("frontend/src/modules/auth/api.ts")
+        );
+
+        $view2 = view('frontend::modules/auth/blocTS', $data);
+
+        $stub2 = new StubGenerator(
+            $this->context,
+            $view2->render(),
+            resource_path("frontend/src/modules/auth/bloc.ts")
+        );
+
+        $view3 = view('frontend::modules/auth/indexTS', $data);
+
+        $stub3 = new StubGenerator(
+            $this->context,
+            $view3->render(),
+            resource_path("frontend/src/modules/auth/index.ts")
+        );
+
+        $data['routes'] = [];
+        foreach ($this->tables as $key => $table) {
+            $data['routes'][] = Str::of($table)->singular();
+        }
+
+        $view4 = view('frontend::modules/auth/modelTs', $data);
+
+        $stub4 = new StubGenerator(
+            $this->context,
+            $view4->render(),
+            resource_path("frontend/src/modules/auth/model.ts")
+        );
+
+        $view5 = view('frontend::modules/auth/storeTs', $data);
+
+        $stub5 = new StubGenerator(
+            $this->context,
+            $view5->render(),
+            resource_path("frontend/src/modules/auth/store.ts")
+        );
+
+        $stub->render();
+        $stub2->render();
+        $stub3->render();
+        $stub4->render();
+        $stub5->render();
+        $this->context->info("Frontend Module Auth created.");
+    }
 }
