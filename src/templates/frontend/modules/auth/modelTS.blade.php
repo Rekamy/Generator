@@ -16,12 +16,13 @@ export enum Roles {
     Guest,
 }
 
-export class Permissions {\n"?><?php foreach ($routes as $name) {
-echo "\t{$name}_index = '{$name}_index';\n";
-echo "\t{$name}_create = '{$name}_create';\n";
-echo "\t{$name}_show = '{$name}_show';\n";
-echo "\t{$name}_update = '{$name}_update';\n";
-echo "\t{$name}_destroy = '{$name}_destroy';";}?><?="
+export enum Permissions {\n"?><?php foreach ($routes as $name) {
+echo "\t{$name}_index = '{$name}_index',\n";
+echo "\t{$name}_create = '{$name}_create',\n";
+echo "\t{$name}_show = '{$name}_show',\n";
+echo "\t{$name}_update = '{$name}_update',\n";
+echo "\t{$name}_destroy = '{$name}_destroy',\n";}
+?><?="
 }
 
 /**
