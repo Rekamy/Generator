@@ -8,6 +8,7 @@ use Symfony\Component\Console\Helper\Table;
 use Rekamy\Generator\Core\Generators\{
     APIDocGenerator,
     APIDocInfoGenerator,
+    AuthControllerGenerator,
     BaseControllerGenerator,
     ModelGenerator,
     BlocGenerator,
@@ -77,6 +78,9 @@ class BackendCrudGenerator extends Command
             'crudable_repository_trait' => CrudableRepositoryTraitGenerator::class,
             'has_repository_trait' => HasRepositoryGenerator::class,
             'has_request_trait' => HasRequestGenerator::class,
+
+            //auth
+            'auth_controller' => AuthControllerGenerator::class,
 
             // base
             'base_controller' => BaseControllerGenerator::class,
