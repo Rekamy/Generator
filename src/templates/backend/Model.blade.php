@@ -11,6 +11,7 @@ namespace $namespace;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class $className extends Model
 {"  
@@ -50,6 +51,15 @@ class $className extends Model
 ?>
 <?= 
 "
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (\$post) {
+            \$post->{\$post->getKeyName()} = (string) Str::uuid();
+        });
+    }
+
     public function author()
     {
         return \$this->belongsTo(User::class, 'created_by');
