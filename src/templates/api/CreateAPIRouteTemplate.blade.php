@@ -2,6 +2,16 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+" ?>
+<?php 
+  foreach($className as $key => $class):
+    echo "use App\Http\Controllers\\$class;\n";
+  endforeach;
+?>
+<?= "
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +25,17 @@ use Illuminate\Http\Request;
 */
 
 " ?>
-<?= "Route::apiResources([" ?>
-<?php foreach ($db->tables as $table) { ?>
-<?= "
-    '" . lcfirst(Str::singular(str_replace('_', '', $table->TABLE_NAME))) . "' => '" . ucfirst(Str::camel(Str::singular($table->TABLE_NAME))) . "APIController',
+<?=
+"Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']); 
 " ?>
+
+<?= "Route::apiResources([" ?>
+<?php foreach ($className as $key => $class) { ?>
+    <?php foreach ($slug as $key => $name) { ?>
+        <?= "
+    '" . $name . "' => '" . $class . "',
+" ?>
+    <?php } ?>
 <?php } ?>
 <?= "]);" ?>

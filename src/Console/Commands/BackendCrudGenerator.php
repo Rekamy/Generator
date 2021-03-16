@@ -25,6 +25,7 @@ use Rekamy\Generator\Core\Generators\{
     CrudRepositoryInterfaceGenerator,
     CrudRequestInterfaceGenerator,
     ExceptionValidationGenerator,
+    APIRoutesGenerator
 };
 
 
@@ -91,6 +92,9 @@ class BackendCrudGenerator extends Command
             'crud_repository_interface' => CrudRepositoryInterfaceGenerator::class,
             'crud_bloc_Interface' => CrudBlocInterfaceGenerator::class,
             'request_interface' => CrudRequestInterfaceGenerator::class,
+
+            //Api route
+            'routes_api' => APIRoutesGenerator::class,
 
         ];
 

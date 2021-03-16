@@ -1,6 +1,6 @@
 <?= 
 "
-import { $studly, ${studly}Bloc, {$camel->singular()}Api } from './index'
+import { $studly, ${studly}Bloc, {$studly}Api } from './index'
 import { store } from '@/core/services/store'
 import { useStore } from 'vuex'
 

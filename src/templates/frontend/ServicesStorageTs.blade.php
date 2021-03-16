@@ -11,7 +11,6 @@ class StorageService extends StorageCore {
     }
 }
 
-
 const service = new StorageService();
 export default service;
 "

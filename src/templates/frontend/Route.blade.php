@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
 @foreach ($routes as $name)
     {
         path: '/crud/{{ $name->slug() }}',
-        name: 'crud{{ $name }}',
+        name: 'crud.{{ $name }}',
         meta: { layout: "main", requiresAuth: true, breadcrumb: '{{ $name->replace('_', ' ')->title() }}' },
         component: () => import(/* webpackChunkName: "crud.{{ $name }}" */ '@/views/crud/{{ $name }}/base.vue'),
         children: [
@@ -61,4 +61,21 @@ const menusItem = [
 @endforeach
 ];
 
-export default { routes, menusItem }
+const menus = [
+    {
+        type: "divider",
+    },
+    {
+        type: "header",
+        name: "CRUD",
+    },
+    {
+        type: "single",
+        class: "navbar-nav",
+        childContainerClass: "nav-item",
+        items: menusItem,
+    },
+]
+
+
+export { routes, menus }

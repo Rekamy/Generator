@@ -5,6 +5,7 @@ import { Vue, setup } from \"vue-class-component\";
 import { widget } from \"@/core/utils/widget\";
 import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
 import $ from \"jquery\";
+import { api } from '@/core/services/api';
 
 export default class {$studly}Page extends Vue {
     
@@ -19,9 +20,14 @@ export default class {$studly}Page extends Vue {
 
     async builDataTable() {
         const scope: any = this;
-        this.{$camel->plural()} = await this.{$camel}Bloc.get{$studly->plural()}()
+        const baseUrl = `\${api.API_URL}/${slug}`;
         this.options = {
-            data: this.{$camel->plural()},
+            ajax: {
+                url: baseUrl,
+                method: 'GET',
+                dataType: 'json',
+                dataSrc: \"data.data\",
+              },
             columns: [\n" ?><?php
             foreach ($columns as $column) :
                 echo "\t\t\t\t{ data: '" . $column->getName() . "' },\n";
