@@ -6,10 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 " ?>
 <?php 
-  foreach($className as $key => $class):
-    echo "use App\Http\Controllers\\$class;\n";
+  foreach($routes as $route):
+    echo "use App\Http\Controllers\\{$route['className']};\n";
   endforeach;
 ?>
+
 <?= "
 
 
@@ -31,11 +32,9 @@ Route::post('login', [AuthController::class, 'login']);
 " ?>
 
 <?= "Route::apiResources([" ?>
-<?php foreach ($className as $key => $class) { ?>
-    <?php foreach ($slug as $key => $name) { ?>
-        <?= "
-    '" . $name . "' => '" . $class . "',
+<?php foreach ($routes as $route) { ?>
+  <?= "
+    '" . $route['routeName']  . "' => '". $route['className'] ."',
 " ?>
-    <?php } ?>
 <?php } ?>
 <?= "]);" ?>

@@ -26,15 +26,14 @@ class APIRoutesGenerator
     public function generate()
     {
         try {
-            $data['slug'] = [];
-            $data['className'] = [];
+            $data = [];
             foreach ($this->tables as $key => $table) {
-                $data['className'][] = Str::of($table)->singular()->studly() . "Controller";
-                $data['slug'][] = Str::of($table)->slug();
+                $data['routes'][] = [
+                    "className" => Str::of($table)->singular()->studly() . "Controller",
+                    "routeName" => Str::of($table)->singular()->slug()
+                ];
             }
-
-
-            // dd($data);
+            
             $view = view('api::CreateAPIRouteTemplate', $data);
 
             $stub = new StubGenerator(
