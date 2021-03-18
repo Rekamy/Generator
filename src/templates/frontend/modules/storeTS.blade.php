@@ -79,6 +79,6 @@ const module = {
 // export default
 store.registerModule('${camel}', module);
 
-const ${camel}Store = useStore();
+const ${camel}Store = store;
 export { ${camel}Store }
 "
