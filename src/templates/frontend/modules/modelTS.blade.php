@@ -35,7 +35,7 @@ export type ${studly}Bloc = {
     /**
      * Get all ${camel} 
      */
-    getAll{$studly->plural()}: () => Promise<[${studly}]>
+    get{$studly->plural()}: () => Promise<[${studly}]>
 
     /**
      * Get ${camel} by id

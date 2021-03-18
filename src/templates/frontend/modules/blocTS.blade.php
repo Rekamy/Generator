@@ -12,7 +12,7 @@ export function {$camel}Factory(): ${studly}Bloc {
     onBeforeMount(() => {
     })
 
-    async function getAll{$studly->plural()}() : Promise<[$studly]> {
+    async function get{$studly->plural()}() : Promise<[$studly]> {
         let response = await api.all()
         return response.data.data;
     }
@@ -41,7 +41,7 @@ export function {$camel}Factory(): ${studly}Bloc {
     return {
         store,
         api,
-        getAll{$studly->plural()},
+        get{$studly->plural()},
         get{$studly},
         create{$studly},
         update{$studly},
