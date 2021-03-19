@@ -22,6 +22,12 @@ class $className extends Model
     if ($softDelete) :
         echo "\tuse SoftDeletes;\n";
     endif;
+    ?>
+
+<?php 
+    if ($isUuid) :
+        echo "\tpublic \$incrementing = false;\n";
+    endif;
 ?>
 
 <?= "\tpublic \$table = '$table';\n"?>
@@ -36,6 +42,9 @@ class $className extends Model
 
 <?= "\tpublic \$casts = [\n" ?>
 <?php 
+    if($isUuid) :
+        echo "\t\t'id' => 'string',\n";
+    endif;
     foreach ($columns as $i=> $column) :
         echo "\t\t'{$column->getName()}' => '" . RuleParser::parseType($column->getType()->getName()) . "',\n";
     endforeach;

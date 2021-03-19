@@ -47,6 +47,8 @@ class ModelGenerator
                 $data['table'] = $table;
 
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
+                $data['uuid'] = collect($this->context->db->listTableColumns($table))->get('id')->gettype()->getname();
+                $data['isUuid'] = ($data['uuid'] == "string");
                 $data['softDelete'] = $data['columns']->get('deleted_at') && $this->context->options->get('softDelete');
                 $data['className'] = Str::of($table)->singular()->studly();
                 $data['namespace'] = $this->context->namespace['model'];

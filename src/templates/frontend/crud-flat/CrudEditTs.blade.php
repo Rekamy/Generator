@@ -15,8 +15,6 @@ export default class Edit{$studly}Page extends Vue {
 
     async save() {
         try {
-            // FIXME: method spoofing should overide from base api
-            this.{$camel}._method = \"PUT\";
             this.$camel = await this.{$camel}Bloc.update{$studly}(this.{$camel});
             widget.alertSuccess('Good Job!', 'You have successfully edit this $title');
             this.\$router.push(`/crud/{$slug}`)

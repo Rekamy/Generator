@@ -1,5 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Roles, Permissions } from '@/modules/auth';
+import  BasePageComponents  from "@/components/layouts/base-page/index.vue";
+
 
 const routes: Array<RouteRecordRaw> = [
 @foreach ($routes as $name)
@@ -7,14 +9,14 @@ const routes: Array<RouteRecordRaw> = [
         path: '/crud/{{ $name->slug() }}',
         name: 'crud.{{ $name }}',
         meta: { layout: "main", requiresAuth: true, breadcrumb: '{{ $name->replace('_', ' ')->title() }}' },
-        component: () => import(/* webpackChunkName: "crud.{{ $name }}" */ '@/views/crud/{{ $name }}/base.vue'),
+        component: BasePageComponents,
         children: [
             {
                 path: '',
                 name: 'crud.{{ $name }}.index',
                 meta: { 
                     layout: "main", requiresAuth: true, breadcrumb: '{{ $name->replace('_', ' ')->title() }}',
-                    permissions: [Permissions.{{ $name }}_index] 
+                    //permissions: [Permissions.{{ $name }}_index] 
                     },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.index" */ '@/views/crud/{{ $name }}/index.vue'),
             },
@@ -23,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'crud.{{ $name }}.view',
                 meta: { 
                     layout: "main", requiresAuth: true, breadcrumb: '{{ $name->slug() }}',
-                    permissions: [Permissions.{{ $name }}_show]
+                    //permissions: [Permissions.{{ $name }}_show]
                     },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.view" */ '@/views/crud/{{ $name }}/view.vue'),
             },
@@ -32,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'crud.{{ $name }}.create',
                 meta: { 
                     layout: "main", requiresAuth: true, breadcrumb: '{{ $name->slug() }}',
-                    permissions: [Permissions.{{ $name }}_create]
+                    //permissions: [Permissions.{{ $name }}_create]
                     },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.create" */ '@/views/crud/{{ $name }}/create.vue'),
             },
@@ -41,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
                 name: 'crud.{{ $name }}.edit',
                 meta: { 
                     layout: "main", requiresAuth: true, breadcrumb: '{{ $name->slug() }}',
-                    permissions: [Permissions.{{ $name}}_update]
+                    //permissions: [Permissions.{{ $name}}_update]
                     },
                 component: () => import(/* webpackChunkName: "crud.{{ $name }}.edit" */ '@/views/crud/{{ $name }}/edit.vue'),
             },
