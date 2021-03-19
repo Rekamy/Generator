@@ -81,8 +81,8 @@ class FrontendCrudGenerator extends Command
 
             'services' => VueServicesStorage::class,
 
-            'crudBaseVue' => CrudBaseVueGenerator::class,
-            'crudBaseTS' => CrudBaseTSGenerator::class,
+            // 'crudBaseVue' => CrudBaseVueGenerator::class,
+            // 'crudBaseTS' => CrudBaseTSGenerator::class,
 
             'crudIndexVue' => CrudIndexVueGenerator::class,
             'crudIndexTS' => CrudIndexTSGenerator::class,
