@@ -243,7 +243,7 @@ class FrontendModuleGenerator
         );
 
         $data['routes'] = [];
-        foreach ($this->tables as $key => $table) {
+        foreach ($this->tables as $table) {
             $data['routes'][] = Str::of($table)->singular();
         }
 

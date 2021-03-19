@@ -21,7 +21,8 @@ echo "\t{$name}_index = '{$name}_index',\n";
 echo "\t{$name}_create = '{$name}_create',\n";
 echo "\t{$name}_show = '{$name}_show',\n";
 echo "\t{$name}_update = '{$name}_update',\n";
-echo "\t{$name}_destroy = '{$name}_destroy',\n";}
+echo "\t{$name}_destroy = '{$name}_destroy',\n";
+}
 ?><?="
 }
 
@@ -66,3 +67,4 @@ export type AuthBloc = {
   restoreAuthState: () => void
 }
 "
+?>

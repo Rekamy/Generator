@@ -27,3 +27,4 @@ export class AuthApi {
 const authApi = new AuthApi();
 export { authApi };
 "
+?>

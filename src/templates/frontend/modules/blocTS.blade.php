@@ -51,3 +51,4 @@ export function {$camel}Factory(): ${studly}Bloc {
 }
 
 "
+?>

@@ -79,3 +79,4 @@ store.registerModule('auth', module);
 const authStore = useStore();
 export { authStore }
 "
+?>

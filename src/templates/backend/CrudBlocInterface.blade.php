@@ -24,11 +24,11 @@ interface CrudBlocInterface
 
     public function store(array \$input);
 
-    public function show(integer \$id);
+    public function show(string \$id);
 
-    public function update(integer \$id, array \$input);
+    public function update(string \$id, array \$input);
 
-    public function destroy(integer \$id);
+    public function destroy(string \$id);
 
     public static function permission(string \$name);
 

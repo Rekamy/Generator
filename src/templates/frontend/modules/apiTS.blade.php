@@ -35,3 +35,4 @@ export class {$studly}Api {
 const {$camel}Api = new {$studly}Api();
 export { {$camel}Api };
 "
+?>

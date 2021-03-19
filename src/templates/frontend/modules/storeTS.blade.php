@@ -82,3 +82,4 @@ store.registerModule('${camel}', module);
 const ${camel}Store = store;
 export { ${camel}Store }
 "
+?>
