@@ -33,13 +33,13 @@ class APIRoutesGenerator
                     "routeName" => Str::of($table)->singular()->slug()
                 ];
             }
-            
+
             $view = view('api::CreateAPIRouteTemplate', $data);
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                base_path('routes/api') . '.php'
+                base_path('routes/api/crud') . '.php'
             );
 
             $stub->render();
