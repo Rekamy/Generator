@@ -178,7 +178,7 @@ return [
         'relation' => true,
 
         'dontOverwrite' => [
-            app_path('Models/User.php')
+            // app_path('Models/User.php')
         ],
 
     ],

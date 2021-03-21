@@ -9,13 +9,9 @@ export default class Create{$studly}Page extends Vue {
     $camel = new $studly
 
     async save() {
-        try {
-            this.{$camel} = await this.{$camel}Bloc.create{$studly}(this.{$camel});
-            widget.alertSuccess('Good Job!', 'You have successfully created a $title');
-            this.\$router.push(`/crud/{$slug}/\${this.{$camel}.id}`)
-        } catch (error) {
-            widget.alertError(error);
-        }
+        this.{$camel} = await this.{$camel}Bloc.create{$studly}(this.{$camel});
+        widget.alertSuccess('Good Job!', 'You have successfully created a $title');
+        this.\$router.push(`/crud/{$slug}/\${this.{$camel}.id}`)
     }
 }
 

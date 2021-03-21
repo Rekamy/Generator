@@ -103,20 +103,31 @@ export function draw{$studly}Table (tableId) {
     }
 
     async function deleteData (data: any) {
-        widget.alertDelete().then(async (result) => {
-            try {
-                if (!result.isConfirmed) {
-                    widget.alertSuccess('Deletion abort.', 'Your data is save.')
-                    return;
-                }
-                let message = await {$camel}Bloc.destroy{$studly}(data.id);
-                widget.alertSuccess('Good Job!', 'Your data has been deleted.');
-                $(tableId).DataTable().ajax.reload()
-            } catch (error) {
-                widget.alertError(error);
+        // FIXME: error does not get captured globally without try and catch
+        try {
+            const result = await widget.alertDelete()
+            if (!result.isConfirmed) {
+                widget.alertSuccess('Deletion abort.', 'Your data is save.')
+                return;
             }
-        })
+
+            let message = await {$camel}Bloc.destroy{$studly}(data.id);
+            widget.alertSuccess('Good Job!', 'Your data has been deleted.');
+            $(tableId).DataTable().ajax.reload()
+        } catch(err) {
+            if (err.error.response?.statusText) {
+                widget.dialog.fire('Opps!', err.error.response.statusText, 'error');
+            } else {
+                widget.dialog.fire('Opps!', err.error.message, 'error');
+            }
+            // console.log(err.error.response)
+            // console.log(err.error.message)
+            // FIXME: cause uncaught exception
+            // throw new Error('asd')
+        }
+        
     }
+
     return { options: reactive(dtOptions) }
 }
 
