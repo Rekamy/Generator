@@ -58,8 +58,8 @@ class RuleParser
             case Str::contains($type, ['int', 'smallint']):
                 $rule = 'integer';
                 break;
-            case Str::contains($type, 'timestamp'):
-                $rule = 'datetime';
+            case Str::contains($type, ['timestamp', 'datetime']):
+                $rule = 'date';
                 break;
 
             default:
