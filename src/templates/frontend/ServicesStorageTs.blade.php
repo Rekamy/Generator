@@ -1,5 +1,5 @@
 <?="
-import { StorageCore } from \"@/core/utils\";
+import { StorageCore } from \"@/core/utils/storage\";
 
 class StorageService extends StorageCore {
     [key: string]: any;

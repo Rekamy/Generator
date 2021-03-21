@@ -39,6 +39,8 @@ class CrudIndexVueGenerator
                     ]);
                 $data['table'] =  $name;
                 $data['title'] =  $name->replace('_', ' ')->title();
+                $data['studly'] =  $name->studly();
+                $data['camel'] = $name->camel();
                 $data['slug'] =  $name->slug();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";

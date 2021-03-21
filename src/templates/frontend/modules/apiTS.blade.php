@@ -10,6 +10,10 @@ export class {$studly}Api {
         this.BASE_URL = \"/{$slug}\";
     }
 
+    getEndpoint () {
+        return api.API_URL + this.BASE_URL
+    }
+    
     async all(): Promise<any> {
         return await api.get<any>(this.BASE_URL, true);
     }
