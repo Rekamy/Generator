@@ -23,7 +23,7 @@ import { User } from './../user'
  * ```
  */
 
-export function authFactory (): AuthBloc {
+export function authFactory () {
   const module = 'auth'
   // const store = useStore()
   const api = authApi
@@ -45,11 +45,20 @@ export function authFactory (): AuthBloc {
 
   async function logout () {
     // ask server to purge token
-    await api.logout()
-    store.commit('auth/signOut')
-    await clearSession();
-    router.replace('/login');
-  }
+    tryLogout();
+        // clear local token and state
+        store.commit('auth/signOut');
+        await clearSession();
+        router.replace('/login');
+    }
+
+    async function tryLogout () {
+        try {
+            await api.logout()
+        } catch (error) {
+        }
+    }
+
 
   async function clearSession () {
     await storage.clearAll()

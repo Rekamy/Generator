@@ -76,7 +76,7 @@ const module = {
 
 store.registerModule('auth', module);
 
-const authStore = useStore();
+const authStore = store;
 export { authStore }
 "
 ?>
