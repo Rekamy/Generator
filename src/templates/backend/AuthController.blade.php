@@ -39,7 +39,7 @@ class AuthController extends Controller
             //     throw new UnauthorizedException('Invalid Login or password.', 401);
             // \$permissions = Permission::where('name', 'like', '%_index')->pluck('name')->toArray();
             
-            \$permissions = ['*'];
+            \$permissions = \$this->getPermissions();
             \$token = \$user->createToken(config('app.token_name'), \$permissions);
             // \$token = \$user->createToken(config('app.token_name'), ['*']);
             if (!\$token) throw new Exception(\"Error Processing Request\", 422);
@@ -69,15 +69,18 @@ class AuthController extends Controller
 
             \$user = auth('web')->user();
 
-            \$permissions = Permission::whereIn('name', [
-                'department_cases_index',
-                'users_index',
-                // 'users_create',
-                'users_show',
-                // 'users_update',
-                // 'users_destroy',
-            ])->pluck('name')->toArray();
-            \$permissions = ['*'];
+            // \$permissions = Permission::whereIn('name', [
+            //     'department_cases_index',
+            //     'users_index',
+            //     // 'users_create',
+            //     'users_show',
+            //     // 'users_update',
+            //     // 'users_destroy',
+            // ])->pluck('name')->toArray();
+
+            \$permissions = \$this->getPermissions();
+
+            //\$permissions = ['*'];
             // \$token = \$user->createToken(config('app.token_name'), \$user->getPermissionNames()->toArray());
             \$token = \$user->createToken(config('app.token_name'), \$permissions);
 
@@ -91,6 +94,24 @@ class AuthController extends Controller
         } catch (\Throwable \$th) {
             throw \$th;
         }
+    }
+
+    private function getPermissions()
+    {
+
+        // \$permissions = Permission::whereIn('name', [
+        //     'department_cases_index',
+        //     'users_index',
+        //     // 'users_create',
+        //     'users_show',
+        //     // 'users_update',
+        //     // 'users_destroy',
+        // ])->pluck('name')->toArray();
+        \$permissions = [
+            '*',
+
+        ];
+        return \$permissions;
     }
 
     /**

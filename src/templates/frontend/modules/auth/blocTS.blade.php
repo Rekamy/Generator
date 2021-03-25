@@ -23,7 +23,7 @@ import { User } from './../user'
  * ```
  */
 
-export function authFactory (): AuthBloc {
+export function authFactory () {
   const module = 'auth'
   // const store = useStore()
   const api = authApi

@@ -12,7 +12,7 @@ export class AuthApi {
     }
 
     async login (data: User): Promise<any>{
-        return await api.post<any>('/login',data,true);
+        return await api.post<any>('/login',data);
     }
 
     async logout (): Promise<any>{
@@ -20,7 +20,7 @@ export class AuthApi {
     }
 
     async register (data: User): Promise<any> {
-        return await api.post<any>(`/register`, data, false);
+        return await api.post<any>(`/register`, data);
     }
 }
 
