@@ -55,9 +55,6 @@ export function draw{$studly}Table (tableId) {
     const dtOptions = {
         ajax: {
             url: api.getEndpoint(),
-            method: 'GET',
-            dataType: 'json',
-            dataSrc: \"data.data\",
         },
         columns: ["
         ?><?php 
@@ -70,12 +67,10 @@ export function draw{$studly}Table (tableId) {
                 data: \"id\",
                 render: function (id: any, type: any, full: any, meta: any) {
                     return (
-                        '<div class=\"form-group\">' +
                         '<div class=\"btn-group\" role=\"group\">' +
                         `<button type=\"button\" class=\"btn btn-success btn-sm view\" id=\"{$camel}ViewAction\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" ></i></button>` +
                         `<button type=\"button\" class=\"btn btn-primary btn-sm edit\" id=\"{$camel}EditAction\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\"></i></button>` +
                         `<button type=\"button\" class=\"btn btn-danger btn-sm delete\"id=\"{$camel}DeleteAction\"><i class=\"far fa-trash-alt\" data-placement=\"top\" title=\"Delete\"></i></button>` +
-                        \"</div>\" +
                         \"</div>\"
                     );
                 }

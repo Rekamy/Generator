@@ -26,7 +26,7 @@ class AuthController extends Controller
             \$this->validateRegistration(\$request);
 
             \$user = User::create([
-                'staff_no' => \$request->staff_no,
+                'username' => \$request->username,
                 'email' => \$request->email,
                 'password' => bcrypt(\$request->password)
             ]);
@@ -34,7 +34,7 @@ class AuthController extends Controller
             if (!\$user) throw new Exception(\"Error Processing Request\", 422);
 
             // FIXME: password verification upon registration are redundant
-            // if (!auth('web')->attempt(['staff_no' => \$request->staff_no, 'password' => \$request->password]))
+            // if (!auth('web')->attempt(['username' => \$request->username, 'password' => \$request->password]))
             // if (Hash::check(\$user->password, \$request->password))
             //     throw new UnauthorizedException('Invalid Login or password.', 401);
             // \$permissions = Permission::where('name', 'like', '%_index')->pluck('name')->toArray();
@@ -112,10 +112,10 @@ class AuthController extends Controller
     private function validateRegistration(Request \$request)
     {
         \$rules = [
-            'staff_no' => 'required|min:4|unique:users',
+            'username' => 'required|min:4|unique:users',
             'email' => 'required|email',
             'password' => 'required|min:8',
-            'confirm_password' => 'required|min:8',
+            // 'confirm_password' => 'required|min:8',
         ];
 
         \$validation = validator(\$request->all(), \$rules);
@@ -125,7 +125,7 @@ class AuthController extends Controller
     private function validateLogin(Request \$request)
     {
         \$rules = [
-            'staff_no' => 'required|min:4',
+            'username' => 'required|min:4',
             'password' => 'required|min:8',
         ];
 

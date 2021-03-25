@@ -17,7 +17,7 @@
           </div>
           <div class=\"table-responsive\">
             <!-- Projects table -->
-            <DataTable class=\"table align-items-center table-flush\" :options=\"table{$studly}.options\" id=\"{$camel}List\">
+            <DataTable class=\"table align-items-center table-hover table-striped table-sm\" :options=\"table{$studly}.options\" id=\"{$camel}List\">
               <thead class=\"thead-light\">
                 <tr>\n" ?>
 <?php

@@ -45,10 +45,18 @@ export function authFactory (): AuthBloc {
 
   async function logout () {
     // ask server to purge token
-    await api.logout()
-    store.commit('auth/signOut')
+    tryLogout();
+    // clear local token and state
+    store.commit('auth/signOut');
     await clearSession();
     router.replace('/login');
+  }
+
+  async function tryLogout () {
+    try {
+        await api.logout()
+    } catch (error) {
+    }
   }
 
   async function clearSession () {

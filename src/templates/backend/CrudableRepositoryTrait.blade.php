@@ -2,44 +2,21 @@
 
 namespace App\Contracts\Repositories\Concerns;
 
-use Illuminate\Pagination\Paginator;
+use App\Contracts\Criteria\DataTableCriteria;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 trait CrudableRepository
 {
-
-    public function pushRequestCriteria(\$input)
-    {
-        if (empty(\$input['start'])) {
-            \$input['start'] = 0;
-        }
-
-        if (empty(\$input['length'])) {
-            \$input['length'] = 10;
-        }
-        return \$input;
-    }
-
-    public function resolvePagination(\$input)
-    {
-        Paginator::currentPageResolver(function () use (\$input) {
-            return (\$input['start'] / \$input['length'] + 1);
-        });
-    }
-
     public function indexAction(\$input)
     {
-        \$input = \$this->pushRequestCriteria(\$input);
-        \$this->resolvePagination(\$input);
-
-        \$model = \$this;
-
-        if (!empty(\$input['search']['value'])) {
-            foreach (\$this->fieldSearchable as \$column) {
-                \$model = \$model->whereLike(\$column, \$input['search']['value']);
-            }
+        if (!empty(\$input['draw'])) {
+            \$this->pushCriteria(app(DataTableCriteria::class));
+        } else {
+            \$this->pushCriteria(app(RequestCriteria::class));
+            return \$this->paginate();
         }
 
-        return \$model->paginate(\$input['length']);
+        return \$this;
     }
 
     public function storeAction(\$input)

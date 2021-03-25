@@ -60,7 +60,6 @@ const mutations = {
         })
     },
 
-    // FIXME: not working
     destroy(state: any, id: number) {
         state.all = state.all.filter((${camel}: $studly) => id !== ${camel}.id)
         console.log(state.all);
