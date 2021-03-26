@@ -79,7 +79,7 @@ class BackendCrudGenerator extends Command
 
             //contracts
             'datatable_criteria' => DatatableCriteriaContractsGenerator::class,
-            'length_aware_paginator_overrides' => LengthAwarePacomginatorContractsGenerator::class,
+            'length_aware_paginator_overrides' => LengthAwarePaginatorContractsGenerator::class,
 
             //providers
             'app_service' => AppServiceProvidersGenerator::class,
