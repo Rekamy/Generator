@@ -23,7 +23,7 @@ class DatatableCriteriaContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Criteria') . 'DataTableCriteria.php'
+                app_path('Contracts/Criteria/') . 'DataTableCriteria.php'
             );
 
             $stub->render();
