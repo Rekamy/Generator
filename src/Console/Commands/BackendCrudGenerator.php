@@ -25,7 +25,10 @@ use Rekamy\Generator\Core\Generators\{
     CrudRepositoryInterfaceGenerator,
     CrudRequestInterfaceGenerator,
     ExceptionValidationGenerator,
-    APIRoutesGenerator
+    APIRoutesGenerator,
+    DatatableCriteriaContractsGenerator,
+    LengthAwarePaginatorContractsGenerator,
+    AppServiceProvidersGenerator
 };
 
 
@@ -73,6 +76,13 @@ class BackendCrudGenerator extends Command
             // TODO: Crud Route Service Provider 
             'apiDoc' => APIDocGenerator::class,
             'apiDocInfo' => APIDocInfoGenerator::class,
+
+            //contracts
+            'datatable_criteria' => DatatableCriteriaContractsGenerator::class,
+            'length_aware_paginator_overrides' => LengthAwarePacomginatorContractsGenerator::class,
+
+            //providers
+            'app_service' => AppServiceProvidersGenerator::class,
 
             // traits
             'crudable_trait' => CrudableTraitGenerator::class,
