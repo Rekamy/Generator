@@ -29,9 +29,9 @@
                             </div>
                             <hr class=\"my-4\" />
                             <div class=\"col text-right\">
-                                <button type=\"button\" @click=\"\$router.replace(`/crud/$slug/\${{$camel}.id}/edit`)\" class=\"btn btn-primary\">Update</button>
+                                <button type=\"button\" @click=\"\$router.push(`/crud/$slug/\${{$camel}.id}/edit`)\" class=\"btn btn-primary\">Update</button>
                                 <button type=\"button\" @click=\"deleteData\" class=\"btn btn-danger\">Delete</button>
-                                <button type=\"button\" @click=\"\$router.replace('/crud/$slug')\" class=\"btn btn-default\">Back</button>
+                                <button type=\"button\" @click=\"\$router.back()\" class=\"btn btn-default\">Back</button>
                             </div>
                         </form>
                     </div>

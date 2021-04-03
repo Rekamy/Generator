@@ -59,7 +59,7 @@ export function draw{$studly}Table (tableId) {
         columns: ["
         ?><?php 
         foreach ($columns as $columns) :
-            echo "\n\t\t\t{ data: '". $columns->getName() . "' }," ;
+            echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $columns->getName() . "' }," ;
         endforeach;
 ?><?= "
             {

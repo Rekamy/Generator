@@ -23,8 +23,7 @@
         "darkaonline/l5-swagger": "^8.0.4",
         "doctrine/dbal": "^3.0.0"
     },
-    "require-dev": {
-    },
+    "require-dev": {},
     "authors": [
         {
             "name": "Firdaus Ishaddin",
@@ -54,5 +53,11 @@
                 "Rekamy\\Generator\\GeneratorServiceProvider"
             ]
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../packages/Generator"
+        }
+    ]
 }

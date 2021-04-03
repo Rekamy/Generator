@@ -23,7 +23,7 @@ export default class View{$studly}Page extends Vue {
             }
             await this.{$camel}Bloc.destroy{$studly}(this.{$camel}.id);
             widget.alertSuccess('Good Job!', 'Your data has been deleted.');
-            this.\$router.replace('/crud/{$camel}');
+            this.\$router.back();
         } catch (error) {
             throw error
         }

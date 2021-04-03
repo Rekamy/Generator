@@ -19,16 +19,6 @@
             <!-- Projects table -->
             <DataTable class=\"table align-items-center table-hover table-striped table-sm\" :options=\"table{$studly}.options\" id=\"{$camel}List\">
               <thead class=\"thead-light\">
-                <tr>\n" ?>
-<?php
-  foreach($columns as $column):
-    $name = Str::of($column->getName());
-
-    echo "\t\t\t\t\t<th scope=\"col\">$name</th>\n";
-  endforeach;
-  echo "\t\t\t\t\t<th scope=\"col\">Action</th>\n";
-?>
-<?= "\t\t\t\t</tr>
               </thead>
             </DataTable>
           </div>
