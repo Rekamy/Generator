@@ -16,7 +16,7 @@ export default class Edit{$studly}Page extends Vue {
     async save() {
         this.$camel = await this.{$camel}Bloc.update{$studly}(this.{$camel});
         widget.alertSuccess('Good Job!', 'You have successfully edit this $title');
-        this.\$router.replace(`/crud/{$slug}`)
+        this.\$router.back()
     }   
 }
 
