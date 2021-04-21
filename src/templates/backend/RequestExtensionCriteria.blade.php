@@ -14,41 +14,41 @@ class RequestExtensionCriteria implements CriteriaInterface
     /**
      * @var \Illuminate\Http\Request
      */
-    protected $request;
-    protected $query;
-    protected $columns;
+    protected \$request;
+    protected \$query;
+    protected \$columns;
 
-    public function __construct(Request $request)
+    public function __construct(Request \$request)
     {
-        $this->request = $request;
+        \$this->request = \$request;
     }
 
 
-    public function bindModel($model, RepositoryInterface $repository)
+    public function bindModel(\$model, RepositoryInterface \$repository)
     {
-        $this->query = $model;
-        $this->repository = $repository;
+        \$this->query = \$model;
+        \$this->repository = \$repository;
     }
 
     /**
      * Apply criteria in query repository
      *
-     * @param         Builder|Model     $model
-     * @param RepositoryInterface $repository
+     * @param         Builder|Model     \$model
+     * @param RepositoryInterface \$repository
      *
      * @return mixed
      * @throws \Exception
      */
-    public function apply($model, RepositoryInterface $repository)
+    public function apply(\$model, RepositoryInterface \$repository)
     {
-        $this->bindModel($model, $repository);
+        \$this->bindModel(\$model, \$repository);
 
-        $this->applyScopes();
+        \$this->applyScopes();
 
-        $this->applyAppend();
-        // dd($this->query);
-        $this->presenter = 'asd';
-        return $this->query;
+        \$this->applyAppend();
+        // dd(\$this->query);
+        \$this->presenter = 'asd';
+        return \$this->query;
     }
 
     /**
@@ -58,12 +58,12 @@ class RequestExtensionCriteria implements CriteriaInterface
      */
     public function applyScopes()
     {
-        if (!$this->request->has('scopes')) return;
+        if (!\$this->request->has('scopes')) return;
 
-        $scopes = $this->request->get('scopes');
-        $scopes = explode(';', $scopes);
-        foreach ($scopes as $scope) {
-            $this->query = $this->$scope();
+        \$scopes = \$this->request->get('scopes');
+        \$scopes = explode(';', \$scopes);
+        foreach (\$scopes as \$scope) {
+            \$this->query = \$this->\$scope();
         }
     }
 
@@ -74,19 +74,19 @@ class RequestExtensionCriteria implements CriteriaInterface
      */
     public function applyAppend()
     {
-        if (!$this->request->has('append')) return;
+        if (!\$this->request->has('append')) return;
 
-        $append = $this->request->get('append');
-        $appends = explode(';', $append);
+        \$append = \$this->request->get('append');
+        \$appends = explode(';', \$append);
 
-        if ($this->query instanceof Model) {
-            $this->query->append($appends);
+        if (\$this->query instanceof Model) {
+            \$this->query->append(\$appends);
         }
 
-        if ($this->query instanceof Builder) {
-            $model = $this->query->getModel();
-            $model->append($appends);
-            $this->query->setModel($model);
+        if (\$this->query instanceof Builder) {
+            \$model = \$this->query->getModel();
+            \$model->append(\$appends);
+            \$this->query->setModel(\$model);
         }
     }
 }

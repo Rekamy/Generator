@@ -29,7 +29,11 @@ use Rekamy\Generator\Core\Generators\{
     DatatableCriteriaContractsGenerator,
     LengthAwarePaginatorContractsGenerator,
     AppServiceProvidersGenerator,
-    FileUploadContractsGenerator
+    RequestExtensionContractsGenerator,
+    BaseRepositoryContractsGenerator,
+    RequestCriteriaContractsGenerator,
+    FileUploadContractsGenerator,
+    HasAuditorRelationGenerator,
 };
 
 
@@ -94,6 +98,7 @@ class BackendCrudGenerator extends Command
             'crudable_repository_trait' => CrudableRepositoryTraitGenerator::class,
             'has_repository_trait' => HasRepositoryGenerator::class,
             'has_request_trait' => HasRequestGenerator::class,
+            'has_auditor_relation_trait' => HasAuditorRelationGenerator::class,
 
             //auth
             'auth_controller' => AuthControllerGenerator::class,

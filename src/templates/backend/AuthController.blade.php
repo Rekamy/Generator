@@ -1,11 +1,11 @@
-<?="<?php
+<?= "<?php
 
 namespace App\Http\Controllers\Auth;
 
 use App\Exceptions\ValidationException;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Profile;
+// use App\Models\Profile;
 use App\Http\Controllers\Base\Controller;
 use App\Http\Resources\UserProfileResource;
 use DB;
@@ -29,8 +29,8 @@ class AuthController extends Controller
             if (!\$user) throw new Exception('Error Processing Request', 422);
 
             // dummy map profile
-            Profile::first()->user()->associate(\$user)->save();
-            \$user->givePermissionTo('view_profiles');
+            // Profile::first()->user()->associate(\$user)->save();
+            // \$user->givePermissionTo('view_profiles');
 
             Auth::guard('web')->login(\$user);
 
