@@ -38,7 +38,7 @@ class DashboardGenerator
             $command =  "cd $resources_path && git clone git@gitlab.com:rekamy/packages/argon-template.git frontend";
             exec($command);
             $this->context->info("Installing dependency...");
-            $command =  "cd $resources_path/frontend && npm i";
+            $command =  "cd $resources_path/frontend && npm install";
             exec($command);
             $command =  "cd $resources_path/frontend && rm -rf .git";
             exec($command);

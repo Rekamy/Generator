@@ -52,7 +52,7 @@ const routes: Array<RouteRecordRaw> = [
 @endforeach
 ];
 
-const menusItem = [
+const crudMenusItem = [
 @foreach ($routes as $name)
     {
         type: "menu",
@@ -63,7 +63,7 @@ const menusItem = [
 @endforeach
 ];
 
-const menus = [
+const crudMenus = [
     {
         type: "divider",
     },
@@ -72,12 +72,12 @@ const menus = [
         name: "CRUD",
     },
     {
-        type: "single",
+        type: "parent",
         class: "navbar-nav",
         childContainerClass: "nav-item",
-        items: menusItem,
+        items: crudMenusItem,
     },
 ]
 
 
-export { routes, menus }
+export { routes, crudMenus }
