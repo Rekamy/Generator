@@ -48,7 +48,27 @@ class ControllerGenerator
 
                 $stub->render();
                 $this->context->info("Controller Created.");
+                $this->resources();
             }
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function resources(){
+        try {
+            $view = view('backend::UserProfileResource')
+                ->with('context', $this->context);
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                app_path('Http/Resources/') . 'UserProfileResource.php'
+            );
+
+            $stub->render();
+            $this->context->info("User Profile Resource Created.");
+
         } catch (\Throwable $th) {
             throw $th;
         }

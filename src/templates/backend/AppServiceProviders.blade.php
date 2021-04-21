@@ -1,4 +1,4 @@
-<?="
+<?= "
 <?php
 
 namespace App\Providers;
@@ -52,6 +52,11 @@ class AppServiceProvider extends ServiceProvider
         \$this->app->bind(
             \Illuminate\Pagination\LengthAwarePaginator::class,
             \App\Contracts\Overrides\LengthAwarePaginator::class
+        );
+
+        \$this->app->bind(
+            \Prettus\Repository\Criteria\RequestCriteria::class,
+            \App\Contracts\Overrides\RequestCriteria::class
         );
     }
 }

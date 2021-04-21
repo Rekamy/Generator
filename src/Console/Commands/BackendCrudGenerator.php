@@ -28,7 +28,8 @@ use Rekamy\Generator\Core\Generators\{
     APIRoutesGenerator,
     DatatableCriteriaContractsGenerator,
     LengthAwarePaginatorContractsGenerator,
-    AppServiceProvidersGenerator
+    AppServiceProvidersGenerator,
+    FileUploadContractsGenerator
 };
 
 
@@ -79,7 +80,11 @@ class BackendCrudGenerator extends Command
 
             //contracts
             'datatable_criteria' => DatatableCriteriaContractsGenerator::class,
+            'request_extension_criteria' => RequestExtensionContractsGenerator::class,
             'length_aware_paginator_overrides' => LengthAwarePaginatorContractsGenerator::class,
+            'base_repository_overrides' => BaseRepositoryContractsGenerator::class,
+            'request_criteria_overrides' => RequestCriteriaContractsGenerator::class,
+            'file_upload' => FileUploadContractsGenerator::class,
 
             //providers
             'app_service' => AppServiceProvidersGenerator::class,

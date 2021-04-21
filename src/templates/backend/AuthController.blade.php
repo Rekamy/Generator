@@ -1,21 +1,21 @@
 <?="<?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Exceptions\ValidationException;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Profile;
 use App\Http\Controllers\Base\Controller;
+use App\Http\Resources\UserProfileResource;
 use DB;
 use Exception;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\UnauthorizedException;
-use Laravel\Passport\Passport;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Auth;
 
 class AuthController extends Controller
 {
-
     /**
      * Registration
      */
@@ -25,30 +25,26 @@ class AuthController extends Controller
         try {
             \$this->validateRegistration(\$request);
 
-            \$user = User::create([
-                'username' => \$request->username,
-                'email' => \$request->email,
-                'password' => bcrypt(\$request->password)
-            ]);
+            \$user = User::create(\$request->all());
+            if (!\$user) throw new Exception('Error Processing Request', 422);
 
-            if (!\$user) throw new Exception(\"Error Processing Request\", 422);
+            // dummy map profile
+            Profile::first()->user()->associate(\$user)->save();
+            \$user->givePermissionTo('view_profiles');
 
-            // FIXME: password verification upon registration are redundant
-            // if (!auth('web')->attempt(['username' => \$request->username, 'password' => \$request->password]))
-            // if (Hash::check(\$user->password, \$request->password))
-            //     throw new UnauthorizedException('Invalid Login or password.', 401);
+            Auth::guard('web')->login(\$user);
+
             // \$permissions = Permission::where('name', 'like', '%_index')->pluck('name')->toArray();
-            
-            \$permissions = \$this->getPermissions();
-            \$token = \$user->createToken(config('app.token_name'), \$permissions);
+            \$permissions = \$this->getPermissions(\$user);
+            \$token = \$user->createToken(config('app.token_name'));
             // \$token = \$user->createToken(config('app.token_name'), ['*']);
-            if (!\$token) throw new Exception(\"Error Processing Request\", 422);
+            if (!\$token) throw new Exception('Error Processing Request', 422);
 
             DB::commit();
             return [
                 'user' => \$user,
                 'token' => \$token->accessToken,
-                'scopes' => \$permissions
+                'scopes' => \$user->permissions->pluck('name')
             ];
         } catch (\Throwable \$th) {
             DB::rollback();
@@ -64,39 +60,35 @@ class AuthController extends Controller
         try {
             \$this->validateLogin(\$request);
 
-            if (!auth('web')->attempt(\$request->all()))
+            if (!Auth::guard('web')->once(\$request->all()))
                 throw new UnauthorizedException('Invalid Login or password.', 401);
 
-            \$user = auth('web')->user();
+            \$user = Auth::guard('web')->user();
 
-            // \$permissions = Permission::whereIn('name', [
-            //     'department_cases_index',
-            //     'users_index',
-            //     // 'users_create',
-            //     'users_show',
-            //     // 'users_update',
-            //     // 'users_destroy',
-            // ])->pluck('name')->toArray();
-
-            \$permissions = \$this->getPermissions();
-
-            //\$permissions = ['*'];
-            // \$token = \$user->createToken(config('app.token_name'), \$user->getPermissionNames()->toArray());
-            \$token = \$user->createToken(config('app.token_name'), \$permissions);
-
-            if (!\$token) throw new Exception(\"Error Processing Request\", 422);
-
-            return [
-                'user' => \$user,
-                'token' => \$token->accessToken,
-                'scopes' => \$permissions
-            ];
+            return new UserProfileResource(\$user);
         } catch (\Throwable \$th) {
             throw \$th;
         }
     }
 
-    private function getPermissions()
+    /**
+     * Impersonate
+     */
+    public function impersonate(Request \$request, User \$user)
+    {
+        try {
+            \$this->validateImpersonate(\$request);
+            Auth::guard('web')->login(\$user);
+
+            \$user = Auth::guard('web')->user();
+
+            return new UserProfileResource(\$user);
+        } catch (\Throwable \$th) {
+            throw \$th;
+        }
+    }
+
+    private function getPermissions(\$user)
     {
 
         // \$permissions = Permission::whereIn('name', [
@@ -108,8 +100,8 @@ class AuthController extends Controller
         //     // 'users_destroy',
         // ])->pluck('name')->toArray();
         \$permissions = [
-            '*',
-
+            // '*',
+            'view_profiles',
         ];
         return \$permissions;
     }
@@ -119,7 +111,7 @@ class AuthController extends Controller
      */
     public function logout(Request \$request)
     {
-        auth()->user()->token()->revoke();
+        \$request->user()->token()->revoke();
     }
 
     /**
@@ -127,15 +119,16 @@ class AuthController extends Controller
      */
     public function revokeTokens(Request \$request)
     {
-        auth()->user()->revokeTokens();
+        \$request->user()->revokeTokens();
     }
 
     private function validateRegistration(Request \$request)
     {
         \$rules = [
             'username' => 'required|min:4|unique:users',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
+            // TODO: not implemented yet
             // 'confirm_password' => 'required|min:8',
         ];
 
@@ -152,6 +145,12 @@ class AuthController extends Controller
 
         \$validation = validator(\$request->all(), \$rules);
         if (\$validation->fails()) throw new ValidationException(\$validation);
+    }
+
+    private function validateImpersonate(Request \$request)
+    {
+        if (!\$request->has('impersonate'))
+            throw new Exception('Bad Request. Impersonate tag required.', 400);
     }
 }
 "
