@@ -1,15 +1,14 @@
-<?="<?php
+<?= "<?php
 
 namespace App\Contracts\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Prettus\Repository\Contracts\RepositoryInterface;
 use Prettus\Repository\Contracts\CriteriaInterface;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Exception;
 
 class DataTableCriteria implements CriteriaInterface
 {
@@ -47,7 +46,7 @@ class DataTableCriteria implements CriteriaInterface
         \$this->repository = \$repository;
 
         if (!\$this->request->has('columns')) throw new Exception('Column does not set', 400);
-        
+
         \$this->columns = collect(\$this->request->get('columns'))
             ->map(function (\$value, \$index) {
                 \$value['index'] = \$index;
@@ -56,10 +55,10 @@ class DataTableCriteria implements CriteriaInterface
 
         if (\$this->isPaginationable()) \$this->resolvePagination();
 
-
         \$this->applyFilter();
-
-        return \$this->query->paginate(\$this->request->get('length'));
+        \$resource = \$this->query->paginate(\$this->request->get('length'));
+        \$resource->setCollection(\$resource->getCollection()->makeVisible(\$this->columns->pluck('data')->toArray()));
+        return \$resource;
     }
 
     public function applyFilter()
@@ -81,6 +80,12 @@ class DataTableCriteria implements CriteriaInterface
                     \$this->query = \$this->query->orderBy(\$columns[\$index]['data'], \$sort);
                 }
             }
+        }
+
+        if (\$this->request->has('with')) {
+            \$with = \$this->request->get('with');
+            \$relations = explode(';', \$with);
+            \$this->query = \$this->query->with(\$relations);
         }
     }
     /**
