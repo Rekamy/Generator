@@ -56,7 +56,7 @@ const crudMenusItem = [
 @foreach ($routes as $name)
     {
         type: "menu",
-        name: "Crud{{ $name->studly() }}",
+        name: "{{ $name->studly() }}",
         route: "/crud/{{ $name->slug() }}",
         class: "ni ni-tv-2 text-primary",
     },
@@ -73,6 +73,7 @@ const crudMenus = [
     },
     {
         type: "parent",
+        name: "Crud",
         class: "navbar-nav",
         childContainerClass: "nav-item",
         items: crudMenusItem,
