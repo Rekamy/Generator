@@ -15,7 +15,7 @@ class $className extends CrudBloc
         \$this->request = \$request;
     }
 
-    // public static function permission(\$name) : string {
+    public static function permission(\$name) {
     //     \$permission = [
     //         'index' => '{$table}_index',
     //         'create' => '{$table}_create',
@@ -25,6 +25,6 @@ class $className extends CrudBloc
     //     ];
         
     //     return \$permission[\$name];
-    // }
+    }
 }
 "?>
