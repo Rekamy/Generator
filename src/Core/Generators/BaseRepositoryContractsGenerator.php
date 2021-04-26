@@ -7,7 +7,7 @@ use Rekamy\Generator\Console\StubGenerator;
 class BaseRepositoryContractsGenerator
 {
     private $context;
- 
+
     public function __construct($context)
     {
         $this->context = $context;
@@ -17,7 +17,7 @@ class BaseRepositoryContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::RequestExtensionCriteria')
+            $view = view('backend::BaseRepository')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(
@@ -28,7 +28,6 @@ class BaseRepositoryContractsGenerator
 
             $stub->render();
             $this->context->info("Base Repository Contracts Created.");
-
         } catch (\Throwable $th) {
             throw $th;
         }
