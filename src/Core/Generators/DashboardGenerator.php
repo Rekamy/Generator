@@ -43,6 +43,8 @@ class DashboardGenerator
 
             if (is_dir($frontendPath)) {
                 $this->context->info("Folder dashboard already exist. skip clone..");
+                if (!file_exists($frontendPath . '/.env'))
+                    copy($frontendPath . '/.env.example', $frontendPath . '/.env');
                 return;
             }
 
@@ -56,6 +58,9 @@ class DashboardGenerator
             $packageManager = $this->context->config['package_manager'];
             $command =  "cd $frontendPath && $packageManager install";
             exec($command);
+
+            if (!file_exists($frontendPath . '/.env'))
+                copy($frontendPath . '/.env.example', $frontendPath . '/.env');
         } catch (\Throwable $th) {
             throw $th;
         }
