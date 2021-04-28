@@ -52,7 +52,7 @@ class CrudIndexTSGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$name/index.ts")
+                    $this->context->path['frontend']['crud'] . "/$name/index.ts"
                 );
 
                 $stub->render();

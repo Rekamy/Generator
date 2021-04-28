@@ -64,7 +64,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name}/api.ts")
+            $this->context->path['frontend']['module'] . "/$name/api.ts"
         );
 
         $stub->render();
@@ -93,7 +93,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name}/bloc.ts")
+            $this->context->path['frontend']['module'] . "/$name/bloc.ts"
         );
 
         $stub->render();
@@ -122,7 +122,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name}/model.ts")
+            $this->context->path['frontend']['module'] . "/$name/model.ts"
         );
 
         $stub->render();
@@ -151,7 +151,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name}/store.ts")
+            $this->context->path['frontend']['module'] . "/$name/store.ts"
         );
 
         $stub->render();
@@ -180,7 +180,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/{$name}/index.ts")
+            $this->context->path['frontend']['module'] . "/$name/index.ts"
         );
 
         $stub->render();
@@ -201,7 +201,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/index.ts")
+            $this->context->path['frontend']['module'] . "/index.ts"
         );
 
         $stub->render();
@@ -223,7 +223,7 @@ class FrontendModuleGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path("frontend/src/modules/auth/api.ts")
+            $this->context->path['frontend']['module'] . "/auth/api.ts"
         );
 
         $view2 = view('frontend::modules/auth/blocTS', $data);
@@ -231,7 +231,7 @@ class FrontendModuleGenerator
         $stub2 = new StubGenerator(
             $this->context,
             $view2->render(),
-            resource_path("frontend/src/modules/auth/bloc.ts")
+            $this->context->path['frontend']['module'] . "/auth/bloc.ts"
         );
 
         $view3 = view('frontend::modules/auth/indexTS', $data);
@@ -239,7 +239,7 @@ class FrontendModuleGenerator
         $stub3 = new StubGenerator(
             $this->context,
             $view3->render(),
-            resource_path("frontend/src/modules/auth/index.ts")
+            $this->context->path['frontend']['module'] . "/auth/index.ts"
         );
 
         $data['routes'] = [];
@@ -252,7 +252,7 @@ class FrontendModuleGenerator
         $stub4 = new StubGenerator(
             $this->context,
             $view4->render(),
-            resource_path("frontend/src/modules/auth/model.ts")
+            $this->context->path['frontend']['module'] . "/auth/model.ts"
         );
 
         $view5 = view('frontend::modules/auth/storeTs', $data);
@@ -260,7 +260,7 @@ class FrontendModuleGenerator
         $stub5 = new StubGenerator(
             $this->context,
             $view5->render(),
-            resource_path("frontend/src/modules/auth/store.ts")
+            $this->context->path['frontend']['module'] . "/auth/store.ts"
         );
 
         $stub->render();

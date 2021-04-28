@@ -52,7 +52,7 @@ class CrudEditTSGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$name/edit.ts")
+                    $this->context->path['frontend']['crud'] . "/$name/edit.ts"
                 );
 
                 $stub->render();

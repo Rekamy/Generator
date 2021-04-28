@@ -118,8 +118,19 @@ class BackendCrudGenerator extends Command
 
         ];
 
-        foreach ($generators as $class) {
-            $generator = new $class($this);
+        foreach ($generators as $key => $class) {
+            $skip = false;
+            $classOverride = null;
+
+            if (!empty($this->generate['backend'][$key]['skip']))
+                $skip = $this->generate['backend'][$key]['skip'];
+
+            if ($skip) continue;
+
+            if (!empty($this->generate['backend'][$key]['class']))
+                $classOverride = $this->generate['backend'][$key]['class'];
+
+            $generator = $classOverride ? new $classOverride($this) : new $class($this);
             $generator->generate();
             $this->newline();
         }

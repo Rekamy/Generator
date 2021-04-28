@@ -52,7 +52,7 @@ class CrudViewTSGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$name/view.ts")
+                    $this->context->path['frontend']['crud'] . "/$name/view.ts"
                 );
 
                 $stub->render();

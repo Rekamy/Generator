@@ -50,7 +50,7 @@ class CrudEditVueGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$name/edit.vue")
+                    $this->context->path['frontend']['crud'] . "/$name/edit.vue"
                 );
 
                 $stub->render();

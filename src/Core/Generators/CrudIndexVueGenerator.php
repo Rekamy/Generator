@@ -50,7 +50,7 @@ class CrudIndexVueGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$name/index.vue")
+                    $this->context->path['frontend']['crud'] . "/$name/index.vue"
                 );
 
                 $stub->render();

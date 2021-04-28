@@ -13,6 +13,8 @@ return [
 
     'app_name' => env('APP_NAME', 'Swagger API Documentation'),
 
+    'package_manager' => 'npm',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -21,34 +23,70 @@ return [
     |
     | Which file would you like to generate. Set the value to false you 
     | don't want to generate.
+    | 
+    | Backend generator
+    |   - model
+    |   - bloc
+    |   - repository
+    |   - controller
+    |   - request
+    |   - exception_validation
+    |   - apiDoc
+    |   - apiDocInfo
+    |   - datatable_criteria
+    |   - request_extension_criteria
+    |   - length_aware_paginator_overrides
+    |   - base_repository_overrides
+    |   - request_criteria_overrides
+    |   - file_upload
+    |   - app_service
+    |   - crudable_trait
+    |   - crudable_repository_trait
+    |   - has_repository_trait
+    |   - has_request_trait
+    |   - has_auditor_relation_trait
+    |   - auth_controller
+    |   - base_controller
+    |   - crud_bloc
+    |   - crud_controller
+    |   - crud_repository_interface
+    |   - crud_bloc_Interface
+    |   - request_interface
+    |   - routes_api
+    |
+    | Frontend generator
+    |   - base
+    |   - route
+    |   - crudIndexVue
+    |   - crudIndexTS
+    |   - crudCreateVue
+    |   - crudCreateTS
+    |   - crudViewVue
+    |   - crudViewTS
+    |   - crudEditVue
+    |   - crudEditTS
+    |   - frontendModule
     |
     */
 
     'generate' => [
 
-        'models'               => true,
+        // 'backend' => [
+        //     'model' => [
+        //         'skip' => false,
+        //         'class' => null,
+        //         'class' => null,
+        //     ],
+        // ],
 
-        'base_controller'      => true,
+        // 'frontend' => [
+        //     'base' => [
+        //         'skip' => false,
+        //         'class' => null,
+        //     ],
 
-        'app_base_controller'  => true,
+        // ],
 
-        'repositories'         => true,
-
-        'api_requests'         => true,
-
-        'api_routes'           => true,
-
-        'api_controllers'      => true,
-
-        // 'web_requests'         => true,
-
-        // 'web_routes'           => true,
-
-        // 'web_controllers'      => true,
-
-        // 'module_views'         => true,
-
-        'swagger_api_doc'      => true,
     ],
 
     /*
@@ -76,8 +114,6 @@ return [
             // spatie permission
             'model_has_permissions',
             'model_has_roles',
-            'permissions',
-            'roles',
             'role_has_permissions',
 
             // passport
@@ -98,36 +134,74 @@ return [
 
     // Path is where you want the generator to generate.
     'path' => [
+        'backend' => [
+            'model' => '',
+            'bloc' => '',
+            'repository' => '',
+            'controller' => '',
+            'request' => '',
+            'exception_validation' => '',
+            'apiDoc' => '',
+            'apiDocInfo' => '',
+            'datatable_criteria' => '',
+            'request_extension_criteria' => '',
+            'length_aware_paginator_overrides' => '',
+            'base_repository_overrides' => '',
+            'request_criteria_overrides' => '',
+            'file_upload' => '',
+            'app_service' => '',
+            'crudable_trait' => '',
+            'crudable_repository_trait' => '',
+            'has_repository_trait' => '',
+            'has_request_trait' => '',
+            'has_auditor_relation_trait' => '',
+            'auth_controller' => '',
+            'base_controller' => '',
+            'crud_bloc' => '',
+            'crud_controller' => '',
+            'crud_repository_interface' => '',
+            'crud_bloc_Interface' => '',
+            'request_interface' => '',
+            'routes_api' => '',
+        ],
+        'frontend' => [
+            'base' => resource_path("app"),
+            'route' => resource_path("app/src/router/crud"),
+            'crud' => resource_path("app/src/views/crud"),
+            'module' => resource_path("app/src/modules"),
+        ],
 
-        'migration'             => base_path('database/migrations/'),
+        // 'migration'             => base_path('database/migrations/'),
 
-        'model'                 => app_path('Models/'),
+        // 'model'                 => app_path('Models/'),
 
-        'repository'            => app_path('Repositories/'),
+        // 'repository'            => app_path('Repositories/'),
 
-        'bloc'                  => app_path('Bloc/'),
+        // 'bloc'                  => app_path('Bloc/'),
 
-        'base_controller'       => app_path('Http/Controllers/Base/'),
+        // 'base_controller'       => app_path('Http/Controllers/Base/'),
 
-        'app_base_controller'   => app_path('Http/Controllers/'),
+        // 'app_base_controller'   => app_path('Http/Controllers/'),
 
-        'api_request'           => app_path('Http/Requests/API/'),
+        // 'api_request'           => app_path('Http/Requests/API/'),
 
-        'api_controller'        => app_path('Http/Controllers/API/'),
+        // 'api_controller'        => app_path('Http/Controllers/API/'),
 
-        'api_routes'            => base_path('routes/api.php'),
+        // 'api_routes'            => base_path('routes/api.php'),
 
-        'web_request'           => app_path('Http/Requests/'),
+        // 'web_request'           => app_path('Http/Requests/'),
 
-        'web_controller'        => app_path('Http/Controllers/'),
+        // 'web_controller'        => app_path('Http/Controllers/'),
 
-        'web_routes'            => base_path('routes/web.php'),
+        // 'web_routes'            => base_path('routes/web.php'),
 
-        'module_views'          => base_path('resources/views'),
+        // 'module_views'          => base_path('resources/views'),
 
-        'layouts'               => base_path('resources/views/layouts'),
+        // 'layouts'               => base_path('resources/views/layouts'),
 
-        'swagger_api_doc'       => app_path('Http/Controllers/API/Doc'),
+        // 'swagger_api_doc'       => app_path('APIDoc/'),
+
+        // 'swagger_api_info'       => app_path('APIDoc/APIDocInfo'),
     ],
 
     /*
@@ -139,24 +213,52 @@ return [
 
     // Namespace for the generated files.
     'namespace' => [
+        'model' => 'App\Models',
+        'bloc' => '',
+        'repository' => '',
+        'controller' => '',
+        'request' => '',
+        'exception_validation' => '',
+        'apiDoc' => '',
+        'apiDocInfo' => '',
+        'datatable_criteria' => '',
+        'request_extension_criteria' => '',
+        'length_aware_paginator_overrides' => '',
+        'base_repository_overrides' => '',
+        'request_criteria_overrides' => '',
+        'file_upload' => '',
+        'app_service' => '',
+        'crudable_trait' => '',
+        'crudable_repository_trait' => '',
+        'has_repository_trait' => '',
+        'has_request_trait' => '',
+        'has_auditor_relation_trait' => '',
+        'auth_controller' => '',
+        'base_controller' => '',
+        'crud_bloc' => '',
+        'crud_controller' => '',
+        'crud_repository_interface' => '',
+        'crud_bloc_Interface' => '',
+        'request_interface' => '',
+        'routes_api' => '',
 
-        'model'                 => 'App\Models',
+        // 'model'                 => 'App\Models',
 
-        'repository'            => 'App\Repositories',
+        // 'repository'            => 'App\Repositories',
 
-        'bloc'                  => 'App\Bloc',
+        // 'bloc'                  => 'App\Bloc',
 
-        'base_controller'       => 'App\Http\Controllers\Base',
+        // 'base_controller'       => 'App\Http\Controllers\Base',
 
-        'app_base_controller'   => 'App\Http\Controllers',
+        // 'app_base_controller'   => 'App\Http\Controllers',
 
-        'api_request'           => 'App\Http\Requests\API',
+        // 'api_request'           => 'App\Http\Requests\API',
 
-        'api_controller'        => 'App\Http\Controllers\API',
+        // 'api_controller'        => 'App\Http\Controllers\API',
 
-        'web_request'           => 'App\Http\Requests',
+        // 'web_request'           => 'App\Http\Requests',
 
-        'web_controller'        => 'App\Http\Controllers',
+        // 'web_controller'        => 'App\Http\Controllers',
     ],
 
     /*
@@ -169,9 +271,9 @@ return [
     // options is an add on you can disable these options by setting the value to false
     'options' => [
 
-        'frontend_path' => resource_path('frontend/'),
+        // 'frontend_path' => resource_path('frontend/'),
 
-        'backend_path' => base_path(),
+        // 'backend_path' => base_path(),
 
         'softDelete' => false,
 
@@ -192,21 +294,25 @@ return [
 
     'template' => [
 
-        'vendor_files' => false,
+        'frontend_path' => 'app',
 
-        'own' => false,
+        'source' => 'git@gitlab.com:rekamy/packages/argon-template.git',
 
-        'module_views' => [
+        // 'vendor_files' => false,
 
-            'create' => base_path('robust-theme-template/WebCreateViewstemplate.blade.php'),
+        // 'own' => false,
 
-            'show'   => base_path('robust-theme-template/WebShowViewstemplate.blade.php'),
+        // 'module_views' => [
 
-            'edit'   => base_path('robust-theme-template/WebEditViewstemplate.blade.php'),
+        //     'create' => base_path('robust-theme-template/WebCreateViewstemplate.blade.php'),
 
-            'index'  => base_path('robust-theme-template/WebIndexViewstemplate.blade.php'),
+        //     'show'   => base_path('robust-theme-template/WebShowViewstemplate.blade.php'),
 
-            'fields' => base_path('robust-theme-template/WebFieldViewstemplate.blade.php'),
-        ],
+        //     'edit'   => base_path('robust-theme-template/WebEditViewstemplate.blade.php'),
+
+        //     'index'  => base_path('robust-theme-template/WebIndexViewstemplate.blade.php'),
+
+        //     'fields' => base_path('robust-theme-template/WebFieldViewstemplate.blade.php'),
+        // ],
     ]
 ];

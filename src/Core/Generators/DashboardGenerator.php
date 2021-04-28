@@ -28,19 +28,33 @@ class DashboardGenerator
     public function generate()
     {
         try {
-            
-            $resources_path = resource_path();
-            if(is_dir($resources_path . "/frontend")) {
+
+            $frontendName = 'frontend';
+            $gitTemplate = "git@gitlab.com:rekamy/packages/argon-template.git";
+
+            if (!empty($this->context->template['frontend_path']))
+                $frontendName = $this->context->template['frontend_path'];
+
+            if (!empty($this->context->template['source']))
+                $gitTemplate = $this->context->template['source'];
+
+            $resourcesPath = resource_path();
+            $frontendPath = resource_path($frontendName);
+
+            if (is_dir($frontendPath)) {
                 $this->context->info("Folder dashboard already exist. skip clone..");
                 return;
             }
 
-            $command =  "cd $resources_path && git clone git@gitlab.com:rekamy/packages/argon-template.git frontend";
+            $command =  "cd $resourcesPath && git clone --depth=1 $gitTemplate $frontendName";
             exec($command);
             $this->context->info("Installing dependency...");
-            $command =  "cd $resources_path/frontend && npm install";
+
+            $command =  "cd $frontendPath && rm -rf .git";
             exec($command);
-            $command =  "cd $resources_path/frontend && rm -rf .git";
+
+            $packageManager = $this->context->config['package_manager'];
+            $command =  "cd $frontendPath && $packageManager install";
             exec($command);
         } catch (\Throwable $th) {
             throw $th;

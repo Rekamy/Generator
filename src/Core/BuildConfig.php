@@ -18,21 +18,21 @@ trait BuildConfig
     public $template;
     public $db = [];
     // public $output = [];
-    public $configFile = [];
     public $outputDecorator;
     public $progress;
 
-    public function loadConfig()
+    public function loadConfig() 
     {
-        $this->configFile = config('rekamygenerator');
-        $this->dbname = config('rekamygenerator.database.name');
-        $this->excludeTables = config('rekamygenerator.database.exclude_tables');
-        $this->generate = config('rekamygenerator.generate');
-        $this->path = config('rekamygenerator.path');
-        $this->options = collect(config('rekamygenerator.options'));
-        $this->namespace = config('rekamygenerator.namespace');
-        $this->appName = config('rekamygenerator.app_name');
-        $this->template = config('rekamygenerator.template');
+        $this->config = config('rekamygenerator');
+        $this->dbname = $this->config['database']['name'];
+        $this->excludeTables = $this->config['database']['exclude_tables'];
+        $this->generate = $this->config['generate'];
+        $this->path = $this->config['path'];
+        $this->options = collect($this->config['options']);
+        $this->namespace = $this->config['namespace'];
+        $this->appName = $this->config['app_name'];
+        $this->template = $this->config['template'];
+        $this->frontPath = $this->config['template'];
 
         $db = \DB::connection();
         $schema = $db->getDoctrineSchemaManager();

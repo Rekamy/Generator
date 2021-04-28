@@ -62,11 +62,15 @@ class $className extends Model
 "
     protected static function boot()
     {
-        parent::boot();
-
-        static::creating(function (\$post) {
+        parent::boot();\n" ?>
+<?php 
+    if($isUuid) : 
+    echo "static::creating(function (\$post) {
             \$post->{\$post->getKeyName()} = (string) Str::uuid();
-        });
+        });"
+    endif;
+?>
+<?= "
     }
 
     public function author()

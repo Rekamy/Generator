@@ -34,11 +34,10 @@ class VueRouteGenerator
             }
 
             $view = view('frontend::route', $data);
-
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                resource_path("frontend/src/router/crud/crud.ts")
+                $this->context->path['frontend']['route'] . "/crud.ts"
             );
 
             $stub->render();

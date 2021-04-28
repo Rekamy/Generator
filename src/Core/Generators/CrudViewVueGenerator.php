@@ -51,7 +51,7 @@ class CrudViewVueGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path("frontend/src/views/crud/$name/view.vue")
+                    $this->context->path['frontend']['crud'] . "/$name/view.vue"
                 );
 
                 $stub->render();

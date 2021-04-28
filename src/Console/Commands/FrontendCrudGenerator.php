@@ -72,7 +72,8 @@ class FrontendCrudGenerator extends Command
     public function generate()
     {
         $generators = [
-            'dashboard' => DashboardGenerator::class,
+            'base' => DashboardGenerator::class,
+
             'route' => VueRouteGenerator::class,
 
             'crudIndexVue' => CrudIndexVueGenerator::class,
@@ -90,32 +91,19 @@ class FrontendCrudGenerator extends Command
             'frontendModule' => FrontendModuleGenerator::class,
         ];
 
-        // switch ($this->template) {
+        foreach ($generators as $key => $class) {
+            $skip = false;
+            $classOverride = null;
 
-        //     case 'Argon':
-        //         $generators['crudBaseVue'] = CrudBaseVueGenerator::class;
-        //         $generators['crudIndexVue'] = CrudIndexVueGenerator::class;
-        //         $generators['crudCreateVue'] = CrudCreateVueGenerator::class;
-        //         $generators['crudViewVue'] = CrudViewVueGenerator::class;
-        //         $generators['crudEditVue'] = CrudEditVueGenerator::class;
-        //         break;
+            if (!empty($this->generate['frontend'][$key]['skip']))
+                $skip = $this->generate['frontend'][$key]['skip'];
 
-        //     case 'Sparker':
-        //         dd("Tak buat lagi brooo");
-        //         break;
+            if ($skip) continue;
 
-        //     case 'Robust':
-        //         dd("test");
-        //         # code...
-        //         break;
+            if (!empty($this->generate['frontend'][$key]['class']))
+                $classOverride = $this->generate['frontend'][$key]['class'];
 
-        //     default:
-        //         dd("Choose la");
-        //         break;
-        // }
-
-        foreach ($generators as $class) {
-            $generator = new $class($this);
+            $generator = $classOverride ? new $classOverride($this) : new $class($this);
             $generator->generate();
             $this->newline();
         }
