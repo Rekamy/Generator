@@ -43,13 +43,12 @@ class BlocGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    app_path('Bloc/') . $data['className'] . '.php'
+                    $this->context->path['backend']['bloc'] . $data['className'] . '.php'
                 );
 
                 $stub->render();
                 $this->context->info("Bloc Created.");
             }
-
         } catch (\Throwable $th) {
             throw $th;
         }

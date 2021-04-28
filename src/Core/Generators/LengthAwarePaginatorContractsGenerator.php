@@ -23,7 +23,7 @@ class LengthAwarePaginatorContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Overrides/') . 'LengthAwarePaginator.php'
+                $this->context->path['backend']['override'] . 'LengthAwarePaginator.php'
             );
 
             $stub->render();

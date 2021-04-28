@@ -45,7 +45,7 @@ class APIDocGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    app_path('APIDoc/') . $data['className'] . '.php'
+                    $this->context->path['backend']['api_doc'] . $data['className'] . '.php'
                 );
 
                 $stub->render();

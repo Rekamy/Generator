@@ -33,12 +33,11 @@ class APIDocInfoGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('APIDoc/APIDocInfo') . '.php'
+                $this->context->path['backend']['api_doc'] . 'APIDocInfo.php'
             );
 
             $stub->render();
             $this->context->info("APIDoc Created.");
-
         } catch (\Throwable $th) {
             throw $th;
         }

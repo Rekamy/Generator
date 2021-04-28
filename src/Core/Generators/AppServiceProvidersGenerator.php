@@ -23,7 +23,7 @@ class AppServiceProvidersGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Providers/') . 'AppServiceProvider.php'
+                $this->context->path['backend']['providers'] . 'AppServiceProvider.php'
             );
 
             $stub->render();

@@ -43,7 +43,7 @@ class ControllerGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    app_path('Http/Controllers/') . $data['className'] . '.php'
+                    $this->context->path['backend']['controller'] . $data['className'] . '.php'
                 );
 
                 $stub->render();

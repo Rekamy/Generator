@@ -28,7 +28,7 @@ class HasRequestGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Bloc/Concerns/') . 'HasRequest.php'
+                $this->context->path['backend']['has_request_trait'] . 'HasRequest.php'
             );
 
             $stub->render();

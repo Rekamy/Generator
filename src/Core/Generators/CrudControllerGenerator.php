@@ -28,7 +28,7 @@ class CrudControllerGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Http/Controllers/Base/') . 'CrudController.php'
+                $this->context->path['backend']['base_controller'] . 'CrudController.php'
             );
 
             $stub->render();

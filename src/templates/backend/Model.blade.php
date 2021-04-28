@@ -67,7 +67,7 @@ class $className extends Model
     if($isUuid) : 
     echo "static::creating(function (\$post) {
             \$post->{\$post->getKeyName()} = (string) Str::uuid();
-        });"
+        });";
     endif;
 ?>
 <?= "

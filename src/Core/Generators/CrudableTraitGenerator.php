@@ -28,7 +28,7 @@ class CrudableTraitGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Bloc/Concerns/') . 'CrudableBloc.php'
+                $this->context->path['backend']['crudable_trait'] . 'CrudableBloc.php'
             );
 
             $stub->render();

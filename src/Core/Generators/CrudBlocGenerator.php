@@ -28,7 +28,7 @@ class CrudBlocGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Bloc/Base/') . 'CrudBloc.php'
+                $this->context->path['backend']['crud_bloc'] . 'CrudBloc.php'
             );
 
             $stub->render();

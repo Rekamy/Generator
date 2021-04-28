@@ -43,7 +43,7 @@ class RepositoryGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    app_path('Repositories/') . $data['className'] . '.php'
+                    $this->context->path['backend']['repository'] . $data['className'] . '.php'
                 );
 
                 $stub->render();

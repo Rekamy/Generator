@@ -7,7 +7,7 @@ use Rekamy\Generator\Console\StubGenerator;
 class RequestCriteriaContractsGenerator
 {
     private $context;
- 
+
     public function __construct($context)
     {
         $this->context = $context;
@@ -23,12 +23,11 @@ class RequestCriteriaContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Overrides/') . 'RequestCriteria.php'
+                $this->context->path['backend']['override'] . 'RequestCriteria.php'
             );
 
             $stub->render();
             $this->context->info("Request Criteria Created.");
-
         } catch (\Throwable $th) {
             throw $th;
         }

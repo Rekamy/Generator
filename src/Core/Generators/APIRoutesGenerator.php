@@ -39,7 +39,7 @@ class APIRoutesGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                base_path('routes/crud') . '.php'
+                $this->context->path['backend']['crud_routes']
             );
 
             $stub->render();

@@ -75,7 +75,6 @@ return [
         //     'model' => [
         //         'skip' => false,
         //         'class' => null,
-        //         'class' => null,
         //     ],
         // ],
 
@@ -135,34 +134,29 @@ return [
     // Path is where you want the generator to generate.
     'path' => [
         'backend' => [
-            'model' => '',
-            'bloc' => '',
-            'repository' => '',
-            'controller' => '',
-            'request' => '',
-            'exception_validation' => '',
-            'apiDoc' => '',
-            'apiDocInfo' => '',
-            'datatable_criteria' => '',
-            'request_extension_criteria' => '',
-            'length_aware_paginator_overrides' => '',
-            'base_repository_overrides' => '',
-            'request_criteria_overrides' => '',
-            'file_upload' => '',
-            'app_service' => '',
-            'crudable_trait' => '',
-            'crudable_repository_trait' => '',
-            'has_repository_trait' => '',
-            'has_request_trait' => '',
-            'has_auditor_relation_trait' => '',
-            'auth_controller' => '',
-            'base_controller' => '',
-            'crud_bloc' => '',
-            'crud_controller' => '',
-            'crud_repository_interface' => '',
-            'crud_bloc_Interface' => '',
-            'request_interface' => '',
-            'routes_api' => '',
+            'model' => app_path('Models/'),
+            'bloc' => app_path('Bloc/'),
+            'repository' => app_path('Repositories/'),
+            'controller' => app_path('Http/Controllers/'),
+            'request' => app_path('Http/Requests/'),
+            'exception' => app_path('Exceptions/'),
+            'api_doc' => app_path('APIDoc/'),
+            'criteria' => app_path('Contracts/Criteria/'),
+            'override' => app_path('Contracts/Overrides/'),
+            'utilities' => app_path('Contracts/Utilities/'),
+            'providers' => app_path('Providers/'),
+            'crudable_trait' => app_path('Contracts/Bloc/Concerns/'),
+            'crudable_repository_trait' => app_path('Contracts/Repositories/Concerns/'),
+            'has_repository_trait' => app_path('Contracts/Bloc/Concerns/'),
+            'has_request_trait' => app_path('Contracts/Bloc/Concerns/'),
+            'has_auditor_relation_trait' => app_path('Contracts/Bloc/Concerns/'),
+            'auth_controller' => app_path('Http/Controllers/Auth/'),
+            'base_controller' => app_path('Http/Controllers/Base/'),
+            'crud_bloc' => app_path('Contracts/Bloc/Concerns/'),
+            'crud_repository_interface' => app_path('Contracts/Repositories/'),
+            'crud_bloc_interface' => app_path('Contracts/Bloc/'),
+            'request_interface' => app_path('Contracts/Requests/'),
+            'crud_routes' => base_path('routes/crud.php'),
         ],
         'frontend' => [
             'base' => resource_path("app"),
@@ -170,38 +164,8 @@ return [
             'crud' => resource_path("app/src/views/crud"),
             'module' => resource_path("app/src/modules"),
         ],
+        'migration' => base_path('database/migrations/'),
 
-        // 'migration'             => base_path('database/migrations/'),
-
-        // 'model'                 => app_path('Models/'),
-
-        // 'repository'            => app_path('Repositories/'),
-
-        // 'bloc'                  => app_path('Bloc/'),
-
-        // 'base_controller'       => app_path('Http/Controllers/Base/'),
-
-        // 'app_base_controller'   => app_path('Http/Controllers/'),
-
-        // 'api_request'           => app_path('Http/Requests/API/'),
-
-        // 'api_controller'        => app_path('Http/Controllers/API/'),
-
-        // 'api_routes'            => base_path('routes/api.php'),
-
-        // 'web_request'           => app_path('Http/Requests/'),
-
-        // 'web_controller'        => app_path('Http/Controllers/'),
-
-        // 'web_routes'            => base_path('routes/web.php'),
-
-        // 'module_views'          => base_path('resources/views'),
-
-        // 'layouts'               => base_path('resources/views/layouts'),
-
-        // 'swagger_api_doc'       => app_path('APIDoc/'),
-
-        // 'swagger_api_info'       => app_path('APIDoc/APIDocInfo'),
     ],
 
     /*

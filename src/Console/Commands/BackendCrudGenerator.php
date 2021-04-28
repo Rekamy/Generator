@@ -45,7 +45,7 @@ class BackendCrudGenerator extends Command
      *
      * @var string
      */
-    protected $signature = 'generate';
+    protected $signature = 'generate:backend';
 
     /**
      * The console command description.

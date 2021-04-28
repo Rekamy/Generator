@@ -1,6 +1,6 @@
 <?="<?php
 
-namespace App\Contracts\FileUpload;
+namespace App\Contracts\Utilities;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;

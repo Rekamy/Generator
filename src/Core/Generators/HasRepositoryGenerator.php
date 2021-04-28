@@ -28,7 +28,7 @@ class HasRepositoryGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Bloc/Concerns/') . 'HasRepository.php'
+                $this->context->path['backend']['has_repository_trait'] . 'HasRepository.php'
             );
 
             $stub->render();

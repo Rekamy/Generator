@@ -28,7 +28,7 @@ class CrudRequestInterfaceGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Requests/') . 'CrudRequestInterface.php'
+                $this->context->path['backend']['request_interface'] . 'CrudRequestInterface.php'
             );
 
             $stub->render();

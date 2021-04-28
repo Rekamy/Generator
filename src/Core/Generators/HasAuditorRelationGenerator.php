@@ -24,7 +24,7 @@ class HasAuditorRelationGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                app_path('Contracts/Bloc/Concerns/') . 'HasAuditorRelations.php'
+                $this->context->path['backend']['has_auditor_relation_trait'] . 'HasAuditorRelations.php'
             );
 
             $stub->render();
