@@ -40,7 +40,7 @@ class CrudCreateVueGenerator
                     ]);
                 $data['table'] =  $name;
                 $data['camel'] =  $name->camel();
-                $data['title'] =  $name->replace('_', ' ')->title();
+                $data['title'] =  $name->replace('_', ' ')->absoluteTitle();
                 $data['slug'] =  $name->slug();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";

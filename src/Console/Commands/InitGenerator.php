@@ -36,7 +36,7 @@ class InitGenerator extends Command
             $answerCollection->push('generate:migration');
         } else {
             if ($this->confirm('Run fresh migration?'))
-                $answerCollection->push('migrate:fresh --seed');
+                $answerCollection->push('migrate:fresh');
         }
 
         if ($this->confirm('Generate backend from current database?'))

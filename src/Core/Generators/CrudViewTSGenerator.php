@@ -34,7 +34,7 @@ class CrudViewTSGenerator
                 $name = Str::of($table)->singular();
                 $data['context'] = $this->context;
                 $data['table'] = $name;
-                $data['title'] =  $name->title();
+                $data['title'] =  $name->absoluteTitle();
                 $data['camel'] = $name->camel();
                 $data['slug'] =  $name->slug();
                 $data['studly'] =  $name->studly();

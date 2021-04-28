@@ -26,6 +26,15 @@ class GeneratorServiceProvider extends ServiceProvider
         //     return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
         // });
 
+        \Str::macro('absoluteTitle', function (string $value) {
+            return \Str::of($value)->kebab()->replace('_', ' ')->title();
+        });
+
+        Stringable::macro('absoluteTitle', function () {
+            $string = (string) \Str::of($this->value)->kebab()->replace('_', ' ')->title();
+            return new Stringable($string);
+        });
+
         $this->publishes([
             __DIR__ . '/config/rekamygenerator.php' => config_path('rekamygenerator.php'),
         ], 'rekamygenerator');

@@ -38,7 +38,7 @@ class CrudIndexVueGenerator
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
                 $data['table'] =  $name;
-                $data['title'] =  $name->replace('_', ' ')->title();
+                $data['title'] =  $name->replace('_', ' ')->absoluteTitle();
                 $data['studly'] =  $name->studly();
                 $data['camel'] = $name->camel();
                 $data['slug'] =  $name->slug();

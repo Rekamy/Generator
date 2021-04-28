@@ -39,7 +39,7 @@ class CrudEditVueGenerator
                         'deleted_at', 'deleted_by', 'remark',
                     ]);
                 $data['table'] =  $name;
-                $data['title'] =  $name->replace('_', ' ')->title();
+                $data['title'] =  $name->replace('_', ' ')->absoluteTitle();
                 $data['slug'] =  $name->slug();
                 $data['camel'] =  $name->camel();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";

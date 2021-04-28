@@ -58,21 +58,29 @@ export function draw{$studly}Table (tableId) {
         },
         columns: ["
         ?><?php 
-        foreach ($columns as $columns) :
-            echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $columns->getName() . "' }," ;
+        foreach ($columns as $key => $columns) :
+            $title = \Str::of($columns->getName())->absoluteTitle();
+            // $title = $columns->getName();
+            dd($title);
+            if($key < 5) {
+                echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "' }," ;
+            } else {
+                echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "', visible: \"false\" }," ;
+            }
         endforeach;
 ?><?= "
             {
                 title: \"Action\",
                 data: \"id\",
-                render: function (id: any, type: any, full: any, meta: any) {
-                    return (
-                        '<div class=\"btn-group\" role=\"group\">' +
-                        `<button type=\"button\" class=\"btn btn-success btn-sm view\" id=\"{$camel}ViewAction\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" ></i></button>` +
-                        `<button type=\"button\" class=\"btn btn-primary btn-sm edit\" id=\"{$camel}EditAction\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\"></i></button>` +
-                        `<button type=\"button\" class=\"btn btn-danger btn-sm delete\"id=\"{$camel}DeleteAction\"><i class=\"far fa-trash-alt\" data-placement=\"top\" title=\"Delete\"></i></button>` +
-                        \"</div>\"
-                    );
+                render: function (data: any, type: any, row: any, meta: any) {
+                    let html = `
+                    <div class=\"btn-group\" role=\"group\">
+                        <button type=\"button\" class=\"btn btn-success btn-sm view\" id=\"{$camel}ViewAction\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" ></i></button>
+                        <button type=\"button\" class=\"btn btn-primary btn-sm edit\" id=\"{$camel}EditAction\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\"></i></button>
+                        <button type=\"button\" class=\"btn btn-danger btn-sm delete\"id=\"{$camel}DeleteAction\"><i class=\"far fa-trash-alt\" data-placement=\"top\" title=\"Delete\"></i></button>
+                    </div>
+                    `
+                    return html;
                 }
             }
         ],

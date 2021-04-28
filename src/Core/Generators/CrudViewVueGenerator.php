@@ -41,7 +41,7 @@ class CrudViewVueGenerator
                     ]);
                 $data['table'] =  $name;
                 $data['camel'] =  $name->camel();
-                $data['title'] =  $name->replace('_',' ')->title();
+                $data['title'] =  $name->absoluteTitle();
                 $data['slug'] =  $name->slug();
                 // $data['repoName'] = $name->singular()->studly() . "Repository";
                 // $data['requestName'] = $name->singular()->studly() . "Request";
