@@ -74,6 +74,19 @@
     - allowed configurable options through this file
 ------------------------------------------------------------------------------
 
+- handle typescript / php predefined name 
+    - case, switch, if
+------------------------------------------------------------------------------
+
+- handle pluralization of irregular plural forms name 
+    - criterion > criteria
+    - stadium > stadia
+    - information > information
+    - equipment > equipment
+------------------------------------------------------------------------------
+
+
+
 
 
 

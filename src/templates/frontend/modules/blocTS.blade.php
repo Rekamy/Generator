@@ -11,12 +11,12 @@ export function {$camel}Factory() {
     const store: any = useStore()
     const api = ${camel}Api
     
-    async function get{$studly->plural()}() : Promise<[$studly]> {
-        let response = await api.all()
+    async function get{$studly->plural()}(query?: string) : Promise<[$studly]> {
+        let response = query ? await api.all(query) : await api.all()
         return response.data.data;
     }
 
-    async function get{$studly}(id: any): Promise<$studly> {
+    async function get{$studly}(id: any, query?: string): Promise<$studly> {
         let response = await api.first(id)
         return response.data;
     }

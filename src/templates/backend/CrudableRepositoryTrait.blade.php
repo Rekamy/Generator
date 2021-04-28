@@ -4,6 +4,7 @@ namespace App\Contracts\Repositories\Concerns;
 
 use App\Contracts\Criteria\DataTableCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
+use App\Contracts\Criteria\RequestExtensionCriteria;
 
 trait CrudableRepository
 {
@@ -13,6 +14,7 @@ trait CrudableRepository
             \$this->pushCriteria(app(DataTableCriteria::class));
         } else {
             \$this->pushCriteria(app(RequestCriteria::class));
+            \$this->pushCriteria(app(RequestExtensionCriteria::class));
             return \$this->paginate();
         }
 
@@ -29,6 +31,8 @@ trait CrudableRepository
 
     public function showAction(\$id)
     {
+        \$this->pushCriteria(app(RequestCriteria::class));
+        \$this->pushCriteria(app(RequestExtensionCriteria::class));
         if (!\$result = \$this->find(\$id))
             throw new Exception('Error Processing Request', 422);
 

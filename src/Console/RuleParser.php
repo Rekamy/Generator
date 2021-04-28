@@ -59,7 +59,7 @@ class RuleParser
                 $rule = 'integer';
                 break;
             case Str::contains($type, ['timestamp', 'datetime']):
-                $rule = 'date:d-m-Y H:i A';
+                $rule = 'date:Y-m-d H:i';
                 break;
 
             default:

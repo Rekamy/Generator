@@ -125,7 +125,7 @@ class AuthController extends Controller
     private function validateRegistration(Request \$request)
     {
         \$rules = [
-            'username' => 'required|min:4|unique:users',
+            (new User)->username() => 'required|min:4|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             // TODO: not implemented yet
@@ -139,7 +139,7 @@ class AuthController extends Controller
     private function validateLogin(Request \$request)
     {
         \$rules = [
-            'username' => 'required|min:4',
+            (new User)->username() => 'required|min:4',
             'password' => 'required|min:8',
         ];
 
