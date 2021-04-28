@@ -58,13 +58,15 @@ export function draw{$studly}Table (tableId) {
         },
         columns: ["
         ?><?php 
-        foreach ($columns as $key => $columns) :
+        $i = 0;
+        foreach ($columns as $columns) :
             $title = \Str::of($columns->getName())->absoluteTitle();
-            if($key < 5) {
+            if($i++ < 5) {
                 echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "' }," ;
             } else {
                 echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "', visible: \"false\" }," ;
             }
+
         endforeach;
 ?><?= "
             {
