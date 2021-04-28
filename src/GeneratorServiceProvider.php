@@ -3,6 +3,7 @@
 namespace Rekamy\Generator;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Stringable;
 use Illuminate\Database\Eloquent\Builder;
 use Rekamy\Generator\Console\Commands\{
     FrontendCrudGenerator,
