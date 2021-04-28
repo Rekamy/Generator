@@ -298,21 +298,5 @@ return [
 
         'source' => 'git@gitlab.com:rekamy/packages/argon-template.git',
 
-        // 'vendor_files' => false,
-
-        // 'own' => false,
-
-        // 'module_views' => [
-
-        //     'create' => base_path('robust-theme-template/WebCreateViewstemplate.blade.php'),
-
-        //     'show'   => base_path('robust-theme-template/WebShowViewstemplate.blade.php'),
-
-        //     'edit'   => base_path('robust-theme-template/WebEditViewstemplate.blade.php'),
-
-        //     'index'  => base_path('robust-theme-template/WebIndexViewstemplate.blade.php'),
-
-        //     'fields' => base_path('robust-theme-template/WebFieldViewstemplate.blade.php'),
-        // ],
     ]
 ];
