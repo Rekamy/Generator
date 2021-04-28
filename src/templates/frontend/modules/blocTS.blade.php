@@ -60,8 +60,6 @@ export function draw{$studly}Table (tableId) {
         ?><?php 
         foreach ($columns as $key => $columns) :
             $title = \Str::of($columns->getName())->absoluteTitle();
-            // $title = $columns->getName();
-            dd($title);
             if($key < 5) {
                 echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "' }," ;
             } else {
