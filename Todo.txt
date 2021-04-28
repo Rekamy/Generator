@@ -1,0 +1,94 @@
+########
+  TODO
+########
+
+------------------------------------------------------------------------------
+- datatable render function use following standard
+
+    ```
+    render: function (data: any, type: any, row: any, meta: any) {
+        let html = `
+        <div>
+            ${row.data1}
+        </div>
+        `
+        return html;
+    }
+    ```
+    RFC: remove meta since its rarely used
+    RFC: use backtick instead of concatenation to preserve view indentation
+------------------------------------------------------------------------------
+
+- datatable data title use studly case
+    ```
+    { data: 'compound_no', title: 'Compound No' },
+    ```
+------------------------------------------------------------------------------
+
+- if has relation, datatable data auto point to the first data of related relation
+    ```
+    { data: 'subdistrict.name', title: 'Subdistrict'},
+    ```
+------------------------------------------------------------------------------
+
+- hide data if total columns more than 5
+    ```
+    { data: 'subdistrict.name', title: 'Subdistrict', visible: false},
+    ```
+------------------------------------------------------------------------------
+
+- handle popup tooltips (global)
+------------------------------------------------------------------------------
+
+- form auto detect format 
+    - date : datepicker
+    - relations / *_id : select2
+------------------------------------------------------------------------------
+
+- dynamic form component
+    - add multiple child of the same model
+------------------------------------------------------------------------------
+
+- tree level data structure (BTree)
+    - case scenario : nested category
+------------------------------------------------------------------------------
+
+- reference crud screen 
+    - guided predefined reference crud 
+------------------------------------------------------------------------------
+
+- plugins 
+    - date time picker
+    - select2 taggable
+    - file upload / file dropzone
+    - wysiwyg editor
+    - switch button
+------------------------------------------------------------------------------
+
+- locale 
+    - multi language features
+------------------------------------------------------------------------------
+
+- generator configuration files 
+    - utilize configuration files
+    - allowed configurable options through this file
+------------------------------------------------------------------------------
+
+
+
+
+######################
+    General Module
+######################
+
+- notification module
+------------------------------------------------------------------------------
+
+- chat module
+------------------------------------------------------------------------------
+
+- template generator for printing (pdf) / notification (mail) 
+------------------------------------------------------------------------------
+
+- resource manager module
+------------------------------------------------------------------------------
