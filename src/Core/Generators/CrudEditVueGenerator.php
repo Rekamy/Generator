@@ -47,10 +47,12 @@ class CrudEditVueGenerator
 
                 $view = view('frontend::crud-flat/CrudEditVue', $data);
 
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+                
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['frontend']['crud'] . "/$name/edit.vue"
+                    resource_path($target) . "/$name/edit.vue"
                 );
 
                 $stub->render();

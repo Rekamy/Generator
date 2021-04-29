@@ -49,10 +49,12 @@ class CrudEditTSGenerator
 
                 $view = view('frontend::crud-flat/CrudEditTS', $data);
 
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+                
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['frontend']['crud'] . "/$name/edit.ts"
+                    resource_path($target) . "/$name/edit.ts"
                 );
 
                 $stub->render();

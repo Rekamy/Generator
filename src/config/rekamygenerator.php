@@ -159,10 +159,9 @@ return [
             'crud_routes' => base_path('routes/crud.php'),
         ],
         'frontend' => [
-            'base' => resource_path("app"),
-            'route' => resource_path("app/src/router/crud"),
-            'crud' => resource_path("app/src/views/crud"),
-            'module' => resource_path("app/src/modules"),
+            'route' => "/src/router/crud",
+            'crud' => "/src/views/crud",
+            'module' => "/src/modules",
         ],
         'migration' => base_path('database/migrations/'),
 

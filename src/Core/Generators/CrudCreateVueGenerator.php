@@ -47,10 +47,12 @@ class CrudCreateVueGenerator
 
                 $view = view('frontend::crud-flat/CrudCreateVue', $data);
 
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+                
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['frontend']['crud'] . "/$name/create.vue"
+                    resource_path($target) . "/$name/create.vue"
                 );
 
                 $stub->render();

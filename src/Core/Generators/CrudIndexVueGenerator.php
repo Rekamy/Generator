@@ -47,10 +47,12 @@ class CrudIndexVueGenerator
 
                 $view = view('frontend::crud-flat/CrudIndexVue', $data);
 
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['frontend']['crud'] . "/$name/index.vue"
+                    resource_path($target) . "/$name/index.vue"
                 );
 
                 $stub->render();

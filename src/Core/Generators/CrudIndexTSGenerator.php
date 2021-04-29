@@ -49,10 +49,12 @@ class CrudIndexTSGenerator
 
                 $view = view('frontend::crud-flat/CrudIndexTS', $data);
 
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+                
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['frontend']['crud'] . "/$name/index.ts"
+                    resource_path($target) . "/$name/index.ts"
                 );
 
                 $stub->render();
