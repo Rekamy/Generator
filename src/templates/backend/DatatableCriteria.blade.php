@@ -94,7 +94,8 @@ class DataTableCriteria implements CriteriaInterface
             foreach (\$orders as \$value) {
                 \$index = \$value['column'];
                 \$sort = \$value['dir'];
-                if (!empty(\$columns[\$index]['data'])) {
+                \$sortable = !empty(\$columns[\$index]['data']) && !\Str::contains(\$columns[\$index]['data'], '.');
+                if (\$sortable) {
                     \$this->query = \$this->query->orderBy(\$columns[\$index]['data'], \$sort);
                 }
             }
