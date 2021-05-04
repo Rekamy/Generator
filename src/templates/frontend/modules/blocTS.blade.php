@@ -64,7 +64,7 @@ export function draw{$studly}Table (tableId) {
             if($i++ < 5) {
                 echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "' }," ;
             } else {
-                echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "', visible: \"false\" }," ;
+                echo "\n\t\t\t{ data: '". $columns->getName() . "', title: '". $title . "', visible: false }," ;
             }
 
         endforeach;

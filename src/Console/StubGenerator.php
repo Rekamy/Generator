@@ -40,31 +40,25 @@ class StubGenerator
      */
     public function render()
     {
-        $overwrite = true;
+        $overwrite = $this->context->options['overwrite'];
+
+        if ($this->target == base_path('routes/crud.php')) {
+            $overwrite = true;
+        }
 
         if (in_array($this->target, $this->context->options->get('dontOverwrite'))) {
             $overwrite = false;
         }
 
         if (file_exists($this->target) && !$overwrite) {
-            // throw new RuntimeException('Cannot generate file. Target ' . $this->target . ' already exists.');
             $this->context->error("Target $this->target already exists.");
-
-            // dd("Target $this->target already exists.");
-        } else {
-
-            // Standard replacements
-            // collect($replacements)->each(function (string $replacement, string $tag) use (&$this->source) {
-            //     $this->source = str_replace($tag, $replacement, $this->source);
-            // });
-
-            $path = pathinfo($this->target, PATHINFO_DIRNAME);
-
-            if (!file_exists($path)) {
-                mkdir($path, 0776, true);
-            }
-
-            file_put_contents($this->target, $this->source);
+            return;
         }
+
+        $path = pathinfo($this->target, PATHINFO_DIRNAME);
+
+        if (!file_exists($path)) mkdir($path, 0776, true);
+
+        file_put_contents($this->target, $this->source);
     }
 }

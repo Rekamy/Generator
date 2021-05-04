@@ -110,6 +110,11 @@ return [
             'failed_jobs',
             'password_resets',
 
+            // telescope
+            'telescope_entries_tags',
+            'telescope_entries',
+            'telescope_monitoring',
+
             // spatie permission
             'model_has_permissions',
             'model_has_roles',
@@ -121,7 +126,8 @@ return [
             'oauth_clients',
             'oauth_personal_access_clients',
             'oauth_refresh_tokens',
-        ]
+        ],
+        'include_tables' => []
     ],
 
     /*
@@ -236,8 +242,11 @@ return [
 
         'relation' => true,
 
+        'overwrite' => true,
+
+        // if overwrite if true, control overwriting scope
         'dontOverwrite' => [
-            app_path('Models/User.php')
+            app_path('Models/User.php'),
         ],
 
     ],
@@ -251,7 +260,7 @@ return [
 
     'template' => [
 
-        'frontend_path' => 'app',
+        'frontend_path' => 'frontend',
 
         'source' => 'git@gitlab.com:rekamy/packages/argon-template.git',
 
