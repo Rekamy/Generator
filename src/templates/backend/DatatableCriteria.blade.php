@@ -53,12 +53,28 @@ class DataTableCriteria implements CriteriaInterface
                 return \$value;
             });
 
+        \$this->loadAnyRelation();
+
         if (\$this->isPaginationable()) \$this->resolvePagination();
 
         \$this->applyFilter();
         \$resource = \$this->query->paginate(\$this->request->get('length'));
         \$resource->setCollection(\$resource->getCollection()->makeVisible(\$this->columns->pluck('data')->toArray()));
         return \$resource;
+    }
+
+    public function loadAnyRelation()
+    {
+        \$this->columns->pluck('data')->each(function (\$column) {
+            if (\Str::contains(\$column, '.')) {
+                \$relations = explode('.', \$column);
+                array_pop(\$relations);
+                \$relations = collect(\$relations)->map(function (\$relation) {
+                    return (string) \Str::of(\$relation)->camel();
+                });
+                \$this->query = \$this->query->with(\$relations->toArray());
+            }
+        });
     }
 
     public function applyFilter()
@@ -87,7 +103,27 @@ class DataTableCriteria implements CriteriaInterface
             \$relations = explode(';', \$with);
             \$this->query = \$this->query->with(\$relations);
         }
+        
+        \$this->applyQueryFilter();
     }
+
+    public function applyQueryFilter()
+    {
+        if (!\$this->request->has('query')) return;
+
+        \$query = \$this->request->get('query');
+
+        if (!empty(\$query['searchField'])) {
+            \$searchable = explode(',', \$query['searchField']);
+        }
+
+        if (!empty(\$query['search'])) {
+            \$search = \$query['search'];
+        }
+
+        \$this->query = \$this->query->search(\$searchable, \$search);
+    }
+    
     /**
      * Check if Request allow pagination.
      *
