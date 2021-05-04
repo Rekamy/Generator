@@ -79,6 +79,8 @@ class DataTableCriteria implements CriteriaInterface
 
     public function applyFilter()
     {
+        \$this->applyColumnsFilter();
+
         if (\$this->request->has('search')) {
             \$keyword = \$this->request->get('search');
             \$dtSearchable = \$this->columns->where('searchable', 'true')->pluck('data')->toArray();
@@ -124,6 +126,19 @@ class DataTableCriteria implements CriteriaInterface
         \$this->query = \$this->query->search(\$searchable, \$search);
     }
     
+    public function applyColumnsFilter()
+    {
+        \$this->columns->whereNotNull('search.value')
+            ->each(function (\$column) {
+                \$search = \$column['search'];
+                if (!\$search['regex']) {
+                    \$this->query = \$this->query->where(\$column['data'], \$search['value']);
+                } else {
+                    \$this->query = \$this->query->where(\$column['data'], 'like', \$search['value']);
+                }
+            });
+    }
+
     /**
      * Check if Request allow pagination.
      *
