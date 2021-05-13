@@ -247,7 +247,6 @@ return [
         // if overwrite if true, control overwriting scope
         'dontOverwrite' => [
             app_path('Models/User.php'),
-            app_path('Models/CaseFile.php'),
         ],
 
     ],
