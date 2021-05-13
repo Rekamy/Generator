@@ -21,7 +21,7 @@ trait BuildConfig
     public $outputDecorator;
     public $progress;
 
-    public function loadConfig() 
+    public function loadConfig()
     {
         $this->config = config('rekamygenerator');
         $this->database = $this->config['database'];
@@ -35,10 +35,19 @@ trait BuildConfig
         $this->frontPath = $this->config['template'];
 
         $this->excludeTables = $this->database['exclude_tables'];
+        $this->includeTables = $this->database['include_tables'];
 
+        // FIXME: on migrate, schema manager does not get latest db struct
         $db = \DB::connection();
         $schema = $db->getDoctrineSchemaManager();
 
         $this->db = $schema;
     }
+
+    // public function reloadTable()
+    // {
+    //     $db = \DB::connection();
+    //     $schema = $db->getDoctrineSchemaManager();
+    //     $this->db = $schema;
+    // }
 }

@@ -21,6 +21,9 @@ class FrontendModuleGenerator
         $this->context->info("Creating Frontend Module...");
         $this->tables = collect($this->context->db->listTableNames())
             ->filter(function ($item) {
+                if (!empty($this->context->includeTables))
+                    return !in_array($item, $this->context->excludeTables) && in_array($item, $this->context->includeTables);
+
                 return !in_array($item, $this->context->excludeTables);
             });
     }
