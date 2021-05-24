@@ -91,10 +91,8 @@ class $className extends Model
 " 
 ?>
 <?php
-if($relations->get($table)) {
-    foreach ($relations->get($table) as $relation) {
-        echo $relation;
-    }
+if($relations) {
+    collect($relations)->each(function ($relation) { echo $relation . "\n"; });
 }
 /*
 foreach ($db->get('constraints') as $constraint) {

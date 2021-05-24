@@ -3,6 +3,7 @@
 namespace Rekamy\Generator\Core;
 
 use DB;
+use Str;
 
 trait BuildConfig
 {
@@ -20,6 +21,7 @@ trait BuildConfig
     // public $output = [];
     public $outputDecorator;
     public $progress;
+    public $relations;
 
     public function loadConfig()
     {
@@ -37,17 +39,73 @@ trait BuildConfig
         $this->excludeTables = $this->database['exclude_tables'];
         $this->includeTables = $this->database['include_tables'];
 
+        $this->relations = collect();
+
         // FIXME: on migrate, schema manager does not get latest db struct
         $db = \DB::connection();
         $schema = $db->getDoctrineSchemaManager();
 
         $this->db = $schema;
+
+        $this->tables = collect($this->db->listTableNames())
+            ->filter(fn ($item) =>  !in_array($item, $this->excludeTables));
+
+        $this->cacheRelationship();
     }
 
-    // public function reloadTable()
-    // {
-    //     $db = \DB::connection();
-    //     $schema = $db->getDoctrineSchemaManager();
-    //     $this->db = $schema;
-    // }
+    private function cacheRelationship()
+    {
+        foreach ($this->tables as $table) {
+            collect($this->db->listTableForeignKeys($table))
+                ->each(function ($fk) use ($table) {
+                    $record = [
+                        'table' => $table,
+                        'targetTable' => $fk->getForeignTableName(),
+                        'relName' => (string) $this->parseName($fk->getLocalColumns()[0])->singular(),
+                        'relType' => 'belongsTo',
+                        'foreignModel' => (string) $this->parseName($fk->getLocalColumns()[0])->singular()->ucfirst(),
+                        'referenceColumn' => $fk->getLocalColumns()[0],
+                        'targetKey' => $fk->getForeignColumns()[0],
+                    ];
+                    $this->relations->push($record);
+                    $inverseRecord = [
+                        'table' => $fk->getForeignTableName(),
+                        'targetTable' => $table,
+                        'relName' => $fk->getForeignColumns()[0] == 'id' ? (string) $this->parseName($table) : (string) $this->parseName($fk->getForeignColumns()[0]),
+                        'relType' => 'hasMany',
+                        'foreignModel' => (string) $this->parseName($table)->singular()->ucfirst(),
+                        'referenceColumn' => $fk->getLocalColumns()[0],
+                        'targetKey' => $fk->getForeignColumns()[0],
+                        'registerBy' => $table,
+                    ];
+                    $this->relations->push($inverseRecord);
+                });
+        }
+
+    }
+
+    private function parseName($name)
+    {
+        $parsedName = $name = \Str::of($name);
+        if ($name->endsWith('_id'))
+            $parsedName = $name->remove('_id');
+
+        return $parsedName->camel();
+    }
+
+    public function makeRelation($detail)
+    {
+        $relType = $detail['relType'];
+        $relName = $detail['relName'];
+        $foreignModel = $detail['foreignModel'];
+        $referenceColumn = $detail['referenceColumn'];
+        $targetKey = $detail['targetKey'];
+
+        $html = "\tpublic function $relName()\n";
+        $html .= "\t{\n";
+        $html .= "\t\treturn \$this->{$relType}({$foreignModel}::class, '$referenceColumn', '$targetKey');\n";
+        $html .= "\t}\n";
+
+        return  $html;
+    }
 }

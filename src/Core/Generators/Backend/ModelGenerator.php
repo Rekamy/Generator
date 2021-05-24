@@ -56,7 +56,10 @@ class ModelGenerator
                     return $column->getNotnull();
                 });
                 if ($this->context->options->get('relation')) {
-                    $data['relations'] = $this->relations;
+                    $data['relations'] = [];
+                    foreach ($this->context->relations->where('table', $table) as $relation) {
+                        array_push($data['relations'], $this->context->makeRelation($relation));
+                    }
                 }
 
                 $view = view('backend::Model', $data);
