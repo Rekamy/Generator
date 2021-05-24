@@ -1,6 +1,6 @@
 <?="<?php
 
-namespace App\Http\Controllers\Base;
+namespace " . $context->namespace['crud_controller'] . ";
 
 use Illuminate\Http\Request;
 use DB;

@@ -17,7 +17,7 @@ class RequestExtensionContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::RequestExtensionCriteria')
+            $view = view('backend::criteria.RequestExtensionCriteria')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

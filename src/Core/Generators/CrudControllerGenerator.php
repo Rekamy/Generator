@@ -22,7 +22,7 @@ class CrudControllerGenerator
     public function generate()
     {
         try {
-            $view = view('backend::CrudController')
+            $view = view('backend::controller.CrudController')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

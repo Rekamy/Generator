@@ -22,7 +22,7 @@ class ExceptionValidationGenerator
     public function generate()
     {
         try {
-            $view = view('backend::ExceptionValidation')
+            $view = view('backend::exception.ExceptionValidation')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

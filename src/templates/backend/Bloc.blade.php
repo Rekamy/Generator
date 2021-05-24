@@ -3,7 +3,7 @@
 
 namespace App\Bloc;
 
-use App\Bloc\Base\CrudBloc;
+use App\Contracts\Bloc\Concerns\CrudBloc;
 use App\Repositories\\$repoName;
 use App\Http\Requests\\$requestName;
 

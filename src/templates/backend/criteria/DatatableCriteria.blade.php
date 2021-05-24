@@ -1,5 +1,7 @@
 <?= "<?php
 
+<?php
+
 namespace App\Contracts\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -16,12 +18,15 @@ class DataTableCriteria implements CriteriaInterface
      * @var \Illuminate\Http\Request
      */
     protected \$request;
+    protected \$resources;
+    protected \$appends;
     protected \$query;
     protected \$columns;
 
     public function __construct(Request \$request)
     {
         \$this->request = \$request;
+        \$this->appends = collect();
     }
 
     public function resolvePagination()
@@ -53,14 +58,26 @@ class DataTableCriteria implements CriteriaInterface
                 return \$value;
             });
 
+
         \$this->loadAnyRelation();
+        \$this->applyQueryScope();
 
         if (\$this->isPaginationable()) \$this->resolvePagination();
 
         \$this->applyFilter();
-        \$resource = \$this->query->paginate(\$this->request->get('length'));
-        \$resource->setCollection(\$resource->getCollection()->makeVisible(\$this->columns->pluck('data')->toArray()));
-        return \$resource;
+
+        \$this->buildResources();
+
+
+        return \$this->resources;
+    }
+
+    public function buildResources()
+    {
+        \$this->resources = \$this->query->paginate(\$this->request->get('length'));
+        \$newCollection = \$this->resources->getCollection();
+        \$newCollection->append(\$this->appends->toArray());
+        \$this->resources->setCollection(\$newCollection);
     }
 
     public function loadAnyRelation()
@@ -69,18 +86,34 @@ class DataTableCriteria implements CriteriaInterface
             if (\Str::contains(\$column, '.')) {
                 \$relations = explode('.', \$column);
                 array_pop(\$relations);
-                \$relations = collect(\$relations)->map(function (\$relation) {
-                    return (string) \Str::of(\$relation)->camel();
-                });
-                \$this->query = \$this->query->with(\$relations->toArray());
+                \$this->query = \$this->query->with(implode('.', \$relations));
             }
         });
     }
 
+    public function applyQueryScope()
+    {
+        // dd(\$this->request->all());
+
+        if (\$this->request->has('scope')) {
+            \$scopes = explode(',', \$this->request->get('scope'));
+            collect(\$scopes)->each(fn (\$scope) => \$this->query = \$this->query->\$scope());
+        }
+
+        if (\$this->request->has('append')) {
+            \$appends = explode(',', \$this->request->get('append'));
+            collect(\$appends)->each(fn (\$append) => \$this->appends->push(\$append));
+        }
+
+        if (\$this->request->has('with')) {
+            \$with = \$this->request->get('with');
+            \$relations = explode(';', \$with);
+            \$this->query = \$this->query->with(\$relations);
+        }
+    }
+
     public function applyFilter()
     {
-        \$this->applyColumnsFilter();
-
         if (\$this->request->has('search')) {
             \$keyword = \$this->request->get('search');
             \$dtSearchable = \$this->columns->where('searchable', 'true')->pluck('data')->toArray();
@@ -100,46 +133,7 @@ class DataTableCriteria implements CriteriaInterface
                 }
             }
         }
-
-        if (\$this->request->has('with')) {
-            \$with = \$this->request->get('with');
-            \$relations = explode(';', \$with);
-            \$this->query = \$this->query->with(\$relations);
-        }
-        
-        \$this->applyQueryFilter();
     }
-
-    public function applyQueryFilter()
-    {
-        if (!\$this->request->has('query')) return;
-
-        \$query = \$this->request->get('query');
-
-        if (!empty(\$query['searchField'])) {
-            \$searchable = explode(',', \$query['searchField']);
-        }
-
-        if (!empty(\$query['search'])) {
-            \$search = \$query['search'];
-        }
-
-        \$this->query = \$this->query->search(\$searchable, \$search);
-    }
-    
-    public function applyColumnsFilter()
-    {
-        \$this->columns->whereNotNull('search.value')
-            ->each(function (\$column) {
-                \$search = \$column['search'];
-                if (!\$search['regex']) {
-                    \$this->query = \$this->query->where(\$column['data'], \$search['value']);
-                } else {
-                    \$this->query = \$this->query->where(\$column['data'], 'like', \$search['value']);
-                }
-            });
-    }
-
     /**
      * Check if Request allow pagination.
      *

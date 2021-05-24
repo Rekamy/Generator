@@ -28,7 +28,7 @@ use Rekamy\Generator\Core\Generators\{
     APIRoutesGenerator,
     DatatableCriteriaContractsGenerator,
     LengthAwarePaginatorContractsGenerator,
-    AppServiceProvidersGenerator,
+    ServiceProvidersGenerator,
     RequestExtensionContractsGenerator,
     BaseRepositoryContractsGenerator,
     RequestCriteriaContractsGenerator,
@@ -91,7 +91,7 @@ class BackendCrudGenerator extends Command
             'file_upload' => FileUploadContractsGenerator::class,
 
             //providers
-            'app_service' => AppServiceProvidersGenerator::class,
+            'service_provider' => ServiceProvidersGenerator::class,
 
             // traits
             'crudable_trait' => CrudableTraitGenerator::class,

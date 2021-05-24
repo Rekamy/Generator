@@ -38,7 +38,7 @@ class ControllerGenerator
                 $data['className'] = $name->singular()->studly() . "Controller";
                 $data['blocName'] = $name->singular()->studly() . "Bloc";
 
-                $view = view('backend::Controller', $data);
+                $view = view('backend::controller.Controller', $data);
 
                 $stub = new StubGenerator(
                     $this->context,
@@ -55,7 +55,8 @@ class ControllerGenerator
         }
     }
 
-    public function resources(){
+    public function resources()
+    {
         try {
             $view = view('backend::UserProfileResource')
                 ->with('context', $this->context);
@@ -68,7 +69,6 @@ class ControllerGenerator
 
             $stub->render();
             $this->context->info("User Profile Resource Created.");
-
         } catch (\Throwable $th) {
             throw $th;
         }

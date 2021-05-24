@@ -17,7 +17,7 @@ class DatatableCriteriaContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::DatatableCriteria')
+            $view = view('backend::criteria.DatatableCriteria')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

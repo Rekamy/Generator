@@ -17,7 +17,7 @@ class LengthAwarePaginatorContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::LengthAwarePaginator')
+            $view = view('backend::override.LengthAwarePaginator')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

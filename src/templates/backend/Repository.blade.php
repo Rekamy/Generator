@@ -6,7 +6,7 @@ namespace $namespace;
 use App\Contracts\Repositories\Concerns\CrudableRepository;
 use App\Contracts\Repositories\CrudRepositoryInterface;
 use App\Models\\$modelName;
-use Prettus\Repository\Eloquent\BaseRepository;
+use App\Contracts\Overrides\BaseRepository;
 
 /**
  * Class $className

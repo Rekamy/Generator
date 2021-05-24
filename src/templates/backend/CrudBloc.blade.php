@@ -1,6 +1,6 @@
 <?="<?php
 
-namespace App\Bloc\Base;
+namespace App\Contracts\Bloc\Concerns;
 
 use App\Contracts\Bloc\Concerns\CrudableBloc;
 use App\Contracts\Bloc\Concerns\HasRepository;

@@ -25,7 +25,7 @@ class AuthControllerGenerator
         try {
             $data['context'] = $this->context;
 
-            $view = view('backend::AuthController', $data);
+            $view = view('backend::controller.AuthController', $data);
 
             $stub = new StubGenerator(
                 $this->context,

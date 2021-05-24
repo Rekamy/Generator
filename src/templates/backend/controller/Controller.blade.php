@@ -1,7 +1,7 @@
 <?=
 "<?php
 
-namespace App\Http\Controllers;
+namespace " . $context->namespace['controller'] . ";
 
 use App\Http\Controllers\Base\CrudController;
 use App\Bloc\\$blocName;

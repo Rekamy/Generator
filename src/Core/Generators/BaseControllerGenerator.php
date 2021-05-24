@@ -12,7 +12,7 @@ use Symfony\Component\Console\Helper\TableCell;
 class BaseControllerGenerator
 {
     private $context;
- 
+
     public function __construct($context)
     {
         $this->context = $context;
@@ -22,7 +22,7 @@ class BaseControllerGenerator
     public function generate()
     {
         try {
-            $view = view('backend::BaseController')
+            $view = view('backend::controller.BaseController')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(
@@ -33,7 +33,6 @@ class BaseControllerGenerator
 
             $stub->render();
             $this->context->info("BaseController Created.");
-
         } catch (\Throwable $th) {
             throw $th;
         }

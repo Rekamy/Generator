@@ -14,17 +14,19 @@
                 <div class=\"card-body\">
                     <form>
                         <h6 class=\"heading-small text-muted mb-4\">Details</h6>
-                        <div class=\"pl-lg-4\">" ?>
+                        <div class=\"pl-lg-4\">
+                            <div class=\"row\">" ?>
 <?php foreach ($columns as $column) : 
     $name = Str::of($column->getName());
 ?><?= "
-                            <div class=\"col-lg-6\">
-                                <div class=\"form-group\">
-                                    <label class=\"form-control-label\" for=\"create-{$camel}-{$name}\">{$name->studly()}</label>
-                                    <input type=\"text\" v-model=\"{$camel}.{$name}\" id=\"create-{$camel}-{$name}\" class=\"form-control\">
-                                </div>
-                            </div>" ?>
+                                <div class=\"col-lg-6\">
+                                    <div class=\"form-group\">
+                                        <label class=\"form-control-label\" for=\"create-{$camel}-{$name}\">{$name->studly()}</label>
+                                        <input type=\"text\" v-model=\"{$camel}.{$name}\" id=\"create-{$camel}-{$name}\" class=\"form-control\">
+                                    </div>
+                                </div>" ?>
 <?php endforeach; ?><?= "
+                            </div>
                         </div>
                         <hr class=\"my-4\" />
                         <div class=\"col text-right\">

@@ -17,7 +17,7 @@ class BaseRepositoryContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::BaseRepository')
+            $view = view('backend::override.BaseRepository')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

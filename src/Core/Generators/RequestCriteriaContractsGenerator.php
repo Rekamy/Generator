@@ -17,7 +17,7 @@ class RequestCriteriaContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::RequestCriteria')
+            $view = view('backend::criteria.RequestCriteria')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(

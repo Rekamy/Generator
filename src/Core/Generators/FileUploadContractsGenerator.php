@@ -17,7 +17,7 @@ class FileUploadContractsGenerator
     public function generate()
     {
         try {
-            $view = view('backend::FileUpload')
+            $view = view('backend::utils.FileUpload')
                 ->with('context', $this->context);
 
             $stub = new StubGenerator(
