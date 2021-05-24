@@ -1,7 +1,5 @@
 <?= "<?php
 
-<?php
-
 namespace App\Contracts\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;

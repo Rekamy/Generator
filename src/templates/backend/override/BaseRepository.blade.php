@@ -1,6 +1,6 @@
 <?= "<?php
 
-namespace App\Contracts\Repositories\Base;
+namespace App\Contracts\Overrides;
 
 use Prettus\Repository\Events\RepositoryEntityCreated;
 use Prettus\Repository\Events\RepositoryEntityCreating;
@@ -24,7 +24,7 @@ abstract class BaseRepository extends PrettusBaseRepository
      *
      * @return mixed
      */
-    public function create(array \$attributes)
+    public function createWithRelation(array \$attributes)
     {
         if (!is_null(\$this->validator)) {
             // we should pass data that has been casts by the model
@@ -73,7 +73,7 @@ abstract class BaseRepository extends PrettusBaseRepository
         // \$relationGroup = ['HasOne'];
 
         \$relations = [];
-        \$classNamespace = \"Illuminate\Database\Eloquent\Relations\\\";
+        \$classNamespace = \"" . "Illuminate\Database\Eloquent\Relations\\" . "\\\";
         foreach (\$reflector->getMethods() as \$key => \$reflectionMethod) {
 
             \$returnType = \$reflectionMethod->getReturnType();

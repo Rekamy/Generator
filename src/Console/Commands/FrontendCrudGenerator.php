@@ -5,7 +5,7 @@ namespace Rekamy\Generator\Console\Commands;
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
 use Symfony\Component\Console\Helper\Table;
-use Rekamy\Generator\Core\Generators\{
+use Rekamy\Generator\Core\Generators\Frontend\{
     BaseTSGenerator,
     BaseVueGenerator,
     VueRouteGenerator,

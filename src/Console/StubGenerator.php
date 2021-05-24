@@ -58,7 +58,7 @@ class StubGenerator
         $path = pathinfo($this->target, PATHINFO_DIRNAME);
 
         if (!file_exists($path)) mkdir($path, 0776, true);
-
+        
         file_put_contents($this->target, $this->source);
     }
 }

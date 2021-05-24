@@ -23,7 +23,7 @@ trait CrudableRepository
 
     public function storeAction(\$input)
     {
-        if (!\$result = \$this->create(\$input))
+        if (!\$result = \$this->createWithRelation(\$input))
             throw new Exception('Error Processing Request', 422);
 
         return \$result;
