@@ -57,10 +57,7 @@ class FrontendModuleGenerator
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except([
-                'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-                'deleted_at', 'deleted_by', 'remark',
-            ]);
+            ->except($this->context->database['skipColumns']);
 
         $view = view('frontend::modules/apiTS', $data);
 
@@ -87,12 +84,27 @@ class FrontendModuleGenerator
         $data['camel'] = $name->camel();
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
-        $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except([
-                'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-                'deleted_at', 'deleted_by', 'remark',
-            ]);
 
+        $fkColumns = collect($this->context->db->listTableForeignKeys($table))->map(fn ($col) => $col->getColumns()[0])->values();
+        $indexColumns = collect($this->context->db->listTableIndexes($table))->map(fn ($col) => $col->getColumns()[0])->values();
+        $skipColumns = collect()
+            ->merge($fkColumns)
+            ->merge($indexColumns)
+            ->merge($this->context->database['skipColumns'])->unique();
+
+        $data['columns'] = collect($this->context->db->listTableColumns($table))
+            ->except($skipColumns->toArray());
+        $relColumns = [];
+        $this->context->relations->where('table', $table)->where('relType', 'belongsTo')
+            ->each(function ($relation) use ($table, &$relColumns) {
+                // FIXME: check implementation
+                $descriptorColumn = $this->context->getDescriptorColumn($table);
+                if ($descriptorColumn) {
+                    $relColumns[$relation['relName']] = $relation['relName'] . '.' . $descriptorColumn->getName();
+                }
+            });
+
+        $data['relationColumns'] = $relColumns;
         $view = view('frontend::modules/blocTS', $data);
 
         $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
@@ -119,10 +131,16 @@ class FrontendModuleGenerator
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except([
-                'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-                'deleted_at', 'deleted_by', 'remark',
-            ]);
+            ->except($this->context->database['skipColumns']);
+        $data['imports'] = [];
+        $additional = $this->context->relations
+            ->where('table', $table);
+        $additionalAttributes = $additional->where('relType', 'belongsTo');
+        $additionalArray = $additional->where('relType', 'hasMany');
+
+        $data['additionalAttributes'] = $additionalAttributes->pluck('foreignModel', 'relName')->toArray();
+        $data['additionalArray'] = $additionalArray->pluck('foreignModel', 'relName')->toArray();
+        $data['imports'][] = "import { {$additional->pluck("foreignModel")->implode(', ')} } from '@/modules';";
 
         $view = view('frontend::modules/modelTS', $data);
 
@@ -150,10 +168,7 @@ class FrontendModuleGenerator
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except([
-                'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-                'deleted_at', 'deleted_by', 'remark',
-            ]);
+            ->except($this->context->database['skipColumns']);
 
         $view = view('frontend::modules/storeTS', $data);
 
@@ -181,10 +196,7 @@ class FrontendModuleGenerator
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
         $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except([
-                'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-                'deleted_at', 'deleted_by', 'remark',
-            ]);
+            ->except($this->context->database['skipColumns']);
 
         $view = view('frontend::modules/indexTS', $data);
 

@@ -58,6 +58,7 @@ trait BuildConfig
         foreach ($this->tables as $table) {
             collect($this->db->listTableForeignKeys($table))
                 ->each(function ($fk) use ($table) {
+
                     $record = [
                         'table' => $table,
                         'targetTable' => $fk->getForeignTableName(),
@@ -81,7 +82,6 @@ trait BuildConfig
                     $this->relations->push($inverseRecord);
                 });
         }
-
     }
 
     private function parseName($name)
@@ -100,12 +100,33 @@ trait BuildConfig
         $foreignModel = $detail['foreignModel'];
         $referenceColumn = $detail['referenceColumn'];
         $targetKey = $detail['targetKey'];
+        $relModel = ucfirst($relType);
 
-        $html = "\tpublic function $relName()\n";
+        $html = "\tpublic function $relName() : $relModel\n";
         $html .= "\t{\n";
         $html .= "\t\treturn \$this->{$relType}({$foreignModel}::class, '$referenceColumn', '$targetKey');\n";
         $html .= "\t}\n";
 
         return  $html;
+    }
+
+    public function getDescriptorColumn($table)
+    {
+        // FIXME: check implementation
+        $fkColumns = collect($this->db->listTableForeignKeys($table))
+            ->map(fn ($col) => $col->getColumns()[0])->values();
+        // $indexColumns = collect($this->db->listTableIndexes($table))
+        //     ->map(fn ($col, $key) => ['column' => $col->getColumns()[0], 'table' => $key]);
+        $indexColumns = collect($this->db->listTableIndexes($table))
+            ->filter(fn ($col, $key) => $key == 'primary')
+            ->map(fn ($col) => $col->getColumns()[0])->values();
+
+        $skipColumns = collect()
+            ->merge($fkColumns)
+            ->merge($indexColumns)
+            ->merge($this->database['skipColumns'])->unique();
+
+        return collect($this->db->listTableColumns($table))->except($skipColumns->toArray())
+            ->first(fn ($col) => !\Str::endsWith($col->getName(), '_id'));
     }
 }

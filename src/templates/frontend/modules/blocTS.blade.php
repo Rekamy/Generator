@@ -68,6 +68,11 @@ export function draw{$studly}Table (tableId) {
             }
 
         endforeach;
+
+        foreach ($relationColumns as $name => $column) :
+            $title = (string) \Str::of($name)->studly()->absoluteTitle();
+            echo "\n\t\t\t{ data: '{$column}', title: '$title' }," ;
+        endforeach;
 ?><?= "
             {
                 title: \"Action\",
