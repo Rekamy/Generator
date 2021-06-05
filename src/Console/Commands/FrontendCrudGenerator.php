@@ -72,21 +72,21 @@ class FrontendCrudGenerator extends Command
     public function generate()
     {
         $generators = [
-            // 'base' => DashboardGenerator::class,
+            'base' => DashboardGenerator::class,
 
-            // 'route' => VueRouteGenerator::class,
+            'route' => VueRouteGenerator::class,
 
-            // 'crudIndexVue' => CrudIndexVueGenerator::class,
-            // 'crudIndexTS' => CrudIndexTSGenerator::class,
+            'crudIndexVue' => CrudIndexVueGenerator::class,
+            'crudIndexTS' => CrudIndexTSGenerator::class,
 
-            // 'crudCreateVue' => CrudCreateVueGenerator::class,
-            // 'crudCreateTS' => CrudCreateTSGenerator::class,
+            'crudCreateVue' => CrudCreateVueGenerator::class,
+            'crudCreateTS' => CrudCreateTSGenerator::class,
 
-            // 'crudViewVue' => CrudViewVueGenerator::class,
-            // 'crudViewTS' => CrudViewTSGenerator::class,
+            'crudViewVue' => CrudViewVueGenerator::class,
+            'crudViewTS' => CrudViewTSGenerator::class,
 
-            // 'crudEditVue' => CrudEditVueGenerator::class,
-            // 'crudEditTS' => CrudEditTSGenerator::class,
+            'crudEditVue' => CrudEditVueGenerator::class,
+            'crudEditTS' => CrudEditTSGenerator::class,
 
             'frontendModule' => FrontendModuleGenerator::class,
         ];
