@@ -1,4 +1,4 @@
-<?= 
+<?=
 "
 import { api } from '@/core/services/api';
 import { User } from './../user';
@@ -16,7 +16,7 @@ export class AuthApi {
     }
 
     async logout (): Promise<any>{
-        return await api.post<any>('/logout',null,true);
+        return await api.post<any>('/logout');
     }
 
     async register (data: User): Promise<any> {

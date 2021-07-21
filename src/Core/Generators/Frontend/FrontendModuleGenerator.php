@@ -133,12 +133,13 @@ class FrontendModuleGenerator
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except($this->context->database['skipColumns']);
         $data['imports'] = [];
-        $additional = $this->context->relations
-            ->where('table', $table);
+        $additional = $this->context->relations->where('table', $table)->whereNotIn('foreignModel' , $this->context->database['skipColumns']);
         $additionalAttributes = $additional->where('relType', 'belongsTo');
+
         $additionalArray = $additional->where('relType', 'hasMany');
 
         $data['additionalAttributes'] = $additionalAttributes->pluck('foreignModel', 'relName')->toArray();
+
         $data['additionalArray'] = $additionalArray->pluck('foreignModel', 'relName')->toArray();
         $data['imports'][] = "import { {$additional->pluck("foreignModel")->implode(', ')} } from '@/modules';";
 

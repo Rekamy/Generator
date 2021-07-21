@@ -42,17 +42,22 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace(\$this->namespace)
-                ->group(base_path('routes/api.php'));
+                ->group(function () {
+                    collect(glob(base_path('/routes/api/*.php')))
+                        ->reject(fn (\$value) => \$value == base_path('/routes/api/crud.php'))
+                        ->each(fn (\$path) => require \$path);
+                });
 
+            // Routes Resources should register last in this closure
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace(\$this->namespace)
-                ->group(base_path('routes/crud.php'));
-
-            Route::middleware('web')
-                ->namespace(\$this->namespace)
-                ->group(base_path('routes/web.php'));
+                ->group(base_path('/routes/api/crud.php'));
         });
+
+        Route::middleware('web')
+            ->namespace(\$this->namespace)
+            ->group(base_path('/routes/web.php'));
     }
 
     /**

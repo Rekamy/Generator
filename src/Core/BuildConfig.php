@@ -98,6 +98,8 @@ trait BuildConfig
         $relType = $detail['relType'];
         $relName = $detail['relName'];
         $foreignModel = $detail['foreignModel'];
+
+        if(!class_exists($foreignModel)) return;
         $referenceColumn = $detail['referenceColumn'];
         $targetKey = $detail['targetKey'];
         $relModel = ucfirst($relType);
