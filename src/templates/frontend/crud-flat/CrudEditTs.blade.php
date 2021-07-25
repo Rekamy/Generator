@@ -1,24 +1,32 @@
 <?=
 "
-import { Vue, setup } from 'vue-class-component';
+import { defineComponent, onMounted, ref } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
 import { widget } from \"@/core/utils/widget\";
 
-export default class Edit{$studly}Page extends Vue {
-    {$camel}Bloc = setup(() => {$camel}Factory())
-    $camel = new $studly
+export default defineComponent({
+    setup() {
+        const { update{$studly}, get{$studly} } = {$camel}Factory();
+        const route = useRoute();
+        const $camel = ref(new $studly);
+        {$camel}.value.id = route.params.id
 
-    async created() {
-        this.{$camel}.id = this.\$route.params.id
-        this.{$camel} = await this.{$camel}Bloc.get{$studly}(this.{$camel}.id);
+        onMounted(async () {
+            {$camel}.value = await get{$studly}({$camel}.value.id);
+        })
+
+        const save = async () => {
+            const router = useRouter();
+            {$camel}.value = await update{$studly}({$camel}.value);
+            widget.alertSuccess('Good Job!', 'You have successfully edit this $title');
+            router.back()
+        }   
+
+        return { $camel, save }
     }
-
-    async save() {
-        this.$camel = await this.{$camel}Bloc.update{$studly}(this.{$camel});
-        widget.alertSuccess('Good Job!', 'You have successfully edit this $title');
-        this.\$router.back()
-    }   
-}
+    
+});
 
 "
 ?>

@@ -1,19 +1,26 @@
 <?=
 "
-import { Vue, setup } from 'vue-class-component';
+import { defineComponent, ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { $studly, {$camel}Factory } from \"@/modules/{$table}\";
 import { widget } from \"@/core/utils/widget\";
 
-export default class Create{$studly}Page extends Vue {
-    {$camel}Bloc = setup(() => {$camel}Factory())
-    $camel = new $studly
+export default defineComponent({
+    setup() {
+        const { create{$studly} } = {$camel}Factory())
+        const $camel = ref(new $studly)
 
-    async save() {
-        this.{$camel} = await this.{$camel}Bloc.create{$studly}(this.{$camel});
-        widget.alertSuccess('Good Job!', 'You have successfully created a $title');
-        this.\$router.replace(`/crud/{$slug}/\${this.{$camel}.id}`)
+        const save = async () => {
+            const router = useRouter();
+            {$camel}.value = await create{$studly}({$camel}.value);
+            widget.alertSuccess('Good Job!', 'You have successfully created a $title');
+            router.replace(`/crud/{$slug}/\${{$camel}.value.id}`);
+        }
+
+        return { $camel, save }
     }
-}
+
+});
 
 "
 ?>
