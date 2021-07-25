@@ -51,9 +51,10 @@ export function {$camel}Factory() {
 }
 
 export function draw{$studly}Table (tableId) {
-    const router = useRouter()
-    const { destroy{$studly} } = {$camel}Factory()
-    const api = {$camel}Api
+    const router = useRouter();
+    const { destroy{$studly} } = {$camel}Factory();
+    const api = {$camel}Api;
+    const { reload, search } = dataTableApi(tableId);
     const dtOptions = {
         ajax: {
             url: api.getEndpoint(),
@@ -128,7 +129,7 @@ export function draw{$studly}Table (tableId) {
         
     }
 
-    return { options: reactive(dtOptions), ...dataTableApi(tableId) }
+    return { options: reactive(dtOptions), reload, search }
 }
 
 "

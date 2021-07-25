@@ -1,7 +1,7 @@
 <?=
 
 "
-import { widget } from \"@/core/utils\";
+import { defineComponent } from \"vue\";
 import { draw{$studly}Table } from \"@/modules\";
 
 export default defineComponent({
