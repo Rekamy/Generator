@@ -7,17 +7,17 @@ import { widget } from \"@/core/utils/widget\";
 
 export default defineComponent({
     setup() {
-        const { update{$studly}, get{$studly} } = {$camel}Factory();
         const route = useRoute();
+        const router = useRouter();
+        const { update{$studly}, get{$studly} } = {$camel}Factory();
         const $camel = ref(new $studly);
         {$camel}.value.id = route.params.id
 
-        onMounted(async () {
+        onMounted(async () => {
             {$camel}.value = await get{$studly}({$camel}.value.id);
         })
 
         const save = async () => {
-            const router = useRouter();
             {$camel}.value = await update{$studly}({$camel}.value);
             widget.alertSuccess('Good Job!', 'You have successfully edit this $title');
             router.back()

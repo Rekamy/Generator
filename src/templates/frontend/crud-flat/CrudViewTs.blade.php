@@ -9,17 +9,17 @@ import { widget } from \"@/core/utils\";
 export default defineComponent({
     setup() {
         const route = useRoute();
+        const router = useRouter();
         const { get{$studly}, destroy{$studly} } = {$camel}Factory();
         const $camel = ref(new $studly);
         {$camel}.value.id = route.params.id;
 
-        onMounted(() => {
+        onMounted(async () => {
             {$camel}.value = await get{$studly}({$camel}.value.id);
         })
 
-        const destroy = async (data: any) => {
-            const router = useRouter();
-            const { isConfirmed } = await widget.alertDelete()
+        const destroy = async () => {
+            const { isConfirmed } = await widget.confirm()
             try {
                 if (!isConfirmed) {
                     widget.alertSuccess('Deletion abort.', 'Your data is save.');
