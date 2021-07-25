@@ -1,13 +1,14 @@
 <?=
 
 "
-import { Vue, setup } from \"vue-class-component\";
-import { widget } from \"@/core/utils/widget\";
-import { draw{$studly}Table } from \"@/modules/{$table}\";
+import { widget } from \"@/core/utils\";
+import { draw{$studly}Table } from \"@/modules\";
 
-export default class {$studly}Page extends Vue {
-    table{$studly} = setup(() => draw{$studly}Table('#{$camel}List'))
-}
+export default defineComponent({
+    setup() {
+        return { ...draw{$studly}Table('#{$camel}List') }
+    }
+})
 
 "
 ?>
