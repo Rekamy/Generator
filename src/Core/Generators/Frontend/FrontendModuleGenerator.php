@@ -38,8 +38,8 @@ class FrontendModuleGenerator
                 $this->generateModel($table);
                 $this->generateStore($table);
                 $this->generateIndex($table);
-                $this->generateAuth();
             }
+            // $this->generateAuth();
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -202,7 +202,6 @@ class FrontendModuleGenerator
         $view = view('frontend::modules/indexTS', $data);
 
         $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
-
         $stub = new StubGenerator(
             $this->context,
             $view->render(),

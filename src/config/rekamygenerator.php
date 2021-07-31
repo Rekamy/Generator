@@ -245,11 +245,21 @@ return [
                 'path' => base_path('routes/api/api.php'),
                 'namespace' => null,
             ],
+            'web_routes' => [
+                'path' => base_path('routes/web.php'),
+            ],
+
         ],
         'frontend' => [
-            'route' => "/src/router/crud",
-            'crud' => "/src/views/crud",
-            'module' => "/src/modules",
+            'route' => [
+                'path' => '/src/router/crud',
+            ],
+            'crud' => [
+                'path' => '/src/views/crud',
+            ],
+            'module' => [
+                'path' => '/src/modules',
+            ],
         ],
         'migration' => base_path('database/migrations/'),
 
@@ -263,49 +273,49 @@ return [
     */
 
     // Namespace for the generated files.
-    'namespace' => [
-        'model' => 'App\Models',
-        'bloc' => 'App\Bloc',
-        'repository' => 'App\Repositories',
-        'controller' => 'App\Http\Controllers',
-        'request' => 'App\Http\Requests',
-        'exception' => 'App\Exceptions',
-        'criteria' => 'App\Contracts\Criteria',
-        'overrides' => 'App\Contracts\Overrides',
-        'utilities' => 'App\Contracts\Utilities',
-        'service_provider' => 'App\Providers',
-        'crudable_trait' => 'App\Contracts\Bloc\Concerns',
-        'crudable_repository_trait' => 'App\Contracts\Repository\Concerns',
-        'has_repository_trait' => 'App\Contracts\Bloc\Concerns',
-        'has_request_trait' => 'App\Contracts\Bloc\Concerns',
-        'has_auditor_relation_trait' => 'App\Contracts\Bloc\Concerns',
-        'base_controller' => 'App\Http\Controllers\Base',
-        'crud_controller' => 'App\Http\Controllers\Base',
-        'base_bloc' => 'App\Bloc\Base',
-        'crud_bloc' => '',
-        'crud_repository_interface' => '',
-        'crud_bloc_Interface' => '',
-        'request_interface' => '',
-        'routes_api' => '',
+    // 'namespace' => [
+    //     'model' => 'App\Models',
+    //     'bloc' => 'App\Bloc',
+    //     'repository' => 'App\Repositories',
+    //     'controller' => 'App\Http\Controllers',
+    //     'request' => 'App\Http\Requests',
+    //     'exception' => 'App\Exceptions',
+    //     'criteria' => 'App\Contracts\Criteria',
+    //     'overrides' => 'App\Contracts\Overrides',
+    //     'utilities' => 'App\Contracts\Utilities',
+    //     'service_provider' => 'App\Providers',
+    //     'crudable_trait' => 'App\Contracts\Bloc\Concerns',
+    //     'crudable_repository_trait' => 'App\Contracts\Repository\Concerns',
+    //     'has_repository_trait' => 'App\Contracts\Bloc\Concerns',
+    //     'has_request_trait' => 'App\Contracts\Bloc\Concerns',
+    //     'has_auditor_relation_trait' => 'App\Contracts\Bloc\Concerns',
+    //     'base_controller' => 'App\Http\Controllers\Base',
+    //     'crud_controller' => 'App\Http\Controllers\Base',
+    //     'base_bloc' => 'App\Bloc\Base',
+    //     'crud_bloc' => '',
+    //     'crud_repository_interface' => '',
+    //     'crud_bloc_Interface' => '',
+    //     'request_interface' => '',
+    //     'routes_api' => '',
 
-        // 'model'                 => 'App\Models',
+    //     // 'model'                 => 'App\Models',
 
-        // 'repository'            => 'App\Repositories',
+    //     // 'repository'            => 'App\Repositories',
 
-        // 'bloc'                  => 'App\Bloc',
+    //     // 'bloc'                  => 'App\Bloc',
 
-        // 'base_controller'       => 'App\Http\Controllers\Base',
+    //     // 'base_controller'       => 'App\Http\Controllers\Base',
 
-        // 'app_base_controller'   => 'App\Http\Controllers',
+    //     // 'app_base_controller'   => 'App\Http\Controllers',
 
-        // 'api_request'           => 'App\Http\Requests\API',
+    //     // 'api_request'           => 'App\Http\Requests\API',
 
-        // 'api_controller'        => 'App\Http\Controllers\API',
+    //     // 'api_controller'        => 'App\Http\Controllers\API',
 
-        // 'web_request'           => 'App\Http\Requests',
+    //     // 'web_request'           => 'App\Http\Requests',
 
-        // 'web_controller'        => 'App\Http\Controllers',
-    ],
+    //     // 'web_controller'        => 'App\Http\Controllers',
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -343,7 +353,7 @@ return [
 
     'template' => [
 
-        'frontend_path' => 'frontend',
+        'frontend_path' => 'app',
 
         'source' => 'git@gitlab.com:rekamy/packages/argon-template.git',
 

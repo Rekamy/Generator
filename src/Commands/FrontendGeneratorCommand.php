@@ -20,7 +20,7 @@ use Rekamy\Generator\Core\Generators\Frontend\{
     CrudEditVueGenerator,
     DashboardGenerator,
     FrontendModuleGenerator,
-    VueServicesStorage,
+    WebRoutesRelayGenerator,
 };
 
 
@@ -73,6 +73,7 @@ class FrontendGeneratorCommand extends Command
         $generators = [
             'base' => DashboardGenerator::class,
 
+            'web_route' => WebRoutesRelayGenerator::class,
             'route' => VueRouteGenerator::class,
 
             'crudIndexVue' => CrudIndexVueGenerator::class,

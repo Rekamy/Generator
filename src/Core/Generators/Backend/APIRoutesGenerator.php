@@ -26,75 +26,48 @@ class APIRoutesGenerator
     public function generate()
     {
         try {
-            $data = [
-                'routes' => [],
-            ];
-            foreach ($this->tables as $key => $table) {
-                $data['routes'][] = [
-                    "className" => Str::of($table)->singular()->studly() . "Controller",
-                    "routeName" => Str::of($table)->singular()->slug()
-                ];
-            }
-
-            $view = view('backend::routes.CrudAPIRoutes', $data);
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                $this->context->path['backend']['crud_routes']['path']
-            );
-
-            $stub->render();
-            $this->context->info("Api Route Created.");
+            $this->crudRoutes();
+            $this->authRoutes();
         } catch (\Throwable $th) {
             throw $th;
         }
     }
-    
+
     public function authRoutes()
     {
-        try {
+        $view = view('backend::routes.AuthAPIRoutes');
 
-            $view = view('backend::routes.AuthAPIRoutes');
+        $stub = new StubGenerator(
+            $this->context,
+            $view->render(),
+            $this->context->path['backend']['api_routes']['path']
+        );
 
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                $this->context->path['backend']['api_routes']['path']
-            );
-
-            $stub->render();
-            $this->context->info("Api Route Created.");
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+        $stub->render();
+        $this->context->info("Api Route Created.");
     }
-    
+
     public function crudRoutes()
     {
-        try {
-            $data = [
-                'routes' => [],
+        $data = [
+            'routes' => [],
+        ];
+        foreach ($this->tables as $key => $table) {
+            $data['routes'][] = [
+                "className" => Str::of($table)->singular()->studly() . "Controller",
+                "routeName" => Str::of($table)->singular()->slug()
             ];
-            foreach ($this->tables as $key => $table) {
-                $data['routes'][] = [
-                    "className" => Str::of($table)->singular()->studly() . "Controller",
-                    "routeName" => Str::of($table)->singular()->slug()
-                ];
-            }
-
-            $view = view('backend::routes.CrudAPIRoutes', $data);
-
-            $stub = new StubGenerator(
-                $this->context,
-                $view->render(),
-                $this->context->path['backend']['crud_routes']['path']
-            );
-
-            $stub->render();
-            $this->context->info("Api Route Created.");
-        } catch (\Throwable $th) {
-            throw $th;
         }
+
+        $view = view('backend::routes.CrudAPIRoutes', $data);
+
+        $stub = new StubGenerator(
+            $this->context,
+            $view->render(),
+            $this->context->path['backend']['crud_routes']['path']
+        );
+
+        $stub->render();
+        $this->context->info("Api Route Created.");
     }
 }

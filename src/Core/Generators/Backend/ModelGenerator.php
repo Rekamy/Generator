@@ -49,7 +49,7 @@ class ModelGenerator
                 $data['isUuid'] = ($data['uuid'] == "string");
                 $data['softDelete'] = $data['columns']->get('deleted_at') && $this->context->options->get('softDelete');
                 $data['className'] = Str::of($table)->singular()->studly();
-                $data['namespace'] = $this->context->namespace['model'];
+                $data['namespace'] = $this->context->path['backend']['model']['namespace'];
                 $data['notNullColumns'] = $data['columns']->filter(function ($column) {
                     return $column->getNotnull();
                 });

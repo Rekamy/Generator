@@ -31,6 +31,7 @@ class InitGeneratorCommand extends Command
     {
         $this->loadConfig();
         $commands = collect();
+        $frontendPath = $this->template['frontend_path'];
 
         if ($this->confirm('Generate migration from current database?', false)) {
             $commands->push(['artisan' => 'generate:migration']);
@@ -52,7 +53,7 @@ class InitGeneratorCommand extends Command
             $commands->push(['artisan' => 'generate:frontend']);
 
         if ($this->confirm('Build application on complete generation?', true))
-            $commands->push(['shell' => 'cd resources/frontend && npm run build']);
+            $commands->push(['shell' => "cd resources/{$frontendPath} && npm run build"]);
 
         $commands->each(function ($command) {
             if (!empty($command['artisan'])) {

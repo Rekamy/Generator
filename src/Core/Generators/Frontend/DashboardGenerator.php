@@ -30,11 +30,8 @@ class DashboardGenerator
         try {
 
             $useLocal = true;
-            $frontendName = 'frontend';
+            $frontendName = $this->context->template['frontend_path'];
             $gitTemplate = "git@gitlab.com:rekamy/packages/argon-template.git";
-
-            if (!empty($this->context->template['frontend_path']))
-                $frontendName = $this->context->template['frontend_path'];
 
             if (!empty($this->context->template['source']) && !$useLocal) {
                 $gitTemplate = $this->context->template['source'];
@@ -51,12 +48,14 @@ class DashboardGenerator
                     copy($frontendPath . '/.env.example', $frontendPath . '/.env');
                 return;
             }
-            
+
             if($useLocal) {
                 $command =  "cp -r '$gitTemplate' '$resourcesPath\\$frontendName' ";
+                $this->context->info($command);
                 exec($command);
             } else {
                 $command =  "cd $resourcesPath && git clone --depth=1 $gitTemplate $frontendName";
+                $this->context->info($command);
                 exec($command);
             }
             $this->context->info("Installing dependency...");

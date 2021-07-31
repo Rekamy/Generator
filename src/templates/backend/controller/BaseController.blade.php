@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function success(\$message, \$data = null)
+    public function success(\$message = "Success", \$data = null)
     {
         return response()->json([
             'message' => \$message,
@@ -28,7 +28,7 @@ class Controller extends BaseController
 
     public function web()
     {
-        return redirect('/vue/');
+        return redirect('/{$context->template['frontend_path']}/');
     }
 }
 SCRIPT;

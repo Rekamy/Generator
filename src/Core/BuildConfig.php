@@ -14,7 +14,7 @@ trait BuildConfig
     public $generate;
     public $path;
     public $options;
-    public $namespace;
+    // public $namespace;
     public $appName;
     public $template;
     public $db = [];
@@ -31,7 +31,7 @@ trait BuildConfig
         $this->path = $this->config['setup'];
         $this->generate = $this->config['generate'];
         $this->options = collect($this->config['options']);
-        $this->namespace = $this->config['namespace'];
+        // $this->namespace = $this->config['namespace'];
         $this->appName = $this->config['app_name'];
         $this->template = $this->config['template'];
 

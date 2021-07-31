@@ -82,9 +82,9 @@ export function draw{$studly}Table (tableId) {
                 data: \"id\",
                 render: function (data: any, type: any, row: any, meta: any) {
                     let html = `<div class=\"btn-group\" role=\"group\">`
-                    html += `<button type=\"button\" class=\"btn btn-success btn-sm view\" id=\"{$camel}ViewAction\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" ></i></button>`
-                    html += `<button type=\"button\" class=\"btn btn-primary btn-sm edit\" id=\"{$camel}EditAction\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\"></i></button>`
-                    html += `<button type=\"button\" class=\"btn btn-danger btn-sm destroy\"id=\"{$camel}DestroyAction\"><i class=\"far fa-trash-alt\" data-placement=\"top\" title=\"Delete\"></i></button>`
+                    html += `<button type=\"button\" class=\"btn btn-success btn-sm {$camel}ViewAction\"><i class=\"far fa-eye\" data-placement=\"top\" title=\"View\" ></i></button>`
+                    html += `<button type=\"button\" class=\"btn btn-primary btn-sm {$camel}EditAction\"><i class=\"fas fa-edit\" data-placement=\"top\" title=\"Edit\"></i></button>`
+                    html += `<button type=\"button\" class=\"btn btn-danger btn-sm {$camel}DestroyAction\"><i class=\"far fa-trash-alt\" data-placement=\"top\" title=\"Delete\"></i></button>`
                     html += `</div>`
                     return html;
                 }
@@ -92,13 +92,13 @@ export function draw{$studly}Table (tableId) {
         ],
 
         createdRow: function (row: any, data: any) {
-            $(row).find(\"#{$camel}ViewAction\")
+            $(row).find(\".{$camel}ViewAction\")
                 .on(\"click\", () => viewAction(data));
 
-            $(row).find(\"#{$camel}EditAction\")
+            $(row).find(\".{$camel}EditAction\")
                 .on(\"click\", () => editAction(data));
 
-            $(row).find(\"#{$camel}DestroyAction\")
+            $(row).find(\".{$camel}DestroyAction\")
                 .on(\"click\", () => destroyAction(data));
         }
     }
