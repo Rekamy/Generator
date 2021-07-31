@@ -16,8 +16,6 @@ class UserProfileResource extends JsonResource
      */
     public function toArray($request)
     {
-        $this->resource->append('name')->makeVisible('name');
-
         $token = $this->resource->createToken(config('app.token_name'), ['*']);
         if (!$token) throw new Exception('Error Processing Request', 422);
 
