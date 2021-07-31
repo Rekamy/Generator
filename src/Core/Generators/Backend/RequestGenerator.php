@@ -45,7 +45,7 @@ class RequestGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['request'] . $data['className'] . '.php'
+                    $this->context->path['backend']['request']['path'] . $data['className'] . '.php'
                 );
 
                 $stub->render();

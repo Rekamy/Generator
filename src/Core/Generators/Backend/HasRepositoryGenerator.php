@@ -28,7 +28,7 @@ class HasRepositoryGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['has_repository_trait'] . 'HasRepository.php'
+                $this->context->path['backend']['has_repository_trait']['path'] . 'HasRepository.php'
             );
 
             $stub->render();

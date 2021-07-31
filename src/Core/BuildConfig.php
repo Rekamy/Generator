@@ -28,13 +28,12 @@ trait BuildConfig
         $this->config = config('rekamygenerator');
         $this->database = $this->config['database'];
         $this->dbname = $this->database['name'];
-        $this->path = $this->config['path'];
+        $this->path = $this->config['setup'];
         $this->generate = $this->config['generate'];
         $this->options = collect($this->config['options']);
         $this->namespace = $this->config['namespace'];
         $this->appName = $this->config['app_name'];
         $this->template = $this->config['template'];
-        $this->frontPath = $this->config['template'];
 
         $this->excludeTables = $this->database['exclude_tables'];
         $this->includeTables = $this->database['include_tables'];

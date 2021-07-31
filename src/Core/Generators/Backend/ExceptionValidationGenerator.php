@@ -28,7 +28,7 @@ class ExceptionValidationGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['exception'] . 'ValidationException.php'
+                $this->context->path['backend']['exception']['path'] . 'ValidationException.php'
             );
 
             $stub->render();

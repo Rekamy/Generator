@@ -30,7 +30,7 @@ class AuthControllerGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['auth_controller'] . 'AuthController.php'
+                $this->context->path['backend']['auth_controller']['path'] . 'AuthController.php'
             );
 
             $stub->render();

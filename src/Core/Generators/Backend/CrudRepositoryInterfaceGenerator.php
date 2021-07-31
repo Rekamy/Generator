@@ -28,7 +28,7 @@ class CrudRepositoryInterfaceGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['crud_repository_interface'] . 'CrudRepositoryInterface.php'
+                $this->context->path['backend']['crud_repository_interface']['path'] . 'CrudRepositoryInterface.php'
             );
 
             $stub->render();

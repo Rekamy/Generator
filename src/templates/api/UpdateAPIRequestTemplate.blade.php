@@ -1,7 +1,7 @@
 <?=
 "<?php
 
-namespace " . $context->namespace['api_request'] . ";
+namespace " . $context->path['backend']['api_request']['namespace'] . ";
 
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
 use InfyOm\Generator\Request\APIRequest;

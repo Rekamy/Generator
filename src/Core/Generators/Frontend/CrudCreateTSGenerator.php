@@ -49,7 +49,7 @@ class CrudCreateTSGenerator
 
                 $view = view('frontend::crud-flat/CrudCreateTS', $data);
 
-                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
                 $stub = new StubGenerator(
                     $this->context,

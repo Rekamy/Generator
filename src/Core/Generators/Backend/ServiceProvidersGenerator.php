@@ -32,7 +32,7 @@ class ServiceProvidersGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            $this->context->path['backend']['providers'] . 'AppServiceProvider.php'
+            $this->context->path['backend']['providers']['path'] . 'AppServiceProvider.php'
         );
 
         $stub->render();
@@ -47,7 +47,7 @@ class ServiceProvidersGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            $this->context->path['backend']['providers'] . 'RouteServiceProvider.php'
+            $this->context->path['backend']['providers']['path'] . 'RouteServiceProvider.php'
         );
 
         $stub->render();

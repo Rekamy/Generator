@@ -41,7 +41,7 @@ class APIRoutesGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['crud_routes']
+                $this->context->path['backend']['crud_routes']['path']
             );
 
             $stub->render();
@@ -60,7 +60,7 @@ class APIRoutesGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['api_routes']
+                $this->context->path['backend']['api_routes']['path']
             );
 
             $stub->render();
@@ -88,7 +88,7 @@ class APIRoutesGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['crud_routes']
+                $this->context->path['backend']['crud_routes']['path']
             );
 
             $stub->render();

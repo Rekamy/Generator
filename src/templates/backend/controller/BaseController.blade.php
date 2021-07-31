@@ -1,7 +1,7 @@
 <?= <<<SCRIPT
 <?php
 
-namespace {$context->namespace['base_controller']};
+namespace {$context->path['backend']['base_controller']['namespace']};
 
 use App\Exceptions\ValidationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

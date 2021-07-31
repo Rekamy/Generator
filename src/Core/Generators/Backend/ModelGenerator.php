@@ -64,7 +64,7 @@ class ModelGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['model'] . $data['className'] . '.php'
+                    $this->context->path['backend']['model']['path'] . $data['className'] . '.php'
                 );
                 $stub->render();
                 $this->context->info("Models {$data['className']} Created.");

@@ -47,7 +47,7 @@ class CrudEditVueGenerator
 
                 $view = view('frontend::crud-flat/CrudEditVue', $data);
 
-                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud'];
+                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
                 $stub = new StubGenerator(
                     $this->context,

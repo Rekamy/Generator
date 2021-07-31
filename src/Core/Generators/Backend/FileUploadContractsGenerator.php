@@ -23,7 +23,7 @@ class FileUploadContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['utilities'] . 'FileUpload.php'
+                $this->context->path['backend']['utilities']['path'] . 'FileUpload.php'
             );
 
             $stub->render();

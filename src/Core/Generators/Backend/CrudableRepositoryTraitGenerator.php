@@ -28,7 +28,7 @@ class CrudableRepositoryTraitGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['crudable_repository_trait'] . 'CrudableRepository.php'
+                $this->context->path['backend']['crudable_repository_trait']['path'] . 'CrudableRepository.php'
             );
 
             $stub->render();

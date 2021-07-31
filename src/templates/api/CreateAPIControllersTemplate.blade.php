@@ -1,12 +1,12 @@
 <?=
 "<?php
 
-namespace " . $context->namespace['api_controller'] . ";
+namespace " . $context->path['backend']['api_controller']['namespace'] . ";
 
 use App\Http\Requests\API\Create" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
 use App\Http\Requests\API\Update" . ucfirst(Str::camel(Str::singular($tablename))) . "APIRequest;
 use App\Models\\" . ucfirst(Str::camel(Str::singular($tablename))) . ";
-use " . $context->namespace['repository'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
+use " . $context->path['backend']['repository']['namespace'] . "\\" . ucfirst(Str::camel(Str::singular($tablename))) . "Repository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
@@ -15,7 +15,7 @@ use Response;
 
 /**
  * Class " . ucfirst(Str::camel(Str::singular($tablename))) . "Controller
- * @package " . $context->namespace['api_controller'] . "
+ * @package " . $context->path['backend']['api_controller']['namespace'] . "
  */
 class " . ucfirst(Str::camel(Str::singular($tablename))) . "APIController extends AppBaseController
 {

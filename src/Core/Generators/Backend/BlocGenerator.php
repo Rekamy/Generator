@@ -43,7 +43,7 @@ class BlocGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['bloc'] . $data['className'] . '.php'
+                    $this->context->path['backend']['bloc']['path'] . $data['className'] . '.php'
                 );
 
                 $stub->render();

@@ -35,7 +35,7 @@ class VueRouteGenerator
 
             $view = view('frontend::route', $data);
 
-            $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['route'];
+            $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['route']['path'];
 
             $stub = new StubGenerator(
                 $this->context,

@@ -42,8 +42,8 @@ class GeneratorServiceProvider extends ServiceProvider
 
         // $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
-        $this->loadViewsFrom(__DIR__ . '/templates/api', 'api');
-        $this->loadViewsFrom(__DIR__ . '/templates/web', 'webtemplate');
+        // $this->loadViewsFrom(__DIR__ . '/templates/api', 'api');
+        // $this->loadViewsFrom(__DIR__ . '/templates/web', 'webtemplate');
         $this->loadViewsFrom(__DIR__ . '/templates/backend', 'backend');
         $this->loadViewsFrom(__DIR__ . '/templates/frontend', 'frontend');
         $this->loadViewsFrom(__DIR__ . '/templates/swagger', 'swagger');

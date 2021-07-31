@@ -61,7 +61,7 @@ class FrontendModuleGenerator
 
         $view = view('frontend::modules/apiTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
@@ -107,7 +107,7 @@ class FrontendModuleGenerator
         $data['relationColumns'] = $relColumns;
         $view = view('frontend::modules/blocTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
@@ -145,7 +145,7 @@ class FrontendModuleGenerator
 
         $view = view('frontend::modules/modelTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
@@ -173,7 +173,7 @@ class FrontendModuleGenerator
 
         $view = view('frontend::modules/storeTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
@@ -201,7 +201,7 @@ class FrontendModuleGenerator
 
         $view = view('frontend::modules/indexTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
@@ -224,7 +224,7 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $view = view('frontend::modules/BaseindexTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
@@ -248,7 +248,7 @@ class FrontendModuleGenerator
 
         $view = view('frontend::modules/auth/apiTS', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module'];
+        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,

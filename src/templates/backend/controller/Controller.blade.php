@@ -1,7 +1,7 @@
 <?=
 "<?php
 
-namespace " . $context->namespace['controller'] . ";
+namespace " . $context->path['backend']['controller']['namespace'] . ";
 
 use App\Http\Controllers\Base\CrudController;
 use App\Bloc\\$blocName;
