@@ -1,4 +1,5 @@
-<?= "<?php
+<?= <<<'SCRIPT'
+<?php
 
 namespace App\Http\Controllers\Auth;
 
@@ -19,79 +20,79 @@ class AuthController extends Controller
     /**
      * Registration
      */
-    public function register(Request \$request)
+    public function register(Request $request)
     {
         DB::beginTransaction();
         try {
-            \$this->validateRegistration(\$request);
+            $this->validateRegistration($request);
 
-            \$user = User::create(\$request->all());
-            if (!\$user) throw new Exception('Error Processing Request', 422);
+            $user = User::create($request->all());
+            if (!$user) throw new Exception('Error Processing Request', 422);
 
             // dummy map profile
-            // Profile::first()->user()->associate(\$user)->save();
-            // \$user->givePermissionTo('view_profiles');
+            // Profile::first()->user()->associate($user)->save();
+            // $user->givePermissionTo('view_profiles');
 
-            Auth::guard('web')->login(\$user);
+            Auth::guard('web')->login($user);
 
-            // \$permissions = Permission::where('name', 'like', '%_index')->pluck('name')->toArray();
-            \$permissions = \$this->getPermissions(\$user);
-            \$token = \$user->createToken(config('app.token_name'));
-            // \$token = \$user->createToken(config('app.token_name'), ['*']);
-            if (!\$token) throw new Exception('Error Processing Request', 422);
+            // $permissions = Permission::where('name', 'like', '%_index')->pluck('name')->toArray();
+            $permissions = $this->getPermissions($user);
+            $token = $user->createToken(config('app.token_name'));
+            // $token = $user->createToken(config('app.token_name'), ['*']);
+            if (!$token) throw new Exception('Error Processing Request', 422);
 
             DB::commit();
             return [
-                'user' => \$user,
-                'token' => \$token->accessToken,
-                'scopes' => \$user->permissions->pluck('name')
+                'user' => $user,
+                'token' => $token->accessToken,
+                'scopes' => $user->permissions->pluck('name')
             ];
-        } catch (\Throwable \$th) {
+        } catch (\Throwable $th) {
             DB::rollback();
-            throw \$th;
+            throw $th;
         }
     }
 
     /**
      * Login
      */
-    public function login(Request \$request)
+    public function login(Request $request)
     {
         try {
-            \$this->validateLogin(\$request);
+            $this->validateLogin($request);
 
-            if (!Auth::guard('web')->once(\$request->all()))
+            if (!Auth::guard('web')->once($request->all()))
                 throw new UnauthorizedException('Invalid Login or password.', 401);
 
-            \$user = Auth::guard('web')->user();
+            $user = Auth::guard('web')->user();
 
-            return new UserProfileResource(\$user);
-        } catch (\Throwable \$th) {
-            throw \$th;
+            return new UserProfileResource($user);
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 
     /**
      * Impersonate
      */
-    public function impersonate(Request \$request, User \$user)
+    public function impersonate(Request $request, User $user)
     {
         try {
-            \$this->validateImpersonate(\$request);
-            Auth::guard('web')->login(\$user);
+            $this->validateImpersonate($request);
+            Auth::guard('web')->login($user);
 
-            \$user = Auth::guard('web')->user();
+            $user = Auth::guard('web')->user();
 
-            return new UserProfileResource(\$user);
-        } catch (\Throwable \$th) {
-            throw \$th;
+            return new UserProfileResource($user);
+        } catch (\Throwable $th) {
+            throw $th;
         }
     }
 
-    private function getPermissions(\$user)
+    private function getPermissions($user)
     {
 
-        // \$permissions = Permission::whereIn('name', [
+        // $permissions = Permission::whereIn('name', [
         //     'department_cases_index',
         //     'users_index',
         //     // 'users_create',
@@ -99,32 +100,32 @@ class AuthController extends Controller
         //     // 'users_update',
         //     // 'users_destroy',
         // ])->pluck('name')->toArray();
-        \$permissions = [
+        $permissions = [
             // '*',
             'view_profiles',
         ];
-        return \$permissions;
+        return $permissions;
     }
 
     /**
      * Logout
      */
-    public function logout(Request \$request)
+    public function logout(Request $request)
     {
-        \$request->user()->token()->revoke();
+        $request->user()->token()->revoke();
     }
 
     /**
      * Revoke all other token
      */
-    public function revokeTokens(Request \$request)
+    public function revokeTokens(Request $request)
     {
-        \$request->user()->revokeTokens();
+        $request->user()->revokeTokens();
     }
 
-    private function validateRegistration(Request \$request)
+    private function validateRegistration(Request $request)
     {
-        \$rules = [
+        $rules = [
             (new User)->username() => 'required|min:4|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
@@ -132,26 +133,27 @@ class AuthController extends Controller
             // 'confirm_password' => 'required|min:8',
         ];
 
-        \$validation = validator(\$request->all(), \$rules);
-        if (\$validation->fails()) throw new ValidationException(\$validation);
+        $validation = validator($request->all(), $rules);
+        if ($validation->fails()) throw new ValidationException($validation);
     }
 
-    private function validateLogin(Request \$request)
+    private function validateLogin(Request $request)
     {
-        \$rules = [
+        $rules = [
             (new User)->username() => 'required|min:4',
             'password' => 'required|min:8',
         ];
 
-        \$validation = validator(\$request->all(), \$rules);
-        if (\$validation->fails()) throw new ValidationException(\$validation);
+        $validation = validator($request->all(), $rules);
+        if ($validation->fails()) throw new ValidationException($validation);
     }
 
-    private function validateImpersonate(Request \$request)
+    private function validateImpersonate(Request $request)
     {
-        if (!\$request->has('impersonate'))
+        if (!$request->has('impersonate'))
             throw new Exception('Bad Request. Impersonate tag required.', 400);
     }
 }
 "
+SCRIPT;
 ?>

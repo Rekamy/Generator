@@ -30,21 +30,36 @@ class InitGenerator extends Command
     public function handle()
     {
         $this->loadConfig();
-        $answerCollection = collect();
+        $commands = collect();
 
-        if ($this->confirm('Generate migration from current database?')) {
-            $answerCollection->push('generate:migration');
+        if ($this->confirm('Generate migration from current database?', false)) {
+            $commands->push(['artisan' => 'generate:migration']);
         } else {
-            if ($this->confirm('Run fresh migration?'))
-                $answerCollection->push('migrate:fresh');
+            if ($this->confirm('Install spatie/laravel-permission?', true)) {
+                $commands->push(['shell' => 'php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"']);
+                $commands->push(['artisan' => 'migrate:fresh']);
+            } else {
+                if ($this->confirm('Run fresh migration?', true))
+                    $commands->push(['artisan' => 'migrate:fresh']);
+            }
         }
 
-        if ($this->confirm('Generate backend from current database?'))
-            $answerCollection->push('generate:backend');
+        if ($this->confirm('Generate backend from current database?', true)) {
+            $commands->push(['artisan' => 'generate:backend']);
+        }
 
-        if ($this->confirm('Generate frontend from current database?'))
-            $answerCollection->push('generate:frontend');
+        if ($this->confirm('Generate frontend from current database?', true))
+            $commands->push(['artisan' => 'generate:frontend']);
 
-        $answerCollection->each(fn ($command) => $this->call($command));
+        if ($this->confirm('Build application on complete generation?', true))
+            $commands->push(['shell' => 'cd resources/frontend && npm run build']);
+
+        $commands->each(function ($command) {
+            if (!empty($command['artisan'])) {
+                $this->call($command['artisan']);
+            } else {
+                shell_exec($command['shell']);
+            }
+        });
     }
 }

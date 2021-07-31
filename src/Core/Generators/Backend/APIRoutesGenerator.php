@@ -3,8 +3,8 @@
 namespace Rekamy\Generator\Core\Generators\Backend;
 
 use DB;
-use Rekamy\Generator\Console\RuleParser;
-use Rekamy\Generator\Console\StubGenerator;
+use Rekamy\Generator\Core\RuleParser;
+use Rekamy\Generator\Core\StubGenerator;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;
@@ -26,7 +26,9 @@ class APIRoutesGenerator
     public function generate()
     {
         try {
-            $data = [];
+            $data = [
+                'routes' => [],
+            ];
             foreach ($this->tables as $key => $table) {
                 $data['routes'][] = [
                     "className" => Str::of($table)->singular()->studly() . "Controller",
@@ -34,7 +36,7 @@ class APIRoutesGenerator
                 ];
             }
 
-            $view = view('api::CreateAPIRouteTemplate', $data);
+            $view = view('backend::CrudAPIRoutes', $data);
 
             $stub = new StubGenerator(
                 $this->context,

@@ -167,7 +167,7 @@ return [
             'crud_repository_interface' => app_path('Contracts/Repositories/'),
             'crud_bloc_interface' => app_path('Contracts/Bloc/'),
             'request_interface' => app_path('Contracts/Requests/'),
-            'crud_routes' => base_path('routes/crud.php'),
+            'crud_routes' => base_path('routes/api/crud.php'),
         ],
         'frontend' => [
             'route' => "/src/router/crud",

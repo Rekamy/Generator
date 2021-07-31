@@ -1,6 +1,7 @@
-<?="<?php
+<?= <<<SCRIPT
+<?php
 
-namespace " . $context->namespace['base_controller'] . ";
+namespace {$context->namespace['base_controller']};
 
 use App\Exceptions\ValidationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -24,6 +25,11 @@ class Controller extends BaseController
     {
         return redirect('/api/documentation');
     }
+
+    public function web()
+    {
+        return redirect('/vue/');
+    }
 }
-"
+SCRIPT;
 ?>

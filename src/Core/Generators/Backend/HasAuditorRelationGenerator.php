@@ -3,7 +3,7 @@
 namespace Rekamy\Generator\Core\Generators\Backend;
 
 use DB;
-use Rekamy\Generator\Console\StubGenerator;
+use Rekamy\Generator\Core\StubGenerator;
 
 class HasAuditorRelationGenerator
 {

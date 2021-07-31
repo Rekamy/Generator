@@ -2,7 +2,7 @@
 
 namespace Rekamy\Generator\Core\Generators\Backend;
 
-use Rekamy\Generator\Console\StubGenerator;
+use Rekamy\Generator\Core\StubGenerator;
 
 class FileUploadContractsGenerator
 {

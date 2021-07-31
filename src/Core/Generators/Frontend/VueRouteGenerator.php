@@ -3,8 +3,8 @@
 namespace Rekamy\Generator\Core\Generators\Frontend;
 
 use DB;
-use Rekamy\Generator\Console\RuleParser;
-use Rekamy\Generator\Console\StubGenerator;
+use Rekamy\Generator\Core\RuleParser;
+use Rekamy\Generator\Core\StubGenerator;
 use Illuminate\Support\Str;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableCell;

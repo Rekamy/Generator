@@ -1,4 +1,4 @@
-<?php use Rekamy\Generator\Console\RuleParser; ?>
+<?php use Rekamy\Generator\Core\RuleParser; ?>
 <?=
 "<?php
 

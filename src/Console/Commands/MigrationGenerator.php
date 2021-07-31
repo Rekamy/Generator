@@ -4,8 +4,7 @@ namespace Rekamy\Generator\Console\Commands;
 
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
-use Symfony\Component\Console\Helper\Table;
-use Rekamy\Generator\Core\Generators\MigrationGenerator as TemplateGenerator;
+use Rekamy\Generator\Core\Generators\MigrationGenerator as Generator;
 
 
 class MigrationGenerator extends Command
@@ -41,14 +40,8 @@ class MigrationGenerator extends Command
 
     public function generate()
     {
-        $generators = [
-            'migration' => TemplateGenerator::class,
-        ];
-
-        foreach ($generators as $class) {
-            $generator = new $class($this);
-            $generator->generate();
-            $this->newline();
-        }
+        $generator = new Generator($this);
+        $generator->generate();
+        $this->newline();
     }
 }

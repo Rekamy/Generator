@@ -1,14 +1,12 @@
-<?=
-"
+<?= <<<SCRIPT
 import { api } from '@/core/services/api';
 import { User } from './../user';
-
 
 export class AuthApi {
     private BASE_URL: string;
 
     constructor() {
-        this.BASE_URL = \"\";
+        this.BASE_URL = "";
     }
 
     async login (data: User): Promise<any>{
@@ -26,5 +24,5 @@ export class AuthApi {
 
 const authApi = new AuthApi();
 export { authApi };
-"
+SCRIPT;
 ?>

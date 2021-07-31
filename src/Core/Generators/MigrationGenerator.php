@@ -2,14 +2,8 @@
 
 namespace Rekamy\Generator\Core\Generators;
 
-use DB;
-use Rekamy\Generator\Console\RuleParser;
-use Rekamy\Generator\Console\StubGenerator;
+use Rekamy\Generator\Core\StubGenerator;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Helper\TableSeparator;
-use Symfony\Component\Console\Helper\TableCell;
-use Illuminate\Console\OutputStyle;
-use Symfony\Component\Console\Output\ConsoleOutput;
 
 class MigrationGenerator
 {
