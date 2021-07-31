@@ -126,7 +126,7 @@ class AuthController extends Controller
     private function validateRegistration(Request $request)
     {
         $rules = [
-            (new User)->username() => 'required|min:4|unique:users',
+            'name' => 'required|min:4',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             // TODO: not implemented yet
@@ -140,7 +140,7 @@ class AuthController extends Controller
     private function validateLogin(Request $request)
     {
         $rules = [
-            (new User)->username() => 'required|min:4',
+            'email' => 'required|email|min:4',
             'password' => 'required|min:8',
         ];
 
@@ -154,6 +154,5 @@ class AuthController extends Controller
             throw new Exception('Bad Request. Impersonate tag required.', 400);
     }
 }
-"
 SCRIPT;
 ?>

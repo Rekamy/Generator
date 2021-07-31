@@ -36,17 +36,18 @@ class InitGeneratorCommand extends Command
         if ($this->confirm('Generate migration from current database?', false)) {
             $commands->push(['artisan' => 'generate:migration']);
         } else {
-            if ($this->confirm('Install spatie/laravel-permission?', true)) {
+            if ($this->confirm('Publish spatie/laravel-permission?', true)) {
                 $commands->push(['shell' => 'php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"']);
+            }
+
+            if ($this->confirm('Run fresh migration?', true)) {
                 $commands->push(['artisan' => 'migrate:fresh']);
-            } else {
-                if ($this->confirm('Run fresh migration?', true))
-                    $commands->push(['artisan' => 'migrate:fresh']);
             }
         }
 
         if ($this->confirm('Generate backend from current database?', true)) {
             $commands->push(['artisan' => 'generate:backend']);
+            $commands->push(['artisan' => 'passport:install']);
         }
 
         if ($this->confirm('Generate frontend from current database?', true))

@@ -33,6 +33,7 @@ use Rekamy\Generator\Core\Generators\Backend\{
     RequestCriteriaContractsGenerator,
     FileUploadContractsGenerator,
     HasAuditorRelationGenerator,
+    DependenciesSetupGenerator,
 };
 
 
@@ -114,6 +115,8 @@ class BackendGeneratorCommand extends Command
 
             //Api route
             'routes_api' => APIRoutesGenerator::class,
+
+            'dependencies_setup' => DependenciesSetupGenerator::class,
 
         ];
 
