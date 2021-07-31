@@ -15,10 +15,10 @@ use Rekamy\Generator\Commands\{
 class GeneratorServiceProvider extends ServiceProvider
 {
     protected $commands = [
-        InitGenerator::class,
-        BackendCrudGenerator::class,
-        FrontendCrudGenerator::class,
-        MigrationGenerator::class,
+        InitGeneratorCommand::class,
+        BackendGeneratorCommand::class,
+        FrontendGeneratorCommand::class,
+        MigrationGeneratorCommand::class,
     ];
 
     public function boot()
