@@ -5,11 +5,11 @@ namespace Rekamy\Generator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Stringable;
 use Illuminate\Database\Eloquent\Builder;
-use Rekamy\Generator\Console\Commands\{
-    FrontendCrudGenerator,
-    InitGenerator,
-    BackendCrudGenerator,
-    MigrationGenerator
+use Rekamy\Generator\Commands\{
+    FrontendGeneratorCommand,
+    InitGeneratorCommand,
+    BackendGeneratorCommand,
+    MigrationGeneratorCommand
 };
 
 class GeneratorServiceProvider extends ServiceProvider

@@ -1,6 +1,6 @@
 <?php
 
-namespace Rekamy\Generator\Console\Commands;
+namespace Rekamy\Generator\Commands;
 
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
@@ -36,7 +36,7 @@ use Rekamy\Generator\Core\Generators\Backend\{
 };
 
 
-class BackendCrudGenerator extends Command
+class BackendGeneratorCommand extends Command
 {
     use BuildConfig;
     /**

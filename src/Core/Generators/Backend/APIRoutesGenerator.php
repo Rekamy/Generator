@@ -36,7 +36,54 @@ class APIRoutesGenerator
                 ];
             }
 
-            $view = view('backend::CrudAPIRoutes', $data);
+            $view = view('backend::routes.CrudAPIRoutes', $data);
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                $this->context->path['backend']['crud_routes']
+            );
+
+            $stub->render();
+            $this->context->info("Api Route Created.");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    
+    public function authRoutes()
+    {
+        try {
+
+            $view = view('backend::routes.AuthAPIRoutes');
+
+            $stub = new StubGenerator(
+                $this->context,
+                $view->render(),
+                $this->context->path['backend']['api_routes']
+            );
+
+            $stub->render();
+            $this->context->info("Api Route Created.");
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    
+    public function crudRoutes()
+    {
+        try {
+            $data = [
+                'routes' => [],
+            ];
+            foreach ($this->tables as $key => $table) {
+                $data['routes'][] = [
+                    "className" => Str::of($table)->singular()->studly() . "Controller",
+                    "routeName" => Str::of($table)->singular()->slug()
+                ];
+            }
+
+            $view = view('backend::routes.CrudAPIRoutes', $data);
 
             $stub = new StubGenerator(
                 $this->context,

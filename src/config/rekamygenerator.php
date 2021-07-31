@@ -142,32 +142,109 @@ return [
     */
 
     // Path is where you want the generator to generate.
-    'path' => [
+    'setup' => [
         'backend' => [
-            'model' => app_path('Models/'),
-            'bloc' => app_path('Bloc/'),
-            'repository' => app_path('Repositories/'),
-            'controller' => app_path('Http/Controllers/'),
-            'request' => app_path('Http/Requests/'),
-            'exception' => app_path('Exceptions/'),
-            'api_doc' => app_path('APIDoc/'),
-            'criteria' => app_path('Contracts/Criteria/'),
-            'override' => app_path('Contracts/Overrides/'),
-            'utilities' => app_path('Contracts/Utilities/'),
-            'providers' => app_path('Providers/'),
-            'crudable_trait' => app_path('Contracts/Bloc/Concerns/'),
-            'crudable_repository_trait' => app_path('Contracts/Repositories/Concerns/'),
-            'has_repository_trait' => app_path('Contracts/Bloc/Concerns/'),
-            'has_request_trait' => app_path('Contracts/Bloc/Concerns/'),
-            'has_auditor_relation_trait' => app_path('Contracts/Bloc/Concerns/'),
-            'auth_controller' => app_path('Http/Controllers/Auth/'),
-            'base_controller' => app_path('Http/Controllers/Base/'),
-            'crud_controller' => app_path('Http/Controllers/Base/'),
-            'crud_bloc' => app_path('Contracts/Bloc/Concerns/'),
-            'crud_repository_interface' => app_path('Contracts/Repositories/'),
-            'crud_bloc_interface' => app_path('Contracts/Bloc/'),
-            'request_interface' => app_path('Contracts/Requests/'),
-            'crud_routes' => base_path('routes/api/crud.php'),
+            'model' => [
+                'path' => app_path('Models/'),
+                'namespace' => 'App\Models',
+            ],
+            'bloc' => [
+                'path' => app_path('Bloc/'),
+                'namespace' => 'App\Bloc',
+            ],
+            'repository' => [
+                'path' => app_path('Repositories/'),
+                'namespace' => 'App\Repositories',
+            ],
+            'controller' => [
+                'path' => app_path('Http/Controllers/'),
+                'namespace' => 'App\Http\Controllers',
+            ],
+            'request' => [
+                'path' => app_path('Http/Requests/'),
+                'namespace' => 'App\Http\Requests',
+            ],
+            'exception' => [
+                'path' => app_path('Exceptions/'),
+                'namespace' => 'App\Exceptions',
+            ],
+            'api_doc' => [
+                'path' => app_path('APIDoc/'),
+                'namespace' => null,
+            ],
+            'criteria' => [
+                'path' => app_path('Contracts/Criteria/'),
+                'namespace' => 'App\Contracts\Criteria',
+            ],
+            'override' => [
+                'path' => app_path('Contracts/Overrides/'),
+                'namespace' => 'App\Contracts\Overrides',
+            ],
+            'utilities' => [
+                'path' => app_path('Contracts/Utilities/'),
+                'namespace' => 'App\Contracts\Utilities',
+            ],
+            'providers' => [
+                'path' => app_path('Providers/'),
+                'namespace' => 'App\Providers',
+            ],
+            'crudable_trait' => [
+                'path' => app_path('Contracts/Bloc/Concerns/'),
+                'namespace' => 'App\Contracts\Bloc\Concerns',
+            ],
+            'crudable_repository_trait' => [
+                'path' => app_path('Contracts/Repositories/Concerns/'),
+                'namespace' => 'App\Contracts\Repositories\Concerns',
+            ],
+            'has_repository_trait' => [
+                'path' => app_path('Contracts/Bloc/Concerns/'),
+                'namespace' => 'App\Contracts\Bloc\Concerns',
+            ],
+            'has_request_trait' => [
+                'path' => app_path('Contracts/Bloc/Concerns/'),
+                'namespace' => 'App\Contracts\Bloc\Concerns',
+            ],
+            'has_auditor_relation_trait' => [
+                'path' => app_path('Contracts/Bloc/Concerns/'),
+                'namespace' => 'App\Contracts\Bloc\Concerns',
+            ],
+            'auth_controller' => [
+                'path' => app_path('Http/Controllers/Auth/'),
+                'namespace' => 'App\Http\Controllers\Auth',
+            ],
+            'base_controller' => [
+                'path' => app_path('Http/Controllers/Base/'),
+                'namespace' => 'App\Http\Controllers\Base',
+            ],
+            'crud_controller' => [
+                'path' => app_path('Http/Controllers/Base/'),
+                'namespace' => 'App\Http\Controllers\Base',
+            ],
+            'crud_bloc' => [
+                'path' => app_path('Contracts/Bloc/Concerns/'),
+                'namespace' => 'App\Contracts\Bloc\Concerns',
+            ],
+
+            'crud_repository_interface' => [
+                'path' => app_path('Contracts/Repositories/'),
+                'namespace' => 'App\Contracts\Repositories',
+            ],
+            'crud_bloc_interface' => [
+                'path' => app_path('Contracts/Bloc/'),
+                'namespace' => 'App\Contracts\Bloc',
+            ],
+            'request_interface' => [
+                'path' => app_path('Contracts/Requests/'),
+                'namespace' => 'App\Contracts\Requests',
+            ],
+            'crud_routes' => [
+                'path' => base_path('routes/api/crud.php'),
+                'namespace' => null,
+            ],
+            'api_routes' => [
+                'path' => base_path('routes/api/api.php'),
+                'namespace' => null,
+            ],
         ],
         'frontend' => [
             'route' => "/src/router/crud",

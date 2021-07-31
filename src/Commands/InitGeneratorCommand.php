@@ -1,11 +1,11 @@
 <?php
 
-namespace Rekamy\Generator\Console\Commands;
+namespace Rekamy\Generator\Commands;
 
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
 
-class InitGenerator extends Command
+class InitGeneratorCommand extends Command
 {
     use BuildConfig;
     /**

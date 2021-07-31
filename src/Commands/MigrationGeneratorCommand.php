@@ -1,13 +1,13 @@
 <?php
 
-namespace Rekamy\Generator\Console\Commands;
+namespace Rekamy\Generator\Commands;
 
 use Illuminate\Console\Command;
 use Rekamy\Generator\Core\BuildConfig;
-use Rekamy\Generator\Core\Generators\MigrationGenerator as Generator;
+use Rekamy\Generator\Core\Generators\MigrationGenerator;
 
 
-class MigrationGenerator extends Command
+class MigrationGeneratorCommand extends Command
 {
     use BuildConfig;
     /**
@@ -40,7 +40,7 @@ class MigrationGenerator extends Command
 
     public function generate()
     {
-        $generator = new Generator($this);
+        $generator = new MigrationGenerator($this);
         $generator->generate();
         $this->newline();
     }
