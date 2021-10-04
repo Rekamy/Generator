@@ -97,7 +97,7 @@ php artisan generate
 ## Todo
 
 - handle table name ending with 's'
-- progress bar as per Habib done in previous version
+- progress bar as per Razlan done in previous version
 
 ## License
 
