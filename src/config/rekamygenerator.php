@@ -353,6 +353,8 @@ return [
 
     'template' => [
 
+        'use_local' => false,
+
         'frontend_path' => 'app',
 
         'source' => 'git@gitlab.com:rekamy/packages/argon-template.git',

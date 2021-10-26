@@ -29,15 +29,9 @@ class DashboardGenerator
     {
         try {
 
-            $useLocal = true;
+            $useLocal = $this->context->template['use_local'];
             $frontendName = $this->context->template['frontend_path'];
-            $gitTemplate = "git@gitlab.com:rekamy/packages/argon-template.git";
-
-            if (!empty($this->context->template['source']) && !$useLocal) {
-                $gitTemplate = $this->context->template['source'];
-            } else {
-                $gitTemplate = 'C:\Users\kidzen\Data\server\www\packages\argon-template';
-            }
+            $gitTemplate = $this->context->template['source'];
 
             $resourcesPath = resource_path();
             $frontendPath = resource_path($frontendName);
@@ -64,6 +58,11 @@ class DashboardGenerator
             exec($command);
 
             $packageManager = $this->context->config['package_manager'];
+
+            if($packageManager == 'yarn') {
+                $command =  "cd $frontendPath && rm -rf package-lock.json";
+            }
+
             $command =  "cd $frontendPath && $packageManager install";
             exec($command);
 
