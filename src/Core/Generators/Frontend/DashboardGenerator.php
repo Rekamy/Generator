@@ -29,7 +29,8 @@ class DashboardGenerator
     {
         try {
 
-            $useLocal = $this->context->template['use_local'];
+            // $useLocal = $this->context->template['use_local'];
+            $useLocal = true;
             $frontendName = $this->context->template['frontend_path'];
             $gitTemplate = $this->context->template['source'];
 
