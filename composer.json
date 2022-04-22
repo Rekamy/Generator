@@ -18,7 +18,7 @@
     ],
     "require": {
         "php": "^7.2 || ^8.0",
-        "laravel/framework": "^8.0 || ^7.0",
+        "laravel/framework": "^8.0 || ^7.0 || ^9.0",
         "prettus/l5-repository": "^2.7",
         "darkaonline/l5-swagger": "^8.0.4",
         "laravel/passport": "^10.1",
