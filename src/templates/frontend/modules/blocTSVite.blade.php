@@ -1,38 +1,38 @@
 <?=
 "
-export function use${camel}Table() {
+export function use${studly}Table() {
     const options = ref();
 
     return { options };
 }
 
-export function use${camel}Bloc() {
-    function get${camel}s(query?: object) {
+export function use${studly}Bloc() {
+    function get${studly}s(query?: object) {
         //
     }
 
-    function get${camel}<${camel}>(id: string, query?: object) {
-        return new ${camel}();
+    function get${studly}<${studly}>(id: string, query?: object) {
+        return new ${studly}();
     }
 
-    function create${camel}(data: any) {
-        return new ${camel}();
+    function create${studly}(data: any) {
+        return new ${studly}();
     }
 
-    function update${camel}(id: string, data: any) {
-        return new ${camel}();
+    function update${studly}(id: string, data: any) {
+        return new ${studly}();
     }
 
-    function delete${camel}(id: string) {
+    function delete${studly}(id: string) {
         //
     }
 
     return {
-        get${camel}s,
-        get${camel},
-        create${camel},
-        update${camel},
-        delete${camel},
+        get${studly}s,
+        get${studly},
+        create${studly},
+        update${studly},
+        delete${studly},
     };
 }
 "

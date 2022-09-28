@@ -13,7 +13,6 @@ const { get{$studly}, update{$studly} } = use{$studly}Bloc();
 
 onMounted(async () => {
     const res = await get{$studly}('1');
-    model.value.name = res.name;
 });
 
 const submit = async () => {

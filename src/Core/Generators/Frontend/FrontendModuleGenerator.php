@@ -176,7 +176,12 @@ class FrontendModuleGenerator
         $data['additionalAttributes'] = $additionalAttributes->pluck('foreignModel', 'relName')->toArray();
 
         $data['additionalArray'] = $additionalArray->pluck('foreignModel', 'relName')->toArray();
-        $data['imports'][] = "import { {$additional->pluck("foreignModel")->implode(', ')} } from '@/modules';";
+
+        // dd($additional);
+        foreach ($additional->pluck("foreignModel") as $key => $value) {
+            $path = Str::of($value)->kebab();
+            $data['imports'][] = "import { {$value} } from '@/modules/{$path}/blocs/{$path}.model';";
+        }
 
         $view = view('frontend::modules/modelTSVite', $data);
 

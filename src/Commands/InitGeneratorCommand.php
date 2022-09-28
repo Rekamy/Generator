@@ -50,10 +50,10 @@ class InitGeneratorCommand extends Command
         //     $commands->push(['artisan' => 'passport:install']);
         // }
 
-        // if ($this->confirm('Generate frontend from current database?', true))
-        //     $commands->push(['artisan' => 'generate:frontend']);
+        if ($this->confirm('Generate frontend from current database?', true))
+            $commands->push(['artisan' => 'generate:frontend']);
 
-        $commands->push(['artisan' => 'generate:frontend']);
+        // $commands->push(['artisan' => 'generate:frontend']);
 
         // if ($this->confirm('Build application on complete generation?', true))
         //     $commands->push(['shell' => "cd resources/{$frontendPath} && npm run build"]);

@@ -39,12 +39,12 @@ class VueRouteGenerator
             foreach ($this->tables as $key => $table) {
                 $data['routes'][] =  [
                     'camel' =>Str::of($table)->camel(),
-                    'kebab' =>Str::of($table)->camel()->kebab(),
+                    'kebab' =>Str::of($table)->camel()->singular()->kebab(),
                 ];
             }
 
             $view = view('frontend::routevite', $data);
-
+            
             $target = $this->context->template['frontend_path'];
 
             $stub = new StubGenerator(

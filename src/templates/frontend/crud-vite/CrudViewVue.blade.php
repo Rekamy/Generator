@@ -12,7 +12,6 @@
 
     onMounted(async () => {
         const res = await get{$studly}('1');
-        model.value.name = res.name;
     });
 </script>
 " ?>

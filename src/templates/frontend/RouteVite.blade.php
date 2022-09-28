@@ -6,12 +6,12 @@ createWebHashHistory,
 import type { RouteRecordRaw } from "vue-router";
 // import path from "path";
 
-import homeRoutes from "./modules/home/router";
-import exampleRoutes from "./modules/CrudExample/router";
+import homeRoutes from "@/modules/home/router";
+import exampleRoutes from "@/modules/crud/router";
 <?php
 foreach ($routes as $module) :
     // echo $module;
-    echo "import " . $module['camel'] . "Routes from './module/" . $module['kebab'] . "/router';\n";
+    echo "import " . $module['camel'] . "Routes from '@/modules/" . $module['kebab'] . "/router';\n";
 //  "Routes from './module/$module/router';\n";
 endforeach;
 

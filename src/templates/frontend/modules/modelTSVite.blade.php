@@ -8,11 +8,11 @@ export class ${studly} {
     }
 
     foreach ($additionalAttributes as $name => $model) {
-        echo "\tpublic {$name}: $model = new $model;\n";
+        echo "\tpublic {$name}: any;\n";
     }
 
     foreach ($additionalArray as $name => $model) {
-        echo "\tpublic {$name}: {$model}[] = [];\n";
+        echo "\tpublic {$name}: any[] = [];\n";
     }
 ?><?="}"
 ?>

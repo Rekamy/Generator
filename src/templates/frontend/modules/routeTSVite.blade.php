@@ -3,10 +3,10 @@
 import BasePage from '../../components/BasePage.vue';
 import type { RouteRecordRaw } from 'vue-router';
 
-import Manage${camel} from './pages/Manage${camel}Page.vue';
-import Create${camel} from './pages/Create${camel}Page.vue';
-import View${camel} from './pages/View${camel}Page.vue';
-import Edit${camel} from './pages/Edit${camel}Page.vue';
+import Manage${studly} from './pages/Manage${studly}Page.vue';
+import Create${studly} from './pages/Create${studly}Page.vue';
+import View${studly} from './pages/View${studly}Page.vue';
+import Edit${studly} from './pages/Edit${studly}Page.vue';
 
 export default [
     {
@@ -17,22 +17,22 @@ export default [
             {
                 path: '/',
                 name: 'manage-${slug}',
-                component: Manage${camel},
+                component: Manage${studly},
             },
             {
                 path: '/create',
                 name: 'create-${slug}',
-                component: Create${camel},
+                component: Create${studly},
             },
             {
                 path: '/{id}',
                 name: 'view-${slug}',
-                component: View${camel},
+                component: View${studly},
             },
             {
                 path: '/{id}/edit',
                 name: 'edit-${slug}',
-                component: Edit${camel},
+                component: Edit${studly},
             },
         ],
     },
