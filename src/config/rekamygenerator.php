@@ -357,7 +357,6 @@ return [
 
         'frontend_path' => 'app',
 
-        'source' => 'git@gitlab.com:rekamy/packages/argon-template.git',
-
+        'source' => 'git@gitlab.com:rekamy/packages/tms-template.git',
     ]
 ];
