@@ -15,13 +15,21 @@ class CrudViewVueGenerator
 
     private $tables;
 
+    private $frontendName;
+
     public function __construct($context)
     {
         $this->context = $context;
+        $this->frontendName = $this->context->template['frontend_path'];
         $this->context->info("Creating Vue View...");
+        // $this->tables = collect($this->context->db->listTableNames())
+        //     ->filter(function ($item) {
+        //         return !in_array($item, $this->context->excludeTables);
+        //     });
         $this->tables = collect($this->context->db->listTableNames())
             ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
+                if (str_starts_with($item, 'staff'))
+                    return $item;
             });
     }
 
@@ -43,17 +51,19 @@ class CrudViewVueGenerator
                 $data['camel'] =  $name->camel();
                 $data['title'] =  $name->absoluteTitle();
                 $data['slug'] =  $name->slug();
+                $data['studly'] =  $name->studly();
                 // $data['repoName'] = $name->singular()->studly() . "Repository";
                 // $data['requestName'] = $name->singular()->studly() . "Request";
 
-                $view = view('frontend::crud-flat/CrudViewVue', $data);
+                $view = view('frontend::crud-vite/CrudViewVue', $data);
 
-                $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
+                // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    resource_path($target) . "/$name/view.vue"
+                    base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/pages/View' . $data['studly'] . 'Page.vue'
+                    // resource_path($target) . "/$name/view.vue"
                 );
 
                 $stub->render();

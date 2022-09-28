@@ -19,9 +19,15 @@ class CrudIndexVueGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Vue Index...");
+        // $this->tables = collect($this->context->db->listTableNames())
+        //     ->filter(function ($item) {
+        //         return !in_array($item, $this->context->excludeTables);
+        //     });
+
         $this->tables = collect($this->context->db->listTableNames())
             ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
+                if (str_starts_with($item, 'staff'))
+                    return $item;
             });
     }
 
@@ -45,7 +51,7 @@ class CrudIndexVueGenerator
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
 
-                $view = view('frontend::crud-flat/CrudIndexVue', $data);
+                $view = view('frontend::crud-vite/CrudIndexVue', $data);
 
                 $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 

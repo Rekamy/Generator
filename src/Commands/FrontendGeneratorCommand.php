@@ -10,6 +10,8 @@ use Rekamy\Generator\Core\Generators\Frontend\{
     VueRouteGenerator,
     CrudBaseTSGenerator,
     CrudBaseVueGenerator,
+    CrudFormComponentVueGenerator,
+    CrudManageVueGenerator,
     CrudIndexTSGenerator,
     CrudIndexVueGenerator,
     CrudViewTSGenerator,
@@ -65,7 +67,10 @@ class FrontendGeneratorCommand extends Command
     {
         $this->loadConfig();
         // $this->template = $this->choice('Choose your template ?', ['Argon', 'Sparker', 'Robust'], $this->defaultIndex);
-        $this->generate();
+
+        // $this->generate();
+
+        $this->generateModule();
     }
 
     public function generate()
@@ -89,6 +94,38 @@ class FrontendGeneratorCommand extends Command
             'crudEditTS' => CrudEditTSGenerator::class,
 
             'frontendModule' => FrontendModuleGenerator::class,
+        ];
+
+        foreach ($generators as $key => $class) {
+            $skip = false;
+            $classOverride = null;
+
+            if (!empty($this->generate['frontend'][$key]['skip']))
+                $skip = $this->generate['frontend'][$key]['skip'];
+
+            if ($skip) continue;
+
+            if (!empty($this->generate['frontend'][$key]['class']))
+                $classOverride = $this->generate['frontend'][$key]['class'];
+
+            $generator = $classOverride ? new $classOverride($this) : new $class($this);
+            $generator->generate();
+            $this->newline();
+        }
+    }
+
+    public function generateModule()
+    {
+        $generators = [
+            'base' => DashboardGenerator::class,
+            'route' => VueRouteGenerator::class,
+            'frontendModule' => FrontendModuleGenerator::class,
+
+            'crudManageVue' => CrudManageVueGenerator::class,
+            'crudCreateVue' => CrudCreateVueGenerator::class,
+            'crudViewVue' => CrudViewVueGenerator::class,
+            'crudEditVue' => CrudEditVueGenerator::class,
+            'crudFormComponentVue' => CrudFormComponentVueGenerator::class,
         ];
 
         foreach ($generators as $key => $class) {

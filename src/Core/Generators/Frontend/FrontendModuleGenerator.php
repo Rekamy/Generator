@@ -12,37 +12,70 @@ use Symfony\Component\Console\Helper\TableCell;
 class FrontendModuleGenerator
 {
     private $context;
-
     private $tables;
+    private $frontendName;
 
     public function __construct($context)
     {
         $this->context = $context;
+        $this->frontendName = $this->context->template['frontend_path'];
         $this->context->info("Creating Frontend Module...");
+        // $this->tables = collect($this->context->db->listTableNames())
+        //     ->filter(function ($item) {
+        //         if (!empty($this->context->includeTables))
+        //             return !in_array($item, $this->context->excludeTables) && in_array($item, $this->context->includeTables);
+
+        //         return !in_array($item, $this->context->excludeTables);
+        //     });
+
         $this->tables = collect($this->context->db->listTableNames())
             ->filter(function ($item) {
-                if (!empty($this->context->includeTables))
-                    return !in_array($item, $this->context->excludeTables) && in_array($item, $this->context->includeTables);
-
-                return !in_array($item, $this->context->excludeTables);
+                if (str_starts_with($item, 'staff'))
+                    return $item;
             });
     }
 
     public function generate()
     {
         try {
-            $this->generateBaseIndex();
             foreach ($this->tables as $table) {
-                $this->generateApi($table);
+                $this->generateBaseRoute($table);
+                // $this->generateApi($table);
                 $this->generateBloc($table);
                 $this->generateModel($table);
-                $this->generateStore($table);
-                $this->generateIndex($table);
+                // $this->generateStore($table);
+                // $this->generateIndex($table);
             }
             // $this->generateAuth();
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    private function generateBaseRoute($table)
+    {
+        $this->context->info("Creating Frontend Module Route for table $table ...");
+        $data['context'] = $this->context;
+        $name = Str::of($table)->singular();
+        $data['table'] = $name;
+        $data['title'] =  $name->absoluteTitle();
+        $data['camel'] = $name->camel();
+        $data['slug'] =  $name->slug();
+        $data['studly'] =  $name->studly();
+        $data['columns'] = collect($this->context->db->listTableColumns($table))
+            ->except($this->context->database['skipColumns']);
+
+        $view = view('frontend::modules/routeTSVite', $data);
+
+        $stub = new StubGenerator(
+            $this->context,
+            $view->render(),
+            base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/router.ts'
+            // resource_path($target) . "/$name/model.ts"
+        );
+
+        $stub->render();
+        $this->context->info("Frontend Module Model for table $table created.");
     }
 
     private function generateApi($table)
@@ -105,14 +138,16 @@ class FrontendModuleGenerator
             });
 
         $data['relationColumns'] = $relColumns;
-        $view = view('frontend::modules/blocTS', $data);
+        $view = view('frontend::modules/blocTSVite', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
+        // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
+        // dd($data);
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path($target) . "/$name/bloc.ts"
+            base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.bloc.ts'
+            // resource_path($target) . "/$name/bloc.ts"
         );
 
         $stub->render();
@@ -133,7 +168,7 @@ class FrontendModuleGenerator
         $data['columns'] = collect($this->context->db->listTableColumns($table))
             ->except($this->context->database['skipColumns']);
         $data['imports'] = [];
-        $additional = $this->context->relations->where('table', $table)->whereNotIn('foreignModel' , $this->context->database['skipColumns']);
+        $additional = $this->context->relations->where('table', $table)->whereNotIn('foreignModel', $this->context->database['skipColumns']);
         $additionalAttributes = $additional->where('relType', 'belongsTo');
 
         $additionalArray = $additional->where('relType', 'hasMany');
@@ -143,14 +178,15 @@ class FrontendModuleGenerator
         $data['additionalArray'] = $additionalArray->pluck('foreignModel', 'relName')->toArray();
         $data['imports'][] = "import { {$additional->pluck("foreignModel")->implode(', ')} } from '@/modules';";
 
-        $view = view('frontend::modules/modelTS', $data);
+        $view = view('frontend::modules/modelTSVite', $data);
 
         $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
 
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            resource_path($target) . "/$name/model.ts"
+            base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.model.ts'
+            // resource_path($target) . "/$name/model.ts"
         );
 
         $stub->render();

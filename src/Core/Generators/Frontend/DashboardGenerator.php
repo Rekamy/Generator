@@ -19,33 +19,41 @@ class DashboardGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Dashboard file...");
+        // $this->tables = collect($this->context->db->listTableNames())
+        //     ->filter(function ($item) {
+        //         return !in_array($item, $this->context->excludeTables);
+        //     });
         $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
-            });
+        ->filter(function ($item) {
+            if (str_starts_with($item, 'staff'))
+                return $item;
+        });
     }
 
     public function generate()
     {
         try {
 
-            // $useLocal = $this->context->template['use_local'];
-            $useLocal = true;
+            $useLocal = $this->context->template['use_local'];
+            // $useLocal = true;
             $frontendName = $this->context->template['frontend_path'];
             $gitTemplate = $this->context->template['source'];
 
-            $resourcesPath = resource_path();
-            $frontendPath = resource_path($frontendName);
+            // $resourcesPath = resource_path();
+            // $frontendPath = resource_path($frontendName);
+            $resourcesPath = base_path() . '/Modules/VueTest/Resources';
+            $frontendPath = base_path() . '/Modules/VueTest/Resources/' . $frontendName;
 
+            // dd($frontendPath);
             if (is_dir($frontendPath)) {
-                $this->context->info("Folder dashboard already exist. skip clone..");
-                if (!file_exists($frontendPath . '/.env'))
-                    copy($frontendPath . '/.env.example', $frontendPath . '/.env');
+                $this->context->info("Folder Vue already exist. skip clone..");
+                // if (!file_exists($frontendPath . '/.env'))
+                //     copy($frontendPath . '/.env.example', $frontendPath . '/.env');
                 return;
             }
 
             if($useLocal) {
-                $command =  "cp -r '$gitTemplate' '$resourcesPath\\$frontendName' ";
+                $command =  "cp -r '$gitTemplate' '$resourcesPath/$frontendName' ";
                 $this->context->info($command);
                 exec($command);
             } else {
@@ -67,8 +75,8 @@ class DashboardGenerator
             $command =  "cd $frontendPath && $packageManager install";
             exec($command);
 
-            if (!file_exists($frontendPath . '/.env'))
-                copy($frontendPath . '/.env.example', $frontendPath . '/.env');
+            // if (!file_exists($frontendPath . '/.env'))
+            //     copy($frontendPath . '/.env.example', $frontendPath . '/.env');
         } catch (\Throwable $th) {
             throw $th;
         }

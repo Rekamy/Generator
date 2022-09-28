@@ -19,29 +19,41 @@ class VueRouteGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Route file...");
+        // $this->tables = collect($this->context->db->listTableNames())
+        //     ->filter(function ($item) {
+        //         return !in_array($item, $this->context->excludeTables);
+        //     });
+
         $this->tables = collect($this->context->db->listTableNames())
             ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
+                if (str_starts_with($item, 'staff'))
+                    return $item;
             });
     }
 
     public function generate()
     {
         try {
+            $frontendName = $this->context->template['frontend_path'];
             $data['routes'] = [];
             foreach ($this->tables as $key => $table) {
-                $data['routes'][] = Str::of($table)->singular();
+                $data['routes'][] =  [
+                    'camel' =>Str::of($table)->camel(),
+                    'kebab' =>Str::of($table)->camel()->kebab(),
+                ];
             }
 
-            $view = view('frontend::route', $data);
+            $view = view('frontend::routevite', $data);
 
-            $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['route']['path'];
+            $target = $this->context->template['frontend_path'];
 
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                resource_path($target) . "/crud.ts"
+                base_path() . '/Modules/VueTest/Resources/' . $frontendName . "/router.ts"
             );
+
+            // dd(base_path() . '/Modules/VueTest/Resources/' . $frontendName . "/router.ts");
 
             $stub->render();
             $this->context->info("Crud Route file Created.");
