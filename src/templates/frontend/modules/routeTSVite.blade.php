@@ -15,22 +15,22 @@ export default [
         component: BasePage,
         children: [
             {
-                path: '/',
+                path: '',
                 name: 'manage-${slug}',
                 component: Manage${studly},
             },
             {
-                path: '/create',
+                path: 'create',
                 name: 'create-${slug}',
                 component: Create${studly},
             },
             {
-                path: '/{id}',
+                path: ':id',
                 name: 'view-${slug}',
                 component: View${studly},
             },
             {
-                path: '/{id}/edit',
+                path: ':id/edit',
                 name: 'edit-${slug}',
                 component: Edit${studly},
             },
