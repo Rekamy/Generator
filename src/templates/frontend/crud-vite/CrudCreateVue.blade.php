@@ -1,7 +1,7 @@
 <?= "
 <template>
     <BaseCard title='Create $title'>
-        <{$studly}Component v-model='model' />
+        <{$studly}Component :model='model' />
         <button type='submit' @click='submit'>Save</button>>
     </BaseCard>
 </template>

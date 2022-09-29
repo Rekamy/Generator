@@ -1,7 +1,7 @@
 <?= "
 <template>
     <BaseCard title='Update {$title}'>
-        <{$studly}Component v-model='model' />
+        <{$studly}Component :model='model' />
     </BaseCard>
 </template>
 
@@ -10,8 +10,8 @@
 
     const { get{$studly} } = use{$studly}Bloc();
 
-    onMounted(async () => {
-        const res = await get{$studly}('1');
-    });
+    // onMounted(async () => {
+    //     const res = await get{$studly}('1');
+    // });
 </script>
 " ?>

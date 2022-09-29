@@ -1,7 +1,7 @@
 <?= "
 <template>
     <div>
-        <BaseTable :options='options'></BaseTable>
+        // <BaseTable :options='options'></BaseTable>
     </div>
 </template>
 

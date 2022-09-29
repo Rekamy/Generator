@@ -53,8 +53,8 @@ class CrudFormComponentVueGenerator
                 $data['slug'] =  $name->slug();
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
-
                 $view = view('frontend::crud-vite/components/CrudFormComponentVue', $data);
+
 
                 // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
