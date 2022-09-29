@@ -1,14 +1,30 @@
 <?= "
 <template>
     <div>" ?>
-<?php foreach ($columns as $column) :
-    $name = Str::of($column->getName());
-    $replaced = Str::replace('_', ' ', $name);
-    $label = Str::of($replaced)->title();
-?><?= "
-        <BaseInput label='{$label}' placeholder='{$label}' type='text' v-model='model.{$name}' required></BaseInput>\n" ?>
-<?php endforeach; ?><?= "
-    </div>
+<?php
+$chunk = array_chunk($columns->toArray(), 2);
+for ($i = 0; $i < count($chunk); $i++) {
+?> <?= "<div class='row'>"?> 
+    <?php
+    foreach ($chunk[$i] as $key => $column) {
+        // dd($column->getNotnull());
+        $name = Str::of($column->getName());
+        $replaced = Str::replace('_', ' ', $name);
+        $label = Str::of($replaced)->title();
+
+        if($column->getNotnull()){
+        ?>
+    <?= "<div class='col-6'>     
+                <BaseInput label='{$label}' placeholder='{$label}' type='text' v-model='model.{$name}' required></BaseInput> 
+            </div>  \n"?>
+    <?php }else { ?>
+    <?= "<div class='col-6'>     
+                <BaseInput label='{$label}' placeholder='{$label}' type='text' v-model='model.{$name}'></BaseInput> 
+            </div>  \n"?>
+     <?php }    } ?>
+    <?= "</div>"?> 
+    <?php } ?>
+<?= "</div>
 </template>
 
 <script setup lang='ts'>

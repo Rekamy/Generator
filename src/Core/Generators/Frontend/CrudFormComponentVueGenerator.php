@@ -40,7 +40,6 @@ class CrudFormComponentVueGenerator
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Vue Manage for Table $table ...");
                 $name = Str::of($table)->singular();
-                // $data['context'] = $this->context;
                 $data['columns'] = collect($this->context->db->listTableColumns($table))
                     ->except([
                         'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
@@ -54,7 +53,6 @@ class CrudFormComponentVueGenerator
                 // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
                 $view = view('frontend::crud-vite/components/CrudFormComponentVue', $data);
-
 
                 // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
