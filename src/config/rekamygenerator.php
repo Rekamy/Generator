@@ -355,7 +355,7 @@ return [
 
         'use_local' => false,
 
-        'frontend_path' => 'vue',
+        'frontend_path' => 'vue3',
 
         'source' => 'git@gitlab.com:rekamy/packages/tms-template.git',
     ]

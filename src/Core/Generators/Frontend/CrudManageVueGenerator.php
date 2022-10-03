@@ -56,13 +56,15 @@ class CrudManageVueGenerator
 
                 $view = view('frontend::crud-vite/CrudManageVue', $data);
 
+                // dd($data);
+
                 // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
                 // dd($data['studly']);
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/pages/Manage' . $data['studly'] . 'Page.vue'
+                    base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/pages/Manage' . $data['studly'] . 'Page.vue'
                     // resource_path($target) . "/$name/index.vue"
                 );
 

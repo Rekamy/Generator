@@ -40,6 +40,7 @@ class VueRouteGenerator
                 $data['routes'][] =  [
                     'camel' =>Str::of($table)->camel(),
                     'kebab' =>Str::of($table)->camel()->singular()->kebab(),
+                    'title' =>Str::of($table)->absoluteTitle(),
                 ];
             }
 
@@ -47,10 +48,13 @@ class VueRouteGenerator
             
             $target = $this->context->template['frontend_path'];
 
+            // dd($data);
+            // src/modules/crud-generator
+            // /Users/razlanrazak/Documents/KnowaProject/TMS/tms_jims_staff/Modules/VueTest/Resources/vue3/src/modules/crud-generator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                base_path() . '/Modules/VueTest/Resources/' . $frontendName . "/router.ts"
+                base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/menu.ts'
             );
 
             // dd(base_path() . '/Modules/VueTest/Resources/' . $frontendName . "/router.ts");

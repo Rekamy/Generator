@@ -1,22 +1,32 @@
-<?="
+<?php $router = '$router.go(-1)' ?>
+<?= "
 <template>
-    <BaseCard title='Update {$title}'>
-        <{$studly}Component :model='model' />
-        <button type='submit' @click='submit'>Save</button>>
+    <BaseCard title=\"Edit {$title}\">
+        <{$studly}Component :model=\"model\" />
+        <div class=\"d-flex flex-row-reverse\">
+            <BaseButton type=\"submit mx-2\" @click=\"submit\">Save</BaseButton>
+            <BaseButton color=\"danger mx-2\" @click=\"{$router}\">
+                Cancel
+            </BaseButton>
+        </div>    
     </BaseCard>
 </template>
 
-<script setup lang='ts'>
+<script setup lang=\"ts\">
 const model = ref(new {$studly}());
-
-const { get{$studly}, update{$studly} } = use{$studly}Bloc();
+const route = useRoute();
+const router = useRouter();
 
 onMounted(async () => {
-    const res = await get{$studly}('1');
+    await use{$studly}Bloc().get{$studly}(route.params.id as string);
 });
 
-const submit = async () => {
-    const res = await update{$studly}('1', model);
+const submit = () => {
+    widget.showLoading();
+    use{$studly}Bloc().update{$studly}(model.value.id, model.value).then(() => {
+        widget.alertSuccess(\"Berjaya!\", \"Rekod telah dikemaskini.\");
+        router.go(-1);
+    });
 };
 </script>
-"?>
+" ?>

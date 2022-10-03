@@ -117,10 +117,9 @@ class FrontendGeneratorCommand extends Command
     public function generateModule()
     {
         $generators = [
-            'base' => DashboardGenerator::class,
+            // 'base' => DashboardGenerator::class,
             'route' => VueRouteGenerator::class,
             'frontendModule' => FrontendModuleGenerator::class,
-
             'crudManageVue' => CrudManageVueGenerator::class,
             'crudCreateVue' => CrudCreateVueGenerator::class,
             'crudViewVue' => CrudViewVueGenerator::class,

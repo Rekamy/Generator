@@ -62,7 +62,7 @@ class CrudViewVueGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/pages/View' . $data['studly'] . 'Page.vue'
+                    base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/pages/View' . $data['studly'] . 'Page.vue'
                     // resource_path($target) . "/$name/view.vue"
                 );
 
