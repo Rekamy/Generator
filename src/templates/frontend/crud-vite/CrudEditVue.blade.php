@@ -18,7 +18,7 @@ const route = useRoute();
 const router = useRouter();
 
 onMounted(async () => {
-    await use{$studly}Bloc().get{$studly}(route.params.id as string);
+    model.value = await use{$studly}Bloc().get{$studly}(route.params.id as string);
 });
 
 const submit = () => {
