@@ -2,6 +2,8 @@
 <?=
 "<?php
 
+namespace App\APIDoc;
+
 /**
  * @OA\Get(
  *     path=\"$route\",
@@ -126,5 +128,7 @@ foreach ($columns as $i => $column) :
 <?php endforeach; ?>
 <?= "* )
  */
+class ${className} {
+} 
 "
 ?>
