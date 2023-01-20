@@ -17,6 +17,7 @@ class APIDocGenerator
 
     public function __construct($context)
     {
+        dd('asd');
         $this->context = $context;
         $this->context->info("Creating APIDoc...");
         $this->tables = collect($this->context->db->listTableNames())
@@ -27,6 +28,20 @@ class APIDocGenerator
 
     public function generate()
     {
+        $types = [
+            'Filter',
+            'Get',
+            'First',
+            'Create',
+            'Update',
+            'Delete',
+        ];
+        foreach ($types as $type) {
+            $this->generateDoc($type);
+        }
+    }
+    public function generateDoc($type)
+    {
         try {
             foreach ($this->tables as $table) {
                 $this->context->info("Creating APIDoc for table $table ...");
@@ -34,12 +49,12 @@ class APIDocGenerator
                 $data['table'] = Str::of($table);
                 $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
                 $data['tags'] = Str::of($table)->studly();
-                $data['title'] = Str::of($table)->absoluteTitle();
-                $data['className'] = Str::of($table)->singular()->studly() . "APIDoc";
+                $data['title'] = $title = Str::of($table)->absoluteTitle();
+                $data['className'] = $type . Str::of($table)->singular()->studly() . "APIDoc";
 
                 $data['route'] = '/api/' . Str::slug(Str::singular($table));
 
-                $view = view('swagger::APIDoc', $data);
+                $view = view("swagger::{$type}APIDoc", $data);
 
                 $stub = new StubGenerator(
                     $this->context,
@@ -48,7 +63,7 @@ class APIDocGenerator
                 );
 
                 $stub->render();
-                $this->context->info("APIDoc Created.");
+                $this->context->info("{$type} {$title} APIDoc Created.");
             }
         } catch (\Throwable $th) {
             throw $th;
