@@ -17,7 +17,6 @@ class APIDocGenerator
 
     public function __construct($context)
     {
-        dd('asd');
         $this->context = $context;
         $this->context->info("Creating APIDoc...");
         $this->tables = collect($this->context->db->listTableNames())
@@ -35,6 +34,7 @@ class APIDocGenerator
             'Create',
             'Update',
             'Delete',
+            'Model',
         ];
         foreach ($types as $type) {
             $this->generateDoc($type);
@@ -69,4 +69,5 @@ class APIDocGenerator
             throw $th;
         }
     }
+
 }
