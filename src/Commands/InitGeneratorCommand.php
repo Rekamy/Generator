@@ -48,7 +48,10 @@ class InitGeneratorCommand extends Command
 
         if ($this->confirm('Generate backend from current database?', true)) {
             $commands->push(['artisan' => 'generate:backend']);
-            $commands->push(['artisan' => 'passport:install']);
+            $hasPassport = \Composer\InstalledVersions::isInstalled('laravel/passport');
+            if ($hasPassport)
+                $commands->push(['artisan' => 'passport:install']);
+            $commands->push(['artisan' => 'l5-swagger:generate']);
         }
 
         if ($this->confirm('Generate frontend from current database?', true)) {
