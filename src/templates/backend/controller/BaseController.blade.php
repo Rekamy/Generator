@@ -28,7 +28,7 @@ class Controller extends BaseController
 
     public function web()
     {
-        return redirect('/{$context->config->template->frontend_path}/');
+        return redirect('/{$context->config->setup->frontend->build}/');
     }
 }
 SCRIPT;

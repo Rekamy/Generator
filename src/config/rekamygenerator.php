@@ -9,9 +9,9 @@ return [
     |--------------------------------------------------------------------------
     | App Name
     |--------------------------------------------------------------------------
-    | 
+    |
     | Setup your application name here(For Swagger Use).
-    | 
+    |
     */
 
     'app_name' => env('APP_NAME', 'Swagger API Documentation'),
@@ -68,9 +68,9 @@ return [
     | Generate
     |--------------------------------------------------------------------------
     |
-    | Which file would you like to generate. Set the value to false you 
+    | Which file would you like to generate. Set the value to false you
     | don't want to generate.
-    | 
+    |
     | Backend generator
     |   - model
     |   - bloc
@@ -140,7 +140,7 @@ return [
     | Database
     |--------------------------------------------------------------------------
     |
-    | Database configuration. Set your database name here or 
+    | Database configuration. Set your database name here or
     | from .env and exclude any tables you don't want to generate
     |
     */
@@ -176,12 +176,12 @@ return [
         ],
         'include_tables' => [],
         'skipColumns' => [
-            'id', 'created_at', 
-            // 'updated_at', 
+            'id', 'created_at',
+            // 'updated_at',
             'updated_by',
-            'created_by', 
-            'deleted_at', 'deleted_by', 
-            'remark', 
+            'created_by',
+            'deleted_at', 'deleted_by',
+            'remark',
             'password',
             'remember_token',
         ],
@@ -304,6 +304,7 @@ return [
 
         ],
         'frontend' => [
+            'build' => 'app',
             'path' => [
                 'root' => 'resources/app/',
                 'module' => 'src/modules/',
@@ -394,18 +395,4 @@ return [
 
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Template Path To Be Generate
-    |--------------------------------------------------------------------------
-    |
-    */
-    'template' => [
-
-        'use_local' => false,
-
-        'frontend_path' => 'app',
-
-        'source' => 'git@gitlab.com:rekamy/kopenas/frontend.git',
-    ]
 ];
