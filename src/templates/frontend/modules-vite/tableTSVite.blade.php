@@ -1,18 +1,18 @@
 <?= "
-import { useDataTableApi } from \"@/components/Base/JqueryDataTable/datatable\";
+import { useDataTableApi } from \"@/components/Base/DataTable/datatable\";
 import jQuery from \"jquery\";
 
 export function use{$studly}Table (id: string) {
     const router = useRouter();
     const { reload, search } = useDataTableApi(id);
-    const endpoint = crudApi().makeEndpoint(\"{$slugPlural}\");
+    const endpoint = crudApi(\"{$slug}\").getUrl();
     const options = {
         ajax: {
             url: endpoint,
         },
         order: [[1, \"asc\"]],
         columns: [
-            { data: \"_dtRowIndex\", title: \"Bil\" },"
+            // { data: \"_dtRowIndex\", title: \"Bil\" },"
 ?><?php
             $i = 0;
             foreach ($columns as $columns) :
@@ -36,7 +36,7 @@ export function use{$studly}Table (id: string) {
                 data: \"id\",
                 title: \"Tindakan\",
                 render: actionButtonRenderer({
-                    path: \"/{$slug}\",
+                    path: \"{$slug}\",
                     view: true,
                     edit: true,
                     destroy: true,

@@ -176,8 +176,14 @@ return [
         ],
         'include_tables' => [],
         'skipColumns' => [
-            'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-            'deleted_at', 'deleted_by', 'remark',
+            'id', 'created_at', 
+            // 'updated_at', 
+            'updated_by',
+            'created_by', 
+            'deleted_at', 'deleted_by', 
+            'remark', 
+            'password',
+            'remember_token',
         ],
     ],
 

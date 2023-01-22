@@ -6,7 +6,7 @@
         Add {$studly}
       </RouterLink>
     </template>
-    <BaseTable
+    <DataTable
         id=\"{$slug}\"
         :options=\"options\"
     />
