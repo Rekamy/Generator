@@ -59,7 +59,10 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../packages/Generator"
+            "url": "../packages/Generator",
+            "options": {
+                "symlink": true
+            }
         }
     ]
 }
