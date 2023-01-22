@@ -51,6 +51,9 @@ class CrudViewTSGenerator
 
                 $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
 
+                $contextPath = $this->context->config->setup->frontend->path;
+                $path = $contextPath->root . $contextPath->crud . $name->slug();
+
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),

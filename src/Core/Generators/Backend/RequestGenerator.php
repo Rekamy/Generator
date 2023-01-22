@@ -19,10 +19,7 @@ class RequestGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Request...");
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
-            });
+        $this->tables = $this->context->getTables();
     }
 
     public function generate()
@@ -35,7 +32,7 @@ class RequestGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $name;
                 $data['model'] = $name->singular()->studly();
-                $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
+                $data['columns'] = $this->context->getColumns($table);
                 $data['rules'] = $this->drawRules($data['columns']);
                 $data['className'] = $name->singular()->studly() . "Request";
                 $data['blocName'] = $name->singular()->studly() . "Bloc";
@@ -45,7 +42,7 @@ class RequestGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['request']['path'] . $data['className'] . '.php'
+                    $this->context->config->setup->backend->request->path . $data['className'] . '.php'
                 );
 
                 $stub->render();

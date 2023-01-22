@@ -25,10 +25,7 @@ class ModelGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Models...");
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
-            });
+        $this->tables = $this->context->getTables();
 
         $this->relations = collect();
 
@@ -43,17 +40,17 @@ class ModelGenerator
                 $data['context'] = $this->context;
                 $data['table'] = $table;
 
-                $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
-                $data['uuid'] = collect($this->context->db->listTableColumns($table))->get('id') ?
-                    collect($this->context->db->listTableColumns($table))->get('id')->getType()->getName() : false;
+                $data['columns'] = $this->context->getColumns($table);
+                $primary = collect($this->context->db->listTableColumns($table))->get('id');
+                $data['uuid'] =  $primary ? $primary->getType()->getName() : false;
                 $data['isUuid'] = ($data['uuid'] == "string");
-                $data['softDelete'] = $data['columns']->get('deleted_at') && $this->context->options->get('softDelete');
+                $data['softDelete'] = $data['columns']->get('deleted_at') && $this->context->config->options->get('softDelete');
                 $data['className'] = Str::of($table)->singular()->studly();
-                $data['namespace'] = $this->context->path['backend']['model']['namespace'];
+                $data['namespace'] = $this->context->config->setup->backend->model->namespace;
                 $data['notNullColumns'] = $data['columns']->filter(function ($column) {
                     return $column->getNotnull();
                 });
-                if ($this->context->options->get('relation')) {
+                if ($this->context->config->options->relation) {
                     $data['relations'] = [];
                     foreach ($this->context->relations->where('table', $table) as $relation) {
                         array_push($data['relations'], $this->context->makeRelation($relation));
@@ -64,7 +61,7 @@ class ModelGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['model']['path'] . $data['className'] . '.php'
+                    $this->context->config->setup->backend->model->path . $data['className'] . '.php'
                 );
                 $stub->render();
                 $this->context->info("Models {$data['className']} Created.");

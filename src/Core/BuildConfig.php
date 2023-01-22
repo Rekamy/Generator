@@ -25,19 +25,7 @@ trait BuildConfig
 
     public function loadConfig()
     {
-        $this->config = config('rekamygenerator');
-        $this->database = $this->config['database'];
-        $this->dbname = $this->database['name'];
-        $this->path = $this->config['setup'];
-        $this->generate = $this->config['generate'];
-        $this->options = collect($this->config['options']);
-        // $this->namespace = $this->config['namespace'];
-        $this->appName = $this->config['app_name'];
-        $this->template = $this->config['template'];
-
-        $this->excludeTables = $this->database['exclude_tables'];
-        $this->includeTables = $this->database['include_tables'];
-
+        $this->config = json_decode(json_encode(config('rekamygenerator')));
         $this->relations = collect();
 
         // FIXME: on migrate, schema manager does not get latest db struct
@@ -47,7 +35,7 @@ trait BuildConfig
         $this->db = $schema;
 
         $this->tables = collect($this->db->listTableNames())
-            ->filter(fn ($item) =>  !in_array($item, $this->excludeTables));
+            ->filter(fn ($item) =>  !in_array($item, $this->config->database->exclude_tables));
 
         $this->cacheRelationship();
     }
@@ -83,6 +71,20 @@ trait BuildConfig
         }
     }
 
+    public function getColumns($table, $skip = [])
+    {
+        return collect($this->db->listTableColumns($table))
+            ->filter(fn ($item) => !in_array($item->getName(), $this->config->database->skipColumns))
+            ->filter(fn ($item) => !in_array($item->getName(), $skip));
+    }
+
+    public function getTables($db = null)
+    {
+        return collect($this->db->listTableNames())
+            ->merge($this->config->database->include_tables)
+            ->filter(fn ($item) => !in_array($item, $this->config->database->exclude_tables));
+    }
+
     private function parseName($name)
     {
         $parsedName = $name = \Str::of($name);
@@ -98,15 +100,18 @@ trait BuildConfig
         $relName = $detail['relName'];
         $foreignModel = $detail['foreignModel'];
 
-        if(!class_exists($foreignModel)) return;
+        if (!class_exists($foreignModel)) return;
+
         $referenceColumn = $detail['referenceColumn'];
         $targetKey = $detail['targetKey'];
         $relModel = ucfirst($relType);
 
-        $html = "\tpublic function $relName() : $relModel\n";
-        $html .= "\t{\n";
-        $html .= "\t\treturn \$this->{$relType}({$foreignModel}::class, '$referenceColumn', '$targetKey');\n";
-        $html .= "\t}\n";
+        $html = <<<PHP
+        public function $relName() : $relModel
+        {
+            return \$this->{$relType}({$foreignModel}::class, '$referenceColumn', '$targetKey');\n";
+        }\n
+        PHP;
 
         return  $html;
     }
@@ -125,9 +130,18 @@ trait BuildConfig
         $skipColumns = collect()
             ->merge($fkColumns)
             ->merge($indexColumns)
-            ->merge($this->database['skipColumns'])->unique();
+            ->merge($this->config->database->skipColumns)->unique();
 
-        return collect($this->db->listTableColumns($table))->except($skipColumns->toArray())
+        return $this->getColumns($table, $skipColumns)
             ->first(fn ($col) => !\Str::endsWith($col->getName(), '_id'));
+    }
+
+    public function generateFiles($generators)
+    {
+        foreach ($generators as $class) {
+            $generator = new $class($this);
+            $generator->generate();
+            $this->newline();
+        }
     }
 }

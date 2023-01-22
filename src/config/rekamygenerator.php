@@ -1,5 +1,8 @@
 <?php
 // TODO: fix format
+
+use Rekamy\Generator\Core\Generators\Frontend\FrontendModuleGenerator;
+
 return [
 
     /*
@@ -14,6 +17,50 @@ return [
     'app_name' => env('APP_NAME', 'Swagger API Documentation'),
 
     'package_manager' => 'npm',
+
+    'generators' => [
+        'frontend' => [
+            \Rekamy\Generator\Core\Generators\Frontend\FrontendModuleGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudManageVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudCreateVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudViewVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudEditVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudFormComponentVueGenerator::class,
+        ],
+        'backend' => [
+            \Rekamy\Generator\Core\Generators\Backend\APIDocGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\APIDocInfoGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\AuthControllerGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\BaseControllerGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\ModelGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\BlocGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\RepositoryGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\ControllerGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\RequestGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudableTraitGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudableRepositoryTraitGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\HasRepositoryGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\HasRequestGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudBlocGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudBlocInterfaceGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudControllerGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudRepositoryInterfaceGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\CrudRequestInterfaceGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\ExceptionValidationGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\APIRoutesGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\DatatableCriteriaContractsGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\LengthAwarePaginatorContractsGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\ServiceProvidersGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\RequestExtensionContractsGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\BaseRepositoryContractsGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\RequestCriteriaContractsGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\FileUploadContractsGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\HasAuditorRelationGenerator::class,
+            \Rekamy\Generator\Core\Generators\Backend\DependenciesSetupGenerator::class,
+        ],
+        'mobile' => [],
+        'application' => [],
+    ],
 
 
     /*
@@ -251,15 +298,12 @@ return [
 
         ],
         'frontend' => [
-            'route' => [
-                'path' => '/src/router/crud',
+            'path' => [
+                'root' => 'resources/app/',
+                'module' => 'src/modules/',
+                'crud' => 'src/modules/crud/',
             ],
-            'crud' => [
-                'path' => '/src/views/crud',
-            ],
-            'module' => [
-                'path' => '/src/modules',
-            ],
+            'source' => 'git@gitlab.com:rekamy/kopenas/frontend.git',
         ],
         'migration' => base_path('database/migrations/'),
 
@@ -350,13 +394,12 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-
     'template' => [
 
         'use_local' => false,
 
-        'frontend_path' => 'vue3',
+        'frontend_path' => 'app',
 
-        'source' => 'git@gitlab.com:rekamy/packages/tms-template.git',
+        'source' => 'git@gitlab.com:rekamy/kopenas/frontend.git',
     ]
 ];

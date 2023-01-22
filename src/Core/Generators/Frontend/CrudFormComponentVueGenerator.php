@@ -15,23 +15,12 @@ class CrudFormComponentVueGenerator
 
     private $tables;
 
-    private $frontendName;
 
     public function __construct($context)
     {
         $this->context = $context;
-        $this->frontendName = $this->context->template['frontend_path'];
         $this->context->info("Creating Vue Manage...");
-        // $this->tables = collect($this->context->db->listTableNames())
-        //     ->filter(function ($item) {
-        //         return !in_array($item, $this->context->excludeTables);
-        //     });
-
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                if (str_starts_with($item, 'staff'))
-                    return $item;
-            });
+        $this->tables = $this->context->getTables();
     }
 
     public function generate()
@@ -40,28 +29,25 @@ class CrudFormComponentVueGenerator
             foreach ($this->tables as $table) {
                 $this->context->info("Creating Vue Manage for Table $table ...");
                 $name = Str::of($table)->singular();
-                $data['columns'] = collect($this->context->db->listTableColumns($table))
-                    ->except([
-                        'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-                        'deleted_at', 'deleted_by', 'remark',
-                    ]);
-                $data['table'] =  $name;
-                $data['title'] =  $name->absoluteTitle();
-                $data['studly'] =  $name->studly();
-                $data['camel'] = $name->camel();
-                $data['slug'] =  $name->slug();
-                // $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
-                // $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
+                $data = [
+                    'columns' => $this->context->getColumns($table),
+                    'table' =>  $name,
+                    'title' =>  $name->absoluteTitle(),
+                    'studly' =>  $name->studly(),
+                    'camel' => $name->camel(),
+                    'slug' =>  $name->slug(),
+                ];
+
                 $view = view('frontend::crud-vite/components/CrudFormComponentVue', $data);
 
-                // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['crud']['path'];
+                $contextPath = $this->context->config->setup->frontend->path;
+                $path = $contextPath->root . $contextPath->crud . $name->slug();
+                $targetPath = base_path($path . '/components/' . $name->studly() . 'Component.vue');
 
-                // dd($data['studly']);
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/components/' . $data['studly'] . 'Component.vue'
-                    // resource_path($target) . "/$name/index.vue"
+                    $targetPath
                 );
 
                 $stub->render();

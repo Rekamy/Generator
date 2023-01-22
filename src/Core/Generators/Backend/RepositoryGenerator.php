@@ -19,10 +19,7 @@ class RepositoryGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Repository...");
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
-            });
+        $this->tables = $this->context->getTables();
     }
 
     public function generate()
@@ -33,17 +30,17 @@ class RepositoryGenerator
 
                 $data['context'] = $this->context;
                 $data['table'] = $table;
-                $data['columns'] = collect($this->context->db->listTableColumns($table))->except('id');
+                $data['columns'] = $this->context->getColumns($table);
                 $data['modelName'] = Str::of($table)->singular()->studly();
                 $data['className'] = $data['modelName'] . "Repository";
-                $data['namespace'] = $this->context->path['backend']['repository']['namespace'];
+                $data['namespace'] = $this->context->config->setup->backend->repository->namespace;
 
                 $view = view('backend::Repository', $data);
 
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['repository']['path'] . $data['className'] . '.php'
+                    $this->context->config->setup->backend->repository->path . $data['className'] . '.php'
                 );
 
                 $stub->render();

@@ -17,10 +17,7 @@ class APIRoutesGenerator
     {
         $this->context = $context;
         $this->context->info("Creating APIRoutes...");
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
-            });
+        $this->tables = $this->context->getTables();
     }
 
     public function generate()
@@ -40,7 +37,7 @@ class APIRoutesGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            $this->context->path['backend']['api_routes']['path']
+            $this->context->config->setup->backend->api_routes->path
         );
 
         $stub->render();
@@ -64,7 +61,7 @@ class APIRoutesGenerator
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            $this->context->path['backend']['crud_routes']['path']
+            $this->context->config->setup->backend->crud_routes->path
         );
 
         $stub->render();

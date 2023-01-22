@@ -23,11 +23,7 @@ class DashboardGenerator
         //     ->filter(function ($item) {
         //         return !in_array($item, $this->context->excludeTables);
         //     });
-        $this->tables = collect($this->context->db->listTableNames())
-        ->filter(function ($item) {
-            if (str_starts_with($item, 'staff'))
-                return $item;
-        });
+        $this->tables = collect($this->context->db->listTableNames());
     }
 
     public function generate()

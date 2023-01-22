@@ -28,7 +28,7 @@ class BaseControllerGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['base_controller']['path'] . 'Controller.php'
+                $this->context->config->setup->backend->base_controller->path . 'Controller.php'
             );
 
             $stub->render();

@@ -5,7 +5,7 @@ import jQuery from \"jquery\";
 export function use{$studly}Table (id: string) {
     const router = useRouter();
     const { reload, search } = useDataTableApi(id);
-    const endpoint = crudApi().makeEndpoint(\"crudstaff/{$slugPlural}\");
+    const endpoint = crudApi().makeEndpoint(\"{$slugPlural}\");
     const options = {
         ajax: {
             url: endpoint,

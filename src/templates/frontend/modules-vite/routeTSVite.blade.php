@@ -3,10 +3,10 @@
 import BasePage from \"@/components/Base/BasePage.vue\";
 import type { RouteRecordRaw } from \"vue-router\";
 
-import Manage${studly} from \"./pages/Manage${studly}Page.vue\";
-import Create${studly} from \"./pages/Create${studly}Page.vue\";
-import View${studly} from \"./pages/View${studly}Page.vue\";
-import Edit${studly} from \"./pages/Edit${studly}Page.vue\";
+import Manage${studly}Page from \"./pages/Manage${studly}Page.vue\";
+import Create${studly}Page from \"./pages/Create${studly}Page.vue\";
+import View${studly}Page from \"./pages/View${studly}Page.vue\";
+import Edit${studly}Page from \"./pages/Edit${studly}Page.vue\";
 
 export default [
     {
@@ -17,22 +17,22 @@ export default [
             {
                 path: \"\",
                 name: \"manage-${slug}\",
-                component: Manage${studly},
+                component: Manage${studly}Page,
             },
             {
                 path: \"create\",
                 name: \"create-${slug}\",
-                component: Create${studly},
+                component: Create${studly}Page,
             },
             {
                 path: \":id\",
                 name: \"view-${slug}\",
-                component: View${studly},
+                component: View${studly}Page,
             },
             {
                 path: \":id/edit\",
                 name: \"edit-${slug}\",
-                component: Edit${studly},
+                component: Edit${studly}Page,
             },
         ],
     },

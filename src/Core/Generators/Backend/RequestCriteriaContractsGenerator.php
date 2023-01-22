@@ -23,7 +23,7 @@ class RequestCriteriaContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['override']['path'] . 'RequestCriteria.php'
+                $this->context->config->setup->backend->override->path . 'RequestCriteria.php'
             );
 
             $stub->render();

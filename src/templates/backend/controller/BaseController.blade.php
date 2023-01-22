@@ -1,7 +1,7 @@
 <?= <<<SCRIPT
 <?php
 
-namespace {$context->path['backend']['base_controller']['namespace']};
+namespace {$context->config->setup->backend->base_controller->namespace};
 
 use App\Exceptions\ValidationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -28,7 +28,7 @@ class Controller extends BaseController
 
     public function web()
     {
-        return redirect('/{$context->template['frontend_path']}/');
+        return redirect('/{$context->config->template->frontend_path}/');
     }
 }
 SCRIPT;

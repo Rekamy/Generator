@@ -19,10 +19,7 @@ class ControllerGenerator
     {
         $this->context = $context;
         $this->context->info("Creating Controller...");
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                return !in_array($item, $this->context->excludeTables);
-            });
+        $this->tables = $this->context->getTables();
     }
 
     public function generate()
@@ -43,7 +40,7 @@ class ControllerGenerator
                 $stub = new StubGenerator(
                     $this->context,
                     $view->render(),
-                    $this->context->path['backend']['controller']['path'] . $data['className'] . '.php'
+                    $this->context->config->setup->backend->controller->path . $data['className'] . '.php'
                 );
 
                 $stub->render();

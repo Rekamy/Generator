@@ -13,32 +13,17 @@ class FrontendModuleGenerator
 {
     private $context;
     private $tables;
-    private $frontendName;
 
     public function __construct($context)
     {
         $this->context = $context;
-        $this->frontendName = $this->context->template['frontend_path'];
         $this->context->info("Creating Frontend Module...");
-        // $this->tables = collect($this->context->db->listTableNames())
-        //     ->filter(function ($item) {
-        //         if (!empty($this->context->includeTables))
-        //             return !in_array($item, $this->context->excludeTables) && in_array($item, $this->context->includeTables);
-
-        //         return !in_array($item, $this->context->excludeTables);
-        //     });
-
-        $this->tables = collect($this->context->db->listTableNames())
-            ->filter(function ($item) {
-                if (str_starts_with($item, 'staff'))
-                    return $item;
-            });
     }
 
     public function generate()
     {
         try {
-            foreach ($this->tables as $table) {
+            foreach ($this->context->tables as $table) {
                 $this->generateBaseRoute($table);
                 // $this->generateApi($table);
                 $this->generateBloc($table);
@@ -63,16 +48,18 @@ class FrontendModuleGenerator
         $data['camel'] = $name->camel();
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
-        $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except($this->context->database['skipColumns']);
+        $data['columns'] = $this->context->getColumns($table);
 
         $view = view('frontend::modules-vite/routeTSVite', $data);
+
+        $contextPath = $this->context->config->setup->frontend->path;
+        $path = $contextPath->root . $contextPath->crud . $name->slug();
+        $targetPath = base_path($path . '/router.ts');
 
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/router.ts'
-            // resource_path($target) . "/$name/model.ts"
+            $targetPath
         );
 
         $stub->render();
@@ -107,30 +94,36 @@ class FrontendModuleGenerator
         $this->context->info("Api for table $table created.");
     }
 
+    private function getSkipColumns($table)
+    {
+        $fkColumns = collect($this->context->db->listTableForeignKeys($table))->map(fn ($col) => $col->getColumns()[0])->values();
+        $indexColumns = collect($this->context->db->listTableIndexes($table))->map(fn ($col) => $col->getColumns()[0])->values();
+        return collect()
+            ->merge($fkColumns)
+            ->merge($indexColumns)
+            ->merge($this->context->config->database->skipColumns)->unique()
+            ->toArray();
+    }
+
     private function generateBloc($table)
     {
         $this->context->info("Creating Bloc for table $table ...");
 
-        $data['context'] = $this->context;
         $name = Str::of($table)->singular();
-        $data['table'] = $name;
-        $data['title'] =  $name->absoluteTitle();
-        $data['camel'] = $name->camel();
-        $data['slug'] =  $name->slug();
-        $data['studly'] =  $name->studly();
-        $data['lower'] =  $name->studly()->lower();
-        $data['plural'] =  $name->studly()->plural()->lower();
-        $data['slugPlural'] =  $name->plural()->lower()->slug();
+        $data = [
+            'context' => $this->context,
+            'table' => $name,
+            'title' =>  $name->absoluteTitle(),
+            'camel' => $name->camel(),
+            'slug' =>  $name->slug(),
+            'studly' =>  $name->studly(),
+            'lower' =>  $name->studly()->lower(),
+            'plural' =>  $name->studly()->plural()->lower(),
+            'slugPlural' =>  $name->plural()->lower()->slug(),
+        ];
 
-        $fkColumns = collect($this->context->db->listTableForeignKeys($table))->map(fn ($col) => $col->getColumns()[0])->values();
-        $indexColumns = collect($this->context->db->listTableIndexes($table))->map(fn ($col) => $col->getColumns()[0])->values();
-        $skipColumns = collect()
-            ->merge($fkColumns)
-            ->merge($indexColumns)
-            ->merge($this->context->database['skipColumns'])->unique();
+        $data['columns'] = $this->context->getColumns($table, $this->getSkipColumns($table));
 
-        $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except($skipColumns->toArray());
         $relColumns = [];
         $this->context->relations->where('table', $table)->where('relType', 'belongsTo')
             ->each(function ($relation) use ($table, &$relColumns) {
@@ -144,18 +137,14 @@ class FrontendModuleGenerator
         $data['relationColumns'] = $relColumns;
         $view = view('frontend::modules-vite/blocTSVite', $data);
 
-        // dd($data);
+        $contextPath = $this->context->config->setup->frontend->path;
+        $path = $contextPath->root . $contextPath->crud . $name->slug();
+        $targetPath = base_path($path . '/blocs/bloc.ts');
 
-        // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
-
-        // dd($data);
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            // base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.bloc.ts'
-            base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.bloc.ts'
-
-            // resource_path($target) . "/$name/bloc.ts"
+            $targetPath,
         );
 
         $stub->render();
@@ -174,11 +163,11 @@ class FrontendModuleGenerator
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
 
-        
-        $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except($this->context->database['skipColumns']);
+
+        $data['columns'] = $this->context->getColumns($table);
         $data['imports'] = [];
-        $additional = $this->context->relations->where('table', $table)->whereNotIn('foreignModel', $this->context->database['skipColumns']);
+        $additional = $this->context->relations->where('table', $table)
+            ->whereNotIn('foreignModel', $this->context->config->database->skipColumns);
         $additionalAttributes = $additional->where('relType', 'belongsTo');
 
         $additionalArray = $additional->where('relType', 'hasMany');
@@ -187,7 +176,6 @@ class FrontendModuleGenerator
 
         $data['additionalArray'] = $additionalArray->pluck('foreignModel', 'relName')->toArray();
 
-        // dd($additional);
         foreach ($additional->pluck("foreignModel") as $key => $value) {
             $path = Str::of($value)->kebab();
             $data['imports'][] = "import { {$value} } from '@/modules/{$path}/blocs/{$path}.model';";
@@ -195,13 +183,14 @@ class FrontendModuleGenerator
 
         $view = view('frontend::modules-vite/modelTSVite', $data);
 
-        $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
+        $contextPath = $this->context->config->setup->frontend->path;
+        $path = $contextPath->root . $contextPath->crud . $name->slug();
+        $targetPath = base_path($path . '/blocs/model.ts');
 
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.model.ts'
-            // resource_path($target) . "/$name/model.ts"
+            $targetPath
         );
 
         $stub->render();
@@ -223,16 +212,8 @@ class FrontendModuleGenerator
         $data['plural'] =  $name->studly()->plural()->lower();
         $data['slugPlural'] =  $name->plural()->lower()->slug();
 
+        $data['columns'] = $this->context->getColumns($table, $this->getSkipColumns($table));
 
-        $fkColumns = collect($this->context->db->listTableForeignKeys($table))->map(fn ($col) => $col->getColumns()[0])->values();
-        $indexColumns = collect($this->context->db->listTableIndexes($table))->map(fn ($col) => $col->getColumns()[0])->values();
-        $skipColumns = collect()
-            ->merge($fkColumns)
-            ->merge($indexColumns)
-            ->merge($this->context->database['skipColumns'])->unique();
-
-        $data['columns'] = collect($this->context->db->listTableColumns($table))
-            ->except($skipColumns->toArray());
         $relColumns = [];
         $this->context->relations->where('table', $table)->where('relType', 'belongsTo')
             ->each(function ($relation) use ($table, &$relColumns) {
@@ -246,18 +227,14 @@ class FrontendModuleGenerator
         $data['relationColumns'] = $relColumns;
         $view = view('frontend::modules-vite/tableTSVite', $data);
 
-        // dd($data);
+        $contextPath = $this->context->config->setup->frontend->path;
+        $path = $contextPath->root . $contextPath->crud . $name->slug();
+        $targetPath = base_path($path . '/blocs/table.ts');
 
-        // $target = $this->context->template['frontend_path'] . $this->context->path['frontend']['module']['path'];
-
-        // dd($data);
         $stub = new StubGenerator(
             $this->context,
             $view->render(),
-            // base_path() . '/Modules/VueTest/Resources/' . $this->frontendName . '/modules/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.bloc.ts'
-            base_path() . '/Modules/VueTest/Resources/vue3/src/modules/crud-generator/' . $data['slug'] . '/blocs/' .  $data['slug'] . '.table.ts'
-
-            // resource_path($target) . "/$name/bloc.ts"
+            $targetPath
         );
 
         $stub->render();
@@ -323,7 +300,7 @@ class FrontendModuleGenerator
     {
         $this->context->info("Creating Frontend Module Base Index ...");
 
-        foreach ($this->tables as $table) {
+        foreach ($this->context->tables as $table) {
             $data['modules'][] = Str::of($table)->singular();
         }
 
@@ -346,7 +323,7 @@ class FrontendModuleGenerator
     {
         $this->context->info("Creating Frontend Module Auth ...");
 
-        foreach ($this->tables as $table) {
+        foreach ($this->context->tables as $table) {
             $data['modules'][] = Str::of($table)->singular();
         }
 
@@ -379,7 +356,7 @@ class FrontendModuleGenerator
         );
 
         $data['routes'] = [];
-        foreach ($this->tables as $table) {
+        foreach ($this->context->tables as $table) {
             $data['routes'][] = Str::of($table)->singular();
         }
 

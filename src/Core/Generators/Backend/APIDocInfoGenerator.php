@@ -33,7 +33,7 @@ class APIDocInfoGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['api_doc']['path'] . 'APIDocInfo.php'
+                $this->context->config->setup->backend->api_doc->path . 'APIDocInfo.php'
             );
 
             $stub->render();

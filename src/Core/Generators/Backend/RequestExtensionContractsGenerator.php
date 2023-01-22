@@ -23,7 +23,7 @@ class RequestExtensionContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['criteria']['path'] . 'RequestExtensionCriteria.php'
+                $this->context->config->setup->backend->criteria->path . 'RequestExtensionCriteria.php'
             );
 
             $stub->render();

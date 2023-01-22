@@ -23,7 +23,7 @@ class BaseRepositoryContractsGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['override']['path'] . 'BaseRepository.php'
+                $this->context->config->setup->backend->override->path . 'BaseRepository.php'
             );
 
             $stub->render();

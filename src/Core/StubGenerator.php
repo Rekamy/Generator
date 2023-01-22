@@ -40,13 +40,13 @@ class StubGenerator
      */
     public function render()
     {
-        $overwrite = $this->context->options['overwrite'];
+        $overwrite = $this->context->config->options->overwrite;
 
         if ($this->target == base_path('routes/crud.php')) {
             $overwrite = true;
         }
 
-        if (in_array($this->target, $this->context->options->get('dontOverwrite'))) {
+        if (in_array($this->target, $this->context->config->options->dontOverwrite)) {
             $overwrite = false;
         }
 

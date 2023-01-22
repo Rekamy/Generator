@@ -28,7 +28,7 @@ class CrudBlocInterfaceGenerator
             $stub = new StubGenerator(
                 $this->context,
                 $view->render(),
-                $this->context->path['backend']['crud_bloc_interface']['path'] . 'CrudBlocInterface.php'
+                $this->context->config->setup->backend->crud_bloc_interface->path . 'CrudBlocInterface.php'
             );
 
             $stub->render();
