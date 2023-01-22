@@ -73,9 +73,13 @@ trait BuildConfig
 
     public function getColumns($table, $skip = [])
     {
-        return collect($this->db->listTableColumns($table))
+        // FIXME: debug this line
+        $skip = collect($skip)->toArray();
+        $columns = collect($this->db->listTableColumns($table))
             ->filter(fn ($item) => !in_array($item->getName(), $this->config->database->skipColumns))
             ->filter(fn ($item) => !in_array($item->getName(), $skip));
+
+        return $columns;
     }
 
     public function getTables($db = null)
