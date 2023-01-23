@@ -66,6 +66,8 @@ class BackendGeneratorCommand extends Command
     {
         $this->loadConfig();
         $this->generateFiles($this->config->generators->backend);
+        $hasSwagger = \Composer\InstalledVersions::isInstalled('darkaonline/l5-swagger');
+        if ($hasSwagger)
+            $this->call('l5-swagger:generate');
     }
-
 }

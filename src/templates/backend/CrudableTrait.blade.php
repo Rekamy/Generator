@@ -4,7 +4,6 @@ namespace App\Contracts\Bloc\Concerns;
 
 trait CrudableBloc
 {
-    protected \$repo;
 
     public function index(\$input)
     {

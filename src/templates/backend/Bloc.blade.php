@@ -9,8 +9,10 @@ use App\Http\Requests\\$requestName;
 
 class $className extends CrudBloc
 {
-    public function __construct($repoName \$repo, $requestName \$request)
-    {
+    public function __construct(
+        public $repoName \$repo, 
+        public $requestName \$request,
+    ) {
         \$this->repo = \$repo;
         \$this->request = \$request;
     }

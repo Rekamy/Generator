@@ -58,6 +58,8 @@ class FrontendGeneratorCommand extends Command
         // $this->template = $this->choice('Choose your template ?', ['Argon', 'Sparker', 'Robust'], $this->defaultIndex);
         $this->initFrontend();    
         $this->generateFiles($this->config->generators->frontend);
+        $path = $this->config->setup->frontend->path->root;
+        shell_exec("cd {$path} && npx prettier --write **/*.vue");
     }
 
     public function initFrontend() {
@@ -66,5 +68,6 @@ class FrontendGeneratorCommand extends Command
         if(file_exists($path)) return;
 
         shell_exec("git clone {$source} {$path} && rm -rf {$path}/.git");
+        shell_exec("cd {$path} && npm i");
     }
 }

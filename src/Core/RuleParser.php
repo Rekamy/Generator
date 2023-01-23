@@ -91,6 +91,83 @@ class RuleParser
         return $rule;
     }
 
+    public static function drawComponent($column)
+    {
+        $name = Str::of($column->getName());
+        $label = $name->absoluteTitle()->replaceLast(' Id', '');
+        $element = collect();
+        $script = collect();
+        $attributes = [];
+        $columnType = Str::of($column->getType()->getName());
+
+        switch (true) {
+            case $name->endsWith('_id'):
+                $model = $name->replaceLast('_id', '')->plural();
+                $function = "get{$model->ucfirst()}";
+                $component = "BaseSelect ";
+                $attributes[] = ":select-options=\"$model\" ";
+                $getData = <<<TS
+                const {$model} = ref();
+
+                const {$function} = async () => {
+                {$model}.value = await crudApi("{$model->singular()}").all();
+                };
+
+                {$function}();
+                TS;
+                $script->push($getData);
+                break;
+            case $columnType->contains(['text']):
+                $component = "BaseInputTextArea ";
+                break;
+            case $columnType->contains(['text']):
+                $component = "BaseInputTextArea ";
+                break;
+            case $columnType->contains(['text']):
+                $component = "BaseInputTextArea ";
+                break;
+            case $columnType->contains(['bigint', 'int']):
+                $component = "BaseInputText ";
+                $attributes[] = 'type="numberic" ';
+                break;
+            case $columnType->contains(['smallint', 'boolean']):
+                $component = "BaseSwitch ";
+                $attributes[] = "id=\"input-{$name}\" ";
+                break;
+            case $columnType->contains(['datetime']):
+                // $component = "BaseDateTimePicker ";
+                $component = "BaseDatePicker ";
+                break;
+            case $columnType->contains(['date']):
+                $component = "BaseDatePicker ";
+                break;
+            case $columnType->contains(['time']):
+                $component = "BaseDatePicker ";
+                break;
+
+            default:
+                $component = "BaseInputText ";
+                break;
+        }
+
+
+        $element->push("\n<{$component} label=\"{$label}\" ");
+        $element->push("\n\tv-model=\"modelValue.{$name}\" ");
+        foreach ($attributes as $attr) {
+            $element->push("\n{$attr}");
+        }
+        // $element->push("\n\t:error=\"model.getErrors('{$name}')\" ");
+        $element->push("\n\tplaceholder=\"{$label}\" ");
+        $element->push("\n\t:readonly=\"readonly\" ");
+        if ($column->getNotnull()) $element->push("\n\tis-required ");
+        $element->push("\n/> ");
+
+        return [
+            'component' => $element->join(' '),
+            'script' => $script->join("\n"),
+        ];
+    }
+
     public static function parseSwaggerExample($type)
     {
 

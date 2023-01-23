@@ -2,7 +2,7 @@
 <?= "
 <template>
   <BaseCard title=\"View {$title}\">
-    <{$studly}Component :model=\"model\" readonly />
+    <{$studly}Component v-model=\"model\" readonly />
     <div class=\"d-flex flex-row-reverse\">
       <BaseButton color=\"danger mx-2\" @click=\"{$router}\">
         Back

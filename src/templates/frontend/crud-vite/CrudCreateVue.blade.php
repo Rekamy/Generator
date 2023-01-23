@@ -1,7 +1,7 @@
 <?= "
 <template>
   <BaseCard title=\"Create $title\">
-    <{$studly}Component :model=\"model\" />
+    <{$studly}Component v-model=\"model\" />
     <div class=\"d-flex flex-row-reverse\">
       <BaseButton type=\"submit mx-2\" @click=\"submit\">Save</BaseButton>
       <BaseButton color=\"danger mx-2\" @click=\"\$router.go(-1)\">

@@ -52,10 +52,6 @@ class InitGeneratorCommand extends Command
             $hasPassport = \Composer\InstalledVersions::isInstalled('laravel/passport');
             if ($hasPassport && $this->confirm('Run passport:install command?', false))
                 $commands->push(['artisan' => 'passport:install']);
-
-            $hasSwagger = \Composer\InstalledVersions::isInstalled('darkaonline/l5-swagger');
-            if ($hasSwagger)
-                $commands->push(['artisan' => 'l5-swagger:generate']);
         }
 
         if ($this->confirm('Generate frontend from current database?', true)) {
