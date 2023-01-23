@@ -55,14 +55,5 @@
                 "Rekamy\\Generator\\GeneratorServiceProvider"
             ]
         }
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../packages/Generator",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
+    }
 }
