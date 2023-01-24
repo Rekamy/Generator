@@ -1,10 +1,9 @@
 <?= "
-import { useDataTableApi } from \"@/components/Base/DataTable/datatable\";
 import jQuery from \"jquery\";
+import type { Ref } from "vue";
 
-export function use{$studly}Table (id: string) {
+export function use{$studly}Table (tableRef: Ref) {
     const router = useRouter();
-    const { reload, search } = useDataTableApi(id);
     const endpoint = crudApi(\"{$slug}\").getUrl();
     const options = {
         ajax: {
@@ -67,12 +66,12 @@ export function use{$studly}Table (id: string) {
 
             await use{$studly}Bloc().delete{$studly}(data.id);
             widget.alertSuccess(\"Terbaik!\", \"Data anda telah dihapuskan.\");
-            reload();
+            tableRef.value?.reload();
         } catch (err: any) {
             handleError(err);
         }
     }
 
-    return { options, ...useDataTableApi(id), reload, search };
+    return { options, reload: tableRef.value?.reload(), search: tableRef.value?.search() };
 }
 "?>

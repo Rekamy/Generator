@@ -7,14 +7,14 @@
       </RouterLink>
     </template>
     <DataTable
-        id=\"{$slug}\"
+        ref=\"tableRef\"
         :options=\"options\"
     />
   </BaseCard>
 </template>
 
 <script scoped setup lang=\"ts\">
-const { options } = use{$studly}Table(\"{$slug}\");
-
+const tableRef = ref()
+const { options } = use{$studly}Table(\"tableRef\");
 </script>
 " ?>
