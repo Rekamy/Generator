@@ -1,5 +1,7 @@
 <?=
 "
+import type { Category } from \"./model\";
+
 export function use${studly}Bloc() {
     async function get${studlyPlural}(query?: object) {
         return await crudApi<typeof ${studly}>(\"${slug}\").all(query);
@@ -22,7 +24,7 @@ export function use${studly}Bloc() {
     }
 
     return {
-        get${studly}s,
+        get${studlyPlural},
         get${studly},
         create${studly},
         update${studly},
