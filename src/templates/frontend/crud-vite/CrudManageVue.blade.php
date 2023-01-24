@@ -15,6 +15,6 @@
 
 <script scoped setup lang=\"ts\">
 const tableRef = ref()
-const { options } = use{$studly}Table(\"tableRef\");
+const { options } = use{$studly}Table(tableRef);
 </script>
 " ?>
