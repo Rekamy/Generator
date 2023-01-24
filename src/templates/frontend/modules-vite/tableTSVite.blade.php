@@ -1,6 +1,6 @@
 <?= "
 import jQuery from \"jquery\";
-import type { Ref } from "vue";
+import type { Ref } from \"vue\";
 
 export function use{$studly}Table (tableRef: Ref) {
     const router = useRouter();
