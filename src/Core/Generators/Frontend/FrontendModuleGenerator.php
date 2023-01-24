@@ -117,6 +117,7 @@ class FrontendModuleGenerator
             'camel' => $name->camel(),
             'slug' =>  $name->slug(),
             'studly' =>  $name->studly(),
+            'studlyPlural' =>  $name->studly()->plural(),
             'lower' =>  $name->studly()->lower(),
             'plural' =>  $name->studly()->plural()->lower(),
             'slugPlural' =>  $name->plural()->lower()->slug(),
