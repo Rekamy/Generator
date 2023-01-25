@@ -1,5 +1,5 @@
 <?= "export class ${studly} {
-\tpublic id!: any;\n" 
+\tpublic id!: ID;\n"
 ?>
 <?php
     foreach ($columns as $column) {
