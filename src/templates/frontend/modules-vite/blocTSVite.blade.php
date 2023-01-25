@@ -1,6 +1,6 @@
 <?=
 "
-import type { ${studly} } from "./model";
+import type { ${studly} } from \"./model\";
 
 export function use${studly}Bloc() {
     async function get${studlyPlural}(query?: object) {
