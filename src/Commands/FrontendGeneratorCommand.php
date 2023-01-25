@@ -56,10 +56,10 @@ class FrontendGeneratorCommand extends Command
     {
         $this->loadConfig();
         // $this->template = $this->choice('Choose your template ?', ['Argon', 'Sparker', 'Robust'], $this->defaultIndex);
-        $this->initFrontend();    
+        $this->initFrontend();
         $this->generateFiles($this->config->generators->frontend);
         $path = $this->config->setup->frontend->path->root;
-        shell_exec("cd {$path} && npx prettier --write **/*.vue");
+        shell_exec("cd {$path} && npx prettier --write **/*.vue && npm run lint");
     }
 
     public function initFrontend() {
