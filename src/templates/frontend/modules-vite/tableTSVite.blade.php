@@ -43,7 +43,7 @@ export function use{$studly}Table (tableRef: Ref) {
             },
         ],
 
-        createdRow: function (row: any, data: any) {
+        createdRow: function (row: HTMLElement, data: unknown) {
             jQuery(row)
                 .find(\".action\")
                 .on(\"click\", function () {"?><?php $url = '`${this.dataset.url}`'; ?><?="
@@ -56,7 +56,7 @@ export function use{$studly}Table (tableRef: Ref) {
         }
     }
 
-    async function deleteData(data: any) {
+    async function deleteData(data: unknown) {
         try {
             const result = await widget.confirm();
             if (!result.isConfirmed) {
@@ -64,10 +64,10 @@ export function use{$studly}Table (tableRef: Ref) {
                 return;
             }
 
-            await use{$studly}Bloc().delete{$studly}(data.id);
+            await use{$studly}Bloc().delete{$studly}((data as {$studly}).id);
             widget.alertSuccess(\"Terbaik!\", \"Data anda telah dihapuskan.\");
             tableRef.value?.reload();
-        } catch (err: any) {
+        } catch (err: unknown) {
             handleError(err);
         }
     }

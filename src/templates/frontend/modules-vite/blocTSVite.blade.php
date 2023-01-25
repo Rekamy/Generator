@@ -15,7 +15,7 @@ export function use${studly}Bloc() {
         return await crudApi<${studly}>(\"${slug}\").create(data);
     }
 
-    async function update${studly}(id: ID, data: any) {
+    async function update${studly}(id: ID, data: ${studly}) {
         return await crudApi<${studly}>(\"${slug}\").update(id, data);
     }
 

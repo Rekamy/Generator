@@ -8,11 +8,11 @@
     }
 
     foreach ($additionalAttributes as $name => $model) {
-        echo "\tpublic {$name}: any;\n";
+        echo "\tpublic {$name}: unknown;\n";
     }
 
     foreach ($additionalArray as $name => $model) {
-        echo "\tpublic {$name}: any[] = [];\n";
+        echo "\tpublic {$name}: unknown[] = [];\n";
     }
 ?>
 <?="}"
