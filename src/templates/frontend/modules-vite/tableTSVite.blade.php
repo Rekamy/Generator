@@ -2,6 +2,7 @@
 import jQuery from \"jquery\";
 import type { Ref } from \"vue\";
 import type { {$studly} } from \"./model\";
+import { use{$studly}Bloc } from \"./bloc\";
 
 export function use{$studly}Table (tableRef: Ref) {
     const router = useRouter();

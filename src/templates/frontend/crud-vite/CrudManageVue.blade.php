@@ -14,6 +14,7 @@
 </template>
 
 <script scoped setup lang=\"ts\">
+import { use{$studly}Table } from \"../blocs/table\"; 
 const tableRef = ref()
 const { options } = use{$studly}Table(tableRef);
 </script>

@@ -12,6 +12,10 @@
 </template>
 
 <script setup lang=\"ts\">
+import {$studly}Component from \"../components/{$studly}Component.vue\"; 
+import { {$studly} } from \"../blocs/model\"; 
+import { use{$studly}Bloc } from \"../blocs/bloc\"; 
+
 const model = ref(new {$studly}());
 const route = useRoute();
 
