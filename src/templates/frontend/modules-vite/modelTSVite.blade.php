@@ -1,19 +1,39 @@
-<?= "export class ${studly} {
-\tpublic id!: ID;\n"
+<?php
+$nullable =  collect();
 ?>
+<?= "
+import type { JSONSchemaType } from 'ajv';
+
+export interface ${studly} {
+\tid?: ID;\n" ?>
 <?php
     foreach ($columns as $column) {
         $name = Str::of($column->getName());
-        echo "\tpublic {$name}!: string;\n";
-    }
-
-    foreach ($additionalAttributes as $name => $model) {
-        echo "\tpublic {$name}: unknown;\n";
-    }
-
-    foreach ($additionalArray as $name => $model) {
-        echo "\tpublic {$name}: unknown[] = [];\n";
+        if($column->getNotnull()) {
+            $nullable->push($name);
+            echo "\t{$name}: string;\n";
+        } else {
+            echo "\t{$name}?: string;\n";
+        }
     }
 ?>
-<?="}"
-?>
+<?="}
+
+export const ${studly}Schema: JSONSchemaType<${studly}> = {
+    type: \"object\",
+    properties: {
+        id: { type: [\"string\", \"number\"], nullable: true },\n" ?>
+    <?php 
+    foreach ($columns as $column) {
+        $name = Str::of($column->getName());
+        $type = Str::contains($column->getType()->getName(), ['int', 'smallint', 'bigint']) ? 'number' : "string";
+        $isNullable = $column->getNotnull() ? '' : ", nullable: true "; 
+        echo "\t{$name}: { type: \"$type\"$isNullable },\n";
+    }
+    ?>
+<?php $nulableList = $nullable->join(', '); ?>
+<?="},
+  required: [$nulableList],
+  additionalProperties: false,
+"?>
+<?="}"?>

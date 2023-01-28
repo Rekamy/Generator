@@ -20,12 +20,12 @@ return [
 
     'generators' => [
         'frontend' => [
-            \Rekamy\Generator\Core\Generators\Frontend\FrontendModuleGenerator::class,
-            \Rekamy\Generator\Core\Generators\Frontend\CrudManageVueGenerator::class,
             \Rekamy\Generator\Core\Generators\Frontend\CrudCreateVueGenerator::class,
-            \Rekamy\Generator\Core\Generators\Frontend\CrudViewVueGenerator::class,
             \Rekamy\Generator\Core\Generators\Frontend\CrudEditVueGenerator::class,
             \Rekamy\Generator\Core\Generators\Frontend\CrudFormComponentVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudManageVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\CrudViewVueGenerator::class,
+            \Rekamy\Generator\Core\Generators\Frontend\FrontendModuleGenerator::class,
         ],
         'backend' => [
             \Rekamy\Generator\Core\Generators\Backend\APIDocGenerator::class,

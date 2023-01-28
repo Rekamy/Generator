@@ -67,7 +67,7 @@ class FrontendGeneratorCommand extends Command
         $source = $this->config->setup->frontend->source;
         if(file_exists($path)) return;
 
-        shell_exec("git clone {$source} {$path} && rm -rf {$path}/.git");
+        shell_exec("git clone --depth=1 {$source} {$path} && rm -rf {$path}/.git");
         shell_exec("cd {$path} && npm i");
     }
 }

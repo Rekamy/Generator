@@ -17,6 +17,7 @@ class MigrationGenerator
 
     public function __construct($context)
     {
+        // TODO: call laravel blueprint
         $this->context = $context;
         $this->context->info("Creating Migrations...");
         $this->tables = collect($this->context->db->listTableNames())

@@ -2,7 +2,6 @@
 import jQuery from \"jquery\";
 import type { Ref } from \"vue\";
 import type { {$studly} } from \"./model\";
-import { use{$studly}Bloc } from \"./bloc\";
 
 export function use{$studly}Table (tableRef: Ref) {
     const router = useRouter();
@@ -66,7 +65,7 @@ export function use{$studly}Table (tableRef: Ref) {
                 return;
             }
 
-            await use{$studly}Bloc().delete{$studly}((data as {$studly}).id);
+            await crudApi<{$studly}>(\"{$slug}\").destroy((data as {$studly}).id);
             widget.alertSuccess(\"Terbaik!\", \"Data anda telah dihapuskan.\");
             tableRef.value?.reload();
         } catch (err: unknown) {

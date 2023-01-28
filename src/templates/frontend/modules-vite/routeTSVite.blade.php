@@ -3,11 +3,6 @@
 import BasePage from \"@/components/Base/BasePage.vue\";
 import type { RouteRecordRaw } from \"vue-router\";
 
-import Manage${studly}Page from \"./pages/Manage${studly}Page.vue\";
-import Create${studly}Page from \"./pages/Create${studly}Page.vue\";
-import View${studly}Page from \"./pages/View${studly}Page.vue\";
-import Edit${studly}Page from \"./pages/Edit${studly}Page.vue\";
-
 export default [
   {
     path: \"/${slug}\",
@@ -17,22 +12,22 @@ export default [
       {
         path: \"\",
         name: \"manage-${slug}\",
-        component: Manage${studly}Page,
+        component: () => import(\"./pages/Manage${studly}Page.vue\"),
       },
       {
         path: \"create\",
         name: \"create-${slug}\",
-        component: Create${studly}Page,
+        component: () => import(\"./pages/Create${studly}Page.vue\"),
       },
       {
         path: \":id\",
         name: \"view-${slug}\",
-        component: View${studly}Page,
+        component: () => import(\"./pages/View${studly}Page.vue\"),
       },
       {
         path: \":id/edit\",
         name: \"edit-${slug}\",
-        component: Edit${studly}Page,
+        component: () => import(\"./pages/Edit${studly}Page.vue\"),
       },
     ],
   },

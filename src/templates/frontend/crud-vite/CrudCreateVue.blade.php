@@ -12,18 +12,17 @@
 </template>
 
 <script setup lang=\"ts\">
+  import { useRepoStore } from \"@/core/repository-store\";
 import {$studly}Component from \"../components/{$studly}Component.vue\"; 
 import { {$studly} } from \"../blocs/model\"; 
-import { use{$studly}Bloc } from \"../blocs/bloc\"; 
 
-const model = ref(new {$studly}());
+const store = useRepoStore<{$studly}>("Endpoint.SERVICE_{$studly}");
 const router = useRouter();
 
 const submit = () => {
-  widget.showLoading();
-  use{$studly}Bloc().create{$studly}(model.value).then(() => {
+  store.save().then(() => {
     widget.alertSuccess(\"Berjaya!\", \"Rekod telah ditambah.\");
-    router.replace(\"/{$slug}\");
+    router.replace(\"\");
   });
 };
 </script>

@@ -158,7 +158,7 @@ class RuleParser
         }
         // $element->push("\n\t:error=\"model.getErrors('{$name}')\" ");
         $element->push("\n\tplaceholder=\"{$label}\" ");
-        $element->push("\n\t:readonly=\"readonly\" ");
+        $element->push("\n\t:is-view-only=\"isViewOnly\" ");
         if ($column->getNotnull()) $element->push("\n\tis-required ");
         $element->push("\n/> ");
 
