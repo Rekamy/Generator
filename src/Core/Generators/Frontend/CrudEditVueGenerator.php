@@ -38,6 +38,7 @@ class CrudEditVueGenerator
                     'slug' =>  $name->slug(),
                     'camel' =>  $name->camel(),
                     'studly' =>  $name->studly(),
+                    'service' =>  'SERVICE_' . $name->studly()->upper(),
                 ];
 
                 $view = view('frontend::crud-vite/CrudEditVue', $data);

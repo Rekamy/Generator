@@ -24,7 +24,7 @@ for ($i = 0; $i < count($chunk); $i++) : ?>
 </template>
 
 <script setup lang=\"ts\">
-defineProps([\"modelValue\", \"isViewOnly\"]);
+defineProps([\"store\", \"isViewOnly\"]);
 
 {$scripts->join("\n")}
 </script>

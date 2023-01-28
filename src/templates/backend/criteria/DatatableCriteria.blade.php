@@ -20,6 +20,7 @@ class DataTableCriteria implements CriteriaInterface
     protected \$appends;
     protected \$query;
     protected \$columns;
+    protected \$repository;
 
     public function __construct(Request \$request)
     {
@@ -45,6 +46,7 @@ class DataTableCriteria implements CriteriaInterface
      */
     public function apply(\$model, RepositoryInterface \$repository)
     {
+        if (!\$this->request->has('draw')) return \$model;
         \$this->query = \$model;
         \$this->repository = \$repository;
 

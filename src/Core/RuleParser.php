@@ -93,8 +93,9 @@ class RuleParser
 
     public static function drawComponent($column)
     {
+        $options = json_decode($column->getComment(), true);
         $name = Str::of($column->getName());
-        $label = $name->absoluteTitle()->replaceLast(' Id', '');
+        $label = !empty($options['label']) ? $options['label'] : $name->absoluteTitle()->replaceLast(' Id', '');
         $element = collect();
         $script = collect();
         $attributes = [];
@@ -102,15 +103,15 @@ class RuleParser
 
         switch (true) {
             case $name->endsWith('_id'):
-                $model = $name->replaceLast('_id', '')->plural();
-                $function = "get{$model->ucfirst()}";
+                $studly = $name->replaceLast('_id', '')->studly();
+                $function = "get{$studly->plural()}";
                 $component = "BaseSelect ";
-                $attributes[] = ":select-options=\"$model\" ";
+                $attributes[] = ":select-options=\"{$studly->camel()}\" ";
                 $getData = <<<TS
-                const {$model} = ref();
+                const {$studly->camel()} = ref();
 
                 const {$function} = async () => {
-                {$model}.value = await crudApi("{$model->singular()}").all();
+                {$studly->camel()}.value = await crudApi("{$studly->slug()}").all();
                 };
 
                 {$function}();
@@ -150,13 +151,12 @@ class RuleParser
                 break;
         }
 
-
         $element->push("\n<{$component} label=\"{$label}\" ");
-        $element->push("\n\tv-model=\"modelValue.{$name}\" ");
+        $element->push("\n\tv-model=\"store.model.{$name}\" ");
         foreach ($attributes as $attr) {
             $element->push("\n{$attr}");
         }
-        // $element->push("\n\t:error=\"model.getErrors('{$name}')\" ");
+        $element->push("\n\t:error=\"store.getError('{$name}')\" ");
         $element->push("\n\tplaceholder=\"{$label}\" ");
         $element->push("\n\t:is-view-only=\"isViewOnly\" ");
         if ($column->getNotnull()) $element->push("\n\tis-required ");

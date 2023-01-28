@@ -1,10 +1,10 @@
-<?php $router = "\$router.push('/{$slug}')" ?>
+<?php $routeToBase = "\$router.push('/{$slug}')" ?>
 <?= "
 <template>
   <BaseCard title=\"View {$title}\">
-    <{$studly}Component v-model=\"model\" readonly />
+    <{$studly}Component :store=\"store\" is-view-only />
     <div class=\"d-flex flex-row-reverse\">
-      <BaseButton color=\"danger mx-2\" @click=\"{$router}\">
+      <BaseButton color=\"danger mx-2\" @click=\"{$routeToBase}\">
         Back
       </BaseButton>
     </div>
@@ -12,15 +12,11 @@
 </template>
 
 <script setup lang=\"ts\">
+import type { {$studly} } from \"../blocs/model\"; 
 import {$studly}Component from \"../components/{$studly}Component.vue\"; 
-import { {$studly} } from \"../blocs/model\"; 
-import { use{$studly}Bloc } from \"../blocs/bloc\"; 
 
-const model = ref(new {$studly}());
+const store = useRepoStore<{$studly}>(\"{$slug}\");
 const route = useRoute();
-
-onMounted(async () => {
-  model.value = await use{$studly}Bloc().get{$studly}(route.params.id as string);
-});
+store.find(route.params.id as string);
 </script>
 " ?>

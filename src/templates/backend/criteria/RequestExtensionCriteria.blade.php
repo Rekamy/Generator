@@ -17,6 +17,7 @@ class RequestExtensionCriteria implements CriteriaInterface
     protected \$request;
     protected \$query;
     protected \$columns;
+    protected \$repository;
 
     public function __construct(Request \$request)
     {
@@ -46,8 +47,7 @@ class RequestExtensionCriteria implements CriteriaInterface
         \$this->applyScopes();
 
         \$this->applyAppend();
-        // dd(\$this->query);
-        \$this->presenter = 'asd';
+
         return \$this->query;
     }
 

@@ -2,35 +2,29 @@
 <?= "
 <template>
     <BaseCard title=\"Edit {$title}\">
-        <{$studly}Component v-model=\"model\" />
+        <{$studly}Component :store=\"store\" />
         <div class=\"d-flex flex-row-reverse\">
             <BaseButton type=\"submit mx-2\" @click=\"submit\">Save</BaseButton>
-            <BaseButton color=\"danger mx-2\" @click=\"{$router}\">
-                Cancel
-            </BaseButton>
+            <BaseBackButton />
         </div>    
     </BaseCard>
 </template>
 
 <script setup lang=\"ts\">
 import {$studly}Component from \"../components/{$studly}Component.vue\"; 
-import { {$studly} } from \"../blocs/model\"; 
-import { use{$studly}Bloc } from \"../blocs/bloc\"; 
+import { {$studly}Schema, type {$studly} } from \"../blocs/model\"; 
 
-const model = ref(new {$studly}());
+const store = useRepoStore<{$studly}>(\"{$slug}\", {$studly}Schema);
 const route = useRoute();
 const router = useRouter();
 
-onMounted(async () => {
-    model.value = await use{$studly}Bloc().get{$studly}(route.params.id as string);
-});
+store.find(route.params.id as string);
 
 const submit = () => {
-    widget.showLoading();
-    use{$studly}Bloc().update{$studly}(model.value.id, model.value).then(() => {
-        widget.alertSuccess(\"Berjaya!\", \"Rekod telah dikemaskini.\");
-        router.go(-1);
-    });
+  store.save(route.params.id as string).then(() => {
+    widget.alertSuccess(\"Berjaya!\", \"Rekod telah dikemaskini.\");
+    router.go(-1);
+  });
 };
 </script>
 " ?>

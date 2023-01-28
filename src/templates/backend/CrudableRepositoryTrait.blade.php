@@ -15,7 +15,8 @@ trait CrudableRepository
         } else {
             \$this->pushCriteria(app(RequestCriteria::class));
             \$this->pushCriteria(app(RequestExtensionCriteria::class));
-            return \$this->paginate();
+            if (!request()->has('no-paginate')) return \$this->paginate();
+            return \$this->get();
         }
 
         return \$this;
