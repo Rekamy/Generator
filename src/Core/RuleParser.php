@@ -109,12 +109,11 @@ class RuleParser
                 $attributes[] = ":select-options=\"{$studly->camel()}\" ";
                 $getData = <<<TS
                 const {$studly->camel()} = ref<any>([]);
-
                 const {$function} = async () => {
                 {$studly->camel()}.value = await crudApi("{$studly->kebab()}").all();
                 };
-
                 {$function}();
+
                 TS;
                 $script->push($getData);
                 break;
