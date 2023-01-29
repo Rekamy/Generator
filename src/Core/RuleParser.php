@@ -108,10 +108,10 @@ class RuleParser
                 $component = "BaseSelect ";
                 $attributes[] = ":select-options=\"{$studly->camel()}\" ";
                 $getData = <<<TS
-                const {$studly->camel()} = ref();
+                const {$studly->camel()} = ref<any>([]);
 
                 const {$function} = async () => {
-                {$studly->camel()}.value = await crudApi("{$studly->slug()}").all();
+                {$studly->camel()}.value = await crudApi("{$studly->kebab()}").all();
                 };
 
                 {$function}();

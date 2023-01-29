@@ -10,7 +10,7 @@ export interface ${studly} {
     foreach ($columns as $column) {
         $name = Str::of($column->getName());
         if($column->getNotnull()) {
-            $nullable->push($name);
+            $nullable->push("\"{$name}\"");
             echo "\t{$name}: string;\n";
         } else {
             echo "\t{$name}?: string;\n";
