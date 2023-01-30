@@ -26,7 +26,11 @@ export const ${studly}Schema: JSONSchemaType<${studly}> = {
     <?php 
     foreach ($columns as $column) {
         $name = Str::of($column->getName());
-        $type = Str::contains($column->getType()->getName(), ['int', 'smallint', 'bigint']) ? 'number' : "string";
+        if(Str::of($name)->endsWith('_id')) {
+            $type = '["number", "string"]';
+        } else {
+            $type = Str::contains($column->getType()->getName(), ['int', 'smallint', 'bigint']) ? 'number' : "string";
+        }
         $isNullable = $column->getNotnull() ? ', minLength: 1 ' : ", nullable: true "; 
         echo "\t{$name}: { type: \"$type\"$isNullable },\n";
     }
