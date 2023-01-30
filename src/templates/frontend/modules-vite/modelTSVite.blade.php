@@ -38,6 +38,6 @@ export const ${studly}Schema: JSONSchemaType<${studly}> = {
 <?php $nulableList = $nullable->join(', '); ?>
 <?="},
   required: [$nulableList],
-  additionalProperties: false,
+  additionalProperties: true,
 "?>
 <?="}"?>
