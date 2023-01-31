@@ -37,12 +37,12 @@ class InitGeneratorCommand extends Command
             $commands->push(['artisan' => 'generate:migration']);
         } else {
             $hasLaravelPermission = \Composer\InstalledVersions::isInstalled('spatie/laravel-permission');
-            if ($hasLaravelPermission && $this->confirm('Publish spatie/laravel-permission?', true)) {
+            if ($hasLaravelPermission && $this->confirm('Publish spatie/laravel-permission?', false)) {
                 $commands->push(['shell' => 'php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"']);
             }
 
-            if ($this->confirm('Run fresh migration?', false)) {
-                $commands->push(['artisan' => 'migrate:fresh']);
+            if ($this->confirm('Run fresh migration?', true)) {
+                $commands->push(['shell' => 'php artisan migrate:fresh --seed']);
             }
         }
 
