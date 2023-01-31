@@ -61,6 +61,9 @@ class RuleParser
             case Str::contains($type, ['timestamp', 'datetime']):
                 $rule = 'date:Y-m-d H:i';
                 break;
+            case Str::contains($type, ['time']):
+                $rule = 'date:H:i';
+                break;
 
             default:
                 $rule = $type;
@@ -142,7 +145,7 @@ class RuleParser
                 $component = "BaseDatePicker ";
                 break;
             case $columnType->contains(['time']):
-                $component = "BaseDatePicker ";
+                $component = "BaseTimePicker ";
                 break;
 
             default:
