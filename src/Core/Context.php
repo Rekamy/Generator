@@ -9,6 +9,7 @@ class Context
 
     public $config;
     public $dbname;
+    public $onlyTables = [];
     public $excludeTables = [];
     public $generate;
     public $path;
@@ -28,6 +29,7 @@ class Context
             $this->configFile = include __DIR__ . '/../config/rekamygenerator.php';
             $config = config('database');
             $this->dbname = $config['connections']['mysql']['database'];
+            $this->onlyTables = $this->configFile['database']['only_tables'];
             $this->excludeTables = $this->configFile['database']['exclude_tables'];
             $this->generate = $this->configFile['generate'];
             $this->path = $this->configFile['path'];
@@ -38,6 +40,7 @@ class Context
         } else {
             $this->configFile = config('rekamygenerator');
             $this->dbname = config('rekamygenerator.database.name');
+            $this->onlyTables = config('rekamygenerator.database.only_tables');
             $this->excludeTables = config('rekamygenerator.database.exclude_tables');
             $this->generate = config('rekamygenerator.generate');
             $this->path = config('rekamygenerator.path');

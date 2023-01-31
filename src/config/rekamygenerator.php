@@ -150,6 +150,11 @@ return [
         // Database name
         'name'           => env('DB_DATABASE'),
 
+        // TODO: implements to each generator constructor method
+        'only_tables' => [
+            'attachments'
+        ],
+
         // Exclude table name
         'exclude_tables' => [
             // laravel

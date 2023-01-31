@@ -102,7 +102,7 @@ class RuleParser
         $element = collect();
         $script = collect();
         $attributes = [];
-        $columnType = Str::of($column->getType()->getName());
+        $columnType = !empty(data_get($options, 'type')) ? str(data_get($options, 'type')) : Str::of($column->getType()->getName());
 
         switch (true) {
             case $name->endsWith('_id'):
@@ -146,6 +146,9 @@ class RuleParser
                 break;
             case $columnType->contains(['time']):
                 $component = "BaseTimePicker ";
+                break;
+            case $columnType->contains(['attachment']):
+                $component = "BaseUpload ";
                 break;
 
             default:
@@ -203,6 +206,7 @@ class RuleParser
 
     public static function ruleLibrary($type)
     {
+        // TODO: add rule for time
         return  [
             'image',
             'email',

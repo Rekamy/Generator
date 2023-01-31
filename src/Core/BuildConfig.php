@@ -10,6 +10,7 @@ trait BuildConfig
 
     public $config;
     public $dbname;
+    public $onlyTables = [];
     public $excludeTables = [];
     public $generate;
     public $path;
@@ -34,8 +35,13 @@ trait BuildConfig
 
         $this->db = $schema;
 
-        $this->tables = collect($this->db->listTableNames())
-            ->filter(fn ($item) =>  !in_array($item, $this->config->database->exclude_tables));
+        $this->tables = collect($this->db->listTableNames());
+
+        $this->tables = $this->tables->when(!empty(config('rekamygenerator.database.only_tables')), function ($config) {
+            return $config->filter(fn ($item) => in_array($item, config('rekamygenerator.database.only_tables')));
+        }, function ($config) {
+            return $config->filter(fn ($item) => !in_array($item, config('rekamygenerator.database.exclude_tables')));
+        });
 
         $this->cacheRelationship();
     }
