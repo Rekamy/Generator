@@ -29,10 +29,10 @@ export const ${studly}Schema: JSONSchemaType<${studly}> = {
         if(Str::of($name)->endsWith('_id')) {
             $type = '["number", "string"]';
         } else {
-            $type = Str::contains($column->getType()->getName(), ['int', 'smallint', 'bigint']) ? 'number' : "string";
+            $type = Str::contains($column->getType()->getName(), ['int', 'smallint', 'bigint']) ? '"number"' : '"string"';
         }
-        $isNullable = $column->getNotnull() ? ', minLength: 1 ' : ", nullable: true "; 
-        echo "\t{$name}: { type: \"$type\"$isNullable },\n";
+        $isNullable = $column->getNotnull() ? 'minLength: 1 ' : "nullable: true "; 
+        echo "\t{$name}: { type: $type, $isNullable },\n";
     }
     ?>
 <?php $nulableList = $nullable->join(', '); ?>
