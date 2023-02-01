@@ -46,7 +46,7 @@ class $className extends Model
         echo "\t\t'id' => 'string',\n";
     endif;
     foreach ($columns as $i=> $column) :
-        echo "\t\t'{$column->getName()}' => '" . RuleParser::parseType($column->getType()->getName()) . "',\n";
+        echo "\t\t'{$column->getName()}' => '" . RuleParser::parseCast($column->getType()->getName()) . "',\n";
     endforeach;
     echo "\t];\n";
 ?>

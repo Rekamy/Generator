@@ -49,7 +49,7 @@ class RuleParser
         return $rule;
     }
 
-    public static function parseType($type)
+    public static function parseCast($type)
     {
         switch (true) {
             case Str::contains($type, ['bigint', 'varchar', 'text']):
@@ -61,8 +61,38 @@ class RuleParser
             case Str::contains($type, ['timestamp', 'datetime']):
                 $rule = 'date:Y-m-d H:i';
                 break;
-            case Str::contains($type, ['time']):
+            case $type == 'date':
+                $rule = 'date:Y-m-d';
+                break;
+            case $type == 'time':
                 $rule = 'date:H:i';
+                break;
+
+            default:
+                $rule = $type;
+                break;
+        }
+
+        return $rule;
+    }
+
+    public static function parseType($type)
+    {
+        switch (true) {
+            case Str::contains($type, ['bigint', 'varchar', 'text']):
+                $rule = 'string';
+                break;
+            case Str::contains($type, ['int', 'smallint']):
+                $rule = 'integer';
+                break;
+            case Str::contains($type, ['timestamp', 'datetime']):
+                $rule = 'date_format:Y-m-d H:i';
+                break;
+            case $type == 'date':
+                $rule = 'date_format:Y-m-d';
+                break;
+            case $type == 'time':
+                $rule = 'date_format:H:i';
                 break;
 
             default:
@@ -183,11 +213,14 @@ class RuleParser
             case Str::contains($type, ['tinyint']):
                 $example = true;
                 break;
+            case Str::contains($type, ['datetime']):
+                $example = '2020-01-01 13:00';
+                break;
             case Str::contains($type, ['date']):
                 $example = '2020-01-01';
                 break;
-            case Str::contains($type, ['datetime']):
-                $example = '2020-01-01 13:00:00';
+            case Str::contains($type, ['time']):
+                $example = '10:10';
                 break;
             case Str::contains($type, ['timestamp']):
                 $example = 1674241168;
