@@ -35,7 +35,7 @@ class CrudCreateVueGenerator
                 'camel' =>  $name->camel(),
                 'studly' =>  $name->studly(),
                 'service' =>  'SERVICE_' . $name->studly()->upper(),
-                'title' =>  $name->absoluteTitle(),
+                'title' =>  $name->headline(),
                 'slug' =>  $name->slug(),
             ];
 

@@ -35,7 +35,7 @@ class CrudViewVueGenerator
                     'columns' => $this->context->getColumns($table),
                     'table' =>  $name,
                     'camel' =>  $name->camel(),
-                    'title' =>  $name->absoluteTitle(),
+                    'title' =>  $name->headline(),
                     'slug' =>  $name->slug(),
                     'studly' =>  $name->studly(),
                 ];

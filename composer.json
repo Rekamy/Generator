@@ -28,7 +28,8 @@
         "darkaonline/l5-swagger": "^8.0.4",
         "laravel/passport": "^10.1 || ^11.3",
         "spatie/laravel-permission": "^5.5",
-        "doctrine/dbal": "^2.9 || ^3.0.0"
+        "doctrine/dbal": "^2.9 || ^3.0.0",
+        "symfony/yaml": "^6.2"
     },
     "authors": [
         {
