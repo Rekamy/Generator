@@ -36,7 +36,7 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table)->singular();
         $data['table'] = $name;
-        $data['title'] =  $name->absoluteTitle();
+        $data['title'] =  $name->headline();
         $data['camel'] = $name->camel();
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
@@ -76,7 +76,7 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table)->singular();
         $data['table'] = $name;
-        $data['title'] =  $name->absoluteTitle();
+        $data['title'] =  $name->headline();
         $data['camel'] = $name->camel();
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();
@@ -122,7 +122,7 @@ class FrontendModuleGenerator
         $data['context'] = $this->context;
         $name = Str::of($table)->singular();
         $data['table'] = $name;
-        $data['title'] =  $name->absoluteTitle();
+        $data['title'] =  $name->headline();
         $data['camel'] = $name->camel();
         $data['slug'] =  $name->slug();
         $data['studly'] =  $name->studly();

@@ -47,7 +47,7 @@ class APIDocGenerator
                 $data['table'] = $name;
                 $data['columns'] = $this->context->getColumns($table);
                 $data['tags'] = $name->studly();
-                $data['title'] = $title = $name->absoluteTitle();
+                $data['title'] = $title = $name->headline();
                 $data['className'] = $type . $name->singular()->studly() . "APIDoc";
 
                 $data['route'] = '/api/' . Str::slug(Str::singular($table));

@@ -8,14 +8,14 @@ const routes: Array<RouteRecordRaw> = [
     {
     path: '/crud/{{ $name->slug() }}',
     name: 'crud.{{ $name }}',
-    meta: { layout: "main", requiresAuth: true, breadcrumb: '{{ $name->absoluteTitle() }}' },
+    meta: { layout: "main", requiresAuth: true, breadcrumb: '{{ $name->headline() }}' },
     component: BasePageComponents,
     children: [
     {
     path: '',
     name: 'crud.{{ $name }}.index',
     meta: {
-    layout: "main", requiresAuth: true, breadcrumb: '{{ $name->absoluteTitle() }}',
+    layout: "main", requiresAuth: true, breadcrumb: '{{ $name->headline() }}',
     //permissions: [Permissions.{{ $name }}_index]
     },
     component: () => import(/* webpackChunkName: "crud.{{ $name }}.index" */ '@/views/crud/{{ $name }}/index.vue'),

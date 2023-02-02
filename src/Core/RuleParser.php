@@ -128,7 +128,7 @@ class RuleParser
     {
         $options = json_decode($column->getComment(), true);
         $name = Str::of($column->getName());
-        $label = !empty($options['label']) ? $options['label'] : $name->absoluteTitle()->replaceLast(' Id', '');
+        $label = !empty($options['label']) ? $options['label'] : $name->headline()->replaceLast(' Id', '');
         $element = collect();
         $script = collect();
         $attributes = [];

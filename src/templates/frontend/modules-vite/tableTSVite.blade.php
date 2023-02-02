@@ -16,7 +16,7 @@ export function use{$studly}Table (tableRef: Ref) {
 ?><?php
             $i = 0;
             foreach ($columns as $columns) :
-                $title = \Str::of($columns->getName())->absoluteTitle();
+                $title = \Str::of($columns->getName())->headline();
                 if ($i++ < 5) {
                     echo "\n\t\t\t{ data: \"{$columns->getName()}\", title: \"{$title}\" },";
                 } else {
@@ -26,7 +26,7 @@ export function use{$studly}Table (tableRef: Ref) {
             endforeach;
 
             foreach ($relationColumns as $name => $column) :
-                $title = (string) \Str::of($name)->studly()->absoluteTitle();
+                $title = (string) \Str::of($name)->studly()->headline();
                 echo "\n\t\t\t // { data: \"{$column}\", title: \"$title\" },";
             endforeach;
             ?><?= "

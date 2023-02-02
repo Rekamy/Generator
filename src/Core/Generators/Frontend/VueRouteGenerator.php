@@ -30,7 +30,7 @@ class VueRouteGenerator
                 $data['routes'][] =  [
                     'camel' =>Str::of($table)->camel(),
                     'kebab' =>Str::of($table)->camel()->singular()->kebab(),
-                    'title' =>Str::of($table)->absoluteTitle(),
+                    'title' =>Str::of($table)->headline(),
                 ];
             }
 

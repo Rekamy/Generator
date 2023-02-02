@@ -32,7 +32,7 @@ class CrudFormComponentVueGenerator
                 $data = [
                     'columns' => $this->context->getColumns($table),
                     'table' =>  $name,
-                    'title' =>  $name->absoluteTitle(),
+                    'title' =>  $name->headline(),
                     'studly' =>  $name->studly(),
                     'camel' => $name->camel(),
                     'slug' =>  $name->slug(),

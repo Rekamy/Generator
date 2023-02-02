@@ -34,7 +34,7 @@ class CrudEditVueGenerator
                 $data = [
                     'columns' => $this->context->getColumns($table),
                     'table' =>  $name,
-                    'title' =>  $name->absoluteTitle(),
+                    'title' =>  $name->headline(),
                     'slug' =>  $name->slug(),
                     'camel' =>  $name->camel(),
                     'studly' =>  $name->studly(),
