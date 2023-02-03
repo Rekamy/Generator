@@ -1,16 +1,14 @@
 tables:
-    user:
-        id: id
-        username:
-            - Role
-            - App\Models\Permissions
-        email: string
-        password: string
+  user:
+    id: id
+    username: string
+    email: string
+    password: string
 models:
-    user:
-        hasOne: Illuminate\Support\Str
-        hasMany:
-            - Role
-            - \App\Models\Permissions
-        belongsTo: Department
-        belongsToMany: Spatie\LaravelPermission\Models\Role
+  user:
+    hasOne: Illuminate\Support\Str
+    hasMany:
+      - Role
+      - \App\Models\Permissions
+    belongsTo: Department
+    belongsToMany: Spatie\LaravelPermission\Models\Role

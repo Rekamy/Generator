@@ -27,20 +27,21 @@ class GeneratorServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $ob = DB::usingConnection('test', function ($var = null)
-        {
-            # code...
-        });
 
-        dd($ob);
-        $array = [
+        // $ob = DB::getDoctrineColumn('addresses', 'address');
+        $ob = DB::getDoctrineSchemaManager()->listTables();
+
+        // listTableNames
+        // listTableColumns
+
+        $object = [
             'tables' => [
                 'user' => [
-                    'id' => Schema::class,
-                    'username' => ['Role', '\\App\\Models\\Permissions'],
+                    'id' => 'id',
+                    'username' => 'string:select',
                     'email' => 'string',
                     'password' => 'string',
-                    'username' => ['Role', 'App\Models\Permissions'],
+                    'username' => 'string',
                 ],
             ],
             'models' => [
@@ -53,7 +54,18 @@ class GeneratorServiceProvider extends ServiceProvider
             ],
         ];
 
-        $this->write($array);
+        // $this->writeYaml($object);
+
+        dd(file_get_contents(__DIR__ . '/../config/rekamygenerator.php'));
+        
+        dd($this->readFile('/Core/Factory.php'));
+
+        dd($this->readYaml('/../schema.yaml'));
+        dd(file(__DIR__ . '/../schema.yaml'));
+        dd($this->writeYaml(file(__DIR__ . '/Core/Factory.php')));
+        dd($this->writeYaml(config('rekamygenerator')));
+        // dd(collect($object)->first());
+        // dd($this->writeYaml($object)->dump($object));
 
         // Builder::macro('whereLike', function (string $attribute, string $searchTerm) {
         //     return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
@@ -92,18 +104,99 @@ class GeneratorServiceProvider extends ServiceProvider
         $this->commands($this->commands);
     }
 
-    public function dump(array $generated)
+    public function yaml(): Yaml
     {
-        return Yaml::dump($generated);
+        return app(Yaml::class);
     }
 
-    public function parse(string $generated)
+    /**
+     * Dumps a PHP value to a YAML string.
+     *
+     * The dump method, when supplied with an array, will do its best
+     * to convert the array into friendly YAML.
+     *
+     * @param mixed $input  The PHP value
+     * @param int   $inline The level where you switch to inline YAML
+     * @param int   $indent The amount of spaces to use for indentation of nested nodes
+     * @param int   $flags  A bit field of DUMP_* constants to customize the dumped YAML string
+     */
+    public function dump(array $object)
     {
-        return Yaml::parse($generated);
+        return $this->yaml()->dump($object, 5, 2, Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE);
     }
 
-    public function write(mixed $generated): void
+    /**
+     * Parses YAML into a PHP value.
+     *
+     *  Usage:
+     *  <code>
+     *   $array = Yaml::parse(file_get_contents('config.yml'));
+     *   print_r($array);
+     *  </code>
+     *
+     * @param string $input A string containing YAML
+     * @param int    $flags A bit field of PARSE_* constants to customize the YAML parser behavior
+     *
+     * @throws ParseException If the YAML is not valid
+     */
+    public function parse(string $literal, int $flags = 0)
     {
-        file_put_contents(__DIR__ . '/../schema.yaml', $this->dump($generated, 5));
+        return $this->yaml()->parse($literal, $flags);
+    }
+
+    /**
+     * Reads any file returning a string.
+     *
+     * Usage:
+     *
+     *     $array = Yaml::parseFile('config.yml');
+     *     print_r($array);
+     *
+     * @param string $filename The path to the file to be parsed
+     * @param bool    $asArray Returns multiline strings as PHP value
+     * @return mixed
+     */
+    public function readFile(string $filename, bool $asArray = false)
+    {
+        if ($asArray)
+            return file(__DIR__ . $filename);
+
+        return file_get_contents(__DIR__ . $filename);
+    }
+
+    /**
+     * Reads a YAML file returning PHP values.
+     *
+     * Usage:
+     *
+     *     $array = Yaml::parseFile('config.yml');
+     *     print_r($array);
+     *
+     * @param string $filename The path to the YAML file to be parsed
+     * @param int    $flags    A bit field of PARSE_* constants to customize the YAML parser behavior
+     *
+     * @throws ParseException If the file could not be read or the YAML is not valid
+     */
+    public function readYaml(string $filename, int $flags = 0)
+    {
+        return $this->yaml()->parseFile(__DIR__ . $filename, $flags);
+    }
+
+    /**
+     * Write parsed PHP values into a YAML file.
+     *
+     * The dump method, when supplied with an array, will do its best
+     * to convert the array into friendly YAML.
+     *
+     * @param mixed $input  The PHP value
+     * @param int   $inline The level where you switch to inline YAML
+     * @param int   $indent The amount of spaces to use for indentation of nested nodes
+     * @param int   $flags  A bit field of DUMP_* constants to customize the dumped YAML string
+     */
+    public function writeYaml(mixed $object = [])
+    {
+        file_put_contents(__DIR__ . '/../schema.yaml', $this->dump($object));
+
+        return $this;
     }
 }
