@@ -33,7 +33,10 @@ class ControllerGenerator
                 $data['slug'] = $name->slug();
                 $data['snake'] = $name->snake();
                 $data['className'] = $name->singular()->studly() . "Controller";
+                $fullClassName = $this->context->config->setup->backend->controller->namespace . '\\' . $data['className'];
                 $data['blocName'] = $name->singular()->studly() . "Bloc";
+
+                if(class_exists($fullClassName)) continue;
 
                 $view = view('backend::controller.Controller', $data);
 

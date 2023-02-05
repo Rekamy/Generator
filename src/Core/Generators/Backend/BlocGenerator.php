@@ -32,8 +32,11 @@ class BlocGenerator
                 $data['table'] = $table;
                 $data['columns'] = $this->context->getColumns($table);
                 $data['className'] = Str::of($table)->singular()->studly() . "Bloc";
+                $fullClassName = '\App\Bloc\\' . Str::of($table)->singular()->studly() . "Bloc";
                 $data['repoName'] = Str::of($table)->singular()->studly() . "Repository";
                 $data['requestName'] = Str::of($table)->singular()->studly() . "Request";
+
+                if(class_exists($fullClassName)) continue;
 
                 $view = view('backend::Bloc', $data);
 
