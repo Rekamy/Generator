@@ -56,7 +56,7 @@ return [
             \Rekamy\Generator\Core\Generators\Backend\RequestCriteriaContractsGenerator::class,
             \Rekamy\Generator\Core\Generators\Backend\FileUploadContractsGenerator::class,
             \Rekamy\Generator\Core\Generators\Backend\HasAuditorRelationGenerator::class,
-            \Rekamy\Generator\Core\Generators\Backend\DependenciesSetupGenerator::class,
+            // \Rekamy\Generator\Core\Generators\Backend\DependenciesSetupGenerator::class,
         ],
         'mobile' => [],
         'application' => [],
