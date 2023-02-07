@@ -35,10 +35,6 @@ class AppServiceProvider extends ServiceProvider
             \$this->unsignedBigInteger('deleted_by')->nullable();
         });
 
-        Blueprint::macro('jsonComment', function (\$options) {
-            \$this->comment(json_encode(\$options));
-        });
-
         Blueprint::macro('is', function (\$key, \$default = true, \$prefix = 'is_') {
             return \$this->boolean(\$prefix . \$key)->default(\$default)->comment('Is it ' . \$key . '?');
         });
