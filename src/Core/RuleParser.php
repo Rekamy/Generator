@@ -186,6 +186,14 @@ class RuleParser
                 break;
         }
 
+        if(!empty($options['component']['element'])) {
+            $component = $options['component']['element'] . " ";
+        }
+
+        if(!empty($options['component']['attribute'])) {
+            $attributes[] = $options['component']['attribute'];
+        }
+
         $element->push("\n<{$component} label=\"{$label}\" ");
         $element->push("\n\tv-model=\"store.model.{$name}\" ");
         foreach ($attributes as $attr) {
