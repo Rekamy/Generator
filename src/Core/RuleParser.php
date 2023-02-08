@@ -134,20 +134,34 @@ class RuleParser
         $attributes = [];
         $columnType = !empty(data_get($options, 'type')) ? str(data_get($options, 'type')) : Str::of($column->getType()->getName());
 
+
         switch (true) {
-            case $name->endsWith('_id'):
+            case $name->endsWith('_id') || !empty($options['ref']):
+                if (!empty($options['ref'])) {
+                    $studly = \Str::of($options['ref'])->studly();
+                } else {
+                    $studly = $name->replaceLast('_id', '')->studly();
+                }
                 $studly = $name->replaceLast('_id', '')->studly();
                 $function = "get{$studly->plural()}";
                 $component = "BaseSelect ";
                 $attributes[] = ":select-options=\"{$studly->camel()}\" ";
+
                 $getData = <<<TS
                 const {$studly->camel()} = ref<any>([]);
                 const {$function} = async () => {
-                {$studly->camel()}.value = await crudApi("{$studly->kebab()}").all();
-                };
-                {$function}();
-
                 TS;
+
+                $attributeName = !empty($options['refConfig']['value']) ? $options['refConfig']['value'] : "name";
+                $getData .= <<<TS
+                    {$studly->camel()}.value = await crudApi("{$studly->kebab()}").asSelection({
+                        name: "$attributeName",
+                    });
+                };
+                {$function}();\n
+                TS;
+
+
                 $script->push($getData);
                 break;
             case $columnType->contains(['text']):
@@ -186,11 +200,11 @@ class RuleParser
                 break;
         }
 
-        if(!empty($options['component']['element'])) {
+        if (!empty($options['component']['element'])) {
             $component = $options['component']['element'] . " ";
         }
 
-        if(!empty($options['component']['attribute'])) {
+        if (!empty($options['component']['attribute'])) {
             $attributes[] = $options['component']['attribute'];
         }
 
@@ -200,7 +214,11 @@ class RuleParser
             $element->push("\n{$attr}");
         }
         $element->push("\n\t:error=\"store.getError('{$name}')\" ");
-        $element->push("\n\tplaceholder=\"{$label}\" ");
+        if (!empty($options['placeholder'])) {
+            $element->push("\n\tplaceholder=\"{$options['placeholder']}\" ");
+        } else {
+            $element->push("\n\tplaceholder=\"{$label}\" ");
+        }
         $element->push("\n\t:is-view-only=\"isViewOnly\" ");
         if ($column->getNotnull()) $element->push("\n\tis-required ");
         $element->push("\n/> ");

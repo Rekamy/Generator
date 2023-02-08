@@ -1,4 +1,5 @@
 <?= "
+import { dtActionWrapper, dtAction, dtActionTrigger } from \"@/core/composable\";
 import jQuery from \"jquery\";
 import type { Ref } from \"vue\";
 import type { {$studly} } from \"./model\";
@@ -12,8 +13,9 @@ export function use{$studly}Table (tableRef: Ref) {
         },
         order: [[1, \"asc\"]],
         columns: [
-            // { data: \"_dtRowIndex\", title: \"Bil\" },"
-?><?php
+            // { data: \"_dtRowIndex\", title: \"#\" },"
+?>
+<?php
             $i = 0;
             foreach ($columns as $columns) :
                 $title = \Str::of($columns->getName())->absoluteTitle();
@@ -22,42 +24,53 @@ export function use{$studly}Table (tableRef: Ref) {
                 } else {
                     echo "\n\t\t\t // { data: \"{$columns->getName()}\", title: \"{$title}\", visible: false },";
                 }
-
             endforeach;
 
             foreach ($relationColumns as $name => $column) :
                 $title = (string) \Str::of($name)->studly()->absoluteTitle();
                 echo "\n\t\t\t // { data: \"{$column}\", title: \"$title\" },";
             endforeach;
-            ?><?= "
+            ?>
+<?= "
             {
                 searchable: false,
                 orderable: false,
                 data: \"id\",
                 title: \"Tindakan\",
-                render: actionButtonRenderer({
-                    path: \"{$slug}\",
-                    view: true,
-                    edit: true,
-                    destroy: true,
-                }),
+                render: dtActionWrapper(
+                    dtAction({
+                        icon: \"fas fa-eye\",
+                        color: \"primary\",
+                        action: \"view\",
+                    }),
+                    dtAction({
+                        icon: \"fas fa-pencil\",
+                        color: \"warning\",
+                        action: \"edit\",
+                    }),
+                    dtAction({
+                        icon: \"fas fa-trash\",
+                        color: \"danger\",
+                        action: \"destroy\",
+                        urlTo: \"{$slug}\",
+                    })
+                ),
             },
         ],
 
-        createdRow: function (row: HTMLElement, data: unknown) {
-            jQuery(row)
-                .find(\".action\")
-                .on(\"click\", function () {"?><?php $url = '`${this.dataset.url}`'; ?><?="
-                    router.push({$url});
-                });
-
-            jQuery(row)
-                .find(\".destroy\")
-                .on(\"click\", () => deleteData(data));
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        createdRow: function (element: HTMLElement, data: {$studly}) {
+            dtActionTrigger(element, \"view\", () =>
+                router.push(`/{$slug}/\${data.id}`)
+            );
+            dtActionTrigger(element, \"edit\", () =>
+                router.push(`/{$slug}/\${data.id}/edit`)
+            );
+            dtActionTrigger(element, \"destroy\", () => deleteData(data));
         }
     }
 
-    async function deleteData(data: unknown) {
+    async function deleteData(data: {$studly}) {
         try {
             const result = await widget.confirm();
             if (!result.isConfirmed) {
@@ -65,7 +78,7 @@ export function use{$studly}Table (tableRef: Ref) {
                 return;
             }
 
-            await crudApi<{$studly}>(\"{$slug}\").destroy((data as {$studly}).id);
+            await crudApi<{$studly}>(\"{$slug}\").destroy(data.id);
             widget.alertSuccess(\"Terbaik!\", \"Data anda telah dihapuskan.\");
             tableRef.value?.reload();
         } catch (err: unknown) {
