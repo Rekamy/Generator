@@ -205,7 +205,7 @@ class RuleParser
         }
 
         if (!empty($options['component']['attribute'])) {
-            $attributes[] = $options['component']['attribute'];
+            $attributes[] = $options['component']['attribute'] . ' ';
         }
 
         $element->push("\n<{$component} label=\"{$label}\" ");

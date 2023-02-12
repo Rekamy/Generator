@@ -23,13 +23,13 @@ export const ${studly}Schema: JSONSchemaType<${studly}> = {
     type: \"object\",
     properties: {
         id: { type: [\"string\", \"number\"], nullable: true },\n" ?>
-    <?php 
+<?php 
     foreach ($columns as $column) {
         $name = Str::of($column->getName());
         if(Str::of($name)->endsWith('_id')) {
             $type = '["number", "string"]';
         } else {
-            $type = Str::contains($column->getType()->getName(), ['int', 'smallint', 'bigint']) ? '"number"' : '"string"';
+            $type = Str::contains($column->getType()->getName(), ['integer', 'smallint', 'bigint']) ? '"number"' : '"string"';
         }
         $isNullable = $column->getNotnull() ? 'minLength: 1 ' : "nullable: true "; 
         echo "\t{$name}: { type: $type, $isNullable },\n";
