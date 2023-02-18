@@ -47,7 +47,7 @@ class ModelGenerator
                 $data['softDelete'] = $data['columns']->get('deleted_at') && $this->context->config->options->get('softDelete');
                 $data['className'] = Str::of($table)->singular()->studly();
                 $data['RepoTrait'] = $data['className'] . "Repo";
-                $data['hasRepoTrait'] = class_exists("\App\\RepoTraits\\" . $data['RepoTrait']);
+                $data['hasRepoTrait'] = trait_exists("\App\\RepoTraits\\" . $data['RepoTrait']);
                 $data['namespace'] = $this->context->config->setup->backend->model->namespace;
                 $data['notNullColumns'] = $data['columns']->filter(function ($column) {
                     return $column->getNotnull();

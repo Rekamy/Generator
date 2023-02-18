@@ -15,8 +15,7 @@ use Illuminate\Support\Str;\n" ?>
 <?php if($hasRepoTrait): ?>
 <?= "use App\RepoTraits\{$RepoTrait};" ?>
 <?php endif; ?>
-<?= "use App\RepoTraits\ProfileRepo;
-use Kirschbaum\PowerJoins\PowerJoins;
+<?= "use Kirschbaum\PowerJoins\PowerJoins;
 
 class $className extends Model
 {"  
