@@ -1,5 +1,5 @@
 <?= "
-import { dtActionWrapper, dtAction, dtActionTrigger } from \"@/core/composable\";
+import { dtRenderWrapper, dtAction, dtActionTrigger } from \"@/core/composable\";
 import jQuery from \"jquery\";
 import type { Ref } from \"vue\";
 import type { {$studly} } from \"./model\";
@@ -37,7 +37,7 @@ export function use{$studly}Table (tableRef: Ref) {
                 orderable: false,
                 data: \"id\",
                 title: \"Tindakan\",
-                render: dtActionWrapper(
+                render: dtRenderWrapper(
                     dtAction({
                         icon: \"fas fa-eye\",
                         color: \"primary\",
