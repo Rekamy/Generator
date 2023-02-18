@@ -11,11 +11,12 @@ namespace $namespace;
 use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
-use Illuminate\Support\Str;\n" ?>
+use Illuminate\Support\Str;
+use Kirschbaum\PowerJoins\PowerJoins;\n" ?>
 <?php if($hasRepoTrait): ?>
 <?= "use App\RepoTraits\{$RepoTrait};" ?>
 <?php endif; ?>
-<?= "use Kirschbaum\PowerJoins\PowerJoins;
+<?= "
 
 class $className extends Model
 {"  
