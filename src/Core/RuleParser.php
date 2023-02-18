@@ -146,21 +146,14 @@ class RuleParser
                 $function = "get{$studly->plural()}";
                 $component = "BaseSelect ";
                 $attributes[] = ":select-options=\"{$studly->camel()}\" ";
+                $attributeName = !empty($options['refConfig']['value']) ? $options['refConfig']['value'] : "name";
 
                 $getData = <<<TS
                 const {$studly->camel()} = ref<any>([]);
-                const {$function} = async () => {
+                const {$function} = async () => 
+                    await crudApi("{$studly->kebab()}").asSelection({name: "$attributeName"});
+                onMounted(async () => {$studly->camel()}.value = await {$function}());\n
                 TS;
-
-                $attributeName = !empty($options['refConfig']['value']) ? $options['refConfig']['value'] : "name";
-                $getData .= <<<TS
-                    {$studly->camel()}.value = await crudApi("{$studly->kebab()}").asSelection({
-                        name: "$attributeName",
-                    });
-                };
-                {$function}();\n
-                TS;
-
 
                 $script->push($getData);
                 break;
@@ -184,9 +177,11 @@ class RuleParser
             case $columnType->contains(['datetime']):
                 // $component = "BaseDateTimePicker ";
                 $component = "BaseDatePicker ";
+                $attributes[] = "type=\"datetime\" ";
                 break;
             case $columnType->contains(['date']):
                 $component = "BaseDatePicker ";
+                $attributes[] = "type=\"date\" ";
                 break;
             case $columnType->contains(['time']):
                 $component = "BaseTimePicker ";

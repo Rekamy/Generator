@@ -55,96 +55,85 @@ class DataTableCriteria implements CriteriaInterface
         \$this->columns = collect(\$this->request->get('columns'))
             ->map(function (\$value, \$index) {
                 \$value['index'] = \$index;
+                \$column = \Str::of(\$value['data']);
+                if (\$column->contains('-')) {
+                    \$columnName = \$column->afterLast('-');
+                    \$relationName = \$column->beforeLast('-');
+                    \$tableName = \$column->beforeLast('-')->afterLast('.')->singular()->plural()->snake();
+                    \$value['relation'] = (string) \$relationName;
+                    \$value['fullQualifiedColumnAlias'] = (string) "{\$tableName}.{\$columnName} as {\$relationName}-{\$columnName}";
+                } else {
+                    \$columnName = \$column;
+                    \$tableName = \$this->query->getModel()->table;
+                    \$value['fullQualifiedColumnAlias'] = (string) "{\$tableName}.{\$columnName}";
+                }
+                \$value['column'] = (string) "{\$tableName}.{\$columnName}";
+                \$value['table'] = (string) \$tableName;
                 return \$value;
             });
 
-
+        \$this->query = \$this->query->select(\$this->columns->pluck('fullQualifiedColumnAlias')->toArray());
         \$this->loadAnyRelation();
         \$this->applyQueryScope();
-
-        if (\$this->isPaginationable()) \$this->resolvePagination();
-
         \$this->applyFilter();
 
-        \$this->buildResources();
+        if (\$this->isPaginatable()) \$this->resolvePagination();
 
+        \$this->resources = \$this->query->paginate(\$this->request->get('length'));
 
         return \$this->resources;
     }
 
-    public function buildResources()
-    {
-        \$this->resources = \$this->query->paginate(\$this->request->get('length'));
-        \$newCollection = \$this->resources->getCollection();
-        \$newCollection->append(\$this->appends->toArray());
-        \$this->resources->setCollection(\$newCollection);
-    }
-
     public function loadAnyRelation()
     {
-        \$this->columns->pluck('data')->each(function (\$column) {
-            if (\Str::contains(\$column, '.')) {
-                \$relations = explode('.', \$column);
-                array_pop(\$relations);
-                \$this->query = \$this->query->with(implode('.', \$relations));
-            }
+        \$relations = \$this->columns->filter(fn (\$value) => !empty(\$value['relation']));
+        \$relations->pluck('relation')->unique()->each(function (\$relation) {
+            // TODO: security feat: backend should filter queryable relation
+            \$this->query = \$this->query->leftJoinRelationship(\$relation);
         });
     }
 
     public function applyQueryScope()
     {
-        // dd(\$this->request->all());
-
         if (\$this->request->has('scope')) {
             \$scopes = explode(',', \$this->request->get('scope'));
             collect(\$scopes)->each(fn (\$scope) => \$this->query = \$this->query->\$scope());
         }
 
-        if (\$this->request->has('append')) {
-            \$appends = explode(',', \$this->request->get('append'));
-            collect(\$appends)->each(fn (\$append) => \$this->appends->push(\$append));
-        }
-
-        if (\$this->request->has('with')) {
-            \$with = \$this->request->get('with');
-            \$relations = explode(';', \$with);
-            \$this->query = \$this->query->with(\$relations);
-        }
     }
 
     public function applyFilter()
     {
-        if (\$this->request->has('search')) {
-            \$keyword = \$this->request->get('search');
-            \$dtSearchable = \$this->columns->where('searchable', 'true')->pluck('data')->toArray();
-            \$searchable = array_intersect(\$this->repository->getFieldsSearchable(), \$dtSearchable);
-            \$this->query = \$this->query->search(\$searchable, \$keyword['value']);
+        if (\$this->request->has('search') && !empty(\$keyword = \$this->request->get('search'))) {
+            \$dtSearchable = \$this->columns->where('searchable', 'true');
+            // TODO: security feat: backend should filter searchable column
+            // \$searchable = array_intersect(\$this->repository->getFieldsSearchable(), \$dtSearchable);
+            \$this->query = \$this->query->search(\$dtSearchable->pluck('column')->toArray(), \$keyword['value']);
         }
 
         if (\$this->request->has('order')) {
             \$orders = \$this->request->get('order');
-            \$columns = \$this->columns->toArray();
-            foreach (\$orders as \$value) {
-                \$index = \$value['column'];
-                \$sort = \$value['dir'];
-                \$sortable = !empty(\$columns[\$index]['data']) && !\Str::contains(\$columns[\$index]['data'], '.');
-                if (\$sortable) {
-                    \$this->query = \$this->query->orderBy(\$columns[\$index]['data'], \$sort);
-                }
+            foreach (\$orders as \$sort) {
+                \$sortable = \$this->columns->where('index', \$sort['column']);
+                \$sortable->each(function (\$column) use (\$sort) {
+                    \$this->query = \$this->query->orderBy(\$column['column'], \$sort['dir']);
+                });
             }
         }
     }
+    
     /**
      * Check if Request allow pagination.
      *
      * @return bool
      */
-    public function isPaginationable()
+    public function isPaginatable()
     {
         return !is_null(\$this->request->input('start')) &&
             !is_null(\$this->request->input('length')) &&
             \$this->request->input('length') != -1;
     }
 }
+
 "
 ?>
