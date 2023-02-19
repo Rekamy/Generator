@@ -63,15 +63,20 @@ class RequestGenerator
         foreach ($columns as $column) {
             $name = $column->getName();
             $ruleList = [];
-            $ruleList[] = RuleParser::parseType($column->getType()->getName());
-            if ($column->getLength()) $ruleList[] = 'max:' . $column->getLength();
-            if ($column->getNotnull()) $ruleList[] = 'required';
 
-            $rule = implode("|", $ruleList);
+            if ($type = RuleParser::parseType($column)) $ruleList[] = $type;
+
+            if ($column->getNotNull()) $ruleList[] = 'required';
+
+            if (!sizeof($ruleList)) continue;
+
+            if ($column->getLength()) $ruleList[] = 'max:' . $column->getLength();
+
+            $rule = trim(implode("|", $ruleList), "|");
 
             $rules .= "\n\t\t\t'{$name}' => '{$rule}',";
-            # code...
         }
+        // dump($rules);
         return $rules;
     }
 }

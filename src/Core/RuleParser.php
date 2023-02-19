@@ -76,16 +76,21 @@ class RuleParser
         return $rule;
     }
 
-    public static function parseType($type)
+    public static function parseType($column)
     {
+        $name = Str::of($column->getName());
+        $type = Str::of($column->getType()->getName());
         switch (true) {
-            case Str::contains($type, ['bigint', 'varchar', 'text']):
+            case $name->endsWith('_id'):
+                $rule = null;
+                break;
+            case $type->contains(['bigint', 'varchar', 'text']):
                 $rule = 'string';
                 break;
-            case Str::contains($type, ['int', 'smallint']):
+            case $type->contains(['int', 'smallint']):
                 $rule = 'integer';
                 break;
-            case Str::contains($type, ['timestamp', 'datetime']):
+            case $type->contains(['timestamp', 'datetime']):
                 $rule = 'date_format:Y-m-d H:i';
                 break;
             case $type == 'date':
@@ -96,7 +101,7 @@ class RuleParser
                 break;
 
             default:
-                $rule = $type;
+                $rule = (string) $type;
                 break;
         }
 

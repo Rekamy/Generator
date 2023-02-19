@@ -29,7 +29,7 @@ foreach ($columns as $i => $column) :
  *          in=\"query\",
  *          required=$required, 
  *          @OA\Schema(
- *              type=\"" . RuleParser::parseType($column->getType()->getName()) . "\"
+ *              type=\"" . RuleParser::parseType($column) . "\"
  *          ),
  *     ),\n " ?>
 <?php endforeach; ?>

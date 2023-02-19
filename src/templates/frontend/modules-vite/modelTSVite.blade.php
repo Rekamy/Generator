@@ -5,15 +5,19 @@ $nullable =  collect();
 import type { JSONSchemaType } from 'ajv';
 
 export interface ${studly} {
+  [key: string]: unknown;
 \tid?: ID;\n" ?>
 <?php
     foreach ($columns as $column) {
         $name = Str::of($column->getName());
+        $rule = Str::contains($column->getType()->getName(), ['integer', 'smallint', 'bigint']) ? '"number"' : '"string"';
+        $rule = $name->endsWith('_id') ? 'ID' : $rule;
+
         if($column->getNotnull()) {
             $nullable->push("\"{$name}\"");
-            echo "\t{$name}: string;\n";
+            echo "\t{$name}: $rule;\n";
         } else {
-            echo "\t{$name}?: string;\n";
+            echo "\t{$name}?: $rule;\n";
         }
     }
 ?>

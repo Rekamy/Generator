@@ -35,8 +35,8 @@ class $className extends FormRequest implements CrudRequestInterface
 
         \$rules = [$rules
         ];
-        
-        \$validation = validator(request()->all(), \$rules);
+        \$request = collect(request()->all())->filter()->toArray();
+        \$validation = validator(\$request, \$rules);
         if (\$validation->fails()) throw new ValidationException(\$validation);
     }
 
