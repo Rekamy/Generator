@@ -56,15 +56,24 @@ class GeneratorServiceProvider extends ServiceProvider
 
         // $this->writeYaml($object);
 
-        dd(file_get_contents(__DIR__ . '/../config/rekamygenerator.php'));
+        // dd(file_get_contents(__DIR__ . '/../config/rekamygenerator.php'));
         
-        dd($this->readFile('/Core/Factory.php'));
+        // dd($this->readFile('/Core/Factory.php'));
 
-        dd($this->readYaml('/../schema.yaml'));
-        dd(file(__DIR__ . '/../schema.yaml'));
-        dd($this->writeYaml(file(__DIR__ . '/Core/Factory.php')));
+        // from rekamygenerator.php + draft.yaml -> schema.yaml
+
+        // dd(collect($ob)->first());
+
+        // $data = data_get($this->readYaml('/../schema.yaml'), 'workflows.AdminRegisterStaff.view.component.dob');
+
+        // file_put_contents(__DIR__ . '/../schema.yaml', $data);
+
+        
+
+        dd($this->writeYaml($data));
         dd($this->writeYaml(config('rekamygenerator')));
-        // dd(collect($object)->first());
+        // dd(file(__DIR__ . '/../schema.yaml'));
+        dd($this->writeYaml(file(__DIR__ . '/Core/Factory.php')));
         // dd($this->writeYaml($object)->dump($object));
 
         // Builder::macro('whereLike', function (string $attribute, string $searchTerm) {

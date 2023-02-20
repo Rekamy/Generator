@@ -1,14 +1,70 @@
-tables:
-  user:
-    id: id
-    username: string
-    email: string
-    password: string
-models:
-  user:
-    hasOne: Illuminate\Support\Str
-    hasMany:
-      - Role
-      - \App\Models\Permissions
-    belongsTo: Department
-    belongsToMany: Spatie\LaravelPermission\Models\Role
+workflows:
+  AdminRegisterStaff:
+    middleware:
+      permission: user:register
+    
+    request:
+      name: string|required
+      email:  string|required
+      icno: string|required
+      department: departments:exists
+      grade:  string|required
+      work_history:
+        work_history.*.company: string|required
+        work_history.*.location: states|exists
+        
+    repository:
+      - ProfileRepository
+      - WorkHistoryRepository
+
+    view:
+      component:
+        name: BaseInputText
+        dob: |
+          BaseDatePicker
+          type="date"
+          
+        email:  BaseInputText
+        icno: BaseInputText
+        department: BaseSelect
+        grade:  BaseSelect
+        work_history:
+          BaseNestedForm:
+            company: BaseInputText view
+            location: BaseSelect view
+      
+      action:
+        save: endpoint
+
+  ApproveKursusDalaman:
+  
+    middleware:
+      permission: course:approval
+    
+    request:
+      course_app_id: string|required
+      status_id: string|required
+      remarks: text
+
+    repository:
+      - CourseAppRepository
+
+    view:
+      show:
+        attributes:
+          course_app_id: hidden
+          course_name: text
+          applicant_name: text
+          status: text
+
+        action: approve, reject
+
+      update:
+        attributes:
+          course_app_id: Hidden
+          course_name: BaseSelect
+          applicant_name: BaseInputText
+          status: BaseInputText
+
+        action: approve, reject
+
