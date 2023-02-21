@@ -3,7 +3,9 @@
   <BaseCard title=\"Create $title\">
     <{$studly}Component :store=\"store\" />
     <div class=\"d-flex flex-row-reverse\">
-      <BaseButton type=\"submit mx-2\" @click=\"submit\">Save</BaseButton>
+      <BaseButton type=\"submit mx-2\" :disabled=\"store.hasError\" @click=\"submit\">
+        Save
+      </BaseButton>
       <BaseBackButton>Batal</BaseBackButton>
     </div>
   </BaseCard>
@@ -14,6 +16,7 @@ import {$studly}Component from \"../components/{$studly}Component.vue\";
 import { {$studly}Schema, type {$studly} } from \"../blocs/model\"; 
 
 const store = useRepoStore<{$studly}>(\"{$slug}\", {$studly}Schema);
+
 const router = useRouter();
 
 const submit = () => {
