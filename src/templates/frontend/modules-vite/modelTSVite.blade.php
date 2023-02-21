@@ -19,7 +19,7 @@ foreach ($columns as $column) {
     }
 
     if($column->getNotnull()) {
-        $rule .= 'required()';
+        $rule .= '.required()';
     }
 
     $schema->push([
