@@ -5,7 +5,7 @@ foreach ($columns as $column) {
     $rule = '';
     switch (true) {
         case $name->startsWith('is_'):
-            $rule .= 'boolean()';
+            $rule .= 'boolean().default(false)';
             break;
         case $name->endsWith('_id'):
             $rule .= 'string()';
@@ -20,6 +20,13 @@ foreach ($columns as $column) {
 
     if($column->getNotnull()) {
         $rule .= '.required()';
+    } else {
+        $rule .= '.notRequired()';
+    }
+
+    $options = json_decode($column->getComment(), true);
+    if(!empty($options['label'])) {
+        $rule .= ".label(\"{$options['label']}\")";
     }
 
     $schema->push([
